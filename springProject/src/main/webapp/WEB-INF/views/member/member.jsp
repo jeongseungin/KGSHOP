@@ -10,6 +10,7 @@
 <h1>회원가입 페이지</h1>
 <h1> 췌크~!</h1>
 <h1>hello</h1>
+<h1>커밋체퀴</h1>
 <form action="chkRegister" method="post">
    <table>
       <tr>
