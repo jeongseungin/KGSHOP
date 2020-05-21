@@ -2,6 +2,7 @@ package com.care.DTO;
 
 import java.util.Date;
 
+
 public class Board_qaDTO {//Q&A 게시판 클래스
 	private String product_id;//문의번호
 	private String user_id;//문의 유저 아이디

@@ -55,11 +55,6 @@ public class HomeController {
 		return "cs/cs";
 	}
 	
-	@RequestMapping("QnA")
-	public String QnA() {
-		return "cs/QnA";
-	}
-	
 	@RequestMapping("review")
 	public String reivew() {
 		return "shopping/review";
