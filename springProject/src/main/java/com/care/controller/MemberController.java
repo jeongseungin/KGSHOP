@@ -1,26 +1,59 @@
 package com.care.controller;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.care.DTO.MemberDTO;
 import com.care.service.CommonService;
+import com.care.template.Constants;
+
+@Controller
 public class MemberController {
-	CommonService service;
+	private CommonService service;
+	
+	public MemberController() {
+		System.out.println("ìë™ìœ¼ë¡œ ì‹¤í–‰ë©ë‹ˆë‹¤");
+		String config = "classpath:applicationJDBC.xml";
+		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext(config);
+		JdbcTemplate template = ctx.getBean("template",JdbcTemplate.class);
+		Constants.template = template;
+	}
 	@RequestMapping("login")
 	public String login() {
 		return "member/login";
 	}
+	
 	@RequestMapping(value="chkUser", method=RequestMethod.POST)
 	public String chkUser(Model model, HttpServletRequest request) {
 		model.addAttribute("request",request);
-		service = new LoginServiceImpl();  //service »ó¼Ó¹ŞÀ» LoginServiceImpl »ı¼º
-		int result = service.execute(model);// model°ª ºñ±³À§ÇÑ º¯¼ö ¼³Á¤
+		service = new LoginServiceImpl();  //service ìƒì†ë°›ì„ LoginServiceImpl ìƒì„±
+		int result = service.execute(model);//  modelê°’ ë¹„êµìœ„í•œ ë³€ìˆ˜ ì„¤ì •
 		if(result==0) {
-			return "redirect:home";//·Î±×ÀÎ ¼º°ø½Ã home
+			return "redirect:home";//ë¡œê·¸ì¸ ì„±ê³µì‹œ home
 		}
-		return "redirect:login";//·Î±×ÀÎ ½ÇÆĞ½Ã login
+		return "redirect:login";//ë¡œê·¸ì¸ ì‹¤íŒ¨ì‹œ login
+	}
+	
+	@RequestMapping("popup")
+	public String popup() {
+		return "member/popup";
+	}
+	@RequestMapping(value="chkRegister", method=RequestMethod.POST)
+	public String chkRegister(Model model,  HttpServletRequest request) {
+		model.addAttribute("request",request);
+		service = new RegisterImpl();
+		service.execute(model);
+		int result = service.execute(model);
+		if(result==0) {
+			return "redirect:login";
+		}else {
+		return "redirect:member";	
+		}
 	}
 }
