@@ -65,10 +65,7 @@ public class HomeController {
 		return "shopping/review";
 	}
 	
-	@RequestMapping("inputproduct")
-	public String inputproduct() {
-		return "shopping/inputproduct";
-	}
+	
 	
 	@RequestMapping("topproduct")
 	public String topproduct() {
