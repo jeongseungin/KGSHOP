@@ -1,4 +1,7 @@
 package com.care.controller;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,8 +9,11 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.care.DTO.MemberDTO;
 import com.care.service.CommonService;
@@ -35,7 +41,7 @@ public class MemberController {
 		service = new LoginServiceImpl();  //service 상속받을 LoginServiceImpl 생성
 		int result = service.execute(model);//  model값 비교위한 변수 설정
 		if(result==0) {
-			return "redirect:home";//로그인 성공시 home
+			return "redirect:popup";//로그인 성공시 home
 		}
 		return "redirect:login";//로그인 실패시 login
 	}
@@ -56,4 +62,41 @@ public class MemberController {
 		return "redirect:member";	
 		}
 	}
+	
+	
+	
+//	@RequestMapping(value="idcheck",method=RequestMethod.POST)  
+//    public String idcheck(Model model,  HttpServletRequest request) {
+//		model.addAttribute("request",request);
+//		service = new IdCheckImpl();
+//		service.execute(model);
+//		int result = service.execute(model);
+//		if(result==0) {
+//			return "member/idcheck";
+//		}else {
+//			return "redirect:member";
+//		}
+//    }
+
+	@RequestMapping(value = "idcheck", method = RequestMethod.POST)
+	public String postRegister(Model model,  HttpServletRequest request) throws Exception {
+		model.addAttribute("request",request);
+		service = new IdCheckImpl();
+		service.execute(model);
+		int result = service.execute(model);
+		try {
+			if(result == 1) {
+				return "reidrect:member";
+			}else if(result == 0) {
+				service.execute(model);
+			}
+			// 요기에서~ 입력된 아이디가 존재한다면 -> 다시 회원가입 페이지로 돌아가기 
+			// 존재하지 않는다면 -> register
+		} catch (Exception e) {
+			throw new RuntimeException();
+		}
+		return "redirect:login";
+	}
+	
+	
 }
