@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.care.DAO.MemberDAO;
 import com.care.DTO.MemberDTO;
 import com.care.service.CommonService;
 import com.care.template.Constants;
@@ -22,7 +23,7 @@ import com.care.template.Constants;
 @Controller
 public class MemberController {
 	private CommonService service;
-	
+	MemberDAO dao;
 	public MemberController() {
 		System.out.println("자동으로 실행됩니다");
 		String config = "classpath:applicationJDBC.xml";
@@ -79,7 +80,11 @@ public class MemberController {
 //    }
 
 	@RequestMapping(value = "idcheck", method = RequestMethod.POST)
-	public String postRegister(Model model,  HttpServletRequest request) throws Exception {
+	public String postRegister(String userId, Model model,  HttpServletRequest request) throws Exception {
+		//해당 매게변수 받는 방법 찾기
+		System.out.println(userId);
+		
+		/*
 		model.addAttribute("request",request);
 		service = new IdCheckImpl();
 		service.execute(model);
@@ -95,6 +100,7 @@ public class MemberController {
 		} catch (Exception e) {
 			throw new RuntimeException();
 		}
+		*/
 		return "redirect:login";
 	}
 	

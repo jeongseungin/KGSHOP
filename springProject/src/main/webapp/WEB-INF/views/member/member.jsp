@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 		function check(){ // 비밀번호 중복체크기능
 			pw=document.getElementById("pw").value;
@@ -37,11 +38,10 @@
 			$.ajax({
 				url : "idcheck",
 				type : "post",
-				dataType : "json",
 				data : {"userId" : $("#userId").val()},
 				success : function(data){
-					if(data == 1){
-						alert("중복된 아이디입니다.");
+					if(data == ""){
+						alert("아이디를 입력하시오");
 					}else if(data == 0){
 						//$("#idChk").attr("value", "Y");
 						alert("사용가능한 아이디입니다.");
@@ -112,7 +112,7 @@ function sample6_execDaumPostcode() {
    <table>
       <tr>
          <td>* 아이디 입력</td><td><input type="text" name="id" id="userId">&nbsp;&nbsp;
-         <input type="button" id="idChk" onclick="idChk();" value="아이디 중복확인">
+         <input type="button" id="idChk01" onclick="idChk()" value="아이디 중복확인">
          <div class="divInputId"></div>
          </td>
       </tr>
