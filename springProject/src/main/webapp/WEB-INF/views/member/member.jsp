@@ -35,24 +35,35 @@
 		
 		//아이디 중복체크
 		//1이 중복, 0이 중복 아님
-		function idcheck(){
-			$.ajax({
-				url : "idcheck",
-				type : "post",
-				data : {"userId" : $("#userId").val()},
-				success : function(data){
-				if(data == ""){
-					alert("아이디를 입력하시오");
-					}else if(data == 0){
-						//$("#idChk").attr("value", "Y");
-						alert("사용가능한 아이디입니다.");
-					}else if(dato == 1){
-						alert("중복된 아이디입니다.");
-					}				
+		$("#id").blur(function() {
+		// id = "id_reg" / name = "userId"
+		var id = $('#id').val();
+		$.ajax({
+			url : 'idcheck',
+			type : 'post',
+			success : function(data) {
+				console.log("1 = 중복o / 0 = 중복x : "+ data);							
+				
+				if (data == 1) {
+						// 1 : 아이디가 중복되는 문구
+						$("#id_check").text("사용중인 아이디입니다 :p");
+						$("#id_check").css("color", "red");
+						$("#reg_submit").attr("disabled", true);
+					} else {
+						
+						if(idJ.test(user_id)){
+							// 0 : 아이디 길이 / 문자열 검사
+							$("#id_check").text("");
+							$("#reg_submit").attr("disabled", false);
+				
+						} 
+						
+					}
+				}, error : function() {
+						console.log("실패");
 				}
-			})
-
-		}
+			});
+		});
 		//회원가입 유효성 검사
 		 function validate() {
 			  var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -169,9 +180,9 @@ function sample6_execDaumPostcode() {
 <form action="chkRegister" method="post"  name="join" onsubmit="return validate()">
    <table>
       <tr>
-         <td>* 아이디 입력</td><td><input type="text" name="id" id="userId">&nbsp;&nbsp;
+         <td><label for="id">아이디</label></td><td><input type="text" class="form-control" id="id" name="id" placeholder="ID" required>&nbsp;&nbsp;
          <input type="button" id="idChk01" onclick="idcheck()" value="아이디 중복확인">
-         <div class="divInputId"></div>
+         <div class="check_font" id="id_check"></div>
          </td>
       </tr>
       <tr>
