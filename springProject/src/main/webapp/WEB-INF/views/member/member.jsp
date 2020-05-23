@@ -180,9 +180,8 @@ function sample6_execDaumPostcode() {
 <form action="chkRegister" method="post"  name="join" onsubmit="return validate()">
    <table>
       <tr>
-         <td><label for="id">아이디</label></td><td><input type="text" class="form-control" id="id" name="id" placeholder="ID" required>&nbsp;&nbsp;
+         <td>* 아이디</td><td><input type="text" id="id" name="id">&nbsp;&nbsp;
          <input type="button" id="idChk01" onclick="idcheck()" value="아이디 중복확인">
-         <div class="check_font" id="id_check"></div>
          </td>
       </tr>
       <tr>
