@@ -80,7 +80,7 @@ public class MemberController {
 //    }
 
 	@RequestMapping(value = "idcheck", method = RequestMethod.POST)
-	public String postRegister(String userId, Model model,  HttpServletRequest request) throws Exception {
+	public String postRegister(String userId,Model model,  HttpServletRequest request) throws Exception {
 		//해당 매게변수 받는 방법 찾기
 		System.out.println(userId);
 		

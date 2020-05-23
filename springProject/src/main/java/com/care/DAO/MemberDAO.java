@@ -73,18 +73,18 @@ public class MemberDAO {
 		
 	}
 
-	public int idcheck(String userId) {
-		String sql = "select * from member where id='"+userId+"'";
+	public int idcheck(String userid) {
+		String sql = "select * from member where id='"+userid+"'";
 		MemberDTO dto = null;		
 		try {
 			dto=template.queryForObject(sql, new BeanPropertyRowMapper<MemberDTO>(MemberDTO.class));
-			if(userId.equals(dto.getId())) {
-				return chkOk;
+			if(userid.equals(dto.getId())) {
+				return chkNO;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return chkNO;
+		return chkOk;
 	
 	}
 
