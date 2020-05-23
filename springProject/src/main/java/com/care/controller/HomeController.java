@@ -35,10 +35,7 @@ public class HomeController {
 		
 		return "home";
 	}
-	@RequestMapping("login")
-	public String login() {
-		return "member/login";
-	}
+	
 	
 	@RequestMapping("member")
 	public String member() {
