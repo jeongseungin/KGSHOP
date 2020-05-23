@@ -22,6 +22,7 @@ import com.care.template.Constants;
 
 @Controller
 public class MemberController {
+	
 	private CommonService service;
 	MemberDAO dao;
 	public MemberController() {
@@ -64,26 +65,24 @@ public class MemberController {
 		}
 	}
 	
-	
-	
-//	@RequestMapping(value="idcheck",method=RequestMethod.POST)  
-//    public String idcheck(Model model,  HttpServletRequest request) {
-//		model.addAttribute("request",request);
-//		service = new IdCheckImpl();
-//		service.execute(model);
-//		int result = service.execute(model);
-//		if(result==0) {
-//			return "member/idcheck";
-//		}else {
-//			return "redirect:member";
-//		}
-//    }
-
-	@RequestMapping(value = "idcheck", method = RequestMethod.POST)
-	public String postRegister(String userId,Model model,  HttpServletRequest request) throws Exception {
+	@RequestMapping(value = "idcheck", method ={RequestMethod.GET, RequestMethod.POST})
+	public String idcheck(String userId,Model model,  HttpServletRequest request) throws Exception {
 		//해당 매게변수 받는 방법 찾기
-		System.out.println(userId);
-		
+		String id = userId;
+		System.out.println(id.toString());
+		String userid = id.toString();
+		System.out.println(userid);
+		model.addAttribute("id",userid);
+		service = new IdCheckImpl();
+		service.execute(model);
+		int result = service.execute(model);
+		if(result == 1) {
+			return "reidrect:member";
+		}else if(result == 0) {
+			service.execute(model);
+		}
+//		model.addAttribute("userId",id);
+//		int result = service.execute(model);
 		/*
 		model.addAttribute("request",request);
 		service = new IdCheckImpl();
@@ -101,7 +100,7 @@ public class MemberController {
 			throw new RuntimeException();
 		}
 		*/
-		return "redirect:login";
+		return "redirect:member";
 	}
 	
 	

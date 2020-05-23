@@ -18,9 +18,9 @@ public class MemberDAO {
 	private JdbcTemplate template;
 	private final int chkOk=0;
 	private final int chkNO=1;
-
+//	private static final String namespace = "com.care.mybatis.Membermapper";
 	private SqlSession sqlSession;
-	@Autowired
+
 	public MemberDAO() {
 		this.template = Constants.template;
 	}
