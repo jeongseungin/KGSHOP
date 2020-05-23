@@ -34,24 +34,82 @@
 		}
 		
 		//아이디 중복체크
-		function idChk(){
+		//1이 중복, 0이 중복 아님
+		function idcheck(){
 			$.ajax({
 				url : "idcheck",
 				type : "post",
 				data : {"userId" : $("#userId").val()},
 				success : function(data){
-					if(data == ""){
-						alert("아이디를 입력하시오");
+				if(data == ""){
+					alert("아이디를 입력하시오");
 					}else if(data == 0){
 						//$("#idChk").attr("value", "Y");
 						alert("사용가능한 아이디입니다.");
-					}
+					}else if(dato == 1){
+						alert("중복된 아이디입니다.");
+					}				
 				}
 			})
+
 		}
+		//회원가입 유효성 검사
+		 function validate() {
+			  var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		       // 이메일이 적합한지 검사할 정규식
+		       var id = document.getElementById("id");
+    		   var pw = document.getElementById("pw");
+    		   var pw_answer = document.getElementById("pw_answer");
+    		   var name = document.getElementById("name");
+		       var email = document.getElementById("email");
+		       var addr = document.getElementById("addr");
+		       var addr2 = document.getElementById("addr2");
+		       var tel = document.getElementById("tel1");
+    		   if(join.id.value=="") {
+    	           alert("아이디을 입력해 주세요");
+    	           join.id.focus();
+    	           return false;
+    	       }
+    		   if(join.pw.value=="") {
+    	           alert("비밀번호를 입력해 주세요");
+    	           join.pw.focus();
+    	           return false;
+    	       }
+    		   if(join.name.value=="") {
+    	           alert("이름을 입력해 주세요");
+    	           join.name.focus();
+    	           return false;
+    	       }
+    		   if(join.pw_answer.value=="") {
+    	           alert("비밀번호 확인 질문에 답해주세요");
+    	           join.pw_answer.focus();
+    	           return false;
+    	       }
+    		   if(join.addr.value=="") {
+    	           alert("주소를 입력해 주세요");
+    	           join.addr.focus();
+    	           return false;
+    	       }
+    		   if(join.addr2.value=="") {
+    	           alert("상세주소를 입력해 주세요");
+    	           join.addr2.focus();
+    	           return false;
+    	       }
+    		   if(join.tel1.value=="") {
+    	           alert("전화번호를 입력해 주세요");
+    	           join.tel1.focus();
+    	           return false;
+    	       }
+    		   if(email.value=="") {
+    	           alert("이메일을 입력해 주세요");
+    	           email.focus();
+    	           return false;
+    	       }
 
-
-
+    	       if(!check(re2, email, "적합하지 않은 이메일 형식입니다.")) {
+    	           return false;
+    	       }
+		 }
 
 </script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -108,11 +166,11 @@ function sample6_execDaumPostcode() {
 <body>
 <h1>회원가입 페이지(*은 필수항목)</h1>
 
-<form action="chkRegister" method="post" name="form">
+<form action="chkRegister" method="post"  name="join" onsubmit="return validate()">
    <table>
       <tr>
          <td>* 아이디 입력</td><td><input type="text" name="id" id="userId">&nbsp;&nbsp;
-         <input type="button" id="idChk01" onclick="idChk()" value="아이디 중복확인">
+         <input type="button" id="idChk01" onclick="idcheck()" value="아이디 중복확인">
          <div class="divInputId"></div>
          </td>
       </tr>
