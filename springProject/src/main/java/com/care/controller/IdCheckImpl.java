@@ -15,9 +15,9 @@ public class IdCheckImpl implements CommonService {
 	public int execute(Model model) {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		String userId = request.getParameter("userId");
+		String id = request.getParameter("id");
 		MemberDAO dao = new MemberDAO();
-		int result = dao.idcheck(userId);
+		int result = dao.idcheck(id);
 		return result;		
 	}
 
