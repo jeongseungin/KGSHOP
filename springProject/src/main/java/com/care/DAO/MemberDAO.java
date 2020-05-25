@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -73,15 +74,15 @@ public class MemberDAO {
 		
 	}
 
-	public int idcheck(String userid) {
-		String sql = "select * from member where id='"+userid+"'";
+	public int idcheck(String id) {
+		String sql = "select * from member where id='"+id.trim()+"'";
 		MemberDTO dto = null;		
 		try {
 			dto=template.queryForObject(sql, new BeanPropertyRowMapper<MemberDTO>(MemberDTO.class));
-			if(userid.equals(dto.getId())) {
+			if(id.equals(dto.getId())) {
 				return chkNO;
 			}
-		} catch (Exception e) {
+		} catch (EmptyResultDataAccessException e) {
 			e.printStackTrace();
 		}
 		return chkOk;
