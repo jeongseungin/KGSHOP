@@ -42,7 +42,7 @@
 			return false;
 		}
 		var url = "idcheck?id=" + id;
-		window.open(url, "get", "height = 180, width = 300,top=100,left=500");
+		window.open(url, "get", "height = 100, width = 230,top=100,left=500");
 	}
 	//회원가입 유효성 검사
 	function validate() {

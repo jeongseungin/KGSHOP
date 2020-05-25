@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
@@ -19,8 +20,8 @@ public class MemberDAO {
 	private JdbcTemplate template;
 	private final int chkOk=0;
 	private final int chkNO=1;
-//	private static final String namespace = "com.care.mybatis.Membermapper";
-	private SqlSession sqlSession;
+	private static final String namespace = "com.care.mybatis.Membermapper";
+	private SqlSession session;
 
 	public MemberDAO() {
 		this.template = Constants.template;
@@ -75,19 +76,19 @@ public class MemberDAO {
 	}
 
 	public int idcheck(String id) {
-		String sql = "select * from member where id='"+id.trim()+"'";
+		String sql = "select * from member where id='"+id+"'";
 		MemberDTO dto = null;		
 		try {
 			dto=template.queryForObject(sql, new BeanPropertyRowMapper<MemberDTO>(MemberDTO.class));
 			if(id.equals(dto.getId())) {
 				return chkNO;
 			}
-		} catch (EmptyResultDataAccessException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+			
 		}
-		return chkOk;
+		return chkOk;// 오류 메세지 신경 안써도 됨
 	
 	}
-
 
 }
