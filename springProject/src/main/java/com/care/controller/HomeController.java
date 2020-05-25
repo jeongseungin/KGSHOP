@@ -37,54 +37,54 @@ public class HomeController {
 	}
 	
 	
-	@RequestMapping("member")
-	public String member() {
-		return "member/member";
-	}
-	
-	@RequestMapping("myPage")
-	public String myPage() {
-		return "member/myPage";
-	}
-	
-	@RequestMapping("cs")
-	public String cs() {
-		return "cs/cs";
-	}
-	
-	@RequestMapping("QnA")
-	public String QnA() {
-		return "cs/QnA";
-	}
-	
-	@RequestMapping("review")
-	public String reivew() {
-		return "shopping/review";
-	}
-	
-	@RequestMapping("inputproduct")
-	public String inputproduct() {
-		return "shopping/inputproduct";
-	}
-	
-	@RequestMapping("topproduct")
-	public String topproduct() {
-		return "category/top/topproduct";
-	}
-	
-	@RequestMapping("bottomproduct")
-	public String bottomproduct() {
-		return "category/bottom/bottomproduct";
-	}
-	
-	@RequestMapping("outerproduct")
-	public String outerproduct() {
-		return "category/outer/outerproduct";
-	}
-	
-	@RequestMapping("productName")
-	public String inputproductsave() {
-		return "shopping/productName";
-	}
+//	@RequestMapping("member")
+//	public String member() {
+//		return "member/member";
+//	}
+//	
+//	@RequestMapping("myPage")
+//	public String myPage() {
+//		return "member/myPage";
+//	}
+//	
+//	@RequestMapping("cs")
+//	public String cs() {
+//		return "cs/cs";
+//	}
+//	
+//	@RequestMapping("QnA")
+//	public String QnA() {
+//		return "cs/QnA";
+//	}
+//	
+//	@RequestMapping("review")
+//	public String reivew() {
+//		return "shopping/review";
+//	}
+//	
+//	@RequestMapping("inputproduct")
+//	public String inputproduct() {
+//		return "shopping/inputproduct";
+//	}
+//	
+//	@RequestMapping("topproduct")
+//	public String topproduct() {
+//		return "category/top/topproduct";
+//	}
+//	
+//	@RequestMapping("bottomproduct")
+//	public String bottomproduct() {
+//		return "category/bottom/bottomproduct";
+//	}
+//	
+//	@RequestMapping("outerproduct")
+//	public String outerproduct() {
+//		return "category/outer/outerproduct";
+//	}
+//	
+//	@RequestMapping("productName")
+//	public String inputproductsave() {
+//		return "shopping/productName";
+//	}
 	
 }

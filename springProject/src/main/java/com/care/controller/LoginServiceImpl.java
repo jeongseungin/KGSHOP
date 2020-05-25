@@ -24,7 +24,7 @@ public class LoginServiceImpl implements CommonService {
 		int result = dao.loginChk(id,pw);// MemberDAO메소드 호출
 		if(result==0) {
 			HttpSession session = request.getSession();
-			session.setAttribute("userId", request.getParameter("id"));//로그인 성공시 id값 세션 가져오기
+			session.setAttribute("id", request.getParameter("id"));//로그인 성공시 id값 세션 가져오기
 		}
 		
 		return result;
