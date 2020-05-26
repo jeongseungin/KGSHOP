@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.care.DAO.MemberDAO;
 import com.care.DTO.MemberDTO;
@@ -27,8 +28,9 @@ import com.care.template.Constants;
 public class MemberController {
 	
 	private CommonService service;
-
+	 
 	MemberDAO dao;
+	
 	public MemberController() {
 		System.out.println("자동으로 실행됩니다");
 		String config = "classpath:database/jdbc-config.xml";
@@ -47,14 +49,14 @@ public class MemberController {
 		service = new LoginServiceImpl();  //service 상속받을 LoginServiceImpl 생성
 		int result = service.execute(model);//  model값 비교위한 변수 설정
 		if(result==0) {
-			return "redirect:successlogin";//로그인 성공시 successlogin
+			return "redirect:myPage";//로그인 성공시 successlogin
 		}
 		return "redirect:login";//로그인 실패시 login
 	}
 	//로그인 성공 시 
-	@RequestMapping("successlogin")
+	@RequestMapping("myPage")
 	public String popup() {
-		return "member/successlogin";
+		return "member/myPage";
 	}
 	
 	//회원 가입
@@ -83,5 +85,17 @@ public class MemberController {
 	
 
 	
+	@RequestMapping("list")
+	public String list(Model model, HttpServletRequest request) {
+		model.addAttribute("request",request);
+		service= new ListImpl();
+		return "member/list";
+	}
+	@RequestMapping("updatedata")
+	public String updatedata(Model model, HttpServletRequest request) {
+		model.addAttribute("request",request);
+		service=new UpdateImpl();
+		return "redirect:login";
+	}
 	
 }

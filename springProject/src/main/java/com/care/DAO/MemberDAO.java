@@ -1,6 +1,7 @@
 package com.care.DAO;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,18 +11,19 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
-
+import org.springframework.stereotype.Repository;
 
 import com.care.DTO.MemberDTO;
 import com.care.template.Constants;
 
-
+@Repository
 public class MemberDAO {
 	private JdbcTemplate template;
 	private final int chkOk=0;
 	private final int chkNO=1;
 	private static final String namespace = "com.care.mybatis.Membermapper";
-	private SqlSession session;
+	@Autowired
+	private SqlSession sqlSession;
 
 	public MemberDAO() {
 		this.template = Constants.template;
@@ -91,4 +93,17 @@ public class MemberDAO {
 	
 	}
 
+
+
+	public void updatedata(MemberDTO dto) {
+		int result = sqlSession.update(namespace+".updatedata",dto);	
+	}
+
+	public MemberDTO list(String id) {
+		return sqlSession.selectOne(namespace+".list",id);
+	}
+
+	
+	
+	
 }
