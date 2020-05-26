@@ -2,7 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<mapper namespace="com.care.mybatis.productMapper">
 
+<insert id="saveproduct" parameterType="dto">
+		insert into productname values(#{product_name_no},#{product_category_no},#{product_name_title},#{product_name_color},#{product_name_size},#{product_stock},#{product_name_price},#{product_name_detail},#{product_hashtag},#{product_images})
+	</insert>
+
+</mapper>
 
 
 

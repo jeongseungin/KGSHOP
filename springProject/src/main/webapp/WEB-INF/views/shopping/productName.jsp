@@ -11,7 +11,7 @@
 <body>
 <h1>상품 등록</h1>
 
-<form name="productName" id="productName" action="save_product" method="post" enctype="multipart/form-data"> 
+<form name="productName" id="productName" action="SaveProduct" method="post" enctype="multipart/form-data"> 
 			<table border="1">
 			<tr>
 				<th colspan="2">상품 등록 </th>
@@ -74,6 +74,11 @@
 				</textarea></td>
 			</tr>
 			<tr>
+				<td>상품 해쉬태그</td>
+				<td><textarea rows="5" cols="50" style="resize: none;" name="product_hashtag" id="product_hashtag">
+				</textarea></td>
+			</tr>
+			<tr>
 				<td>상품 이미지</td>
 				<td><input type="file" name="product_images" id="product_images"></td>
 			</tr>
@@ -81,8 +86,7 @@
 			
 			<tr>
 				<td colspan="2">
-					<br/>
-					<input type="button" value="상품 등록" onclick="product_write();">
+					<input type="submit" value="상품 등록" >
  					<input type="button" value="취소" onclick="location.href='mypage'">				
  				</td>
 			</tr>
