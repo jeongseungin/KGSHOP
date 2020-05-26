@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.care.mybatis.board_qaMapper">
+	<insert id="savedata" parameterType="com.care.DTO.Board_qaDTO">
+		INSERT INTO BOARD_QA VALUES(#{user_id},#{qa_pwd},#{qa_subject},#{qa_content},#{qa_state},#{qa_reply},sysdate)
+	</insert>
+</mapper>

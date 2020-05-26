@@ -4,7 +4,7 @@ import java.util.Date;
 
 
 public class Board_qaDTO {//Q&A 게시판 클래스
-	private String product_id;//문의번호
+	private String qa_category;//문의 유저 아이디
 	private String user_id;//문의 유저 아이디
 	private String qa_pwd;//비공개 패스워드
 	private String qa_subject;//문의 제목
@@ -13,12 +13,6 @@ public class Board_qaDTO {//Q&A 게시판 클래스
 	private int qa_reply;//관리자 답변 여부
 	private Date qa_logtime;//문의 작성 일자
 	
-	public String getProduct_id() {
-		return product_id;
-	}
-	public void setProduct_id(String product_id) {
-		this.product_id = product_id;
-	}
 	public String getUser_id() {
 		return user_id;
 	}
@@ -60,6 +54,12 @@ public class Board_qaDTO {//Q&A 게시판 클래스
 	}
 	public void setQa_logtime(Date qa_logtime) {
 		this.qa_logtime = qa_logtime;
+	}
+	public String getQa_category() {
+		return qa_category;
+	}
+	public void setQa_category(String qa_category) {
+		this.qa_category = qa_category;
 	}
 
 	
