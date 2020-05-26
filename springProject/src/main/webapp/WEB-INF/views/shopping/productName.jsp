@@ -5,17 +5,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="productName.js"></script>
+
 
 </head>
 <body>
 <h1>상품 등록</h1>
 
-<form name="productName" id="productName" action="SaveProduct" method="post" enctype="multipart/form-data"> 
+<form name="productName" id="productName" action="SaveProduct" method="post" enctype="multipart/form-data" > 
 			<table border="1">
 			<tr>
 				<th colspan="2">상품 등록 </th>
 			</tr>
+			  <tr>
+				<td>상품 고유번호</td>
+				<td><input type="text" name="product_name_no" id="product_name_no" ></td>
+			 </tr>
 			<tr>
 				<td>상품 카테고리</td>
 				<td>
@@ -78,9 +82,9 @@
 				<td><textarea rows="5" cols="50" style="resize: none;" name="product_hashtag" id="product_hashtag">
 				</textarea></td>
 			</tr>
-			<tr>
+			 <tr>
 				<td>상품 이미지</td>
-				<td><input type="file" name="product_images" id="product_images"></td>
+				<td><input type="file" name="productPhoto" id="productPhoto"></td>
 			</tr>
 			
 			

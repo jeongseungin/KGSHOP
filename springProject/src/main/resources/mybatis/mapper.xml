@@ -5,8 +5,20 @@
 <mapper namespace="com.care.mybatis.productMapper">
 
 <insert id="saveproduct" parameterType="dto">
-		insert into productname values(#{product_name_no},#{product_category_no},#{product_name_title},#{product_name_color},#{product_name_size},#{product_stock},#{product_name_price},#{product_name_detail},#{product_hashtag},#{product_images})
-	</insert>
+		insert into productname values(
+		#{product_name_no},
+		#{product_category_no},
+		#{product_name_title},
+		#{product_name_detail},
+		#{product_name_price},
+		#{product_name_size},
+		#{product_name_color},
+		#{product_name_image},
+		#{product_stock},
+		#{product_hashtag}
+		)
+	
+</insert>
 
 </mapper>
 

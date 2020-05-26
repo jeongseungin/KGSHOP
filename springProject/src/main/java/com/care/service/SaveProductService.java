@@ -11,12 +11,20 @@ import com.care.DTO.ProductnameDTO;
 public class SaveProductService { 
 	@Autowired
 	private ProductnameDAO dao;
-	public SaveProductService() {
-		System.out.println(dao);
-	}
+	
 	
 	public void saveproduct(ProductnameDTO dto) {
 		// TODO Auto-generated method stub
+		System.out.println("서비스");
+		System.out.println(dto.getProduct_name_no());
+		System.out.println(dto.getProduct_category_no());
+		System.out.println(dto.getProduct_name_title());
+		System.out.println(dto.getProduct_name_detail());
+		System.out.println(dto.getProduct_name_price());
+		System.out.println(dto.getProduct_hashtag());
+		System.out.println(dto.getProduct_name_size());
+		System.out.println(dto.getProduct_name_color());
+		System.out.println(dto.getProduct_stock());
 		dao.saveproduct(dto);
 		
 	}
