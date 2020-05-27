@@ -155,7 +155,7 @@ function sample6_execDaumPostcode() {
 <form action="updatedata" method="post"  name="join" onsubmit="return validate()">
    <table>
       <tr>
-         <td>* 아이디</td><td><input type="text" id="id" name="id" value="${list.id }">&nbsp;&nbsp;
+         <td>* 아이디</td><td><input type="text" id="id" name="id" value="${list.id}">&nbsp;&nbsp;
          <input type="button"  onclick="idcheck()" value="아이디 중복확인">
          </td>
       </tr>

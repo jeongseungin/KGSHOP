@@ -4,6 +4,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 
@@ -12,11 +14,19 @@ import com.care.DTO.MemberDTO;
 import com.care.service.CommonService;
 @Repository
 public class RegisterImpl implements CommonService{
+	@Autowired
+	BCryptPasswordEncoder pwdEncoder;
+
+	public RegisterImpl() {
+		// TODO Auto-generated constructor stub
+	}
+
 
 	@Override
 	public int execute(Model model) {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
+	
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		String name = request.getParameter("name");
@@ -29,11 +39,14 @@ public class RegisterImpl implements CommonService{
 		String addr2 = request.getParameter("addr2");
 		String pw_answer = request.getParameter("pw_answer");
 		MemberDAO dao = new MemberDAO();
+		
 	
 		return dao.register(id,pw,name,email,tel,tel1,tel2,addr,addr1,addr2,pw_answer);
 		
 	}
 
+
+	
 
 
 }

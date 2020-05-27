@@ -3,6 +3,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -11,6 +13,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.care.DTO.MemberDTO;
@@ -24,7 +27,9 @@ public class MemberDAO {
 	private static final String namespace = "com.care.mybatis.Membermapper";
 	@Autowired
 	private SqlSession sqlSession;
-
+	@Autowired
+	BCryptPasswordEncoder pwdEncoder;
+	HttpServletRequest request;
 	public MemberDAO() {
 		this.template = Constants.template;
 	}
@@ -52,6 +57,7 @@ public class MemberDAO {
 			final String addr1, final String addr2, final String pw_answer) {
 		String sql = "insert into member values(?,?,?,?,?,?,?)";
 		int result = 0;
+
 		final String Addr=(addr+" "+addr1+" "+addr2);
 		final String Tel=(tel+"-"+tel1+"-"+tel2);
 		try {
@@ -100,7 +106,9 @@ public class MemberDAO {
 	}
 
 	public MemberDTO list(String id) {
-		return sqlSession.selectOne(namespace+".list",id);
+		
+		return 	sqlSession.selectOne(namespace+".list",id);
+		
 	}
 
 	
