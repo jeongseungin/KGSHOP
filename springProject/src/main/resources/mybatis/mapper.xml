@@ -16,11 +16,15 @@
 		#{product_name_image},
 		#{product_thumbnail},
 		#{product_stock},
+		#{product_hit},
 		#{product_hashtag}
 		)
 	
 </insert>
 
+	<select id="listAll" resultType="String">
+		select * from mybatis_test where product_category_no =#{category}
+	</select>
 </mapper>
 
 

@@ -22,7 +22,7 @@
 <h1>상품</h1>
 <a href="productName">상품등록</a>
 <h1>카테고리</h1>
-<a href="topproduct">상의</a>
+<a href="topproduct?category=top">상의</a>
 <a href="bottomproduct">하의</a>
 <a href="outerproduct">아우터</a>
 </body>

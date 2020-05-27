@@ -14,8 +14,7 @@ public class UploadFileUtils {
  static final int THUMB_HEIGHT = 300;
  
  public static String fileUpload(String uploadPath,
-         String fileName,
-         byte[] fileData, String ymdPath) throws Exception {
+         String fileName,byte[] fileData, String ymdPath) throws Exception {
 
   UUID uid = UUID.randomUUID();
   

@@ -5,14 +5,53 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script >
+function product_write() {
+	var product_name_no = document.getElementById("product_name_no");
+	var	product_name_title =  document.getElementById("product_name_title");
+	var	product_stock =  document.getElementById("product_stock");
+	var	product_name_price =  document.getElementById("product_name_price");
+	var product_name_price =  document.getElementById("product_name_price");
+	var product_name_detail =  document.getElementById("product_name_detail");
+	var product_images =  document.getElementById("product_images");
+    	
+		if(product_name_no.value == ""){
+			alert("상품고유번호 을 입력하세요")
+			productName.product_name_no.focus();
+			return false;
+		}
+		else if(product_name_title.value == "") {
+			alert("상품명을 입력하세요")
+			productName.product_name_title.focus();
+			return false;
+		}else if (product_stock.value == ""){
+			alert("재고량 을 입력하세요")
+			productName.product_stock.focus();
+			return false;
+		}else if (product_name_price.value == ""){
+			alert("상품 가격을 입력하세요")
+			productName.product_name_price.focus();
+			return false;
+		}else if (product_name_detail.value == ""){
+			alert("상품 설명을 입력하세요")
+			productName.product_name_detail.focus();
+			return false;
+		}else if (product_images.value == ""){
+			alert("상품 이미지을 입력하세요")
+			productName.product_images.focus();
+			return false;
+		}else{
+			return true;
+		}
+    }
+</script>
 
 </head>
 <body>
 <h1>상품 등록</h1>
 
-<form name="productName" id="productName" action="SaveProduct" method="post" enctype="multipart/form-data" > 
-			<table border="1">
+<form name="productName" id="productName" action="SaveProduct" method="post" enctype="multipart/form-data" onsubmit="return product_write()" > 
+			<table >
 			<tr>
 				<th colspan="2">상품 등록 </th>
 			</tr>
@@ -82,23 +121,15 @@
 				<td><textarea rows="5" cols="50" style="resize: none;" name="product_hashtag" id="product_hashtag">
 				</textarea></td>
 			</tr>
+			
 			 <tr>
-				<td>상품 이미지</td>
-				<td><input type="file" name="product_name_image" id="product_name_image"></td>
+				<td><label for="product_name_image">상품 이미지</label></td>
+				<td><input type="file" name="file" id="product_name_image"></td>
 			</tr>
-			<script>
-			$("#product_name_image").change(function){
-				if(this.files && this.files[0]){
-					var reader = new FileReader;
-					reader.onload = function(data) {
-						${".select_img img"}.attr("src", data.target.result).width(500);
-					}
-					reader.readAsDataURL(this.files[0]);
-				}
-			});
-			</script>
-			
-			
+			<tr>
+				<td>파일 저장 주소</td>
+				<td><%=request.getRealPath("/") %></td>
+			</tr>
 			<tr>
 				<td colspan="2">
 					<input type="submit" value="상품 등록" >
@@ -106,6 +137,9 @@
  				</td>
 			</tr>
 	</table>
+	
+ 
+ 
 	</form>
 </body>
 </html>

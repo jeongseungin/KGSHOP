@@ -24,7 +24,7 @@
 	<!-- 업로드 패스 설정 --> 
 <beans:bean class="java.lang.String" id="uploadPath">
 <!-- 사용자에 맞는 경로로 설정해야됩니다 -->
- <beans:constructor-arg value="C:\Users\itbank\Documents\KGSHOP\springProject\.metadata\.plugins\org.eclipse.core.resources" />
+ <beans:constructor-arg value="C:\웹개발자 양성 2019-12-16\spring_workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\springProject\resources" />
 </beans:bean>
 
 <!-- 일반 파일 업로드 경로 -->
