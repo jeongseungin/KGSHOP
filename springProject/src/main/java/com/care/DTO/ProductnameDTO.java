@@ -8,21 +8,15 @@ public class ProductnameDTO {//등록상품에 대한 클래스
 	private String product_name_title;//상품 이름
 	private String product_name_detail;//상품 설명
 	private int product_name_price;//상품 가격
-	private String product_name_image;//상품 이미지 url
+	private String product_name_image;//상품 이미지 
+	private String product_thumbnail; //이미지 썸네일
 	private String product_hashtag;//해시태그(검색용)
 	private String product_name_size;//상품 사이즈
 	private String product_name_color;//상품 색상
-	//private int product_hit; // 조회수
+	private int product_hit; // 조회수
 	private int product_stock; //재고량
-	private MultipartFile productPhoto; //상품이미지파일
 	
 	
-	public MultipartFile getProductPhoto() {
-		return productPhoto;
-	}
-	public void setProductPhoto(MultipartFile productPhoto) {
-		this.productPhoto = productPhoto;
-	}
 	public String getProduct_name_no() {
 		return product_name_no;
 	}
@@ -77,17 +71,25 @@ public class ProductnameDTO {//등록상품에 대한 클래스
 	public void setProduct_name_color(String product_name_color) {
 		this.product_name_color = product_name_color;
 	}
-//	public int getProduct_hit() {
-//		return product_hit;
-//	}
-//	public void setProduct_hit(int product_hit) {
-//		this.product_hit = product_hit;
-//	}
+	public int getProduct_hit() {
+		return product_hit;
+	}
+	public void setProduct_hit(int product_hit) {
+		this.product_hit = product_hit;
+	}
 	public int getProduct_stock() {
 		return product_stock;
 	}
 	public void setProduct_stock(int product_stock) {
 		this.product_stock = product_stock;
 	} 
+	
+	public String getProduct_thumbnail() {
+		return product_thumbnail;
+	}
+	public void setProduct_thumbnail(String product_thumbnail) {
+		this.product_thumbnail = product_thumbnail;
+	}
+	
 }
 	

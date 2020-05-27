@@ -84,8 +84,19 @@
 			</tr>
 			 <tr>
 				<td>상품 이미지</td>
-				<td><input type="file" name="productPhoto" id="productPhoto"></td>
+				<td><input type="file" name="product_name_image" id="product_name_image"></td>
 			</tr>
+			<script>
+			$("#product_name_image").change(function){
+				if(this.files && this.files[0]){
+					var reader = new FileReader;
+					reader.onload = function(data) {
+						${".select_img img"}.attr("src", data.target.result).width(500);
+					}
+					reader.readAsDataURL(this.files[0]);
+				}
+			});
+			</script>
 			
 			
 			<tr>
