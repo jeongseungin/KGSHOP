@@ -12,9 +12,8 @@ public class Board_qaDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
-	
 	public int insert(Board_qaDTO dto) {
-		sqlSession.insert(namespace+"savedata",dto);
-		return 0;
+		int i = sqlSession.insert(namespace+".savedata",dto);
+		return i;
 	}
 }

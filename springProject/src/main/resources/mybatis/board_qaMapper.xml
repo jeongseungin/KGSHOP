@@ -3,7 +3,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.care.mybatis.board_qaMapper">
-	<insert id="savedata" parameterType="com.care.DTO.Board_qaDTO">
-		INSERT INTO BOARD_QA VALUES(#{user_id},#{qa_pwd},#{qa_subject},#{qa_content},#{qa_state},#{qa_reply},sysdate)
+	<insert id="savedata">
+		INSERT INTO BOARD_QA(QA_CATEGORY , USER_ID , QA_CONTENT , QA_LOGTIME , QA_PWD , QA_REPLY , QA_SEQ , QA_STATE , QA_SUBJECT) 
+		VALUES(#{qa_category},#{user_id},#{qa_content},sysdate,#{qa_pwd},0,qa_seq.nextval,#{qa_state},#{qa_subject})
 	</insert>
 </mapper>

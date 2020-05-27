@@ -11,7 +11,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.care.DTO.Board_qaDTO;
 import com.care.service.Board_qaService;
+import com.care.service.CommonService;
 import com.care.template.Constants;
 
 @Controller
@@ -33,8 +35,13 @@ public class Board_qaController {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		System.out.println(id);
-		
 		return "cs/QnAwrite";
 	}
-	
+	@RequestMapping("savedata")
+	public String savedata(Board_qaDTO dto) {
+		int i;
+		i = service.Board_qaInsert(dto);
+		System.out.println("결과값"+i);
+		return "redirect:/";
+	}
 }
