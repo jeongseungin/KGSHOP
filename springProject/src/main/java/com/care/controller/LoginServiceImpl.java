@@ -22,10 +22,10 @@ public class LoginServiceImpl implements CommonService {
 		String pw = request.getParameter("pw");
 		MemberDAO dao = new MemberDAO();
 		int result = dao.loginChk(id,pw);// MemberDAO메소드 호출
-		if(result==0) {
-			HttpSession session = request.getSession();
-			session.setAttribute("id", request.getParameter("id"));//로그인 성공시 id값 세션 가져오기
-	
+		System.out.println(result);
+		if(result==0) { 
+			
+			
 		}
 		
 		return result;

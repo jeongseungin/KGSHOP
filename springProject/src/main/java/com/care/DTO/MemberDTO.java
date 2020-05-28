@@ -12,6 +12,16 @@ public class MemberDTO {//회원 정보에 대한 클래스
 	private String addr1;//유저 주소
 	private String addr2;//유저 주소
 	private String pw_answer;
+	private String sessionid; //세션 아이디 받는거
+	
+	public String getSessionid() {
+		return sessionid;
+	}
+	public void setSessionid(String sessionid) {
+		this.sessionid = sessionid;
+	}
+	
+	
 	public String getId() {
 		return id;
 	}

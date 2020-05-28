@@ -15,12 +15,14 @@ public class ListImpl implements CommonService {
 	public int execute(Model model) {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		String id = request.getParameter("id");
-
-		MemberDAO dao = new MemberDAO();
-		model.addAttribute("list",dao.list(id));
-		return 0;
 		
+//		String id = request.getParameter("id");
+//		System.out.println(id);
+//		MemberDAO dao = new MemberDAO();
+//		dao.list(id);
+	return 0;
 	}
+
+	
 
 }

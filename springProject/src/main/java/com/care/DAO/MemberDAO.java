@@ -2,6 +2,7 @@ package com.care.DAO;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,6 +16,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
 
 import com.care.DTO.MemberDTO;
 import com.care.template.Constants;
@@ -105,11 +107,20 @@ public class MemberDAO {
 		int result = sqlSession.update(namespace+".updatedata",dto);	
 	}
 
-	public MemberDTO list(String id) {
-		
-		return 	sqlSession.selectOne(namespace+".list",id);
-		
+	public  MemberDTO list(Model model) {
+		return 	sqlSession.selectOne(namespace+".list",model);
 	}
+
+	public void modify(String id, String pw) {
+		String sql = "update member set id='"+id+"', pw='"+pw+"' where='id'";
+		template.update(sql);
+	}
+
+//	public MemberDTO list(String id) {
+//		
+//		return 	sqlSession.selectOne(namespace+".list",id);
+//		
+//	}
 
 	
 	

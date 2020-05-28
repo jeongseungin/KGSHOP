@@ -5,13 +5,12 @@
 	<select id="listAll" resultType="dto">
 		select * from member
 	</select>
-	<select id="list" resultType="dto" parameterType="String">
-		select * from member where id=#{id}
+	<select id="list" parameterType="String" resultType="dto">
+		select * from member where id=#{sessionid}
 	</select>
 	<update id="updatedata" parameterType="com.care.DTO.MemberDTO">
-	update member set id=#{id}, pw=#{pw}, name=#{name},  email=#{email},  name=#{name},
-	tel=#{tel},  tel1=#{tel1},  tel2=#{tel2}, addr=#{addr}, addr1=#{addr1}, addr2=#{addr2}, pw_answer=#{pw_answer}
-													where id=#{id}
+	update member set id=#{id}, pw=#{pw}, name=#{name}, email=#{email}, name=#{name},
+	tel=#{tel}, tel1=#{tel1}, tel2=#{tel2}, addr=#{addr}, addr1=#{addr1}, addr2=#{addr2}, pw_answer=#{pw_answer} where id=#{id}
 	</update>
 	
 </mapper>

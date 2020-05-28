@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,14 +29,14 @@ import com.care.service.CommonService;
 import com.care.service.MemberService;
 import com.care.template.Constants;
 
+
+
+
 @Controller
-@SessionAttributes("id") 
-
-
-
 public class MemberController {
 	
 	private CommonService service;
+	
 	private MemberService member;
 	MemberDAO dao;
 	
@@ -60,7 +61,10 @@ public class MemberController {
 		service = new LoginServiceImpl();  //service 상속받을 LoginServiceImpl 생성
 		int result = service.execute(model);//  model값 비교위한 변수 설정
 		if(result==0) {
-			return "redirect:myPage";//로그인 성공시 successlogin
+			HttpSession session = request.getSession();
+			session.setAttribute("id", request.getParameter("id"));//로그인 성공시 id값 세션 가져오기
+		
+			return "redirect:list";//로그인 성공시 successlogin
 		}
 		return "redirect:login";//로그인 실패시 login
 	}
@@ -103,18 +107,39 @@ public class MemberController {
 
 	
 	@RequestMapping("list")
-	public String list() {	
+	public String list(Model model,HttpServletRequest request) {
+////		MemberDTO dto = new MemberDTO();
+//		String sessionid;
+//		//model.addAttribute("request",request);
+//		
+//		HttpSession session = request.getSession();
+//		sessionid = (String)session.getAttribute("id");
+//		model.addAttribute("list",sessionid);
+//		
+//		
+////		dto.setSessionid(sessionid);
+//		member.list(model);
+		
 		
 		return "member/list";
 	}
+//	@RequestMapping("list")
+//	public String list(Model model, HttpServletRequest re) {
+//		model.addAttribute("request",re);
+//		member.list(model);
+//		return "list";
+//	}
 	@RequestMapping("updatedata")
-	public String updatedata(MemberDTO dto,@RequestParam("id") String id,Model model) {
-		System.out.println(id);
-		model.addAttribute("id",id);
-		
-		member.list(id);
-		member.updatedata(dto);
+	public String updatedata(MemberDTO dto,Model model,HttpServletRequest request) {
+//		System.out.println(dto);		
+//		member.updatedata(dto);
+		model.addAttribute("request",request);
+		member = new MemberModifyServiceImpl();
+		member.execute(model);
 		return "redirect:login";
 	}
-	
+	@RequestMapping("list2")
+	public String list2() {
+		return "member/list2";
+	}
 }
