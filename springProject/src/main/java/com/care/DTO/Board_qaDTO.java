@@ -12,7 +12,14 @@ public class Board_qaDTO {//Q&A 게시판 클래스
 	private int qa_state;//비밀글 여부
 	private int qa_reply;//관리자 답변 여부
 	private Date qa_logtime;//문의 작성 일자
+	private int qa_seq;//글 번호(시퀀스)
 	
+	public int getQa_seq() {
+		return qa_seq;
+	}
+	public void setQa_seq(int qa_seq) {
+		this.qa_seq = qa_seq;
+	}
 	public String getUser_id() {
 		return user_id;
 	}

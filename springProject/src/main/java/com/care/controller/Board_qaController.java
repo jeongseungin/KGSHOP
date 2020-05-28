@@ -1,5 +1,7 @@
 package com.care.controller;
 
+import java.util.logging.Logger;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.swing.text.StyleConstants.ColorConstants;
@@ -9,9 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.care.DTO.Board_qaCriteria;
 import com.care.DTO.Board_qaDTO;
+import com.care.DTO.Board_qaPageMaker;
 import com.care.service.Board_qaService;
 import com.care.service.CommonService;
 import com.care.template.Constants;
@@ -22,12 +27,19 @@ public class Board_qaController {
 	@Autowired
 	Board_qaService service;
 	
+	
+	
 	@RequestMapping("QnA")
-	public String QnA(HttpServletRequest request) {
+	public String QnA(Model model, Board_qaCriteria cri, HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		String name = "abc";
 		session.setAttribute("id", name);
+		model.addAttribute("list",service.list(cri));
+		Board_qaPageMaker pageMaker = new Board_qaPageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.listCount());
 		
+		model.addAttribute("pageMaker", pageMaker);
 		return "cs/QnA";
 	}
 	@RequestMapping("QnAwrite")
@@ -44,4 +56,5 @@ public class Board_qaController {
 		System.out.println("결과값"+i);
 		return "redirect:/";
 	}
+	
 }
