@@ -21,23 +21,13 @@ public class ProductnameDAO {
 
 	public void saveproduct(ProductnameDTO dto) {
 		int result = sqlSession.insert(namespace+".saveproduct",dto);
-		System.out.println("DAO");
 	}
 
 
-	public void topviewproduct(Model model,String category) {
-		
-	 sqlSession.selectList(namespace+".toplistall",category);
-
-		
+	public List<ProductnameDTO> topviewproduct()  {
+	 return sqlSession.selectList(namespace+ ".ToplistAll");
 	}
 
-
-	
-
-
-	
-	
 	
 	
 }

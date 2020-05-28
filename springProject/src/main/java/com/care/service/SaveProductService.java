@@ -1,5 +1,6 @@
 package com.care.service;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,10 +24,11 @@ public class SaveProductService {
 		
 	}
 	
-	public void topproductview(Model model,String category) {
-		Map<String, Object> map = model.asMap();
-		model.addAttribute("toplist",dao.topviewproduct(model, category));
+	public void topproductview(Model model) {
+		model.addAttribute("toplists",dao.topviewproduct());
 	}
+	
+
 	
 
 

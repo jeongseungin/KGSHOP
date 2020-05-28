@@ -4,6 +4,7 @@ package com.care.controller;
 import java.io.File;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.annotation.Resource;
@@ -17,10 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.care.DTO.ProductnameDTO;
 import com.care.service.SaveProductService;
-import com.care.service.TopProductView;
 import com.care.uitls.UploadFileUtils;
 
 /**
@@ -69,11 +68,9 @@ public class HomeController {
 		return "shopping/review";
 	}
 	
-	
-	
 	@RequestMapping("topproduct")
-	public String topproduct(@RequestParam("category") String category, Model model) {
-		service.topproductview(category,model);
+	public String topproduct(Model model) {
+		service.topproduc.tview(model);
 		return "category/top/topproduct";
 	}
 	
@@ -84,8 +81,6 @@ public class HomeController {
 	
 	@RequestMapping("outerproduct")
 	public String outerproduct() {
-		
-		
 		return "category/outer/outerproduct";
 	}
 	

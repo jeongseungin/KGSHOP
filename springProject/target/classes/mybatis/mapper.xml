@@ -22,8 +22,8 @@
 	
 </insert>
 
-	<select id="listAll" resultType="String">
-		select * from mybatis_test where product_category_no =#{category}
+	<select id="ToplistAll" resultType="dto" >
+		select * from productname where product_category_no = 'top'
 	</select>
 </mapper>
 
