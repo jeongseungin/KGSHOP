@@ -5,28 +5,22 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 
 import com.care.DAO.MemberDAO;
 import com.care.DTO.MemberDTO;
 import com.care.service.CommonService;
-@Repository
-public class RegisterImpl implements CommonService{
-	@Autowired
-	BCryptPasswordEncoder pwdEncoder;
+import com.care.service.MemberService;
 
-	public RegisterImpl() {
-		// TODO Auto-generated constructor stub
-	}
+public class MemberModifyServiceImpl implements CommonService {
 
+	
 
 	@Override
 	public int execute(Model model) {
 		Map<String, Object> map = model.asMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
-	
+		HttpServletRequest request = 
+						(HttpServletRequest)map.get("request");
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		String name = request.getParameter("name");
@@ -34,19 +28,17 @@ public class RegisterImpl implements CommonService{
 		String tel = request.getParameter("tel");
 		String tel1 = request.getParameter("tel1");
 		String tel2 = request.getParameter("tel2");
+		String Tel = tel+"-"+tel1+"-"+tel2;
 		String addr = request.getParameter("addr");
 		String addr1 = request.getParameter("addr1");
 		String addr2 = request.getParameter("addr2");
+		String Addr = addr+" "+addr1+" "+addr2;
 		String pw_answer = request.getParameter("pw_answer");
+		System.out.println(id);
 		MemberDAO dao = new MemberDAO();
-		
-	
-		return dao.register(id,pw,name,email,tel,tel1,tel2,addr,addr1,addr2,pw_answer);
+		int result = dao.modify(id,pw,name,email,Tel,Addr,pw_answer);
+		return result;
 		
 	}
-
-
-	
-
 
 }

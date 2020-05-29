@@ -12,6 +12,7 @@ public class MemberDTO {//회원 정보에 대한 클래스
 	private String addr1;//유저 주소
 	private String addr2;//유저 주소
 	private String pw_answer;
+	
 	public String getId() {
 		return id;
 	}
@@ -78,10 +79,5 @@ public class MemberDTO {//회원 정보에 대한 클래스
 	public void setPw_answer(String pw_answer) {
 		this.pw_answer = pw_answer;
 	}
-
-	
-	
-	
-	
 
 }
