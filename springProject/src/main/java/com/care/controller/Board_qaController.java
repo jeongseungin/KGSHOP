@@ -35,12 +35,14 @@ public class Board_qaController {
 		String name = "abc";
 		session.setAttribute("id", name);
 		model.addAttribute("list",service.list(cri));
+		
 		Board_qaPageMaker pageMaker = new Board_qaPageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.listCount());
-		
 		model.addAttribute("pageMaker", pageMaker);
+		
 		return "cs/QnA";
+		
 	}
 	@RequestMapping("QnAwrite")
 	public String QnAwrite(HttpServletRequest request) {

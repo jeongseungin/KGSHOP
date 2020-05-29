@@ -16,6 +16,7 @@ public class Board_qaCriteria {
 		if (page <= 0) {
 			this.page = 1;
 			return;
+			
 		}
 		this.page = page;
 	}

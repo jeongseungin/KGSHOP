@@ -68,7 +68,7 @@ public class Board_qaPageMaker {
 						    .queryParam("page", page)
 							.queryParam("perPageNum", cri.getPerPageNum())
 							.build();
-		   
+		System.out.println(uriComponents.toUriString());
 		return uriComponents.toUriString();
 	}
 }

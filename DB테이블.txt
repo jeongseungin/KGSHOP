@@ -1,0 +1,103 @@
+//회원 
+create table member(
+id varchar2(20) primary key not null,
+pw varchar2(20) not null,
+name varchar2(20) not null,
+email varchar2(30)  not null,
+tel varchar2(20) not null,
+addr varchar2(50) not null
+);
+(아이디,비밀번호,이름,이메일,전화번호,주소)
+
+// 장바구니
+create table shopcart( 
+cartnum number,
+member_id varchar2(100),
+cartlist varchar2(2000)
+);
+(장바구니순번, 회원아이디, 장바구니(JSON))
+
+// 리뷰게시판
+create table board_review(
+product_id varchar2(100),
+user_id  varchar2(50), 
+review_pwd  varchar2(100), 
+review_subject  varchar2(1000),
+review_content varchar2(4000),
+review_image  varchar2(500),
+review_hit number,
+review_star number,
+review_logtime date
+);
+(리뷰번호, 리뷰상품아이디, 회원아이디, 리뷰비밀번호, 리뷰제목, 리뷰내용, 리뷰조회수, 리뷰작성일)
+
+// 베너
+create table event(  
+event_no number,
+event_image  varchar2(100)
+);
+(베너번호, 베너이미지명)
+
+//등록상품
+create table inputproduct(
+product_name_no number primary key,
+product_category_no number,
+product_name_title  varchar2(100),
+product_name_detail  varchar2(4000),
+product_name_price number,   
+product_name_image  varchar2(1000), 
+product_size  varchar2(500),
+product_color varchar2(500),
+product_hit number,     
+product_hashtag varchar2(500) 
+);
+(등록상품번호, 상품분류번호, 페이지 제목, 페이지 내용,  상품가격, 상품이미지명, 조회수)
+
+// Q&A 게시판
+create table board_qa(
+qa_category varchar2(20),
+qa_seq number,
+user_id varchar2(50),
+qa_pwd  varchar2(100),
+qa_subject  varchar2(50),
+qa_content  varchar2(4000),
+qa_state number,
+qa_reply number,
+qa_logtime date
+);
+(문의번호,카테고리,회원아이디,문의비밀번호,문의제목,문의내용,비밀글여부,관리자답변여부,문의작성일자)
+
+review_seq number, - REVIEW_SEQ
+qa_seq number, - QA_SEQ
+order_no number, - ORDER_SEQ
+cartnum number, - CART_SEQ
+
+//주문서
+create table orders(
+order_no number,
+order_id  varchar2(100),
+order_total number,
+order_state number,
+order_date date,
+order_addr  varchar2(200),
+order_tel  varchar2(20),
+order_name  varchar2(20),
+orderlist varchar2(2000),
+order_receiver  varchar2(20),
+order_logtime date,
+order_deliveryfee number
+);
+(주문번호seq, 주문자아이디, 주문액합계, 주문서상태, 주문일자, 배송할 주소, 회신할 연락처, 주문내역(json), 수취인명, 주문서
+갱신일자, 배송료)
+
+create sequence CART_SEQ;
+
+create sequence QA_SEQ;
+
+create sequence REVIEW_SEQ;
+
+create sequence ORDER_SEQ;
+
+
+String sql = "insert into shopcart(cartnum,member_id,cartlist)"+
+            "values(CART_SEQ.nextval,?,?)";

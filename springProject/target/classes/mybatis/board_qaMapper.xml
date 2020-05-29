@@ -7,6 +7,7 @@
 		INSERT INTO BOARD_QA(QA_CATEGORY , USER_ID , QA_CONTENT , QA_LOGTIME , QA_PWD , QA_REPLY , QA_SEQ , QA_STATE , QA_SUBJECT) 
 		VALUES(#{qa_category},#{user_id},#{qa_content},sysdate,#{qa_pwd},0,qa_seq.nextval,#{qa_state},#{qa_subject})
 	</insert>
+	
 	<select id="listPage" resultType="com.care.DTO.Board_qaDTO" parameterType="com.care.DTO.Board_qaCriteria">
 		SELECT  QA_SEQ, 
             QA_CATEGORY,
@@ -22,7 +23,7 @@
 		               ROW_NUMBER() OVER(ORDER BY QA_SEQ DESC) AS RNUM
 		         FROM BOARD_QA
 		                       ) MP
-		WHERE RNUM BETWEEN 1 AND 2
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
 		ORDER BY QA_SEQ DESC
 	</select>
 	
