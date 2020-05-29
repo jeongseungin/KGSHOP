@@ -70,7 +70,7 @@ public class HomeController {
 	
 	@RequestMapping("topproduct")
 	public String topproduct(Model model) {
-		service.topproduc.tview(model);
+		service.topproductview(model);
 		return "category/top/topproduct";
 	}
 	
