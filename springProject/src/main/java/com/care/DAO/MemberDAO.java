@@ -31,6 +31,7 @@ public class MemberDAO {
 	private SqlSession sqlSession;
 	@Autowired
 	BCryptPasswordEncoder pwdEncoder;
+	
 	HttpServletRequest request;
 	public MemberDAO() {
 		this.template = Constants.template;
@@ -59,7 +60,7 @@ public class MemberDAO {
 			final String addr1, final String addr2, final String pw_answer) {
 		String sql = "insert into member values(?,?,?,?,?,?,?)";
 		int result = 0;
-
+		
 		final String Addr=(addr+" "+addr1+" "+addr2);
 		final String Tel=(tel+"-"+tel1+"-"+tel2);
 		try {
@@ -103,17 +104,47 @@ public class MemberDAO {
 
 
 
-	public void updatedata(MemberDTO dto) {
-		int result = sqlSession.update(namespace+".updatedata",dto);	
+	public void updatedata(MemberDTO dto) throws SQLException {
+		System.out.println(dto.getId());
+		int result =-1;    
+		result = sqlSession.update(namespace+".updatedata",dto);
+		System.out.println("수정된 값 : "+result);
 	}
 
 	public  MemberDTO list(Model model) {
 		return 	sqlSession.selectOne(namespace+".list",model);
 	}
 
-	public void modify(String id, String pw) {
-		String sql = "update member set id='"+id+"', pw='"+pw+"' where='id'";
-		template.update(sql);
+	public int modify(final String id, final String pw,final String name,final String email,
+			final String Tel, final String Addr, final String pw_answer) {
+		MemberDTO dto = new MemberDTO();
+		final String Id = dto.getId();
+		System.out.println(Id);
+		String sql = "update member set id='"+id+"', pw='"+pw+"', name='"+name+"', email='"+email+"', tel='"+Tel+"', addr='"+Addr+"', pw_answer='"+pw_answer+"' where id='"+Id+"'";
+		
+		int result = 0;
+		
+		try {
+		template.update(sql, new PreparedStatementSetter() {
+
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setString(1, id);
+				ps.setString(2, pw);
+				ps.setString(3, name);
+				ps.setString(4, email);
+				ps.setString(5, Tel);
+				ps.setString(6, Addr);
+//				ps.setString(6, Addr);
+				ps.setString(7, pw_answer);
+				ps.setString(8, Id);
+			}
+			
+		});
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 //	public MemberDTO list(String id) {

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -155,14 +156,14 @@ function sample6_execDaumPostcode() {
 <form action="updatedata" name="join" onsubmit="return validate()">
    <table>
       <tr>
-         <td>* 아이디</td><td><input type="text" id="id" name="id" value="${id}">&nbsp;&nbsp;
+         <td>* 아이디</td><td><input type="text" id="id" name="id" value="${id }" disabled="disabled">&nbsp;&nbsp;
          <input type="button"  onclick="idcheck()" value="아이디 중복확인">
          </td>
       </tr>
       <tr>
-         <td>* 비밀번호 입력</td><td><input type="text" name="pw" id="pw" value="${pw}"></td>
+         <td>* 비밀번호 입력</td><td><input type="text" name="pw" id="pw"></td>
       </tr>
-      <!--  
+      
       <tr>
          <td>* 비밀번호 확인</td><td><input type="text" name="pw1" id="pw1" onchange="check()" value="${pw}"><font style="margin-left: 10px;" id="pw1_conform" color="red"></font></td>
       </tr>
@@ -182,7 +183,7 @@ function sample6_execDaumPostcode() {
       	<td>비밀번호 확인 답변</td><td><input type="text" style="width: 400px;" name="pw_answer"></td>
       </tr>
       <tr>
-      	<td>* 이름</td><td><input type="text" name="name" value="하이" disabled="disabled"></td>
+      	<td>* 이름</td><td><input type="text" name="name" ></td>
       </tr>
       <tr>
       	<td rowspan="4" style="padding-bottom: 50px;">* 주소</td><td>
@@ -215,7 +216,7 @@ function sample6_execDaumPostcode() {
       <tr>
       	<td>* 이메일</td><td><input type="email" style="width: 200px;" name="email">
       </tr>
-   -->
+  
    </table>
    <input type="submit" value="수정완료" style="margin-left: 150px;">
    <input type="button" value="취소" style="margin-left: 10px;" onclick="location.href='login'">

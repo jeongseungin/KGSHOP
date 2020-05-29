@@ -1,4 +1,5 @@
 package com.care.controller;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -37,8 +38,8 @@ public class MemberController {
 	
 	private CommonService service;
 	
+	@Autowired
 	private MemberService member;
-	MemberDAO dao;
 	
 	@Autowired
 	BCryptPasswordEncoder pwdEncoder;
@@ -130,12 +131,36 @@ public class MemberController {
 //		return "list";
 //	}
 	@RequestMapping("updatedata")
-	public String updatedata(MemberDTO dto,Model model,HttpServletRequest request) {
+	public String updatedata(MemberDTO dto,HttpServletRequest request) throws SQLException {
+		
+		HttpSession session = request.getSession();
+		
+		String id = (String) session.getAttribute("id");
+		System.out.println("세션 스트링값" + id);
+		
+		String addr = request.getParameter("addr");
+		String addr1 = request.getParameter("addr1");
+		String addr2 = request.getParameter("addr2");
+		dto.setId(id);
+		System.out.println("세션 주소 값 : "+addr+addr1+addr2);
+		dto.setAddr(addr+addr1+addr2);
+		
+		System.out.println(dto.getId());
+		System.out.println(dto.getName());
+		System.out.println(dto.getAddr());
+		System.out.println(dto.getEmail());
+		System.out.println(dto.getPw());
+		System.out.println(dto.getPw_answer());
 //		System.out.println(dto);		
 //		member.updatedata(dto);
-		model.addAttribute("request",request);
-		member = new MemberModifyServiceImpl();
-		member.execute(model);
+//		HttpSession session = request.getSession();
+//		String id = (String)session.getAttribute("id");
+//		System.out.println(id);
+		
+		//model.addAttribute("request",request);
+		
+		member.execute(dto);
+		
 		return "redirect:login";
 	}
 	@RequestMapping("list2")
