@@ -22,8 +22,16 @@
 <h1>상품</h1>
 <a href="productName">상품등록</a>
 <h1>카테고리</h1>
-<a href="topproduct">상의</a>
-<a href="bottomproduct">하의</a>
-<a href="outerproduct">아우터</a>
+<a href="notebookproduct">노트북</a>
+<a href="computerproduct">컴퓨터</a>
+<a href="moniterproduct">모니터</a>
+<a href="mouseproduct">마우스</a>
+<a href="speakerproduct">스피커</a>
+<a href="graphiccardproduct">그래픽카드</a>
+<a href="cpuproduct">CPU</a>
+<a href="mainboardproduct">메인보드</a>
+<a href="hddproduct">하드디스크</a>
+<a href="sddproduct">SDD</a>
+<a href="ramproduct">RAM</a>
 </body>
 </html>

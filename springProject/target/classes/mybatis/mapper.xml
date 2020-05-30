@@ -5,14 +5,13 @@
 <mapper namespace="com.care.mybatis.productMapper">
 
 <insert id="saveproduct" parameterType="dto">
+		<!-- 상품등록  -->
 		insert into productname values(
 		#{product_name_no},
 		#{product_category_no},
 		#{product_name_title},
 		#{product_name_detail},
 		#{product_name_price},
-		#{product_name_size},
-		#{product_name_color},
 		#{product_name_image},
 		#{product_thumbnail},
 		#{product_stock},
@@ -21,9 +20,63 @@
 		)
 	
 </insert>
-
-	<select id="ToplistAll" resultType="dto" >
-		select * from productname where product_category_no = 'top'
+	<!-- 노트북상품목록 전체 검색 -->
+	<select id="NotebooklistAll" resultType="dto" >
+		select * from productname where product_category_no = 'notebook'
+	</select>
+	
+	<!-- 컴퓨터상품목록 전체 검색 -->
+	<select id="ComputerlistAll" resultType="dto" >
+		select * from productname where product_category_no = 'computer'
+	</select>
+	
+	<!-- 모니터상품목록 전체 검색 -->
+	<select id="MoniterlistAll" resultType="dto" >
+		select * from productname where product_category_no = 'moniter'
+	</select>
+	
+	<!-- 마우스상품목록 전체 검색 -->
+	<select id="MouselistAll" resultType="dto" >
+		select * from productname where product_category_no = 'mouse'
+	</select>
+	
+	<!-- 스피커상품목록 전체 검색 -->
+	<select id="SpeakerlistAll" resultType="dto" >
+		select * from productname where product_category_no = 'speaker'
+	</select>
+	
+	<!-- 그래픽카드상품목록 전체 검색 -->
+	<select id="GraphiccardlistAll" resultType="dto" >
+		select * from productname where product_category_no = 'graphiccard'
+	</select>
+	
+	<!-- cpu상품목록 전체 검색 -->
+	<select id="CpulistAll" resultType="dto" >
+		select * from productname where product_category_no = 'cpu'
+	</select>
+	
+	<!-- 메인보드상품목록 전체 검색 -->
+	<select id="MainboardlistAll" resultType="dto" >
+		select * from productname where product_category_no = 'mainboard'
+	</select>
+	
+	<!-- 하드디스크상품목록 전체 검색 -->
+	<select id="HddlistAll" resultType="dto" >
+		select * from productname where product_category_no = 'hdd'
+	</select>
+	
+	<!-- SDD상품목록 전체 검색 -->
+	<select id="SddlistAll" resultType="dto" >
+		select * from productname where product_category_no = 'sdd'
+	</select>
+	
+	<!-- RAM상품목록 전체 검색 -->
+	<select id="RamlistAll" resultType="dto" >
+		select * from productname where product_category_no = 'ram'
+	</select>
+	
+	<select id="Productlist" resultType="dto" parameterType="String">
+		select * from produtname where product_name_no = #{product_name_no}
 	</select>
 </mapper>
 

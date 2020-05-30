@@ -11,7 +11,6 @@ function product_write() {
 	var	product_name_title =  document.getElementById("product_name_title");
 	var	product_stock =  document.getElementById("product_stock");
 	var	product_name_price =  document.getElementById("product_name_price");
-	var product_name_price =  document.getElementById("product_name_price");
 	var product_name_detail =  document.getElementById("product_name_detail");
 	var product_images =  document.getElementById("product_images");
     	
@@ -63,9 +62,17 @@ function product_write() {
 				<td>상품 카테고리</td>
 				<td>
 				<select name="product_category_no" id="product_category_no">
-    			<option value="outer">아우터</option>
-    			<option value="top">상의</option>
-   				<option value="bottom">하의</option>
+    			<option value="notebook">노트북</option>
+    			<option value="computer">컴퓨터</option>
+   				<option value="moniter">모니터</option>
+   				<option value="mouse">마우스</option>
+   				<option value="speaker">스피커</option>
+   				<option value="graphiccard">그래픽카드</option>
+   				<option value="cpu">CPU</option>
+   				<option value="mainboard">메인보드</option>
+   				<option value="hdd">하드디스크</option>
+   				<option value="sdd">SDD</option>
+   				<option value="ram">RAM</option>
 				</select>
 				</td>
 			</tr>
@@ -73,36 +80,7 @@ function product_write() {
 				<td>상품 명</td>
 				<td><input type="text" name="product_name_title" id="product_name_title"></td>
 			</tr>
-			<tr>
-				<td>상품 색상</td>
-				<td>
-				<select name="product_name_color" id="product_name_color">
-    			<option value="white">화이트</option>
-    			<option value="block">블랙</option>
-   				<option value="ivoyy">아이보리</option>
-    			<option value="navy">네이비</option>
-    			<option value="beige">베이지</option>
-    			<option value="brown">브라운</option>
-    			<option value="khaki">카키</option>
-    			<option value="skyblue">스카이블루</option>
-    			<option value="pink">핑크</option>
-    			<option value="mustard">머스타드</option>
-				</select>
-				</td>
-				
-			</tr>
-			<tr>
-				<td>상품 사이즈</td>
-				<td>
-				<select name="product_name_size" id="product_name_size">
-    			<option value="S">S[90]</option>
-    			<option value="M">M[95]</option>
-   				<option value="L">L[100]</option>
-    			<option value="XL">XL[105]</option>
-    			<option value="XXL">XXL[110]</option>
-				</select>
-				</td>
-			</tr>
+			
 			<tr>
 				<td>상품 재고</td>
 				<td><input type="text" name="product_stock" id="product_stock"></td>

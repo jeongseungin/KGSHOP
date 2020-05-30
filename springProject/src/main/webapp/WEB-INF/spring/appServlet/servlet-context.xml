@@ -28,7 +28,7 @@
 </beans:bean>
 
 <!-- 일반 파일 업로드 경로 -->
-<resources mapping="/imgUpload/**" location="file:///C:/웹개발자%20양성%202019-12-16/spring_workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/springProject/resources/" />
+<resources mapping="/imgUpload/**" location="file:///C:/Users/itbank/Documents/KGSHOP/springProject/src/main/webapp/resources/" />
 
 <beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
  <beans:property name="maxUploadSize" value="10485760"/>
