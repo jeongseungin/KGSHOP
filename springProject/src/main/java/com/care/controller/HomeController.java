@@ -171,8 +171,33 @@ public class HomeController {
 		return "category/productview/view";
 	}
 	
+	@RequestMapping("modifyproduct")
+	public String modifyproduct(@RequestParam("product_name_no") String product_name_no, Model model) {
+		ProductnameDTO modify = service.modifyproduct(product_name_no);
+		model.addAttribute("modifylist",modify);
+		return "shopping/modifyproduct";
+	}
+	@RequestMapping("ModifySaveProduct")
+	public String ModifySaveProduct(ProductnameDTO dto, MultipartFile file)throws Exception {
+		String imgUploadPath = uploadPath + File.separator + "imgUpload";
+		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+		String fileName = null;
 
-	
+		if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
+		 fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+		} else {
+		 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+		}
+		dto.setProduct_name_image(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		dto.setProduct_thumbnail(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+		service.modifysaveproduct(dto);
+		return "home";
+	}
+	@RequestMapping("deleteproduct")
+	public String deleteproduct(@RequestParam("product_name_no") String product_name_no) {
+		service.deleteproduct(product_name_no);
+		return "home";
+	}
 	
 	
 	

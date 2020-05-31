@@ -92,6 +92,24 @@ public class ProductnameDAO {
 	}
 
 
+	public ProductnameDTO modifyproduct(String product_name_no) {
+		
+		return sqlSession.selectOne("com.care.mybatis.productMapper"+ ".Modifylist",product_name_no);
+	}
+
+
+	public void modifysaveproduct(ProductnameDTO dto) {
+	
+		int result = sqlSession.update(namespace+".modifysaveproduct",dto);
+	}
+
+
+	public void deleteproduct(String product_name_no) {
+		sqlSession.delete(namespace+".deleteproduct",product_name_no);
+		
+	}
+
+
 
 
 	

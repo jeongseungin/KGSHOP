@@ -26,59 +26,83 @@
 	</select>
 	
 	<!-- 컴퓨터상품목록 전체 검색 -->
-	<select id="ComputerlistAll" resultType="dto" >
+	<select id="ComputerlistAll" >
 		select * from productname where product_category_no = 'computer'
 	</select>
 	
 	<!-- 모니터상품목록 전체 검색 -->
-	<select id="MoniterlistAll" resultType="dto" >
+	<select id="MoniterlistAll" >
 		select * from productname where product_category_no = 'moniter'
 	</select>
 	
 	<!-- 마우스상품목록 전체 검색 -->
-	<select id="MouselistAll" resultType="dto" >
+	<select id="MouselistAll" >
 		select * from productname where product_category_no = 'mouse'
 	</select>
 	
 	<!-- 스피커상품목록 전체 검색 -->
-	<select id="SpeakerlistAll" resultType="dto" >
+	<select id="SpeakerlistAll">
 		select * from productname where product_category_no = 'speaker'
 	</select>
 	
 	<!-- 그래픽카드상품목록 전체 검색 -->
-	<select id="GraphiccardlistAll" resultType="dto" >
+	<select id="GraphiccardlistAll">
 		select * from productname where product_category_no = 'graphiccard'
 	</select>
 	
 	<!-- cpu상품목록 전체 검색 -->
-	<select id="CpulistAll" resultType="dto" >
+	<select id="CpulistAll">
 		select * from productname where product_category_no = 'cpu'
 	</select>
 	
 	<!-- 메인보드상품목록 전체 검색 -->
-	<select id="MainboardlistAll" resultType="dto" >
+	<select id="MainboardlistAll" >
 		select * from productname where product_category_no = 'mainboard'
 	</select>
 	
 	<!-- 하드디스크상품목록 전체 검색 -->
-	<select id="HddlistAll" resultType="dto" >
+	<select id="HddlistAll" >
 		select * from productname where product_category_no = 'hdd'
 	</select>
 	
 	<!-- SDD상품목록 전체 검색 -->
-	<select id="SddlistAll" resultType="dto" >
+	<select id="SddlistAll">
 		select * from productname where product_category_no = 'sdd'
 	</select>
 	
 	<!-- RAM상품목록 전체 검색 -->
-	<select id="RamlistAll" resultType="dto" >
+	<select id="RamlistAll" >
 		select * from productname where product_category_no = 'ram'
 	</select>
+	
 	<!-- 상품 상세보기 -->
 	<select id="Productlist" resultType="dto" parameterType="String">
 		select * from productname where product_name_no=#{product_name_no}
 	</select>
 	
+	<!-- 수정할 상품 고유번호보기 -->
+	<select id="Modifylist" resultType="dto" parameterType="String" >
+		select product_name_no from productname where product_name_no=#{product_name_no}
+	</select>
+	
+		<!-- 상품수정  -->
+	<update id="modifysaveproduct" parameterType="dto">
+		update  productname 
+			set
+		product_category_no =#{product_category_no},
+		product_name_title =#{product_name_title},
+		product_name_detail =#{product_name_detail},
+		product_name_price =#{product_name_price},
+		product_name_image =#{product_name_image},
+		product_thumbnail =#{product_thumbnail},
+		product_stock =#{product_stock},
+		product_hashtag =#{product_hashtag}
+		where product_name_no = #{product_name_no}
+</update>
+
+<delete id="deleteproduct" parameterType="String">
+		delete from productname where product_name_no = #{product_name_no}
+	</delete>
 </mapper>
 
 

@@ -90,6 +90,21 @@ public class SaveProductService {
 		
 	}
 
+	public ProductnameDTO modifyproduct(String product_name_no) {
+		
+		return dao.modifyproduct(product_name_no);
+	}
+
+	public void modifysaveproduct(ProductnameDTO dto) {
+		dao.modifysaveproduct(dto);
+		
+	}
+
+	public void deleteproduct(String product_name_no) {
+		dao.deleteproduct(product_name_no);
+		
+	}
+
 
 	
 	
