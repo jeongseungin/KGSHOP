@@ -85,9 +85,14 @@ public class ProductnameDAO {
 	}
 
 
-//	public List<ProductnameDTO> productview(String product_name_no) {
-//		return sqlSession.selectOne(namespace+ ".Productlist",+product_name_no);
-//	}
+	public ProductnameDTO productview(String product_name_no) {
+		System.out.println("DAO");
+		System.out.println(product_name_no);
+		return sqlSession.selectOne("com.care.mybatis.productMapper"+ ".Productlist",product_name_no);
+	}
+
+
+
 
 	
 	

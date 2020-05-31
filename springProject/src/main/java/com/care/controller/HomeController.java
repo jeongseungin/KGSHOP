@@ -162,10 +162,18 @@ public class HomeController {
 		 
 	}
 	
-//	@RequestMapping("productview")
-//	public String productview(@RequestParam("product_name_no") String product_name_no, Model model) {
-//		service.productview(product_name_no);
-//		return "category/productview/view";
-//	}
+	@RequestMapping("productview")
+	public String productview(@RequestParam("product_name_no") String product_name_no, Model model) {
+		System.out.println("컨트롤러");
+		System.out.println("상품명넘겨주기: "+ product_name_no);
+		ProductnameDTO view = service.productview(product_name_no);
+		model.addAttribute("productlist",view);
+		return "category/productview/view";
+	}
+	
+
+	
+	
+	
 	
 }

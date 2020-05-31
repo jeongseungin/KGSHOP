@@ -74,10 +74,11 @@
 	<select id="RamlistAll" resultType="dto" >
 		select * from productname where product_category_no = 'ram'
 	</select>
-	
+	<!-- 상품 상세보기 -->
 	<select id="Productlist" resultType="dto" parameterType="String">
-		select * from produtname where product_name_no = #{product_name_no}
+		select * from productname where product_name_no=#{product_name_no}
 	</select>
+	
 </mapper>
 
 

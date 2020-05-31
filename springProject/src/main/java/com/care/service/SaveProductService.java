@@ -83,16 +83,14 @@ public class SaveProductService {
 		
 	}
 
-//	public void productview(String product_name_no, Model model) {
-//		model.addAttribute("productlist",dao.productview(product_name_no));
-//		
-//	}
-	
+	public ProductnameDTO productview(String product_name_no) {
+		System.out.println("서비스");
+		System.out.println(product_name_no);
+		return dao.productview(product_name_no);
+		
+	}
+
 
 	
-
-
-	
-
 	
 }
