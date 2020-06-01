@@ -111,8 +111,8 @@ public class MemberDAO {
 		System.out.println("수정된 값 : "+result);
 	}
 
-	public  MemberDTO list(Model model) {
-		return 	sqlSession.selectOne(namespace+".list",model);
+	public  MemberDTO list(MemberDTO dto) {
+		return 	sqlSession.selectOne(namespace+".list",dto);
 	}
 
 	public int modify(final String id, final String pw,final String name,final String email,

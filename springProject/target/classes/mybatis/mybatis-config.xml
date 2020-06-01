@@ -7,7 +7,7 @@
    <typeAliases>
    
 		<typeAlias alias="dto" type="com.care.DTO.MemberDTO"/>
-		
+		<typeAlias alias="Productdto" type="com.care.DTO.ProductnameDTO"/>
    </typeAliases>
 </configuration>
 

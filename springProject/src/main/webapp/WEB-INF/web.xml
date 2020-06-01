@@ -9,6 +9,7 @@
 		<param-value>
 		/WEB-INF/spring/root-context.xml
 		classpath:database/jdbc-config.xml
+		classpath:database/jdbc-config2.xml
 		  /WEB-INF/spring/appServlet/spring-security.xml
 		</param-value>
 	</context-param>

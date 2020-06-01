@@ -1,22 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.care.mybatis.myMapper">
-	<select id="listAll" resultType="dto">
-		select * from mybatis_test
+<mapper namespace="com.care.mybatis.productMapper">
+	<insert id="saveproduct" parameterType="Productdto">
+		<!-- 상품등록  -->
+		insert into productname values(
+		#{product_name_no},
+		#{product_category_no},
+		#{product_name_title},
+		#{product_name_detail},
+		#{product_name_price},
+		#{product_name_image},
+		#{product_thumbnail},
+		#{product_stock},
+		#{product_hit},
+		#{product_hashtag}
+		)
+	
+</insert>
+	<!-- 노트북상품목록 전체 검색 -->
+	<select id="NotebooklistAll" resultType="Productdto" >
+		select * from productname where product_category_no = 'notebook'
 	</select>
-	<select id="list" resultType="dto" parameterType="String">
-		select * from mybatis_test where num=#{num}
+	
+	<!-- 컴퓨터상품목록 전체 검색 -->
+	<select id="ComputerlistAll" resultType="Productdto">
+		select * from productname where product_category_no = 'computer'
 	</select>
-	<insert id="savedata" parameterType="dto">
-		insert into mybatis_test values(#{num},#{name},#{mydate})
-	</insert>
-	<update id="updatedata" parameterType="com.care.dto.TestDTO">
-	update mybatis_test set name=#{name}, mydate=#{mydate}
-													where num=#{num}
-	</update>
-	<delete id="delete" parameterType="String">
-		delete from mybatis_test where num = #{num}
+	
+	<!-- 모니터상품목록 전체 검색 -->
+	<select id="MoniterlistAll" resultType="Productdto">
+		select * from productname where product_category_no = 'moniter'
+	</select>
+	
+	<!-- 마우스상품목록 전체 검색 -->
+	<select id="MouselistAll" resultType="Productdto">
+		select * from productname where product_category_no = 'mouse'
+	</select>
+	
+	<!-- 스피커상품목록 전체 검색 -->
+	<select id="SpeakerlistAll" resultType="Productdto">
+		select * from productname where product_category_no = 'speaker'
+	</select>
+	
+	<!-- 그래픽카드상품목록 전체 검색 -->
+	<select id="GraphiccardlistAll" resultType="Productdto">
+		select * from productname where product_category_no = 'graphiccard'
+	</select>
+	
+	<!-- cpu상품목록 전체 검색 -->
+	<select id="CpulistAll" resultType="Productdto">
+		select * from productname where product_category_no = 'cpu'
+	</select>
+	
+	<!-- 메인보드상품목록 전체 검색 -->
+	<select id="MainboardlistAll" resultType="Productdto">
+		select * from productname where product_category_no = 'mainboard'
+	</select>
+	
+	<!-- 하드디스크상품목록 전체 검색 -->
+	<select id="HddlistAll" resultType="Productdto">
+		select * from productname where product_category_no = 'hdd'
+	</select>
+	
+	<!-- SDD상품목록 전체 검색 -->
+	<select id="SddlistAll" resultType="Productdto">
+		select * from productname where product_category_no = 'sdd'
+	</select>
+	
+	<!-- RAM상품목록 전체 검색 -->
+	<select id="RamlistAll" resultType="Productdto">
+		select * from productname where product_category_no = 'ram'
+	</select>
+	
+	<!-- 상품 상세보기 -->
+	<select id="Productlist" resultType="Productdto" parameterType="String">
+		select * from productname where product_name_no=#{product_name_no}
+	</select>
+	
+	<!-- 수정할 상품 고유번호보기 -->
+	<select id="Modifylist" resultType="Productdto" parameterType="String" >
+		select product_name_no from productname where product_name_no=#{product_name_no}
+	</select>
+	
+		<!-- 상품수정  -->
+	<update id="modifysaveproduct" parameterType="Productdto">
+		update  productname 
+			set
+		product_category_no =#{product_category_no},
+		product_name_title =#{product_name_title},
+		product_name_detail =#{product_name_detail},
+		product_name_price =#{product_name_price},
+		product_name_image =#{product_name_image},
+		product_thumbnail =#{product_thumbnail},
+		product_stock =#{product_stock},
+		product_hashtag =#{product_hashtag}
+		where product_name_no = #{product_name_no}
+</update>
+
+<!-- 상품삭제 -->
+<delete id="deleteproduct" parameterType="String">
+		delete from productname where product_name_no = #{product_name_no}
 	</delete>
 </mapper>
 

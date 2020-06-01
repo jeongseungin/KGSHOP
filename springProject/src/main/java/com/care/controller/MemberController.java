@@ -84,11 +84,12 @@ public class MemberController {
 
 		String encoder = pwdEncoder.encode(request.getParameter("pw"));
 		System.out.println(encoder);
+		dto.setPw(encoder);
 		service = new RegisterImpl();
 		service.execute(model);
 		int result = service.execute(model);
 		if(result==0) {
-			dto.setPw(encoder);
+		
 			return "redirect:login";			
 		}else {
 		return "redirect:member";	
@@ -164,7 +165,15 @@ public class MemberController {
 		return "redirect:login";
 	}
 	@RequestMapping("list2")
-	public String list2() {
+	public String list2(MemberDTO dto,HttpServletRequest request) {
+		HttpSession session = request.getSession();		
+		String id = (String) session.getAttribute("id");
+		dto.setId(id);
+		member.list(dto);
 		return "member/list2";
+	}
+	@RequestMapping("boot_test")
+	public String boot_test(){
+		return "member/boot_test";
 	}
 }
