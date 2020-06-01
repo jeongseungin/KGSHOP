@@ -26,52 +26,52 @@
 	</select>
 	
 	<!-- 컴퓨터상품목록 전체 검색 -->
-	<select id="ComputerlistAll" >
+	<select id="ComputerlistAll" resultType="dto">
 		select * from productname where product_category_no = 'computer'
 	</select>
 	
 	<!-- 모니터상품목록 전체 검색 -->
-	<select id="MoniterlistAll" >
+	<select id="MoniterlistAll" resultType="dto">
 		select * from productname where product_category_no = 'moniter'
 	</select>
 	
 	<!-- 마우스상품목록 전체 검색 -->
-	<select id="MouselistAll" >
+	<select id="MouselistAll" resultType="dto">
 		select * from productname where product_category_no = 'mouse'
 	</select>
 	
 	<!-- 스피커상품목록 전체 검색 -->
-	<select id="SpeakerlistAll">
+	<select id="SpeakerlistAll" resultType="dto">
 		select * from productname where product_category_no = 'speaker'
 	</select>
 	
 	<!-- 그래픽카드상품목록 전체 검색 -->
-	<select id="GraphiccardlistAll">
+	<select id="GraphiccardlistAll" resultType="dto">
 		select * from productname where product_category_no = 'graphiccard'
 	</select>
 	
 	<!-- cpu상품목록 전체 검색 -->
-	<select id="CpulistAll">
+	<select id="CpulistAll" resultType="dto">
 		select * from productname where product_category_no = 'cpu'
 	</select>
 	
 	<!-- 메인보드상품목록 전체 검색 -->
-	<select id="MainboardlistAll" >
+	<select id="MainboardlistAll" resultType="dto">
 		select * from productname where product_category_no = 'mainboard'
 	</select>
 	
 	<!-- 하드디스크상품목록 전체 검색 -->
-	<select id="HddlistAll" >
+	<select id="HddlistAll" resultType="dto">
 		select * from productname where product_category_no = 'hdd'
 	</select>
 	
 	<!-- SDD상품목록 전체 검색 -->
-	<select id="SddlistAll">
+	<select id="SddlistAll" resultType="dto">
 		select * from productname where product_category_no = 'sdd'
 	</select>
 	
 	<!-- RAM상품목록 전체 검색 -->
-	<select id="RamlistAll" >
+	<select id="RamlistAll" resultType="dto">
 		select * from productname where product_category_no = 'ram'
 	</select>
 	
