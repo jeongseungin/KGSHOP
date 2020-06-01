@@ -36,5 +36,10 @@ public class Board_qaService implements CommonService{
 		return dao.listCount();
 	}
 	
+	// 게시물 조회
+		public Board_qaDTO read(int qa_seq) throws Exception {
+			return dao.read(qa_seq);
+		}
+	
 	
 }

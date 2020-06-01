@@ -15,6 +15,8 @@ public class Board_qaDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
+	
+	//게시물 추가
 	public int insert(Board_qaDTO dto) {
 		int i = sqlSession.insert(namespace+".savedata",dto);
 		return i;
@@ -23,9 +25,12 @@ public class Board_qaDAO {
 	public List<Board_qaDTO> list(Board_qaCriteria cri) throws Exception {
 		return sqlSession.selectList(namespace+".listPage",cri);
 	}
-	//게시글 총 개수
+	//게시물 숫자 카운트
 	public int listCount() throws Exception{
-		
 		return sqlSession.selectOne(namespace+".listCount");
+	}
+	//게시물 조회
+	public Board_qaDTO read(int qa_seq) {
+		return sqlSession.selectOne(namespace+".read",qa_seq);
 	}
 }

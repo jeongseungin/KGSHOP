@@ -58,5 +58,11 @@ public class Board_qaController {
 		System.out.println("결과값"+i);
 		return "redirect:/";
 	}
+	//게시물 조회
+	@RequestMapping("QnAreadView")
+		public String read(Board_qaDTO dto, Model model) throws Exception {
+			model.addAttribute("read", service.read(dto.getQa_seq()));
+			return "cs/QnAreadView";
+		}
 	
 }
