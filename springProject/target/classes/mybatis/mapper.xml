@@ -100,6 +100,7 @@
 		where product_name_no = #{product_name_no}
 </update>
 
+<!-- 상품삭제 -->
 <delete id="deleteproduct" parameterType="String">
 		delete from productname where product_name_no = #{product_name_no}
 	</delete>
