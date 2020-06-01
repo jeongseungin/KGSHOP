@@ -9,52 +9,55 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div id="root">
-			<header>
-				<h1> 게시판</h1>
-			</header>
-			<hr />
-			 
-			<nav>
-			  홈 - 글 작성
-			</nav>
-			<hr />
-			
-			<section id="container">
-				<form role="form" method="post">
-					<table>
-						<tbody>
+<h1>게시글 조회</h1>
+					<table border="1">
 							<tr>
 								<td>
-									<label for="bno">글 번호</label><input type="text" id="qa_seq" name="qa_seq" value="${read.qa_seq}"/>
+									<label for="bno">글 번호</label>
+								</td>
+								<td>
+									<input type="text" id="qa_seq" name="qa_seq" value="${read.qa_seq}" readonly="readonly"/>
 								</td>
 							</tr>	
 							<tr>
 								<td>
-									<label for="title">제목</label><input type="text" id="qa_subject" name="qa_subject" value="${read.qa_subject}"/>
+									<label for="title">제목</label>
+								</td>
+								<td>
+									<input type="text" id="qa_subject" name="qa_subject" value="${read.qa_subject}" readonly="readonly"/>
 								</td>
 							</tr>	
 							<tr>
 								<td>
-									<label for="content">내용</label><textarea id="qa_content" name="qa_content"><c:out value="${read.qa_content}" />뇬</textarea>
+									<label for="content">내용</label>
+								</td>
+								<td>
+									<textarea id="qa_content" name="qa_content" readonly="readonly" 
+									rows="10" cols="100" style="resize: none">
+									<c:out value="${read.qa_content}" /></textarea>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<label for="writer">작성자</label><input type="text" id="user_id" name="user_id" value="${read.user_id}" />
+									<label for="writer">작성자</label>
+								</td>
+								<td>
+									<input type="text" id="user_id" name="user_id" value="${read.user_id}" readonly="readonly"/>
 								</td>
 							</tr>
 							<tr>
 								<td>
 									<label for="regdate">작성날짜</label>
-									<fmt:formatDate value="${read.qa_logtime}" pattern="yyyy-MM-dd"/>					
+								</td>
+								<td>
+									<fmt:formatDate value="${read.qa_logtime}" pattern="yyyy-MM-dd" />					
 								</td>
 							</tr>		
-						</tbody>			
 					</table>
-				</form>
-			</section>
-			<hr />
-		</div>
+					<jsp:useBean id="now" class="java.util.Date" />
+					<fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" var="today" />
+					오늘 날짜 : <c:out value="${today}"/>
+
+
 </body>
 </html>
