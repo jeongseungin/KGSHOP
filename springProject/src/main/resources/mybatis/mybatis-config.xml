@@ -5,11 +5,11 @@
     "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
    <typeAliases>
-   
 		<typeAlias alias="dto" type="com.care.DTO.MemberDTO"/>
 		<typeAlias alias="Productdto" type="com.care.DTO.ProductnameDTO"/>
    </typeAliases>
 </configuration>
+
 
 
 

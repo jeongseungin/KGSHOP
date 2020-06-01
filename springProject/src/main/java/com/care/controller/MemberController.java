@@ -82,9 +82,9 @@ public class MemberController {
 
 		String id = request.getParameter("id");
 
-		String encoder = pwdEncoder.encode(request.getParameter("pw"));
-		System.out.println(encoder);
-		dto.setPw(encoder);
+//		String encoder = pwdEncoder.encode(request.getParameter("pw"));
+//		System.out.println(encoder);
+//		dto.setPw(encoder);
 		service = new RegisterImpl();
 		service.execute(model);
 		int result = service.execute(model);
@@ -144,7 +144,12 @@ public class MemberController {
 		String addr2 = request.getParameter("addr2");
 		dto.setId(id);
 		System.out.println("세션 주소 값 : "+addr+addr1+addr2);
-		dto.setAddr(addr+addr1+addr2);
+		dto.setAddr(addr+" "+addr1+" "+addr2);
+		
+		String tel = request.getParameter("tel");
+		String tel1 = request.getParameter("tel2");
+		String tel2 = request.getParameter("tel2");
+		dto.setTel(tel+"-"+tel1+"-"+tel2);
 		
 		System.out.println(dto.getId());
 		System.out.println(dto.getName());
@@ -166,10 +171,10 @@ public class MemberController {
 	}
 	@RequestMapping("list2")
 	public String list2(MemberDTO dto,HttpServletRequest request) {
-		HttpSession session = request.getSession();		
-		String id = (String) session.getAttribute("id");
-		dto.setId(id);
-		member.list(dto);
+//		HttpSession session = request.getSession();		
+//		String id = (String) session.getAttribute("id");
+//		dto.setId(id);
+//		member.list(dto);
 		return "member/list2";
 	}
 	@RequestMapping("boot_test")
