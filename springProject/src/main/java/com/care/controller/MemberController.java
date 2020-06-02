@@ -149,6 +149,7 @@ public class MemberController {
 		String tel = request.getParameter("tel");
 		String tel1 = request.getParameter("tel2");
 		String tel2 = request.getParameter("tel2");
+		System.out.println("세션 주소 값 : "+tel+tel1+tel2);
 		dto.setTel(tel+"-"+tel1+"-"+tel2);
 		
 		System.out.println(dto.getId());
@@ -180,5 +181,13 @@ public class MemberController {
 	@RequestMapping("boot_test")
 	public String boot_test(){
 		return "member/boot_test";
+	}
+	@RequestMapping("bootlogin")
+	public String bootlogin(){
+		return "member/bootlogin";
+	}
+	@RequestMapping("bootMember")
+	public String bootMember(){
+		return "member/bootMember";
 	}
 }

@@ -106,8 +106,8 @@ public class MemberDAO {
 
 	public void updatedata(MemberDTO dto) throws SQLException {
 		System.out.println(dto.getId());
-		int result =-1;    
-		result = sqlSession.update(namespace+".updatedata",dto);
+//		result = sqlSession.update(namespace+".updatedata",dto);
+		int result = sqlSession.update(namespace+".updatedata",dto);
 		System.out.println("수정된 값 : "+result);
 	}
 
