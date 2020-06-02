@@ -144,7 +144,10 @@ public class MemberController {
 		dto.setId(id);
 		System.out.println("세션 주소 값 : "+addr+addr1+addr2);
 		dto.setAddr(addr+addr1+addr2);
-		
+		String tel = request.getParameter("tel");
+		String tel1 = request.getParameter("tel1");
+		String tel2 = request.getParameter("tel2");
+		dto.setTel(tel+tel1+tel2);
 		System.out.println(dto.getId());
 		System.out.println(dto.getName());
 		System.out.println(dto.getAddr());
@@ -167,4 +170,13 @@ public class MemberController {
 	public String list2() {
 		return "member/list2";
 	}
+	@RequestMapping("bootlogin")
+	public String bootlogin() {
+		return "member/bootlogin";
+	}
+	@RequestMapping("bootMember")
+	public String bootMember() {
+		return "member/bootMember";
+	}
+	
 }

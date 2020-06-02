@@ -11,8 +11,8 @@
 	홈 페이지 입니다.
 </h1>
 <h1>로그인</h1>
-<a href="login">로그인</a>
-<a href="member">회원가입</a>
+<a href="bootlogin">로그인</a>
+<a href="bootMember">회원가입</a>
 <h1>CS</h1>
 <a href="myPage">마이페이지</a>
 <a href="cs">고객센터</a>
