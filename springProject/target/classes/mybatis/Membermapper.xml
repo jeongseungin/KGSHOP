@@ -9,8 +9,14 @@
 		select * from member where id=#{sessionid}
 	</select>
 	<update id="updatedata" parameterType="dto">
-	update member set pw=#{pw}, name=#{name}, email=#{email},
-	tel=#{tel}, addr=#{addr}, pw_answer=#{pw_answer} where id=#{id}
+	update member set
+	 pw=#{pw},
+	 name=#{name},
+	 email=#{email},
+	 tel=#{tel},
+	 addr=#{addr},
+	 pw_answer=#{pw_answer}
+	 where id=#{id}
 	</update>
 	
 </mapper>
