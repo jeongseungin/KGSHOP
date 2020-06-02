@@ -147,7 +147,7 @@ public class MemberController {
 		dto.setAddr(addr+" "+addr1+" "+addr2);
 		
 		String tel = request.getParameter("tel");
-		String tel1 = request.getParameter("tel2");
+		String tel1 = request.getParameter("tel1");
 		String tel2 = request.getParameter("tel2");
 		System.out.println("세션 주소 값 : "+tel+tel1+tel2);
 		dto.setTel(tel+"-"+tel1+"-"+tel2);
