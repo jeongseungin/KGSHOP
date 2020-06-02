@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.care.mybatis.Membermapper">
-	<select id="listAll" resultType="dto">
-		select * from member
-	</select>
-	<select id="list" parameterType="String" resultType="dto">
-		select * from member where id=#{sessionid}
-	</select>
-	<update id="updatedata" parameterType="dto">
-	update member set pw=#{pw}, name=#{name}, email=#{email},
-	tel=#{tel}, addr=#{addr}, pw_answer=#{pw_answer} where id=#{id}
-	</update>
+<mapper namespace="com.care.mybatis.membermapper">
 	
+	<update id="updatedata" parameterType="com.care.DTO.MemberDTO">
+		update member
+		 set 
+		 pw=#{pw}, 
+		 name=#{name}, 
+		 email=#{email},
+		 tel=#{tel},
+		 addr=#{addr},
+		 pw_answer=#{pw_answer} 
+		 where id=#{id}
+</update>
 </mapper>
 
 
