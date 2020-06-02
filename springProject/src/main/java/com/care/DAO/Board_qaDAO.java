@@ -33,4 +33,13 @@ public class Board_qaDAO {
 	public Board_qaDTO read(int qa_seq) {
 		return sqlSession.selectOne(namespace+".read",qa_seq);
 	}
+	// 게시물 수정
+	public void update(Board_qaDTO dto) throws Exception {
+		sqlSession.update(namespace+".update", dto);
+	}
+
+	// 게시물 삭제
+	public void delete(int qa_seq) throws Exception {
+		sqlSession.delete(namespace+".delete",qa_seq);
+	}
 }

@@ -56,13 +56,34 @@ public class Board_qaController {
 		int i;
 		i = service.Board_qaInsert(dto);
 		System.out.println("결과값"+i);
-		return "redirect:/";
+		return "redirect:/cs/QnA";
 	}
 	//게시물 조회
 	@RequestMapping("QnAreadView")
 		public String read(Board_qaDTO dto, Model model) throws Exception {
 			model.addAttribute("read", service.read(dto.getQa_seq()));
 			return "cs/QnAreadView";
-		}
+	}
+	// 게시판 수정뷰
+	@RequestMapping("updateView")
+	public String updateView(Board_qaDTO dto, Model model) throws Exception{
+		model.addAttribute("update", service.read(dto.getQa_seq()));
+		return "cs/QnAupdateView";
+	}
+	
+	// 게시판 수정
+	@RequestMapping("update")
+	public String update(Board_qaDTO dto) throws Exception{
+		service.update(dto);
+		return "redirect:QnA";
+	}
+	
+	// 게시판 삭제
+	@RequestMapping("delete")
+	public String delete(Board_qaDTO dto) throws Exception{
+		service.delete(dto.getQa_seq());
+		return "redirect:QnA";
+	}
+	
 	
 }

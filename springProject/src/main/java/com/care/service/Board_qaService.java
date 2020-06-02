@@ -39,7 +39,15 @@ public class Board_qaService implements CommonService{
 	// 게시물 조회
 		public Board_qaDTO read(int qa_seq) throws Exception {
 			return dao.read(qa_seq);
-		}
+	}
+	@Override
+	public void update(Board_qaDTO dto) throws Exception {
+		dao.update(dto);
+	}
+	@Override
+	public void delete(int qa_seq) throws Exception {
+		dao.delete(qa_seq);
+	}
 	
 	
 }

@@ -12,4 +12,6 @@ public interface CommonService {
 	public int Board_qaInsert(Board_qaDTO dto);
 	public List<Board_qaDTO> list(Board_qaCriteria cri) throws Exception;
 	public int listCount() throws Exception;
+	void update(Board_qaDTO dto) throws Exception;
+	void delete(int qa_seq) throws Exception;
 }

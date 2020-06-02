@@ -25,4 +25,13 @@ public class LoginServiceImpl implements CommonService {
 	public int listCount() throws Exception {
 		return 0;
 	}
+	@Override
+	public void update(Board_qaDTO dto) throws Exception {
+		// TODO Auto-generated method stub
+	}
+	@Override
+	public void delete(int qa_seq) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }
