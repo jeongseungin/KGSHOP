@@ -5,11 +5,14 @@
 <html>
 <head>
 	<script type="text/javascript">
+		
 		function publicRadioChk(){
 			var password = document.getElementById("qa_pwd");
 			password.value='';
+			var x = document.getElementsByName("qa_state");
+			console.log(x[0].value);		
 		}
-		function writeChk(){
+		nction writeChk(){
 			var subject = document.getElementById("qa_subject");
 			var password = document.getElementById("qa_pwd");
 			

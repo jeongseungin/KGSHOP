@@ -56,7 +56,7 @@ public class Board_qaController {
 		int i;
 		i = service.Board_qaInsert(dto);
 		System.out.println("결과값"+i);
-		return "redirect:/cs/QnA";
+		return "redirect:QnA";
 	}
 	//게시물 조회
 	@RequestMapping("QnAreadView")
