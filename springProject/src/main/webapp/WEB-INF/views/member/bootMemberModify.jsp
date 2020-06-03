@@ -73,7 +73,7 @@ function sample6_execDaumPostcode() {
  	  border-radius: 4px;
  	  padding-left: 10px;
  	  }
-	.post1{ 
+		.post1{ 
  	  width: 75px;
  	  height: 35px;
  	  border: 1px solid #BDBDBD;
@@ -116,22 +116,22 @@ function sample6_execDaumPostcode() {
                 <p></p>
                 <div class="col-md-12">
                     <small>
-                   <a href="#">회원가입</a>
+                   <a href="#">회원정보수정</a>
                     </small>
                 </div>
             </div>
             <!--// 헤더 들어가는 부분 -->
-           <form action="chkRegister" method="post">
+           <form action="updatedata" method="post">
                 <div class="form-group" id="divId">
                     <label for="inputId" class="col-lg-2 control-label">아이디</label>
                     <div class="col-lg-10">
-                        <input type="text" class="id" id="id" name="id" data-rule-required="true" placeholder="30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30">  &nbsp;&nbsp;<input type="button" class="conform" value="중복확인" onclick="idcheck()"  >
+                        <input type="text" class="id" id="id" name="id" data-rule-required="true" placeholder="30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30" value="${id }" disabled="disabled">  &nbsp;&nbsp;<input type="button" class="conform" value="중복확인" onclick="idcheck()"  >
                     </div>
                 </div>
                 <div class="form-group" id="divPassword">
                     <label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="password" name="pw" data-rule-required="true" placeholder="패스워드" maxlength="30">
+                        <input type="password" class="form-control" id="password" name="pw" data-rule-required="true" value="${memberlist.pw }" maxlength="30">
                     </div>
                 </div>
                 <div class="form-group" id="divPasswordCheck">
@@ -208,7 +208,7 @@ function sample6_execDaumPostcode() {
                 
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
-                        <button type="submit" class="btn btn-primary">가입</button>
+                        <button type="submit" class="btn btn-primary">수정</button>
                     </div>
                 </div>
             </form>

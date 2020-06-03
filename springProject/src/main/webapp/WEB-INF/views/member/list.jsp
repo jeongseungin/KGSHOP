@@ -11,7 +11,7 @@
 	로그인 성공<br>
 	${id }
 
-	<form action="list2" method="post">
+	<form action="bootMemberModify" method="post">
 	<input type="submit" value="회원정보 수정"><hr>
 	</form>
 	<input type="button" value="장바구니"><hr>

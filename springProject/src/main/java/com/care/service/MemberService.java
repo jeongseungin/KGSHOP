@@ -19,4 +19,11 @@ public class MemberService {
 		dao.updatedata(dto);
 	}
 
+	public void memberlist(MemberDTO dto) {
+		dao.list(dto);
+		
+	}
+
+
+
 }

@@ -6,7 +6,7 @@
 		select * from member
 	</select>
 	<select id="list" parameterType="String" resultType="dto">
-		select * from member where id=#{sessionid}
+		select * from member where id=#{id}
 	</select>
 	<update id="updatedata" parameterType="dto">
 	update member set

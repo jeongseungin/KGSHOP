@@ -67,7 +67,7 @@ public class MemberController {
 		
 			return "redirect:list";//로그인 성공시 successlogin
 		}
-		return "redirect:login";//로그인 실패시 login
+		return "redirect:bootlogin";//로그인 실패시 login
 	}
 	//로그인 성공 시 
 	@RequestMapping("myPage")
@@ -89,9 +89,9 @@ public class MemberController {
 		int result = service.execute(model);
 		if(result==0) {
 			dto.setPw(encoder);
-			return "redirect:login";			
+			return "redirect:bootlogin";			
 		}else {
-		return "redirect:member";	
+		return "redirect:bootMember";	
 		}
 	}
 	//아이디 중복체크 페이지
@@ -144,10 +144,7 @@ public class MemberController {
 		dto.setId(id);
 		System.out.println("세션 주소 값 : "+addr+addr1+addr2);
 		dto.setAddr(addr+addr1+addr2);
-		String tel = request.getParameter("tel");
-		String tel1 = request.getParameter("tel1");
-		String tel2 = request.getParameter("tel2");
-		dto.setTel(tel+tel1+tel2);
+	
 		System.out.println(dto.getId());
 		System.out.println(dto.getName());
 		System.out.println(dto.getAddr());
@@ -164,7 +161,7 @@ public class MemberController {
 		
 		member.execute(dto);
 		
-		return "redirect:login";
+		return "redirect:bootlogin";
 	}
 	@RequestMapping("list2")
 	public String list2() {
@@ -178,5 +175,15 @@ public class MemberController {
 	public String bootMember() {
 		return "member/bootMember";
 	}
+	@RequestMapping("bootMemberModify")
+	public String bootMemberModify(MemberDTO dto,HttpServletRequest request) {
+		HttpSession session = request.getSession();		
+		String id = (String) session.getAttribute("id");
+		System.out.println(id);
+		dto.setId(id);
+		member.memberlist(dto);
+		return "member/bootMemberModify";
+	}
+	
 	
 }
