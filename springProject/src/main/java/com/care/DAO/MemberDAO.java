@@ -26,7 +26,7 @@ public class MemberDAO {
 	private JdbcTemplate template;
 	private final int chkOk=0;
 	private final int chkNO=1;
-	private static final String namespace = "com.care.mybatis.Membermapper";
+	private static final String namespace = "com.care.mybatis.Mapper";
 	@Autowired
 	private SqlSession sqlSession;
 	@Autowired
@@ -110,11 +110,12 @@ public class MemberDAO {
 		result = sqlSession.update(namespace+".updatedata",dto);
 		System.out.println("수정된 값 : "+result);
 	}
-
+	/*
 	public  MemberDTO list(MemberDTO dto) {
 		System.out.println(dto.getId());
 		return 	sqlSession.selectOne(namespace+".list",dto);
 	}
+	*/
 
 	public int modify(final String id, final String pw,final String name,final String email,
 			final String Tel, final String Addr, final String pw_answer) {

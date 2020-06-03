@@ -199,15 +199,17 @@ public class MemberController {
 	public String bootMember() {
 		return "member/bootMember";
 	}
+	
 	@RequestMapping("bootMemberModify")
 	public String bootMemberModify(MemberDTO dto,HttpServletRequest request) {
 		HttpSession session = request.getSession();		
 		String id = (String) session.getAttribute("id");
 		System.out.println(id);
 		dto.setId(id);
-		member.memberlist(dto);
+		//member.memberlist(dto);
 		return "member/bootMemberModify";
 	}
+	
 	@RequestMapping("successlogin")
 	public String successlogin(HttpServletRequest request) {
 		
