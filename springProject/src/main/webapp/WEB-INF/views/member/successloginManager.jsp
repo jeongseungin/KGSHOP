@@ -39,6 +39,9 @@
           <li class="nav-item">
             <a class="nav-link" href="#">장바구니</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">상품등록</a>
+          </li>
            <li class="nav-item">
             <a class="nav-link" href="bootMemberModify">회원정보수정</a>
           </li>

@@ -1,6 +1,7 @@
 package com.care.controller;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
@@ -9,6 +10,8 @@ import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.http.HttpStatus;
@@ -44,6 +47,15 @@ public class MemberController {
 	@Autowired
 	BCryptPasswordEncoder pwdEncoder;
 	
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+
+		
+		return "home";
+	}
 	public MemberController() {
 		System.out.println("자동으로 실행됩니다");
 		String config = "classpath:database/jdbc-config.xml";
@@ -63,10 +75,17 @@ public class MemberController {
 		int result = service.execute(model);//  model값 비교위한 변수 설정
 		if(result==0) {
 			HttpSession session = request.getSession();
-			session.setAttribute("id", request.getParameter("id"));//로그인 성공시 id값 세션 가져오기
-		
-			return "redirect:list";//로그인 성공시 successlogin
+			session.setAttribute("id", request.getParameter("id"));//로그인 성공시 id값 세션 가져오기	
+			String id = (String) session.getAttribute("id");
+			if(id.equals("홍길동")) {
+				return "redirect:successloginManager";
+			}
+			return "redirect:successlogin";//로그인 성공시 successlogin
 		}
+	
+		
+//		model.addAttribute("manager",id);
+//		service.execute(model);
 		return "redirect:bootlogin";//로그인 실패시 login
 	}
 	//로그인 성공 시 
@@ -84,11 +103,13 @@ public class MemberController {
 
 		String encoder = pwdEncoder.encode(request.getParameter("pw"));
 		System.out.println(encoder);
+//		model.addAttribute("encoder",encoder);
 		service = new RegisterImpl();
 		service.execute(model);
 		int result = service.execute(model);
 		if(result==0) {
-			dto.setPw(encoder);
+			
+			
 			return "redirect:bootlogin";			
 		}else {
 		return "redirect:bootMember";	
@@ -104,7 +125,10 @@ public class MemberController {
 	public String member() {
 		return "member/member";
 	}
-	
+	@RequestMapping("successloginManager")
+	public String successloginManager() {
+		return "member/successloginManager";
+	}
 
 	
 	@RequestMapping("list")
@@ -184,6 +208,13 @@ public class MemberController {
 		member.memberlist(dto);
 		return "member/bootMemberModify";
 	}
-	
-	
+	@RequestMapping("successlogin")
+	public String successlogin(HttpServletRequest request) {
+		
+		return "member/successlogin";
+	}
+	@RequestMapping("home")
+	public String logout() {
+		return "home";
+	}
 }

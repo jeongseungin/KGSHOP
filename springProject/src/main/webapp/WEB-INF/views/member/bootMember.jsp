@@ -109,10 +109,11 @@ function sample6_execDaumPostcode() {
 </style>
 </head>
 <body>
+
 	 <div class="container"><!-- 좌우측의 공간 확보 -->
             <!-- 헤더 들어가는 부분 -->
             
-            <div class="row">
+            <div class="row" >
                 <p></p>
                 <div class="col-md-12">
                     <small>
@@ -208,8 +209,11 @@ function sample6_execDaumPostcode() {
                 
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
-                        <button type="submit" class="btn btn-primary">가입</button>
+                        <button type="submit" class="conform">가입</button>&nbsp;&nbsp;<button type="button" class="conform" onclick="location.href='home'">취소</button>
                     </div>
+                    
+                        
+                 
                 </div>
             </form>
         
@@ -506,17 +510,14 @@ function sample6_execDaumPostcode() {
             
         </script>
                 <!--// 본문 들어가는 부분 -->
-            <hr/>
-            <!-- 푸터 들어가는 부분 -->
-            
-            <div>
-                <p class="text-center">
-                    <small><strong>업체명</strong></small><br>
-                    <small>대표 : 홍길동 ㆍ 주소 :  사거리 ㆍ 사업자등록번호:123-12-12345 ㆍ 전화 : 02-123-1234</small><br>
-                    <small>Copyrightⓒ test.com All rights reserved.</small>
-                </p>
-            </div>
+          </div>
             <!--// 푸터 들어가는 부분 -->
-        </div>
+       
+                 <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
 </body>
 </html>

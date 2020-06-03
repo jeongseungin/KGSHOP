@@ -131,7 +131,7 @@ function sample6_execDaumPostcode() {
                 <div class="form-group" id="divPassword">
                     <label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="password" name="pw" data-rule-required="true" value="${memberlist.pw }" maxlength="30">
+                        <input type="password" class="form-control" id="password" name="pw" data-rule-required="true" value="${memberlist.pw }" maxlength="30" placeholder="패스워드">
                     </div>
                 </div>
                 <div class="form-group" id="divPasswordCheck">
@@ -208,7 +208,7 @@ function sample6_execDaumPostcode() {
                 
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
-                        <button type="submit" class="btn btn-primary">수정</button>
+                       <button type="submit" class="conform">수정</button>&nbsp;&nbsp;<button type="button" class="conform" onclick="location.href='successlogin'">취소</button>
                     </div>
                 </div>
             </form>
@@ -506,17 +506,18 @@ function sample6_execDaumPostcode() {
             
         </script>
                 <!--// 본문 들어가는 부분 -->
-            <hr/>
+         
             <!-- 푸터 들어가는 부분 -->
             
-            <div>
-                <p class="text-center">
-                    <small><strong>업체명</strong></small><br>
-                    <small>대표 : 홍길동 ㆍ 주소 :  사거리 ㆍ 사업자등록번호:123-12-12345 ㆍ 전화 : 02-123-1234</small><br>
-                    <small>Copyrightⓒ test.com All rights reserved.</small>
-                </p>
-            </div>
+       
             <!--// 푸터 들어가는 부분 -->
         </div>
+         <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
 </body>
 </html>

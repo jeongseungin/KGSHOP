@@ -46,6 +46,15 @@
   		padding: 10px;
   		font-size: 16px;
 	}
+	.conform{ 
+ 	  width: 90px;
+ 	  height: 35px;
+ 	  border: 1px solid #BDBDBD;
+ 	  border-radius: 4px;
+ 	  padding-left: 10px;
+ 	  background: #EAEAEA;
+ 	  color: black;
+ 	  }
  </style>
 </head>
 <body cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
