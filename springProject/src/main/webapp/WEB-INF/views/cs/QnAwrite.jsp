@@ -9,19 +9,25 @@
 		function publicRadioChk(){
 			var password = document.getElementById("qa_pwd");
 			password.value='';
-			var x = document.getElementsByName("qa_state");
-			console.log(x[0].value);		
+			document.getElementById("radiovaluechk").value='0';
+			console.log('라디오 값 =',document.getElementById("radiovaluechk").value);
 		}
-		nction writeChk(){
+		function privateRadioChk(){
+			document.getElementById("radiovaluechk").value='1';
+			console.log('라디오 값 =',document.getElementById("radiovaluechk").value);
+		}
+		function writeChk(){
 			var subject = document.getElementById("qa_subject");
 			var password = document.getElementById("qa_pwd");
+			var radioValue= document.getElementById("radiovaluechk").value;
+			console.log('비밀번호 체크시 라디오 값 =',radioValue);
 			
 			if(!subject.value){
 				alert('제목은 필수사항입니다.');
 				subject.focus();
 				
 			}
-			else if(!password.value){
+			else if(!password.value&&radioValue==1){
 				alert('비밀번호는 필수사항입니다.');
 				password.focus();
 			}
@@ -74,7 +80,8 @@
 					공개<input type="radio" name="qa_state" id="public" value="0" 
 						onClick="this.form.qa_pwd.disabled=true; publicRadioChk();">
 					비공개<input type="radio" name="qa_state" id="private" checked="checked" value="1"
-					    onClick="this.form.qa_pwd.disabled=false">
+					    onClick="this.form.qa_pwd.disabled=false; privateRadioChk();">
+					 	<input type="hidden" id="radiovaluechk"  value="1">
 				</td>
 			</tr>		
 			<tr>

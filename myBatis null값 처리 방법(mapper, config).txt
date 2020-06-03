@@ -1,0 +1,26 @@
+mapper null값 처리 방법
+
+방법1. Mapper.xml에서 타입명시
+
+NULL로 세팅 되는 값에 jdbdType
+을 명시해준다.
+~~~~  #{board_viewcount, jdbcType=INTEGER}, #{board_content, jdbcType=VARCHAR}, ~~~~
+=> NULL이 될 수 있는 타입에 모두 명시를 해줘야한다.
+
+
+방법2. mybatis-config.xml에서 처리
+
+방법1과 같은 방법은 하나하나 다 명시를 해줘야하고 다른 쿼리를 추가하게 되면 또 추가를 해야 하지만 이 방법은 mybatis-config.xml에 한 번 적어두기만 하면 된다.
+
+<configuration> 
+
+   <settings>            <!-- <settings>이 없으면 만들어줍니다. -->
+
+     <setting name="jdbcTypeForNull" value="NULL" />
+
+   <settings>
+
+<configuration>
+
+=> <settings> 태그를 <typeAliases> 아래에 두면 <configuration> 태그에 빨간줄(ERROR)이 생긴다. 그러니 위에 두자.
+아래와 같이 설정하면 된다.

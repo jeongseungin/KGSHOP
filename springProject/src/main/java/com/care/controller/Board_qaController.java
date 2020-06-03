@@ -61,8 +61,21 @@ public class Board_qaController {
 	//게시물 조회
 	@RequestMapping("QnAreadView")
 		public String read(Board_qaDTO dto, Model model) throws Exception {
+			int Qa_state = service.read(dto.getQa_seq()).getQa_state();
+			System.out.println("비밀글 여부 1=비공개 0=공개 : "+Qa_state);
 			model.addAttribute("read", service.read(dto.getQa_seq()));
-			return "cs/QnAreadView";
+			if(Qa_state==1) {
+				return "cs/QnApassWord";
+			}else {
+				return "cs/QnAreadView";
+				}
+	
+		
+	}//비밀번호 입력 후 게시물 조회
+	@RequestMapping("QnApassWord")
+	public String QnApassWord(Board_qaDTO dto, Model model) throws Exception {
+		model.addAttribute("read", service.read(dto.getQa_seq()));
+		return "cs/QnAreadView";
 	}
 	// 게시판 수정뷰
 	@RequestMapping("updateView")

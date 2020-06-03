@@ -37,7 +37,7 @@
 </script>
 <body>
 <h1>게시글 조회</h1>
-
+	
 	<form name="readForm" role="form" method="post">
 		<input type="hidden" id="qa_seq" name="qa_seq" value="${read.qa_seq}" />
 	</form>
