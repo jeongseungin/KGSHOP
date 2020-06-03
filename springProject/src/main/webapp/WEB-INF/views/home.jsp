@@ -17,10 +17,11 @@
 <a href="myPage">마이페이지</a>
 <a href="cs">고객센터</a>
 <h1>게시판</h1>
-<a href="QnA">Q&A게시판</a>
+<a href="QnA">QnA게시판</a>
 <a href="review">리뷰게시판</a>
 <h1>상품</h1>
 <a href="productName">상품등록</a>
+<a href="shoppingcart?user_id=test">장바구니</a>
 <h1>카테고리</h1>
 <a href="notebookproduct">노트북</a>
 <a href="computerproduct">컴퓨터</a>
@@ -33,5 +34,6 @@
 <a href="hddproduct">하드디스크</a>
 <a href="sddproduct">SDD</a>
 <a href="ramproduct">RAM</a>
+
 </body>
 </html>

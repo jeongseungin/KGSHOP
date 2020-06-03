@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.care.DTO.ProductnameDTO;
+import com.care.DTO.ShoppingCartDTO;
 import com.care.service.SaveProductService;
 import com.care.uitls.UploadFileUtils;
 
@@ -164,8 +165,6 @@ public class HomeController {
 	
 	@RequestMapping("productview")
 	public String productview(@RequestParam("product_name_no") String product_name_no, Model model) {
-		System.out.println("컨트롤러");
-		System.out.println("상품명넘겨주기: "+ product_name_no);
 		ProductnameDTO view = service.productview(product_name_no);
 		model.addAttribute("productlist",view);
 		return "category/productview/view";
@@ -199,6 +198,23 @@ public class HomeController {
 		return "home";
 	}
 	
-	
+	@RequestMapping(value = "SaveshoppingCart" ,method = RequestMethod.POST)
+	public String SaveshoppingCart(ShoppingCartDTO dto) {
+		dto.setId("test"); //여기에 로그인한 세션값 넣어주면됩니다
+		
+		service.saveshoppingcart(dto);
+		return "home";
+		 
+	}
+	@RequestMapping("shoppingcart")
+	public String shoppingcart(@RequestParam("user_id") String user_id,Model model) {
+		//장바구니 누르면 로그인 세션값 같이 넘겨서 사용
+		System.out.println("컨트롤러");
+		System.out.println(user_id);
+		ShoppingCartDTO view =	service.viewshoppingcart(user_id);
+		model.addAttribute("shoppingcart",view);
+		
+		return "shopping/shoppingCart";
+	}
 	
 }
