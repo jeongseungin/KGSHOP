@@ -104,10 +104,7 @@ function product_write() {
 				<td><label for="product_name_image">상품 이미지</label></td>
 				<td><input type="file" name="file" id="product_name_image"></td>
 			</tr>
-			<tr>
-				<td>파일 저장 주소</td>
-				<td><%=request.getRealPath("/") %></td>
-			</tr>
+			
 			<tr>
 				<td colspan="2">
 					<input type="submit" value="상품 등록" >

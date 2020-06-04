@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 
 import com.care.DAO.ProductnameDAO;
 import com.care.DTO.ProductnameDTO;
+import com.care.DTO.ShoppingCartDTO;
 
 @Service
 public class SaveProductService { 
@@ -105,7 +106,16 @@ public class SaveProductService {
 		
 	}
 
+public void saveshoppingcart(ShoppingCartDTO dto) {
+		
+		dao.saveshoppingcart(dto);
+		
+	}
 
+	public ShoppingCartDTO viewshoppingcart(String user_id) {
+		
+		return dao.viewshoppingcart(user_id);
+	}
 	
 	
 }

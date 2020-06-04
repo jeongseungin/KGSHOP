@@ -18,12 +18,7 @@ public class MemberService {
 	public void execute(MemberDTO dto) throws SQLException {
 		dao.updatedata(dto);
 	}
-	/*
-	public void memberlist(MemberDTO dto) {
-		dao.list(dto);
-		
-	}
-	*/
+
 
 
 }

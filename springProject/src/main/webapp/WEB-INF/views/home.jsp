@@ -14,26 +14,8 @@
   <!-- Custom styles for this template -->
   <link href="./resources/css/shop-homepage.css" rel="stylesheet">
 </head>
-<body><!--
-<h1>
-	홈 페이지 입니다.
-</h1>
-<h1>로그인</h1>
-<a href="bootlogin">로그인</a>
-<a href="bootMember">회원가입</a>
-<h1>CS</h1>
-<a href="myPage">마이페이지</a>
-<a href="cs">고객센터</a>
-<h1>게시판</h1>
-<a href="QnA">Q&A게시판</a>
-<a href="review">리뷰게시판</a>
-<h1>상품</h1>
-<a href="productName">상품등록</a>
-<h1>카테고리</h1>
-<a href="topproduct">상의</a>
-<a href="bottomproduct">하의</a>
-<a href="outerproduct">아우터</a>
--->
+<body>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="#">KG SHOP</a>
@@ -48,10 +30,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Q&A게시판</a>
+            <a class="nav-link" href="QnA">Q&A게시판</a>
           </li>
            <li class="nav-item">
             <a class="nav-link" href="bootMember">회원가입</a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="shoppingcart?user_id=test">장바구니</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="bootlogin">로그인</a>

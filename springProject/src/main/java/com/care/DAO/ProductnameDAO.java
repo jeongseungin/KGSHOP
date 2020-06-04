@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 
 import com.care.DTO.ProductnameDTO;
+import com.care.DTO.ShoppingCartDTO;
 
 
 @Repository
@@ -110,6 +111,17 @@ public class ProductnameDAO {
 	public void deleteproduct(String product_name_no) {
 		sqlSession.delete(namespace+".deleteproduct",product_name_no);
 		
+	}
+	
+	public void saveshoppingcart(ShoppingCartDTO dto) {
+		int result = sqlSession.insert(namespace+".saveshoppingcart",dto);
+		
+	}
+
+
+	public ShoppingCartDTO viewshoppingcart(String user_id) {
+		
+		return sqlSession.selectOne(namespace+ ".viewshoppingcart",user_id);
 	}
 
 }

@@ -19,66 +19,6 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-//	@RequestMapping(value = "/", method = RequestMethod.GET)
-//	public String home(Locale locale, Model model) {
-//		logger.info("Welcome home! The client locale is {}.", locale);
-//
-//		
-//		return "home";
-//	}
-	
-	
-//	@RequestMapping("member")
-//	public String member() {
-//		return "member/member";
-//	}
-//	
-//	@RequestMapping("myPage")
-//	public String myPage() {
-//		return "member/myPage";
-//	}
-//	
-//	@RequestMapping("cs")
-//	public String cs() {
-//		return "cs/cs";
-//	}
-//	
-//	@RequestMapping("QnA")
-//	public String QnA() {
-//		return "cs/QnA";
-//	}
-//	
-//	@RequestMapping("review")
-//	public String reivew() {
-//		return "shopping/review";
-//	}
-//	
-//	@RequestMapping("inputproduct")
-//	public String inputproduct() {
-//		return "shopping/inputproduct";
-//	}
-//	
-//	@RequestMapping("topproduct")
-//	public String topproduct() {
-//		return "category/top/topproduct";
-//	}
-//	
-//	@RequestMapping("bottomproduct")
-//	public String bottomproduct() {
-//		return "category/bottom/bottomproduct";
-//	}
-//	
-//	@RequestMapping("outerproduct")
-//	public String outerproduct() {
-//		return "category/outer/outerproduct";
-//	}
-//	
-//	@RequestMapping("productName")
-//	public String inputproductsave() {
-//		return "shopping/productName";
-//	}
+
 	
 }
