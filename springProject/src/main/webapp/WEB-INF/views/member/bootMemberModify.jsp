@@ -125,13 +125,14 @@ function sample6_execDaumPostcode() {
                 <div class="form-group" id="divId">
                     <label for="inputId" class="col-lg-2 control-label">아이디</label>
                     <div class="col-lg-10">
-                        <input type="text" class="id" id="id" name="id" data-rule-required="true" placeholder="30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30" value="${id }" disabled="disabled">  &nbsp;&nbsp;<input type="button" class="conform" value="중복확인" onclick="idcheck()"  >
+                        <input type="text" class="id" id="id" name="id" data-rule-required="true" placeholder="30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30" value="${id}" disabled="disabled">  &nbsp;&nbsp;
+                   
                     </div>
                 </div>
                 <div class="form-group" id="divPassword">
                     <label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="password" name="pw" data-rule-required="true" value="${memberlist.pw }" maxlength="30" placeholder="패스워드">
+                        <input type="password" class="form-control" id="password" name="pw" data-rule-required="true" value="" maxlength="30" placeholder="패스워드">
                     </div>
                 </div>
                 <div class="form-group" id="divPasswordCheck">
@@ -215,15 +216,7 @@ function sample6_execDaumPostcode() {
         
         
         <script>
-        function idcheck() {
-    		var id = document.getElementById("id").value;
-    		if (id.length < 1 || id == null) {
-    			alert("중복체크할 아이디를 입력하십시오");
-    			return false;
-    		}
-    		var url = "idcheck?id=" + id;
-    		window.open(url, "get", "height = 100, width = 230,top=100,left=500");
-    	}
+       
         
             $(function(){
                 //모달을 전역변수로 선언

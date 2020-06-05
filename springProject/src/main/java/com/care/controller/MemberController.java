@@ -25,7 +25,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.care.DAO.MemberDAO;
 import com.care.DTO.MemberDTO;
@@ -56,104 +59,67 @@ public class MemberController {
 		
 		return "home";
 	}
-	public MemberController() {
-		System.out.println("자동으로 실행됩니다");
-		String config = "classpath:database/jdbc-config.xml";
-		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext(config);
-		JdbcTemplate template = ctx.getBean("template",JdbcTemplate.class);
-		Constants.template = template;
-	}
-	@RequestMapping("login")
-	public String login() {
-		return "member/login";
-	}
-	
+
 	@RequestMapping(value="chkUser", method=RequestMethod.POST)
-	public String chkUser(Model model, HttpServletRequest request) {
-		model.addAttribute("request",request);
-		service = new LoginServiceImpl();  //service 상속받을 LoginServiceImpl 생성
-		int result = service.execute(model);//  model값 비교위한 변수 설정
-		if(result==0) {
-			HttpSession session = request.getSession();
-			session.setAttribute("id", request.getParameter("id"));//로그인 성공시 id값 세션 가져오기	
-			String id = (String) session.getAttribute("id");
-			if(id.equals("홍길동")) {
-				return "redirect:successloginManager";
-			}
-			return "redirect:successlogin";//로그인 성공시 successlogin
-		}
-	
+	public String chkUser(MemberDTO dto,HttpServletRequest request, HttpSession session) throws Exception {
+		String id = request.getParameter("id");		
+		String pw = request.getParameter("pw");
+		System.out.println(id);
+		System.out.println(pw);
 		
-//		model.addAttribute("manager",id);
-//		service.execute(model);
-		return "redirect:bootlogin";//로그인 실패시 login
+		MemberDTO dto1 = null;
+		dto1 = member.logincheck(dto);
+
+		try {
+			if(dto1.getId().equals(id) && dto1.getPw().equals(pw)) {
+				session.setAttribute("id", request.getParameter("id"));
+				return "redirect:successlogin";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "member/bootlogin";
 	}
-	//로그인 성공 시 
-	@RequestMapping("myPage")
-	public String popup() {
-		return "member/myPage";
-	}
-	
+
 	//회원 가입
 	@RequestMapping(value="chkRegister", method=RequestMethod.POST)
-	public String chkRegister(Model model,  HttpServletRequest request,MemberDTO dto) {
-		model.addAttribute("request",request);
-
-		String id = request.getParameter("id");
-
-		String encoder = pwdEncoder.encode(request.getParameter("pw"));
-		System.out.println(encoder);
-//		model.addAttribute("encoder",encoder);
-		service = new RegisterImpl();
-		service.execute(model);
-		int result = service.execute(model);
-		if(result==0) {
-			
-			
-			return "redirect:bootlogin";			
-		}else {
-		return "redirect:bootMember";	
-		}
+	public String chkRegister(MemberDTO dto, HttpServletRequest request) throws Exception {
+		String addr = request.getParameter("addr");
+		String addr1 = request.getParameter("addr1");
+		String addr2 = request.getParameter("addr2");
+		dto.setAddr(addr+addr1+addr2);
+		int result = member.idChk(dto);
+		try {
+			if(result==1) {
+				return "member/bootMember";
+			}else if(result==0) {
+//				String encoder = dto.getPw();
+//				String encopw = pwdEncoder.encode(encoder);
+//				dto.setPw(encopw);
+				member.savedata(dto);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException();
+		}	
+		return "redirect:home";	
+		
 	}
+	
 	//아이디 중복체크 페이지
-	@RequestMapping(value = "idcheck", method ={RequestMethod.GET, RequestMethod.POST})
-	public String idcheck(Model model,  HttpServletRequest request) throws Exception {
-		return "member/idcheck";
+	@ResponseBody
+	@RequestMapping(value = "idChk", method =RequestMethod.POST)
+	public int idChk(Model model,  HttpServletRequest request,MemberDTO dto) throws Exception {
+		int result = member.idChk(dto);
+		return result;
 	}
-	//
-	@RequestMapping("member")
-	public String member() {
-		return "member/member";
-	}
+
 	@RequestMapping("successloginManager")
 	public String successloginManager() {
 		return "member/successloginManager";
 	}
 
-	
-	@RequestMapping("list")
-	public String list(Model model,HttpServletRequest request) {
-////		MemberDTO dto = new MemberDTO();
-//		String sessionid;
-//		//model.addAttribute("request",request);
-//		
-//		HttpSession session = request.getSession();
-//		sessionid = (String)session.getAttribute("id");
-//		model.addAttribute("list",sessionid);
-//		
-//		
-////		dto.setSessionid(sessionid);
-//		member.list(model);
-		
-		
-		return "member/list";
-	}
-//	@RequestMapping("list")
-//	public String list(Model model, HttpServletRequest re) {
-//		model.addAttribute("request",re);
-//		member.list(model);
-//		return "list";
-//	}
+
 	@RequestMapping("updatedata")
 	public String updatedata(MemberDTO dto,HttpServletRequest request) throws SQLException {
 		
@@ -168,29 +134,12 @@ public class MemberController {
 		dto.setId(id);
 		System.out.println("세션 주소 값 : "+addr+addr1+addr2);
 		dto.setAddr(addr+addr1+addr2);
-	
-		System.out.println(dto.getId());
-		System.out.println(dto.getName());
-		System.out.println(dto.getAddr());
-		System.out.println(dto.getEmail());
-		System.out.println(dto.getPw());
-		System.out.println(dto.getPw_answer());
-//		System.out.println(dto);		
-//		member.updatedata(dto);
-//		HttpSession session = request.getSession();
-//		String id = (String)session.getAttribute("id");
-//		System.out.println(id);
-		
-		//model.addAttribute("request",request);
-		
+
 		member.execute(dto);
 		
-		return "redirect:bootlogin";
+		return "redirect:successlogin";
 	}
-	@RequestMapping("list2")
-	public String list2() {
-		return "member/list2";
-	}
+
 	@RequestMapping("bootlogin")
 	public String bootlogin() {
 		return "member/bootlogin";
@@ -198,16 +147,6 @@ public class MemberController {
 	@RequestMapping("bootMember")
 	public String bootMember() {
 		return "member/bootMember";
-	}
-	
-	@RequestMapping("bootMemberModify")
-	public String bootMemberModify(MemberDTO dto,HttpServletRequest request) {
-		HttpSession session = request.getSession();		
-		String id = (String) session.getAttribute("id");
-		System.out.println(id);
-		dto.setId(id);
-		//member.memberlist(dto);
-		return "member/bootMemberModify";
 	}
 	
 	@RequestMapping("successlogin")
@@ -219,4 +158,11 @@ public class MemberController {
 	public String logout() {
 		return "home";
 	}
+
+	@RequestMapping("bootMemberModify")
+	public String bootMemberModify() {
+		return "member/bootMemberModify";
+	}
+	
+	
 }
