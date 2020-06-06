@@ -53,7 +53,7 @@ public class Board_qaController {
 	}
 	@RequestMapping("savedata")
 	public String savedata(Board_qaDTO dto) {
-		int i;
+		int i;          
 		i = service.Board_qaInsert(dto);
 		System.out.println("결과값"+i);
 		return "redirect:QnA";
@@ -62,7 +62,7 @@ public class Board_qaController {
 	@RequestMapping("QnAreadView")
 		public String read(Board_qaDTO dto, Model model) throws Exception {
 			int Qa_state = service.read(dto.getQa_seq()).getQa_state();
-			System.out.println("비밀글 여부 1=비공개 0=공개 : "+Qa_state);
+			//System.out.println("비밀글 여부 1=비공개 0=공개 : "+Qa_state);
 			model.addAttribute("read", service.read(dto.getQa_seq()));
 			if(Qa_state==1) {
 				return "cs/QnApassWord";
