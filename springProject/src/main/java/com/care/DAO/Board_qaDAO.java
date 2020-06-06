@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.care.DTO.Board_qaCriteria;
 import com.care.DTO.Board_qaDTO;
+import com.care.DTO.Board_qaSearchCriteria;
 
 @Repository
 public class Board_qaDAO {
@@ -22,12 +23,12 @@ public class Board_qaDAO {
 		return i;
 	}
 	//게시물 목록 조회
-	public List<Board_qaDTO> list(Board_qaCriteria cri) throws Exception {
-		return sqlSession.selectList(namespace+".listPage",cri);
+	public List<Board_qaDTO> list(Board_qaSearchCriteria scri) throws Exception {
+		return sqlSession.selectList(namespace+".listPage",scri);
 	}
 	//게시물 숫자 카운트
-	public int listCount() throws Exception{
-		return sqlSession.selectOne(namespace+".listCount");
+	public int listCount(Board_qaSearchCriteria scri) throws Exception{
+		return sqlSession.selectOne(namespace+".listCount", scri);
 	}
 	//게시물 조회
 	public Board_qaDTO read(int qa_seq) {
