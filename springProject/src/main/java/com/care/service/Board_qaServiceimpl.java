@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import com.care.DAO.Board_qaDAO;
 import com.care.DTO.Board_qaCriteria;
 import com.care.DTO.Board_qaDTO;
-import com.care.DTO.Board_qaSearchCriteria;
 
 @Service
 public class Board_qaServiceimpl implements Board_qaService{
@@ -20,7 +19,7 @@ public class Board_qaServiceimpl implements Board_qaService{
 	public int execute(Model model) {
 		return 0;
 	}
-	//게시물 작성
+
 	@Override
 	public int Board_qaInsert(Board_qaDTO dto) {
 		int i = dao.insert(dto);
@@ -28,28 +27,27 @@ public class Board_qaServiceimpl implements Board_qaService{
 	}
 	//게시물 목록 조회
 	@Override
-	public List<Board_qaDTO> list(Board_qaSearchCriteria scri) throws Exception {
-		return dao.list(scri);
+	public List<Board_qaDTO> list(Board_qaCriteria cri) throws Exception {
+		return dao.list(cri);
 	}
 	//게시물 총 개수
 	@Override
-	public int listCount(Board_qaSearchCriteria scri) throws Exception{
-		return dao.listCount(scri);
+	public int listCount() throws Exception{
+		return dao.listCount();
 	}
 	
 	// 게시물 조회
-	@Override
-	public Board_qaDTO read(int qa_seq) throws Exception {
+		public Board_qaDTO read(int qa_seq) throws Exception {
 			return dao.read(qa_seq);
 	}
-	//게시물 수정
 	@Override
 	public void update(Board_qaDTO dto) throws Exception {
 		dao.update(dto);
 	}
-	//게시물 삭제
 	@Override
 	public void delete(int qa_seq) throws Exception {
 		dao.delete(qa_seq);
 	}
+	
+	
 }
