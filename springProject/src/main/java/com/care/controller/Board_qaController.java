@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.care.DTO.Board_qaCriteria;
 import com.care.DTO.Board_qaDTO;
 import com.care.DTO.Board_qaPageMaker;
+import com.care.DTO.Board_qaSearchCriteria;
 import com.care.service.Board_qaServiceimpl;
 import com.care.service.CommonService;
 import com.care.template.Constants;
@@ -30,15 +31,16 @@ public class Board_qaController {
 	
 	
 	@RequestMapping("QnA")
-	public String QnA(Model model, Board_qaCriteria cri, HttpServletRequest request) throws Exception {
+	public String QnA(Model model, Board_qaSearchCriteria scri, HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		String name = "abc";
-		session.setAttribute("id", name);
-		model.addAttribute("list",service.list(cri));
+		session.setAttribute("id", name);//세션생성, 추 후 삭제바람
+		
+		model.addAttribute("list",service.list(scri));
 		
 		Board_qaPageMaker pageMaker = new Board_qaPageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(service.listCount());
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(service.listCount(scri));
 		model.addAttribute("pageMaker", pageMaker);
 		
 		return "cs/QnA";
