@@ -104,6 +104,14 @@
 	<select id="Productlist" resultType="com.care.DTO.ProductnameDTO" parameterType="String">
 		select * from productname where product_name_no=#{product_name_no}
 	</select>
+	<!-- 상품 조회수 올리기 -->
+	
+	<update id="uphit" >
+		update productname
+			set 
+		product_hit = product_hit + 1
+		where product_name_no = #{product_name_no}
+	</update>
 	
 	<!-- 수정할 상품 고유번호보기 -->
 	<select id="Modifylist" resultType="com.care.DTO.ProductnameDTO" parameterType="String" >
