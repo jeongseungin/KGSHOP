@@ -68,7 +68,7 @@ public class Board_qaController {
 			int Qa_state = service.read(dto.getQa_seq()).getQa_state();
 			System.out.println("비밀글 여부 1=비공개 0=공개 : "+Qa_state);
 			model.addAttribute("read", service.read(dto.getQa_seq()));
-			model.addAttribute("scri", scri);
+			//model.addAttribute("scri", scri);
 			System.out.println(scri.getKeyword());
 			System.out.println(scri.getPerPageNum());
 			
@@ -83,7 +83,7 @@ public class Board_qaController {
 	@RequestMapping("QnApassWord")
 	public String QnApassWord(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri, Model model) throws Exception {
 		model.addAttribute("read", service.read(dto.getQa_seq()));
-		model.addAttribute("scri", scri);
+		//model.addAttribute("scri", scri);
 		return "cs/QnAreadView";
 	}
 	
@@ -91,7 +91,7 @@ public class Board_qaController {
 	@RequestMapping("updateView")
 	public String updateView(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri,Model model) throws Exception{
 		model.addAttribute("update", service.read(dto.getQa_seq()));
-		model.addAttribute("scri", scri);
+		//model.addAttribute("scri", scri);
 		return "cs/QnAupdateView";
 	}
 	
