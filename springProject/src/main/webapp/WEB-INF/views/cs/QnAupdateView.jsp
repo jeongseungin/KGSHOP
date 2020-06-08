@@ -4,16 +4,21 @@
 <html>
 	<head>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		
 	 	<title>게시판</title>
 	</head>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			
 			$(".cancel_btn").on("click", function(){
 				event.preventDefault();
-				location.href = "QnA";
+				location.href = "QnAreadView?qa_seq=${update.qa_seq}"
+					   + "&page=${scri.page}"
+					   + "&perPageNum=${scri.perPageNum}"
+					   + "&searchType=${scri.searchType}"
+					   + "&keyword=${scri.keyword}";
 			})
 		})
+		
 	</script>
 	<body>
 		<div id="root">
@@ -29,32 +34,32 @@
 			
 			<section id="container">
 				<form name="updateForm" role="form" method="post" action="update">
-					<input type="hidden" name="bno" value="${update.qa_seq}" readonly="readonly"/>
+					<input type="hidden" name="qa_seq" value="${update.qa_seq}" readonly="readonly"/>
 					<table>
 						<tbody>
 							<tr>
 								<td>
-									<label for="title">카테고리</label><input type="text" id="qa_category" name="qa_category" value="${update.qa_category}"/>
+									<label for="qa_category">카테고리</label><input type="text" id="qa_category" name="qa_category" value="${update.qa_category}"/>
 								</td>
 							</tr>	
 							<tr>
 								<td>
-									<label for="title">제목</label><input type="text" id="qa_content" name=qa_content value="${update.qa_content}"/>
+									<label for="qa_subject">제목</label><input type="text" id="qa_subject" name="qa_subject" value="${update.qa_subject}">
 								</td>
 							</tr>	
 							<tr>
 								<td>
-									<label for="content">내용</label><textarea id="qa_subject" name="qa_subject"><c:out value="${update.qa_subject}" /></textarea>
+									<label for="qa_content">내용</label><textarea id="qa_content" name=qa_content rows="10" cols="100" style="resize: none"><c:out value="${update.qa_content}"/></textarea>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<label for="writer">작성자</label><input type="text" id="user_id" name="user_id" value="${update.user_id}" readonly="readonly"/>
+									<label for="user_id">작성자</label><input type="text" id="user_id" name="user_id" value="${update.user_id}" readonly="readonly"/>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<label for="writer">비밀번호</label><input type="text" id="qa_pwd" name="qa_pwd" value="${update.qa_pwd}" />
+									<label for="qa_pwd">비밀번호</label><input type="text" id="qa_pwd" name="qa_pwd" value="${update.qa_pwd}" />
 								</td>
 							</tr>
 							<tr>

@@ -12,7 +12,9 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.care.DTO.Board_qaCriteria;
 import com.care.DTO.Board_qaDTO;
@@ -31,7 +33,7 @@ public class Board_qaController {
 	
 	
 	@RequestMapping("QnA")
-	public String QnA(Model model, Board_qaSearchCriteria scri, HttpServletRequest request) throws Exception {
+	public String QnA(Model model, @ModelAttribute("scri") Board_qaSearchCriteria scri, HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		String name = "abc";
 		session.setAttribute("id", name);//세션생성, 추 후 삭제바람
@@ -62,10 +64,14 @@ public class Board_qaController {
 	}
 	//게시물 조회
 	@RequestMapping("QnAreadView")
-		public String read(Board_qaDTO dto, Model model) throws Exception {
+		public String read(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri, Model model) throws Exception {
 			int Qa_state = service.read(dto.getQa_seq()).getQa_state();
 			System.out.println("비밀글 여부 1=비공개 0=공개 : "+Qa_state);
 			model.addAttribute("read", service.read(dto.getQa_seq()));
+			model.addAttribute("scri", scri);
+			System.out.println(scri.getKeyword());
+			System.out.println(scri.getPerPageNum());
+			
 			if(Qa_state==1) {
 				return "cs/QnApassWord";
 			}else {
@@ -75,28 +81,43 @@ public class Board_qaController {
 		
 	}//비밀번호 입력 후 게시물 조회
 	@RequestMapping("QnApassWord")
-	public String QnApassWord(Board_qaDTO dto, Model model) throws Exception {
+	public String QnApassWord(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri, Model model) throws Exception {
 		model.addAttribute("read", service.read(dto.getQa_seq()));
+		model.addAttribute("scri", scri);
 		return "cs/QnAreadView";
 	}
+	
 	// 게시판 수정뷰
 	@RequestMapping("updateView")
-	public String updateView(Board_qaDTO dto, Model model) throws Exception{
+	public String updateView(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri,Model model) throws Exception{
 		model.addAttribute("update", service.read(dto.getQa_seq()));
+		model.addAttribute("scri", scri);
 		return "cs/QnAupdateView";
 	}
 	
 	// 게시판 수정
 	@RequestMapping("update")
-	public String update(Board_qaDTO dto) throws Exception{
+	public String update(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri, RedirectAttributes rttr) throws Exception{
 		service.update(dto);
+		
+		rttr.addAttribute("page", scri.getPage());
+		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+		rttr.addAttribute("searchType", scri.getSearchType());
+		rttr.addAttribute("keyword", scri.getKeyword());
+		
 		return "redirect:QnA";
 	}
 	
 	// 게시판 삭제
 	@RequestMapping("delete")
-	public String delete(Board_qaDTO dto) throws Exception{
+	public String delete(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri, RedirectAttributes rttr) throws Exception{
 		service.delete(dto.getQa_seq());
+		
+		rttr.addAttribute("page", scri.getPage());
+		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+		rttr.addAttribute("searchType", scri.getSearchType());
+		rttr.addAttribute("keyword", scri.getKeyword());
+		
 		return "redirect:QnA";
 	}
 	

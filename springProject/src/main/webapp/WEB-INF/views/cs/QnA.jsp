@@ -5,10 +5,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	/*
+	$(".cancel_btn").on("click", function(){
+		event.preventDefault();
+		location.href = "/board/readView?bno=${update.bno}"
+			   + "&page=${scri.page}"
+			   + "&perPageNum=${scri.perPageNum}"
+			   + "&searchType=${scri.searchType}"
+			   + "&keyword=${scri.keyword}";
+	})
+	$(".list_btn").on("click", function(){
+	location.href = "/board/list?page=${scri.page}"
+	+"&perPageNum=${scri.perPageNum}"
+	+"&searchType=${scri.searchType}&keyword=${scri.keyword}";
+	})
+	*/
+</script>
 		<style type="text/css">
 			li {list-style: none; float: left; padding: 6px;}
 		</style>
+		
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -23,7 +40,12 @@
 				<td><c:out value="${list.qa_category}" /></td>
 				<td><c:out value="${list.qa_seq}" /></td>
 				<td>
-					<a href="QnAreadView?qa_seq=${list.qa_seq}"><c:out value="${list.qa_subject}" /></a>
+					<a href="QnAreadView?qa_seq=${list.qa_seq}
+					&page=${scri.page}
+					&perPageNum=${scri.perPageNum}
+					&searchType=${scri.searchType}
+					&keyword=${scri.keyword}">
+					<c:out value="${list.qa_subject}" /></a>
 				</td>
 				<td><c:out value="${list.user_id}" /></td>
 				<td><fmt:formatDate value="${list.qa_logtime}" pattern="yyyy-MM-dd"/></td>

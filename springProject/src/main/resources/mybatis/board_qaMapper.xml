@@ -63,10 +63,10 @@
 	<!-- 수정 -->
 	<update id="update" parameterType="com.care.DTO.Board_qaDTO">
 		UPDATE BOARD_QA
-		   SET QA_CATEGORY=#{qa_category},
-		   	   QA_CONTENT= #{qa_content},
-		   	   QA_PWD=#{qa_pwd},
-		   	   QA_LOGTIME=sysdate
+		   SET QA_CATEGORY =# {qa_category},
+		   	   QA_CONTENT = #{qa_content},
+		   	   QA_PWD = #{qa_pwd},
+		   	   QA_LOGTIME = sysdate
 		 WHERE qa_seq = #{qa_seq}
 	</update>
 	<!-- 삭제 -->

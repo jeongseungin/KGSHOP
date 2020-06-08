@@ -36,7 +36,9 @@ public class Board_qaDAO {
 	}
 	// 게시물 수정
 	public void update(Board_qaDTO dto) throws Exception {
-		sqlSession.update(namespace+".update", dto);
+		System.out.println("게시글 조회 번호"+dto.getQa_seq());
+		int i = sqlSession.update(namespace+".update", dto);
+		System.out.println("수정 결과 값"+i);
 	}
 
 	// 게시물 삭제
