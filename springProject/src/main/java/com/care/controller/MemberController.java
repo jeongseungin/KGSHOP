@@ -59,7 +59,7 @@ public class MemberController {
 		
 		return "home";
 	}
-
+	//로그인
 	@RequestMapping(value="chkUser", method=RequestMethod.POST)
 	public String chkUser(MemberDTO dto,HttpServletRequest request, HttpSession session) throws Exception {
 		String id = request.getParameter("id");		
@@ -70,8 +70,10 @@ public class MemberController {
 		MemberDTO dto1 = null;
 		dto1 = member.logincheck(dto);
 
+		boolean passMatch = pwdEncoder.matches(dto.getPw(), dto1.getPw());
+		
 		try {
-			if(dto1.getId().equals(id) && dto1.getPw().equals(pw)) {
+			if(dto1.getId().equals(id) && pwdEncoder.matches(pw, dto1.getPw())) {	
 				session.setAttribute("id", request.getParameter("id"));
 				return "redirect:successlogin";
 			}
@@ -82,7 +84,7 @@ public class MemberController {
 		return "member/bootlogin";
 	}
 
-	//회원 가입
+	//회원 가입 (비밀번호 암호화)
 	@RequestMapping(value="chkRegister", method=RequestMethod.POST)
 	public String chkRegister(MemberDTO dto, HttpServletRequest request) throws Exception {
 		String addr = request.getParameter("addr");
@@ -94,13 +96,13 @@ public class MemberController {
 			if(result==1) {
 				return "member/bootMember";
 			}else if(result==0) {
-//				String encoder = dto.getPw();
-//				String encopw = pwdEncoder.encode(encoder);
-//				dto.setPw(encopw);
+				String encoder = pwdEncoder.encode(dto.getPw());
+				System.out.println(encoder);
+				dto.setPw(encoder);
 				member.savedata(dto);
 			}
 		} catch (Exception e) {
-			throw new RuntimeException();
+			e.printStackTrace();
 		}	
 		return "redirect:home";	
 		
@@ -119,7 +121,7 @@ public class MemberController {
 		return "member/successloginManager";
 	}
 
-
+	//회원수정
 	@RequestMapping("updatedata")
 	public String updatedata(MemberDTO dto,HttpServletRequest request) throws SQLException {
 		
@@ -163,6 +165,12 @@ public class MemberController {
 	public String bootMemberModify() {
 		return "member/bootMemberModify";
 	}
-	
-	
+	@RequestMapping("myPage")
+	public String myPage(HttpServletRequest request) {
+		return "member/myPage";
+	}
+	@RequestMapping("index")
+	public String idex() {
+		return "member/index";
+	}
 }

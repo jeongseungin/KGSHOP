@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="com.care.DTO.MemberDTO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +20,7 @@
 </head>
 <body>
 
-	
+
  <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -37,11 +39,25 @@
             <a class="nav-link" href="#">Q&A게시판</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">장바구니</a>
+            <a class="nav-link" href="">리뷰게시판</a>
           </li>
+          
+         <li class="nav-item">
+         <c:choose>
+          	  <c:when test="${id eq 'system'}"></c:when>
+            <c:otherwise> <a class="nav-link" href="shoppingcart?user_id=test">장바구니</a></c:otherwise>
+             </c:choose>
+          </li>
+            
            <li class="nav-item">
-            <a class="nav-link" href="bootMemberModify">회원정보수정</a>
+   
+      	    <c:choose>
+          	  <c:when test="${id eq 'system'}"><a class="nav-link" href="myPage">관리자페이지</a></c:when>
+          	  <c:otherwise><a class="nav-link" href="myPage">마이페이지</a></c:otherwise>    
+            </c:choose>
+        
           </li>
+          
           <li class="nav-item">
             <a class="nav-link" href="home">로그아웃</a>
           </li>

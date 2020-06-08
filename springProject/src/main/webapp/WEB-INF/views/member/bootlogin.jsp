@@ -75,6 +75,7 @@
       </form>
       
 		</div>
+		
 	</div>
 
 	<div class="modal">
