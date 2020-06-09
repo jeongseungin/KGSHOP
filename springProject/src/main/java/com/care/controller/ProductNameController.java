@@ -2,17 +2,8 @@ package com.care.controller;
 
 import org.springframework.stereotype.Controller;
 import java.io.File;
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
 import javax.annotation.Resource;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +19,11 @@ public class ProductNameController {
 	@Autowired
 	SaveProductService service;
 
+	@RequestMapping("kakaologin")
+	public String kakaologin() {
+		return "kakaologin";
+	}
+	
 	@RequestMapping("productName")
 	public String productName() {
 		return "shopping/productName";
@@ -105,6 +101,7 @@ public class ProductNameController {
 	
 	@RequestMapping(value = "SaveProduct" ,method = RequestMethod.POST)
 	public String saveproduct(ProductnameDTO dto, MultipartFile file)throws Exception {	
+		
 		String imgUploadPath = uploadPath + File.separator + "imgUpload";
 		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
 		String fileName = null;
@@ -114,21 +111,27 @@ public class ProductNameController {
 		} else {
 		 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
 		}
+		
 		dto.setProduct_name_image(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 		dto.setProduct_thumbnail(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 		dto.setProduct_hit(0);
 		service.saveproduct(dto);
+		
 		return "home";
 		 
 	}
-	
+
 	@RequestMapping("productview")
 	public String productview(@RequestParam("product_name_no") String product_name_no, Model model) {
-		System.out.println("컨트롤러");
-		System.out.println("상품명넘겨주기: "+ product_name_no);
+		upHit(product_name_no);
 		ProductnameDTO view = service.productview(product_name_no);
+		
 		model.addAttribute("productlist",view);
 		return "category/productview/view";
+	}
+	private void upHit(String product_name_no) {
+		service.upHit(product_name_no);
+		return ;
 	}
 	
 	@RequestMapping("modifyproduct")
@@ -148,6 +151,7 @@ public class ProductNameController {
 		} else {
 		 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
 		}
+		
 		dto.setProduct_name_image(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 		dto.setProduct_thumbnail(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 		service.modifysaveproduct(dto);

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,10 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
  <meta name="description" content="">
     <meta name="author" content="">
-   
+    <!-- 네이버 로그인 script -->
+   <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>로그인 폼</title>
     
@@ -55,6 +59,7 @@
  	  background: #EAEAEA;
  	  color: black;
  	  }
+ 	  
  </style>
 </head>
 <body cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
@@ -71,7 +76,12 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="upw" class="form-control" placeholder="Password" required  name="pw"><br>
      
-        <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">로 그 인</button>
+        <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">로 그 인</button><br>
+        <div id="naver_id_login" ></div>
+        <a href = "https://kauth.kakao.com/oauth/authorize?client_id=c2205973abf3d4bbd2283090a123e0db&redirect_uri=http://localhost:9090/controller/oauth&response_type=code">
+      	<img style="width:100%;height:70%; " src="<spring:url value='/imgUpload/'/>\imgUpload\kakao.png">
+      	</a>
+      
       </form>
       
 		</div>
@@ -85,6 +95,20 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
-  
+  <script type="text/javascript">
+ 		var naver_id_login = new naver_id_login("s2clEYDL6OP7KrTI2H7_", "http://localhost:9090/controller/chkcallback");	// Client ID, CallBack URL 삽입
+											// 단 'localhost'가 포함된 CallBack URL
+ 		var state = naver_id_login.getUniqState();
+		
+ 		naver_id_login.setButton("green", 3, 60);
+ 		naver_id_login.setDomain("http://localhost:9090/controller/chklogin");	//  URL
+ 		naver_id_login.setState(state); 	
+ 		naver_id_login.setPopup();
+ 		naver_id_login.init_naver_id_login();
+ 		
+ 		var naverId = naver_id_login.getProfileData('nickname');
+ 		sessionStorage.setItem('naverId', naverId);
+	</script>
+
   </body>
 </html>

@@ -43,7 +43,7 @@ import com.care.template.Constants;
 public class MemberController {
 	
 	private CommonService service;
-	
+
 	@Autowired
 	private MemberService member;
 	
@@ -64,8 +64,7 @@ public class MemberController {
 	public String chkUser(MemberDTO dto,HttpServletRequest request, HttpSession session) throws Exception {
 		String id = request.getParameter("id");		
 		String pw = request.getParameter("pw");
-		System.out.println(id);
-		System.out.println(pw);
+		
 		
 		MemberDTO dto1 = null;
 		dto1 = member.logincheck(dto);

@@ -17,6 +17,7 @@
 
   <!-- Custom styles for this template -->
   <link href="./resources/css/shop-homepage.css" rel="stylesheet">
+ 
 </head>
 <body>
 
@@ -31,7 +32,8 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#" >${id }님 환영합니다
+          
+            <a class="nav-link" href="#" >${naverId }님 환영합니다 
               <span class="sr-only">(current)</span>
             </a>
           </li>
