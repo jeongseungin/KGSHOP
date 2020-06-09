@@ -2,7 +2,7 @@ create table qa_reply (
     qa_seq number not null,
     qa_reply_seq number not null,
     qa_reply_content varchar2(1000) not null,
-    qa_reply_writer varchar2(50) not null,
+    qa_reply_user_id varchar2(50) not null,
     qa_reply_logtime date,
     primary key(qa_seq, qa_reply_seq)
 );

@@ -1,0 +1,31 @@
+ex) logtime date default sysdate 시 데이터가 입력될때마다 현재 날짜와 시간이 자동으로 입력된다.
+
+디폴트(default)
+
+컬럼에 특정 값을 디폴트값으로 설정하면 테이블에 데이터를 입력할 때 해당 컬럼에 값을 입력하지 않을 경우 디폴트로 설정한 값이 자동으로 입력된다.
+
+컬럼 타입 다음에 "DEFAULT 디폴트값"을 명시하면 되며 null이나 not null 앞에 위치시켜야 한다.
+
+
+
+create table addressbook(
+
+name          varchar2(20)  not null    , 
+
+age            number(3)      null         ,
+
+email          varchar2(100) unique     ,
+
+create_date date              default sysdate                          
+
+);
+
+
+
+//추가설명
+
+오라클에서 현재 날짜와 시간을 갖고 있는 SYSDATE를 디폴트값으로 설정한다면 이테이블에 데이터를 넣는 로직을 구현하는 개발자 입장에서는 이 컬럼에 신경을 쓰지 않더라도 데이터가 입력될때마다 현재 날짜와 시간이 자동으로 입력된다.
+
+
+
+출처: https://sugerent.tistory.com/335 [MISTERY]

@@ -104,11 +104,21 @@
 		<button type="submit" class="delete_btn">삭제</button>
 		<button type="submit" class="list_btn">목록</button>	
 	</div>
+	<!-- 댓글 -->
+	<div id="reply">
+	  <ol class="replyList">
+	    <c:forEach items="${replyList}" var="replyList">
+	      <li>
+	        <p>
+	        작성자 : ${replyList.qa_reply_user_id}<br />
+	        작성 날짜 :  <fmt:formatDate value="${replyList.qa_reply_logtime}" pattern="yyyy-MM-dd" />
+	        </p>
 	
-	<jsp:useBean id="now" class="java.util.Date" />
-	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" var="today" />
-	오늘 날짜 : <c:out value="${today}"/>
-
+	        <p>${replyList.qa_reply_content}</p>
+	      </li>
+	    </c:forEach>   
+	  </ol>
+	</div>
 
 </body>
 </html>

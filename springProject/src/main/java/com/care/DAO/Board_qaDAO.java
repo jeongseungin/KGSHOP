@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.care.DTO.Board_qaCriteria;
 import com.care.DTO.Board_qaDTO;
 import com.care.DTO.Board_qaSearchCriteria;
+import com.care.DTO.Board_qa_ReplyDTO;
 
 @Repository
 public class Board_qaDAO {
@@ -40,9 +41,12 @@ public class Board_qaDAO {
 		int i = sqlSession.update(namespace+".update", dto);
 		System.out.println("수정 결과 값"+i);
 	}
-
 	// 게시물 삭제
 	public void delete(int qa_seq) throws Exception {
 		sqlSession.delete(namespace+".delete",qa_seq);
+	}
+	//댓글조회
+	public List<Board_qa_ReplyDTO> readReply(int qa_seq) throws Exception{
+		return sqlSession.selectList(namespace+".readReply", qa_seq);
 	}
 }

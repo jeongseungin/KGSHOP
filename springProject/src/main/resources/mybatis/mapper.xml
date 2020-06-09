@@ -211,6 +211,14 @@
 		 WHERE qa_seq = #{qa_seq}
 	</delete>
 	
+	<!-- 댓글 조회 -->
+	<select id="readReply" resultType="Board_qa_ReplyDTO">
+    	SELECT
+    		  qa_reply_seq, qa_reply_CONTENT, qa_reply_user_id, qa_reply_logtime
+    	 FROM qa_reply
+    	WHERE qa_seq = #{qa_seq}
+	</select>
+	
 	
 	
 	
