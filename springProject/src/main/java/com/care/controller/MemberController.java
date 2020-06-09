@@ -173,4 +173,12 @@ public class MemberController {
 	public String idex() {
 		return "member/index";
 	}
+	@RequestMapping("chklogin")
+	public String login() {
+		return "member/chklogin";
+	}
+	@RequestMapping("chkcallback" )
+	public String callback(HttpSession session) {
+		return "member/chkcallback";
+	}
 }
