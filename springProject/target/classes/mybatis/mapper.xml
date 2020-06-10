@@ -212,13 +212,12 @@
 	</delete>
 	
 	<!-- 댓글 조회 -->
-	<select id="readReply" resultType="com.care.DTO.Board_qa_ReplyDTO">
+	<select id="readReply" resultType="com.care.DTO.Board_qaReplyDTO">
     	SELECT
-    		  qa_reply_seq, qa_reply_content, qa_reply_user_id, qa_reply_logtime
+    		  qa_reply_seq, content, userid, logtime
     	 FROM qa_reply
     	WHERE qa_seq = #{qa_seq}
 	</select>
-	
 </mapper>
 
 

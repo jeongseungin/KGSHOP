@@ -22,7 +22,7 @@ import com.care.DTO.Board_qaCriteria;
 import com.care.DTO.Board_qaDTO;
 import com.care.DTO.Board_qaPageMaker;
 import com.care.DTO.Board_qaSearchCriteria;
-import com.care.DTO.Board_qa_ReplyDTO;
+import com.care.DTO.Board_qaReplyDTO;
 import com.care.service.Board_qaServiceimpl;
 import com.care.service.CommonService;
 import com.care.template.Constants;
@@ -74,7 +74,7 @@ public class Board_qaController {
 			//model.addAttribute("scri", scri);
 			//System.out.println(scri.getKeyword());
 			//System.out.println(scri.getPerPageNum());
-			List<Board_qa_ReplyDTO> replyList = service.readReply(dto.getQa_seq());
+			List<Board_qaReplyDTO> replyList = service.readReply(dto.getQa_seq());
 			System.out.println("Board_qa_ReplyDTO toString값 : "+replyList.get(0).toString());
 			model.addAttribute("replyList", replyList);
 			
@@ -90,7 +90,7 @@ public class Board_qaController {
 	public String QnApassWord(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri, Model model) throws Exception {
 		model.addAttribute("read", service.read(dto.getQa_seq()));
 		//model.addAttribute("scri", scri);
-		List<Board_qa_ReplyDTO> replyList = service.readReply(dto.getQa_seq());
+		List<Board_qaReplyDTO> replyList = service.readReply(dto.getQa_seq());
 		
 		model.addAttribute("replyList", replyList);
 		

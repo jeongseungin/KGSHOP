@@ -9,7 +9,7 @@ import com.care.DAO.Board_qaDAO;
 import com.care.DTO.Board_qaCriteria;
 import com.care.DTO.Board_qaDTO;
 import com.care.DTO.Board_qaSearchCriteria;
-import com.care.DTO.Board_qa_ReplyDTO;
+import com.care.DTO.Board_qaReplyDTO;
 
 @Service
 public class Board_qaServiceimpl implements Board_qaService{
@@ -54,7 +54,7 @@ public class Board_qaServiceimpl implements Board_qaService{
 		dao.delete(qa_seq);
 	}
 	//댓글조회
-	public List<Board_qa_ReplyDTO> readReply(int qa_seq) throws Exception{
+	public List<Board_qaReplyDTO> readReply(int qa_seq) throws Exception{
 		return dao.readReply(qa_seq);
 	}
 }

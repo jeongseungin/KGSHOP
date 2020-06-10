@@ -1,3 +1,4 @@
+
 package com.care.DAO;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.care.DTO.Board_qaCriteria;
 import com.care.DTO.Board_qaDTO;
 import com.care.DTO.Board_qaSearchCriteria;
-import com.care.DTO.Board_qa_ReplyDTO;
+import com.care.DTO.Board_qaReplyDTO;
 
 @Repository
 public class Board_qaDAO {
@@ -25,9 +26,10 @@ public class Board_qaDAO {
 	}
 	//게시물 목록 조회
 	public List<Board_qaDTO> list(Board_qaSearchCriteria scri) throws Exception {
+		List<Board_qaDTO> list = sqlSession.selectList(namespace+".listPage",scri);
 		return sqlSession.selectList(namespace+".listPage",scri);
 	}
-	//게시물 숫자 카운트
+	//게시물 숫자 카운트Board_qaReplyDTO
 	public int listCount(Board_qaSearchCriteria scri) throws Exception{
 		return sqlSession.selectOne(namespace+".listCount", scri);
 	}
@@ -46,7 +48,8 @@ public class Board_qaDAO {
 		sqlSession.delete(namespace+".delete",qa_seq);
 	}
 	//댓글조회
-	public List<Board_qa_ReplyDTO> readReply(int qa_seq) throws Exception{
+	public List<Board_qaReplyDTO> readReply(int qa_seq) throws Exception{
+		List<Board_qaReplyDTO> list = sqlSession.selectList(namespace+".readReply", qa_seq);
 		return sqlSession.selectList(namespace+".readReply", qa_seq);
 	}
 }

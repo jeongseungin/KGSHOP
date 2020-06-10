@@ -105,13 +105,11 @@
 		<button type="submit" class="list_btn">목록</button>	
 	</div>
 	<!-- 댓글 -->
-	${aaa }
-	${replyList.qa_reply_user_id }
-	    <c:forEach items="${replyList}" var="list">
-		    ${list.qa_reply_user_id}<br />
-		    <fmt:formatDate value="${list.qa_reply_logtime}" pattern="yyyy-MM-dd" />
-		    ${list.qa_reply_content}
-	    </c:forEach>   
+	    <c:forEach items="${replyList}" var="a" >
+		    ${a.userid}
+		    <fmt:formatDate value="${a.logtime}" pattern="yyyy-MM-dd" />
+		    ${a.content}
+	    </c:forEach>
  	-->
 </body>
 </html>
