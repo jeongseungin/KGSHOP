@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import com.care.DTO.Board_qaCriteria;
 import com.care.DTO.Board_qaDTO;
 import com.care.DTO.Board_qaSearchCriteria;
+import com.care.DTO.board_qaReplyDTO;
 
 public interface Board_qaService {
 
@@ -23,5 +24,9 @@ public interface Board_qaService {
 	List<Board_qaDTO> list(Board_qaSearchCriteria scri) throws Exception;
 
 	Board_qaDTO read(int qa_seq) throws Exception;
+
+	List<board_qaReplyDTO> readReply(int qa_seq) throws Exception;
+
+	void writeReply(board_qaReplyDTO dto) throws Exception;
 
 }

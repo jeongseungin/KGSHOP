@@ -218,6 +218,21 @@
     	 FROM qa_reply
     	WHERE qa_seq = #{qa_seq}
 	</select>
+	
+	<insert id="writeReply">
+		INSERT INTO QA_REPLY(
+			qa_seq
+			, qa_reply_seq
+			, qa_reply_content
+			, qa_reply_user_id
+			,qa_reply_logtime
+		)
+		VALUES(    #{qa_seq}
+			, qa_reply_seq.NEXTVAL
+			, #{qa_reply_content}
+			, #{qa_reply_user_id}	
+			,sysdate)
+	</insert>
 </mapper>
 
 

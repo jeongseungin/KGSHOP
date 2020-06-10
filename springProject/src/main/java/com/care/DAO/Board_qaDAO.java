@@ -26,7 +26,6 @@ public class Board_qaDAO {
 	}
 	//게시물 목록 조회
 	public List<Board_qaDTO> list(Board_qaSearchCriteria scri) throws Exception {
-		List<Board_qaDTO> list = sqlSession.selectList(namespace+".listPage",scri);
 		return sqlSession.selectList(namespace+".listPage",scri);
 	}
 	//게시물 숫자 카운트Board_qaReplyDTO
@@ -50,5 +49,19 @@ public class Board_qaDAO {
 	//댓글조회
 	public List<board_qaReplyDTO> readReply(int qa_seq) throws Exception{
 		return sqlSession.selectList(namespace+".readReply", qa_seq);
+	}
+	//댓글작성
+	public void writeReply(board_qaReplyDTO dto) {
+		System.out.println(dto.getQa_reply_seq());
+		System.out.println(dto.getQa_reply_content());
+		System.out.println(dto.getQa_reply_logtime());
+		System.out.println(dto.getQa_reply_user_id());
+		
+		
+		
+		
+		
+		int i = sqlSession.insert(namespace+".writeReply", dto);
+		System.out.println("댓글작성 insert결과값 : "+i);
 	}
 }

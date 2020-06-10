@@ -53,8 +53,17 @@ public class Board_qaServiceimpl implements Board_qaService{
 	public void delete(int qa_seq) throws Exception {
 		dao.delete(qa_seq);
 	}
+	
 	//댓글조회
+	@Override
 	public List<board_qaReplyDTO> readReply(int qa_seq) throws Exception{
 		return dao.readReply(qa_seq);
 	}
+	
+	//댓글작성
+	@Override
+	public void writeReply(board_qaReplyDTO dto) throws Exception{
+		dao.writeReply(dto);
+	}
+	
 }

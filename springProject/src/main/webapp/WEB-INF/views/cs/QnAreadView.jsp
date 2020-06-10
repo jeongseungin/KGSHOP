@@ -30,10 +30,17 @@
 		
 		// 취소
 		$(".list_btn").on("click", function(){
-		location.href = "QnA?page=${scri.page}"
-		+"&perPageNum=${scri.perPageNum}"
-		+"&searchType=${scri.searchType}&keyword=${scri.keyword}";
+			location.href = "QnA?page=${scri.page}"
+			+"&perPageNum=${scri.perPageNum}"
+			+"&searchType=${scri.searchType}&keyword=${scri.keyword}";
 		})
+		
+		$(".replyWriteBtn").on("click", function(){
+		   var formObj = $("form[name='replyForm']");
+		   formObj.attr("action", "replyWrite");
+		   formObj.submit();
+		});
+		
 	})
 </script>
 <body>
@@ -118,6 +125,24 @@
 	    </c:forEach>   
 	  </ol>
 	</div>
+
+	<form name="replyForm" method="post">
+	  <input type="hidden" id="qa_seq" name="qa_seq" value="${read.qa_seq}" />
+	  <input type="hidden" id="page" name="page" value="${scri.page}"> 
+	  <input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
+	  <input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
+	  <input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
+	
+	  <div>
+	    <label for="qa_reply_user_id">댓글 작성자</label><input type="text" id="qa_reply_user_id" name="qa_reply_user_id" />
+	    <br/>
+	    <label for="qa_reply_content">댓글 내용</label><input type="text" id="qa_reply_content" name="qa_reply_content" />
+	  </div>
+	  <div>
+	 	 <button type="button" class="replyWriteBtn">작성</button>
+	  </div>
+	</form>
+	
 	    
 </body>
 </html>

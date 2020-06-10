@@ -65,17 +65,19 @@ public class Board_qaController {
 		System.out.println("결과값"+i);
 		return "redirect:QnA";
 	}
-	//게시물 조회
+	//게시물 조회 & 게시물 댓글 조회
 	@RequestMapping("QnAreadView")
 	public String read(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri, Model model) throws Exception {
+			
 			int Qa_state = service.read(dto.getQa_seq()).getQa_state();
 			System.out.println("비밀글 여부 1=비공개 0=공개 : "+Qa_state);
-			model.addAttribute("read", service.read(dto.getQa_seq()));
-			//model.addAttribute("scri", scri);
 			
-			List<board_qaReplyDTO> replyList = service.readReply(dto.getQa_seq());
-			System.out.println("Board_qa_ReplyDTO toString값 : "+replyList.get(0).toString());
-			model.addAttribute("replyList", replyList);
+			//게시물 조회
+			model.addAttribute("read", service.read(dto.getQa_seq()));
+			model.addAttribute("scri", scri);
+			
+			//게시물 댓글 조회
+			model.addAttribute("replyList", service.readReply(dto.getQa_seq()));
 			
 			if(Qa_state==1) {
 				return "cs/QnApassWord";
@@ -89,9 +91,8 @@ public class Board_qaController {
 	@RequestMapping("QnApassWord")
 	public String QnApassWord(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri, Model model) throws Exception {
 		model.addAttribute("read", service.read(dto.getQa_seq()));
-		//model.addAttribute("scri", scri);
-		List<board_qaReplyDTO> replyList = service.readReply(dto.getQa_seq());
-		model.addAttribute("replyList", replyList);
+		model.addAttribute("scri", scri);
+		model.addAttribute("replyList", service.readReply(dto.getQa_seq()));
 		return "cs/QnAreadView";
 	}
 	
@@ -99,7 +100,7 @@ public class Board_qaController {
 	@RequestMapping("updateView")
 	public String updateView(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri,Model model) throws Exception{
 		model.addAttribute("update", service.read(dto.getQa_seq()));
-		//model.addAttribute("scri", scri);
+		model.addAttribute("scri", scri);
 		return "cs/QnAupdateView";
 	}
 	
@@ -129,5 +130,23 @@ public class Board_qaController {
 		return "redirect:QnA";
 	}
 	
+	// 댓글 작성
+	@RequestMapping("replyWrite")
+	public String replyWrite(board_qaReplyDTO dto, Board_qaSearchCriteria scri, RedirectAttributes rttr)throws Exception{
+		service.writeReply(dto);
+		
+//		System.out.println("댓글작성 게시판번호"+dto.getQa_seq());
+//		System.out.println("댓글작성 페이지값 : "+scri.getPage());
+//		System.out.println("댓글작성 서치타입: "+scri.getSearchType());
+//		System.out.println("댓글작성 키워드 : "+scri.getKeyword());
+		
+		rttr.addAttribute("qa_seq", dto.getQa_seq());
+		rttr.addAttribute("page", scri.getPage());
+		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+		rttr.addAttribute("searchType", scri.getSearchType());
+		rttr.addAttribute("keyword", scri.getKeyword());
+		
+		return "redirect:QnAreadView";
+	}
 	
 }
