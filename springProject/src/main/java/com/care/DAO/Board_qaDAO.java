@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import com.care.DTO.Board_qaCriteria;
 import com.care.DTO.Board_qaDTO;
+import com.care.DTO.board_qaReplyDTO;
 import com.care.DTO.Board_qaSearchCriteria;
-import com.care.DTO.Board_qaReplyDTO;
 
 @Repository
 public class Board_qaDAO {
@@ -48,8 +48,7 @@ public class Board_qaDAO {
 		sqlSession.delete(namespace+".delete",qa_seq);
 	}
 	//댓글조회
-	public List<Board_qaReplyDTO> readReply(int qa_seq) throws Exception{
-		List<Board_qaReplyDTO> list = sqlSession.selectList(namespace+".readReply", qa_seq);
+	public List<board_qaReplyDTO> readReply(int qa_seq) throws Exception{
 		return sqlSession.selectList(namespace+".readReply", qa_seq);
 	}
 }

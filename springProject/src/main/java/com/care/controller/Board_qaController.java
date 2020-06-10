@@ -22,7 +22,7 @@ import com.care.DTO.Board_qaCriteria;
 import com.care.DTO.Board_qaDTO;
 import com.care.DTO.Board_qaPageMaker;
 import com.care.DTO.Board_qaSearchCriteria;
-import com.care.DTO.Board_qaReplyDTO;
+import com.care.DTO.board_qaReplyDTO;
 import com.care.service.Board_qaServiceimpl;
 import com.care.service.CommonService;
 import com.care.template.Constants;
@@ -72,9 +72,8 @@ public class Board_qaController {
 			System.out.println("비밀글 여부 1=비공개 0=공개 : "+Qa_state);
 			model.addAttribute("read", service.read(dto.getQa_seq()));
 			//model.addAttribute("scri", scri);
-			//System.out.println(scri.getKeyword());
-			//System.out.println(scri.getPerPageNum());
-			List<Board_qaReplyDTO> replyList = service.readReply(dto.getQa_seq());
+			
+			List<board_qaReplyDTO> replyList = service.readReply(dto.getQa_seq());
 			System.out.println("Board_qa_ReplyDTO toString값 : "+replyList.get(0).toString());
 			model.addAttribute("replyList", replyList);
 			
@@ -83,6 +82,7 @@ public class Board_qaController {
 			}else {
 				return "cs/QnAreadView";
 				}
+			
 	}
  	
 	//비밀번호 입력 후 게시물 조회
@@ -90,10 +90,8 @@ public class Board_qaController {
 	public String QnApassWord(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri, Model model) throws Exception {
 		model.addAttribute("read", service.read(dto.getQa_seq()));
 		//model.addAttribute("scri", scri);
-		List<Board_qaReplyDTO> replyList = service.readReply(dto.getQa_seq());
-		
+		List<board_qaReplyDTO> replyList = service.readReply(dto.getQa_seq());
 		model.addAttribute("replyList", replyList);
-		
 		return "cs/QnAreadView";
 	}
 	
