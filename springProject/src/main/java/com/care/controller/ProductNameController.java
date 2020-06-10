@@ -19,10 +19,7 @@ public class ProductNameController {
 	@Autowired
 	SaveProductService service;
 
-	@RequestMapping("kakaologin")
-	public String kakaologin() {
-		return "kakaologin";
-	}
+	
 	
 	@RequestMapping("productName")
 	public String productName() {
