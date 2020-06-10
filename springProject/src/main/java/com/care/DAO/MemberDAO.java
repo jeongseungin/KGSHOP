@@ -47,12 +47,17 @@ public class MemberDAO {
 		int result = sqlSession.insert(namespace+".input",dto);
 	}
 
-	public MemberDTO logincheck(MemberDTO dto) throws Exception{	
+	public MemberDTO logincheck(MemberDTO dto) throws Exception{
 		return sqlSession.selectOne(namespace+".logincheck",dto);
 	}
 
 	public int idChk(MemberDTO dto)throws Exception{
 		return sqlSession.selectOne(namespace+".idChk",dto);
+	}
+
+
+	public MemberDTO list(String id) throws Exception{
+		return sqlSession.selectOne(namespace+".memberlist",id);
 	}
 
 

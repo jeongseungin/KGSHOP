@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>회원가입</title>
+        <title>회원정보 수정</title>
         <!-- Bootstrap -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요한) -->
@@ -109,6 +109,7 @@ function sample6_execDaumPostcode() {
 </style>
 </head>
 <body>
+	
 	 <div class="container"><!-- 좌우측의 공간 확보 -->
             <!-- 헤더 들어가는 부분 -->
             
@@ -132,7 +133,7 @@ function sample6_execDaumPostcode() {
                 <div class="form-group" id="divPassword">
                     <label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="password" name="pw" data-rule-required="true" value="" maxlength="30" placeholder="패스워드">
+                        <input type="password" class="form-control" id="password" name="pw" data-rule-required="true" maxlength="30" placeholder="패스워드" >
                     </div>
                 </div>
                 <div class="form-group" id="divPasswordCheck">
@@ -144,7 +145,7 @@ function sample6_execDaumPostcode() {
                 <div class="form-group" id="divName">
                     <label for="inputName" class="col-lg-2 control-label">이름</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control onlyHangul" id="name" name="name" data-rule-required="true" placeholder="한글만 입력 가능합니다." maxlength="15">
+                        <input type="text" class="form-control onlyHangul" id="name" name="name"  value="${list.name }" data-rule-required="true" placeholder="한글만 입력 가능합니다." maxlength="15">
                     </div>
                 </div>
                 
@@ -170,13 +171,13 @@ function sample6_execDaumPostcode() {
                 <div class="form-group" id="divEmail">
                     <label for="inputEmail" class="col-lg-2 control-label">이메일</label>
                     <div class="col-lg-10">
-                        <input type="email" class="form-control" id="email" data-rule-required="true" placeholder="이메일" maxlength="40" name="email">
+                        <input type="email" class="form-control" id="email" data-rule-required="true" placeholder="이메일" maxlength="40" name="email" value="${list.email }">
                     </div>
                 </div>
                 <div class="form-group" id="divPhoneNumber">
                     <label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰 번호</label>
                     <div class="col-lg-10">
-                        <input type="tel" class="form-control onlyNumber" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11" name="tel">
+                        <input type="tel" class="form-control onlyNumber" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11" name="tel" value="${list.tel }">
                     </div>
                 </div>
                 <div class="form-group" id="divPhoneNumber">
@@ -193,7 +194,7 @@ function sample6_execDaumPostcode() {
                     </div>
                 </div>
 				<div class="form-group" id="divPhoneNumber">
-                    <label for="inputPhoneNumber" class="col-lg-2 control-label">상세주소</label>	
+                    <label for="inputPhoneNumber" class="col-lg-2 control-label" >상세주소</label>	
                     <div class="col-lg-10">
                         <input type="text" placeholder="상세주소"  class="post2" name="addr2" id="sample6_detailAddress">
                     </div>

@@ -106,8 +106,7 @@
  		naver_id_login.setPopup();
  		naver_id_login.init_naver_id_login();
  		
- 		var naverId = naver_id_login.getProfileData('nickname');
- 		sessionStorage.setItem('naverId', naverId);
+ 		
 	</script>
 
   </body>

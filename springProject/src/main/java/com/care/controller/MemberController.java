@@ -1,4 +1,5 @@
 package com.care.controller;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Locale;
@@ -10,6 +11,8 @@ import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,20 +33,23 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 import com.care.DAO.MemberDAO;
 import com.care.DTO.MemberDTO;
+
 import com.care.service.CommonService;
 import com.care.service.MemberService;
 import com.care.template.Constants;
+import com.github.scribejava.core.model.OAuth2AccessToken;
 
-
+import jdk.nashorn.internal.parser.JSONParser;
 
 
 @Controller
 public class MemberController {
 	
 	private CommonService service;
-
+	
 	@Autowired
 	private MemberService member;
 	
@@ -61,12 +67,11 @@ public class MemberController {
 	}
 	//로그인
 	@RequestMapping(value="chkUser", method=RequestMethod.POST)
-	public String chkUser(MemberDTO dto,HttpServletRequest request, HttpSession session) throws Exception {
+	public String chkUser(MemberDTO dto,HttpServletRequest request, HttpSession session,Model model) throws Exception {
 		String id = request.getParameter("id");		
 		String pw = request.getParameter("pw");
 		
-		
-		MemberDTO dto1 = null;
+ 		MemberDTO dto1 = null;
 		dto1 = member.logincheck(dto);
 
 		boolean passMatch = pwdEncoder.matches(dto.getPw(), dto1.getPw());
@@ -74,6 +79,7 @@ public class MemberController {
 		try {
 			if(dto1.getId().equals(id) && pwdEncoder.matches(pw, dto1.getPw())) {	
 				session.setAttribute("id", request.getParameter("id"));
+				session.setAttribute("pw", request.getParameter("pw"));
 				return "redirect:successlogin";
 			}
 		} catch (Exception e) {
@@ -140,7 +146,13 @@ public class MemberController {
 		
 		return "redirect:successlogin";
 	}
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "home";
+	}
 
+	
 	@RequestMapping("bootlogin")
 	public String bootlogin() {
 		return "member/bootlogin";
@@ -161,7 +173,12 @@ public class MemberController {
 	}
 
 	@RequestMapping("bootMemberModify")
-	public String bootMemberModify() {
+	public String bootMemberModify(MemberDTO dto,HttpServletRequest request,Model model) throws Exception {		
+		HttpSession session = request.getSession();		
+		String id = (String) session.getAttribute("id");
+	
+		model.addAttribute("list",member.list(id));
+		
 		return "member/bootMemberModify";
 	}
 	@RequestMapping("myPage")
@@ -177,7 +194,7 @@ public class MemberController {
 		return "member/chklogin";
 	}
 	@RequestMapping("chkcallback" )
-	public String callback(HttpSession session) {
+	public String callback()throws IOException, ParseException {
 		return "member/chkcallback";
 	}
 }

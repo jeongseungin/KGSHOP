@@ -50,7 +50,7 @@
             </c:choose>
           
           <li class="nav-item">
-            <a class="nav-link" href="home">로그아웃</a>
+            <a class="nav-link" href="logout">로그아웃</a>
           </li>
         </ul>
       </div>
@@ -78,7 +78,9 @@
 		<c:otherwise>
         <h1 class="my-4">마이페이지</h1>
         <div class="list-group">
+    
          <a href="bootMemberModify" class="list-group-item">회원정보수정</a>
+     
          <a href="#" class="list-group-item">내가 쓴글</a>
          <a href="#" class="list-group-item">장바구니</a>
          <a href="#" class="list-group-item">주문내역</a>

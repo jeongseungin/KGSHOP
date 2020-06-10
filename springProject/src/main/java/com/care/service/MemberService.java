@@ -35,6 +35,10 @@ public class MemberService {
 		return result;
 	}
 
+	public MemberDTO list(String id) throws Exception{
+		return dao.list(id);		
+	}
+
 
 
 }

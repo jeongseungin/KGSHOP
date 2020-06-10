@@ -20,12 +20,15 @@
  
 </head>
 <body>
-
+<script type="text/javascript">
+	var naverid = localStorage.getItem('naverId');
+	console.log(naverid);
+</script>
 
  <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">KG SHOP</a>
+      <a class="navbar-brand" href="home">KG SHOP</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -33,7 +36,7 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
           
-            <a class="nav-link" href="#" >${naverId }님 환영합니다 
+            <a class="nav-link" href="#" >${sessionId }님 환영합니다 
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -61,7 +64,7 @@
           </li>
           
           <li class="nav-item">
-            <a class="nav-link" href="home">로그아웃</a>
+            <a class="nav-link" href="logout">로그아웃</a>
           </li>
         </ul>
       </div>
