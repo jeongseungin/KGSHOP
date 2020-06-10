@@ -1,5 +1,6 @@
 package com.care.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -66,15 +67,15 @@ public class Board_qaController {
 	}
 	//게시물 조회
 	@RequestMapping("QnAreadView")
-		public String read(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri, Model model) throws Exception {
+	public String read(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri, Model model) throws Exception {
 			int Qa_state = service.read(dto.getQa_seq()).getQa_state();
 			System.out.println("비밀글 여부 1=비공개 0=공개 : "+Qa_state);
 			model.addAttribute("read", service.read(dto.getQa_seq()));
 			//model.addAttribute("scri", scri);
 			//System.out.println(scri.getKeyword());
 			//System.out.println(scri.getPerPageNum());
-			
 			List<Board_qa_ReplyDTO> replyList = service.readReply(dto.getQa_seq());
+			System.out.println("Board_qa_ReplyDTO toString값 : "+replyList.get(0).toString());
 			model.addAttribute("replyList", replyList);
 			
 			if(Qa_state==1) {
@@ -82,15 +83,17 @@ public class Board_qaController {
 			}else {
 				return "cs/QnAreadView";
 				}
-	
-		
-	}//비밀번호 입력 후 게시물 조회
+	}
+ 	
+	//비밀번호 입력 후 게시물 조회
 	@RequestMapping("QnApassWord")
 	public String QnApassWord(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri, Model model) throws Exception {
 		model.addAttribute("read", service.read(dto.getQa_seq()));
 		//model.addAttribute("scri", scri);
 		List<Board_qa_ReplyDTO> replyList = service.readReply(dto.getQa_seq());
+		
 		model.addAttribute("replyList", replyList);
+		
 		return "cs/QnAreadView";
 	}
 	
