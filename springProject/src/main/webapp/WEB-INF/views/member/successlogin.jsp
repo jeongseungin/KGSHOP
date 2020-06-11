@@ -37,7 +37,7 @@
             <a class="nav-link" href="#">Q&A게시판</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">장바구니</a>
+            <a class="nav-link" href="shoppingcart?user_id=${id}">장바구니</a>
           </li>
            <li class="nav-item">
             <a class="nav-link" href="bootMemberModify">회원정보수정</a>

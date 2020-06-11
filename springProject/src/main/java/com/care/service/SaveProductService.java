@@ -1,5 +1,7 @@
 package com.care.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -107,7 +109,7 @@ public void saveshoppingcart(ShoppingCartDTO dto) {
 		
 	}
 
-	public ShoppingCartDTO viewshoppingcart(String user_id) {
+	public List<ShoppingCartDTO> viewshoppingcart(String user_id) {
 		
 		return dao.viewshoppingcart(user_id);
 	}

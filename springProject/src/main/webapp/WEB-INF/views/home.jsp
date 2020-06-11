@@ -36,7 +36,7 @@
             <a class="nav-link" href="bootMember">회원가입</a>
           </li>
            <li class="nav-item">
-            <a class="nav-link" href="shoppingcart?user_id=test">장바구니</a>
+            <a class="nav-link" href="shoppingcart?user_id=${id}">장바구니</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="bootlogin">로그인</a>

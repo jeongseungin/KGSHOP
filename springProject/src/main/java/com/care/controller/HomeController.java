@@ -18,9 +18,9 @@ public class HomeController {
 @Autowired
 private KakaoAPI kakao;
 
-@RequestMapping("kakaopai")
-public String kakaopai() {
-	return "kakaopai";
+@RequestMapping("kakaopay")
+public String kakaopay() {
+	return "kakaopay";
 }
 
 @RequestMapping("kakaologin")
