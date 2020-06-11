@@ -52,16 +52,21 @@ public class Board_qaDAO {
 	}
 	//댓글작성
 	public void writeReply(board_qaReplyDTO dto) {
-		System.out.println(dto.getQa_reply_seq());
-		System.out.println(dto.getQa_reply_content());
-		System.out.println(dto.getQa_reply_logtime());
-		System.out.println(dto.getQa_reply_user_id());
-		
-		
-		
-		
-		
 		int i = sqlSession.insert(namespace+".writeReply", dto);
 		System.out.println("댓글작성 insert결과값 : "+i);
+	}
+	//댓글 수정
+	public void updateReply(board_qaReplyDTO dto) throws Exception {
+		int i = sqlSession.update(namespace+".updateReply",dto);
+		System.out.println("댓글수정 결과 값 : "+i);
+		
+	}
+	//댓글 삭제
+	public void deleteReply(board_qaReplyDTO dto) throws Exception	{
+		int i = sqlSession.delete(namespace+".deleteReply",dto);
+	}
+	//선택된 댓글 조회
+	public board_qaReplyDTO selectReply(int qa_reply_seq) throws Exception	{
+		return sqlSession.selectOne(namespace+".selectReply", qa_reply_seq);
 	}
 }

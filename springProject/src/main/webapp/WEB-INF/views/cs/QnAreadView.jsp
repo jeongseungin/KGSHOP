@@ -41,6 +41,30 @@
 		   formObj.submit();
 		});
 		
+		//수정 버튼을 클릭했을 때 url주소가 게시판
+		//qa_seq, page, perPageNum, searchType, keyword 그리고 댓글번호인 rno가 들어가 있는것이 보입니다. 
+		//여기서 $(this).attr("data-qa_reply_seq")는 클릭 이벤트가 발생한 수정 버튼의 data-qa_reply_seq값을 가져오겠다는 말이에요.
+		
+		//댓글 수정 View
+		$(".replyUpdateBtn").on("click", function(){
+			location.href = "replyUpdateView?qa_seq=${read.qa_seq}"
+							+ "&page=${scri.page}"
+							+ "&perPageNum=${scri.perPageNum}"
+							+ "&searchType=${scri.searchType}"
+							+ "&keyword=${scri.keyword}"
+							+ "&qa_reply_seq="+$(this).attr("data-qa_reply_seq");
+		});
+				
+		//댓글 삭제 View
+		$(".replyDeleteBtn").on("click", function(){
+			location.href = "replyDeleteView?qa_seq=${read.qa_seq}"
+				+ "&page=${scri.page}"
+				+ "&perPageNum=${scri.perPageNum}"
+				+ "&searchType=${scri.searchType}"
+				+ "&keyword=${scri.keyword}"
+				+ "&qa_reply_seq="+$(this).attr("data-qa_reply_seq");
+		});
+		
 	})
 </script>
 <body>
@@ -121,6 +145,10 @@
 			        작성 날짜 :  <fmt:formatDate value="${replyList.qa_reply_logtime}" pattern="yyyy-MM-dd" />
 	        </p>
 	        <p>${replyList.qa_reply_content}</p>
+	         <div>
+				<button type="button" class="replyUpdateBtn" data-qa_reply_seq="${replyList.qa_reply_seq}">수정</button>
+			    <button type="button" class="replyDeleteBtn" data-qa_reply_seq="${replyList.qa_reply_seq}">삭제</button>
+	  	 	 </div>
 	      </li>
 	    </c:forEach>   
 	  </ol>

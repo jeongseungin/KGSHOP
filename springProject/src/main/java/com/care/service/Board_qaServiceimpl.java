@@ -65,5 +65,20 @@ public class Board_qaServiceimpl implements Board_qaService{
 	public void writeReply(board_qaReplyDTO dto) throws Exception{
 		dao.writeReply(dto);
 	}
+	//댓글수정
+	@Override
+	public void updateReply(board_qaReplyDTO dto) throws Exception {
+		dao.updateReply(dto);
+	}
+	//댓글삭제
+	@Override
+	public void deleteReply(board_qaReplyDTO dto) throws Exception {
+		dao.deleteReply(dto);
+	}
+	//선택된 댓글 조회
+	@Override
+	public board_qaReplyDTO selectReply(int qa_reply_seq) throws Exception {
+		return dao.selectReply(qa_reply_seq);
+	}
 	
 }

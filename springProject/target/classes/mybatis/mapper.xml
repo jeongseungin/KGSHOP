@@ -218,7 +218,7 @@
     	 FROM qa_reply
     	WHERE qa_seq = #{qa_seq}
 	</select>
-	
+	<!-- 댓글작성 -->
 	<insert id="writeReply">
 		INSERT INTO QA_REPLY(
 			qa_seq
@@ -233,6 +233,30 @@
 			, #{qa_reply_user_id}	
 			,sysdate)
 	</insert>
+	
+	<!-- 댓글 수정 -->
+	<update id="updateReply" parameterType="com.care.DTO.board_qaReplyDTO">
+		UPDATE QA_REPLY SET qa_reply_content = #{qa_reply_content}
+		WHERE qa_reply_seq = #{qa_reply_seq}
+	</update>
+
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply" parameterType="com.care.DTO.board_qaReplyDTO">
+		DELETE FROM qa_reply
+		WHERE qa_reply_seq = #{qa_reply_seq}
+	</delete>
+	
+	<!-- 선택된 댓글 조회 -->
+	<select id="selectReply" resultType="com.care.DTO.board_qaReplyDTO">
+		SELECT
+				qa_seq
+			  , qa_reply_seq
+			  , qa_reply_content
+			  , qa_reply_user_id
+			  , qa_reply_logtime
+		  FROM QA_REPLY
+		 WHERE qa_reply_seq = #{qa_reply_seq}
+	</select>
 </mapper>
 
 

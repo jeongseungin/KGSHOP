@@ -29,4 +29,10 @@ public interface Board_qaService {
 
 	void writeReply(board_qaReplyDTO dto) throws Exception;
 
+	public void updateReply(board_qaReplyDTO dto) throws Exception;
+	
+	public void deleteReply(board_qaReplyDTO dto) throws Exception;
+	
+	public board_qaReplyDTO selectReply(int qa_reply_seq) throws Exception;
+	
 }

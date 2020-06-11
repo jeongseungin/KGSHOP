@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.care.DTO.Board_qaCriteria;
@@ -77,7 +78,9 @@ public class Board_qaController {
 			model.addAttribute("scri", scri);
 			
 			//게시물 댓글 조회
-			model.addAttribute("replyList", service.readReply(dto.getQa_seq()));
+			List<board_qaReplyDTO> replyList = service.readReply(dto.getQa_seq());
+			model.addAttribute("replyList", replyList);
+			
 			
 			if(Qa_state==1) {
 				return "cs/QnApassWord";
@@ -148,5 +151,72 @@ public class Board_qaController {
 		
 		return "redirect:QnAreadView";
 	}
+	
+	//댓글 수정 페이지에 접근하기 위한 컨트롤러와 수정한 값을 전송할 수 있는 컨트롤러를 작성
+	//댓글 수정 GET
+	@RequestMapping(value = "/replyUpdateView", method = RequestMethod.GET)
+	public String replyUpdateView(board_qaReplyDTO dto, Board_qaSearchCriteria scri, Model model) throws Exception{
+		
+		model.addAttribute("replyUpdate", service.selectReply(dto.getQa_reply_seq()));
+		model.addAttribute("scri", scri);
+		
+		return "cs/QnAreplyUpdateView";
+	}
+	//댓글 수정 POST
+	@RequestMapping(value = "/replyUpdate", method = RequestMethod.POST)
+	public String replyUpdate(board_qaReplyDTO dto, Board_qaSearchCriteria scri, RedirectAttributes rttr) throws Exception {
+		
+		service.updateReply(dto);
+		
+		rttr.addAttribute("qa_seq", dto.getQa_seq());
+		rttr.addAttribute("page", scri.getPage());
+		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+		rttr.addAttribute("searchType", scri.getSearchType());
+		rttr.addAttribute("keyword", scri.getKeyword());
+		
+		return "redirect:QnAreadView";
+	}
+	
+	//댓글 삭제 페이지에 들어가기 위한 컨트롤러와 삭제 컨트롤러를 작성
+	//댓글 삭제 GET
+		@RequestMapping(value="/replyDeleteView", method = RequestMethod.GET)
+		public String replyDeleteView(board_qaReplyDTO dto, Board_qaSearchCriteria scri, Model model) throws Exception {
+			
+			model.addAttribute("replyDelete", service.selectReply(dto.getQa_reply_seq()));
+			model.addAttribute("scri", scri);
+			
+
+			return "cs/QnAreplyDeleteView";
+		}
+		
+		//댓글 삭제
+		@RequestMapping(value="/replyDelete", method = RequestMethod.POST)
+		public String replyDelete(board_qaReplyDTO dto, Board_qaSearchCriteria scri, RedirectAttributes rttr) throws Exception {
+			
+			service.deleteReply(dto);
+			
+			rttr.addAttribute("qa_seq", dto.getQa_seq());
+			rttr.addAttribute("page", scri.getPage());
+			rttr.addAttribute("perPageNum", scri.getPerPageNum());
+			rttr.addAttribute("searchType", scri.getSearchType());
+			rttr.addAttribute("keyword", scri.getKeyword());
+			
+			return "redirect:QnAreadView";
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
