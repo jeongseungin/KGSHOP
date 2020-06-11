@@ -36,7 +36,7 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
           
-            <a class="nav-link" href="#" >${sessionId }님 환영합니다 
+            <a class="nav-link" href="#" >${id }님 환영합니다 
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -80,7 +80,7 @@
 
         <h1 class="my-4">Category</h1>
         <div class="list-group">
-         <a href="#" class="list-group-item">노트북</a>
+         <a href="notebookproduct" class="list-group-item">노트북</a>
           <a href="#" class="list-group-item">컴퓨터</a>
           <a href="#" class="list-group-item">모니터</a>
           <a href="#" class="list-group-item">마우스</a>

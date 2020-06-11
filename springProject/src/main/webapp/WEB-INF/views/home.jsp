@@ -81,7 +81,8 @@
           </ol>
           <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
+              <img class="#" style="width: 900px;; height: 345px;;" src="././resources/naver.jpg" onclick="javascript:newin=window.open('about:blank'); newin.location.href='https://naver.com';" 
+              alt="First slide">
             </div>
             <div class="carousel-item">
               <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">

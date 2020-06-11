@@ -39,12 +39,14 @@
   $(".plus").click(function(){
    var num = $(".numBox").val();
    var plusNum = Number(num) + 1;
-   
+ 
    if(plusNum >= "${productlist.product_stock}") {
     $(".numBox").val(num);
     alert('최대수량 입니다');
+    
    } else {
-    $(".numBox").val(plusNum);          
+    $(".numBox").val(plusNum);     
+    
    }
   });
   
@@ -55,8 +57,10 @@
    if(minusNum <= 0) {
     $(".numBox").val(num);
     alert('최소수량은 1개 입니다');
+    
    } else {
-    $(".numBox").val(minusNum);          
+    $(".numBox").val(minusNum);   
+    
    }
   });
  </script> 

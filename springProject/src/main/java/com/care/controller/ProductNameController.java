@@ -180,4 +180,12 @@ public class ProductNameController {
 		
 		return "shopping/shoppingCart";
 	}
+	@RequestMapping("productview/view2")
+	public String view2(@RequestParam("product_name_no") String product_name_no, Model model) {
+		upHit(product_name_no);
+		ProductnameDTO view = service.productview(product_name_no);
+		
+		model.addAttribute("productlist",view);
+		return "category/productview/view2";
+	}
 }
