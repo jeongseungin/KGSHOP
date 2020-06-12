@@ -80,7 +80,7 @@ public class MemberController {
 			if(dto1.getId().equals(id) && pwdEncoder.matches(pw, dto1.getPw())) {	
 				session.setAttribute("id", request.getParameter("id"));
 				session.setAttribute("pw", request.getParameter("pw"));
-				return "redirect:successlogin";
+				return "redirect:home";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

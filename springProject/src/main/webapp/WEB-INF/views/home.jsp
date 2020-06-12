@@ -1,22 +1,32 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="com.care.DTO.MemberDTO" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  
-<html>
-<head>
-	<title>Home</title>
-	  <!-- Bootstrap core CSS -->
+
+ <title>Shop Homepage - Start Bootstrap Template</title>
+
+  <!-- Bootstrap core CSS -->
   <link href="./resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
   <link href="./resources/css/shop-homepage.css" rel="stylesheet">
+ 
 </head>
 <body>
+<script type="text/javascript">
+	var naverid = localStorage.getItem('naverId');
+	console.log(naverid);
+</script>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+ <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="home">KG SHOP</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,22 +35,54 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="home">홈
+          <c:choose>
+          	  <c:when test="${id eq 'system'}"><a class="nav-link" href="#" >${id }님 환영합니다 
+              <span class="sr-only">(current)</span></a>
+              </c:when>
+              <c:when test="${empty id }"> <a class="nav-link" href="home">홈
               <span class="sr-only">(current)</span>
-            </a>
+              </a></c:when>
+              <c:otherwise> <a class="nav-link" href="#" >${id }님 환영합니다 
+              <span class="sr-only">(current)</span>
+            </a></c:otherwise>
+          </c:choose>
+           
+            
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="QnA">Q&A게시판</a>
+            <a class="nav-link" href="#">Q&A게시판</a>
           </li>
-           <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link" href="">리뷰게시판</a>
           </li>
+          
+         <li class="nav-item">
+         <c:choose>
+          	  <c:when test="${id eq 'system'}"></c:when>
+          	  <c:when test="${empty id }"></c:when>
+            <c:otherwise> <a class="nav-link" href="shoppingcart?user_id=test">장바구니</a></c:otherwise>
+             </c:choose>
+          </li>
+            
            <li class="nav-item">
-            <a class="nav-link" href="bootMember">회원가입</a>
+   
+      	    <c:choose>
+          	  <c:when test="${id eq 'system'}"><a class="nav-link" href="myPage">관리자페이지</a></c:when>
+          	   <c:when test="${empty id }"> 
+            	<a class="nav-link" href="bootMember">회원가입</a>
+         		 </c:when>
+          	  <c:otherwise><a class="nav-link" href="myPage">마이페이지</a></c:otherwise>    
+            </c:choose>
+        
           </li>
+          
           <li class="nav-item">
-            <a class="nav-link" href="bootlogin">로그인</a>
+          	<c:choose>
+          		  <c:when test="${empty id }"> <a class="nav-link" href="bootlogin">로그인</a> </c:when>
+          		  <c:otherwise>  <a class="nav-link" href="logout">로그아웃</a></c:otherwise>       
+            </c:choose>
           </li>
+          
         </ul>
       </div>
     </div>
@@ -55,17 +97,16 @@
 
         <h1 class="my-4">Category</h1>
         <div class="list-group">
-          <a href="notebookproduct" class="list-group-item">노트북</a>
-          <a href="computerproduct" class="list-group-item">컴퓨터</a>
-          <a href="moniterproduct" class="list-group-item">모니터</a>
-          <a href="mouseproduct" class="list-group-item">마우스</a>
-          <a href="speakerproduct" class="list-group-item">스피커</a>
-          <a href="graphiccardproduct"class="list-group-item">그래픽카드</a>
-          <a href="cpuproduct" class="list-group-item">CPU</a>
-          <a href="mainboardproduct" class="list-group-item">메인보드</a>
-          <a href="hddproduct" class="list-group-item">하드디스크</a>
-          <a href="sddproduct" class="list-group-item">SDD</a>
-       
+         <a href="notebookproduct" class="list-group-item">노트북</a>
+          <a href="#" class="list-group-item">컴퓨터</a>
+          <a href="#" class="list-group-item">모니터</a>
+          <a href="#" class="list-group-item">마우스</a>
+          <a href="#" class="list-group-item">스피커</a>
+          <a href="#" class="list-group-item">그래픽카드</a>
+          <a href="#" class="list-group-item">CPU</a>
+          <a href="#" class="list-group-item">메인보드</a>
+          <a href="#" class="list-group-item">하드디스크</a>
+          <a href="#" class="list-group-item">SDD</a>
         </div>
 
       </div>
@@ -81,8 +122,7 @@
           </ol>
           <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
-              <img class="#" style="width: 900px;; height: 345px;;" src="././resources/naver.jpg" onclick="javascript:newin=window.open('about:blank'); newin.location.href='https://naver.com';" 
-              alt="First slide">
+              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
             </div>
             <div class="carousel-item">
               <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
@@ -223,5 +263,4 @@
   <script src="./resources/vendor/jquery/jquery.min.js"></script>
   <script src="./resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
