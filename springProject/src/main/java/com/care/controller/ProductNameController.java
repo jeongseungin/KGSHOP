@@ -182,6 +182,13 @@ public class ProductNameController {
 		//장바구니 누르면 로그인 세션값 같이 넘겨서 사용
 		
 		List<ShoppingCartDTO> view =service.viewshoppingcart(user_id);
+		
+		for (int i = 0; i < view.size(); i++) {
+			int j=0;
+			j++;
+			
+		}
+		
 		model.addAttribute("shoppingcart",view);
 		
 		return "shopping/shoppingCart";
