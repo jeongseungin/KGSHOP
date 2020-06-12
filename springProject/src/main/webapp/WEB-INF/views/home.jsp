@@ -65,6 +65,7 @@
           </li>
             
            <li class="nav-item">
+
    
       	    <c:choose>
           	  <c:when test="${id eq 'system'}"><a class="nav-link" href="myPage">관리자페이지</a></c:when>
@@ -74,6 +75,9 @@
           	  <c:otherwise><a class="nav-link" href="myPage">마이페이지</a></c:otherwise>    
             </c:choose>
         
+
+            <a class="nav-link" href="shoppingcart?user_id=${id}">장바구니</a>
+
           </li>
           
           <li class="nav-item">
