@@ -5,8 +5,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <meta charset="UTF-8">
 <title>게시판</title>
 </head>
@@ -68,109 +73,120 @@
 	})
 </script>
 <body>
-<h1>게시글 조회</h1>
-	
-	<form name="readForm" role="form" method="post">
-		<input type="hidden" id="qa_seq" name="qa_seq" value="${read.qa_seq}" />
-		<input type="hidden" id="page" name="page" value="${scri.page}"> 
-		<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
-		<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
-		<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
-	</form>
-
-	<table border="1">
-			<tr>
-				<td>
-					<label for="qa_seq">글 번호</label>
-				</td>
-				<td>
-					<input type="text" id="qa_seq" name="qa_seq" value="${read.qa_seq}" readonly="readonly"/>
-				</td>
-			</tr>	
-			<tr>
-				<td>
-					<label for="qa_category">카테고리</label>
-				</td>
-				<td>
-					<input type="text" id="qa_category" name="qa_category" value="${read.qa_category}" readonly="readonly"/>
-				</td>
-			</tr>	
-			<tr>
-				<td>
-					<label for="qa_subject">제목</label>
-				</td>
-				<td>
-					<input type="text" id="qa_subject" name="qa_subject" value="${read.qa_subject}" readonly="readonly"/>
-				</td>
-			</tr>	
-			<tr>
-				<td>
-					<label for="qa_content">내용</label>
-				</td>
-				<td>
-					<textarea id="qa_content" name="qa_content" readonly="readonly" 
-					rows="10" cols="100" style="resize: none">
-					<c:out value="${read.qa_content}" /></textarea>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label for="user_id">작성자</label>
-				</td>
-				<td>
-					<input type="text" id="user_id" name="user_id" value="${read.user_id}" readonly="readonly"/>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label for="qa_logtime">작성날짜</label>
-				</td>
-				<td>
-					<fmt:formatDate value="${read.qa_logtime}" pattern="yyyy-MM-dd" />					
-				</td>
-			</tr>		
-	</table>
-	<div>
-		<button type="submit" class="update_btn">수정</button>
-		<button type="submit" class="delete_btn">삭제</button>
-		<button type="submit" class="list_btn">목록</button>	
-	</div>
-	<!-- 댓글 -->
-	<div id="reply">
-	  <ol class="replyList">
-	    <c:forEach items="${replyList}" var="replyList">
-	      <li>
-	        <p>
-			        작성자 : ${replyList.qa_reply_user_id}<br />
-			        작성 날짜 :  <fmt:formatDate value="${replyList.qa_reply_logtime}" pattern="yyyy-MM-dd" />
-	        </p>
-	        <p>${replyList.qa_reply_content}</p>
-	         <div>
-				<button type="button" class="replyUpdateBtn" data-qa_reply_seq="${replyList.qa_reply_seq}">수정</button>
-			    <button type="button" class="replyDeleteBtn" data-qa_reply_seq="${replyList.qa_reply_seq}">삭제</button>
-	  	 	 </div>
-	      </li>
-	    </c:forEach>   
-	  </ol>
-	</div>
-
-	<form name="replyForm" method="post">
-	  <input type="hidden" id="qa_seq" name="qa_seq" value="${read.qa_seq}" />
-	  <input type="hidden" id="page" name="page" value="${scri.page}"> 
-	  <input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
-	  <input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
-	  <input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
-	
-	  <div>
-	    <label for="qa_reply_user_id">댓글 작성자</label><input type="text" id="qa_reply_user_id" name="qa_reply_user_id" />
-	    <br/>
-	    <label for="qa_reply_content">댓글 내용</label><input type="text" id="qa_reply_content" name="qa_reply_content" />
-	  </div>
-	  <div>
-	 	 <button type="button" class="replyWriteBtn">작성</button>
-	  </div>
-	</form>
-	
-	    
+		<div class="form-horizontal">
+		
+		<h1>게시글 조회</h1>
+		<form name="readForm" role="form" method="post">
+			<input type="hidden" id="qa_seq" name="qa_seq" value="${read.qa_seq}" />
+			<input type="hidden" id="page" name="page" value="${scri.page}"> 
+			<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
+			<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
+			<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
+		</form>
+			
+				<div class="form-group">
+					<label for="qa_seq" class="col-sm-4 control-label">글 번호</label>
+					<div class="col-sm-8">
+						<input type="text" id="qa_seq" name="qa_seq" value="${read.qa_seq}" readonly="readonly"/>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="qa_category" class="col-sm-4 control-label">카테고리</label>
+					<div class="col-sm-8">
+						<input type="text" id="qa_category" name="qa_category" value="${read.qa_category}" readonly="readonly"/>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="qa_subject" class="col-sm-4 control-label">제목</label>
+					<div class="col-sm-8">
+						<input type="text" id="qa_subject" name="qa_subject" value="${read.qa_subject}" readonly="readonly"/>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="qa_content" class="col-sm-4 control-label">내용</label>
+					<div class="col-sm-8">
+						<textarea id="qa_content" name="qa_content" readonly="readonly" 
+						rows="10" cols="100" style="resize: none">
+						<c:out value="${read.qa_content}" /></textarea>
+					</div>
+				</div>
+				
+				
+				<div class="form-group">
+					<label for="user_id" class="col-sm-4 control-label">작성자</label>
+					<div class="col-sm-8">
+						<input type="text" id="user_id" name="user_id" value="${read.user_id}" readonly="readonly"/>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="qa_logtime" class="col-sm-4 control-label">작성날짜</label>
+					<div class="col-sm-8">
+						<fmt:formatDate value="${read.qa_logtime}" pattern="yyyy-MM-dd" />
+					</div>
+				</div>
+				
+				
+				<div class="form-group">
+					<div class="col-sm-offset-4 col-sm-8">
+						<button type="submit" class="update_btn btn btn-default">수정</button>
+						<button type="submit" class="list_btn btn btn-default">목록</button>	
+						<button type="submit" class="delete_btn btn btn-warning">삭제</button>
+					</div>
+				</div>
+			</div>
+				
+				
+				<!-- 댓글 -->
+				<div class="form-horizontal">
+				    <c:forEach items="${replyList}" var="replyList">
+				    	<div id="reply" class="form-group">
+					    	<h4 class="col-sm-offset-4 col-sm-8">댓글</h4>
+					    </div>
+					    
+					    <div id="reply" class="form-group">
+				    		<label class="col-sm-4 control-label">작성자</label>
+				    		<div class="col-sm-8">
+				    		<input type="text" value="${replyList.qa_reply_user_id}" readonly="readonly">
+						        작성 날짜 :  <fmt:formatDate value="${replyList.qa_reply_logtime}" pattern="yyyy-MM-dd" />
+						   	</div>
+					   	</div>
+					   	<div id="reply" class="form-group">
+					        <label class="col-sm-4 control-label">내용</label>
+					        <div class="col-sm-8">
+						        <textarea readonly="readonly" 
+								rows="10" cols="100" style="resize: none">
+								${replyList.qa_reply_content}
+							</textarea>
+							</div>
+						</div>
+					        
+					         <div>
+								<button type="button" class="replyUpdateBtn btn btn-default" data-qa_reply_seq="${replyList.qa_reply_seq}">수정</button>
+							    <button type="button" class="replyDeleteBtn btn btn-warning" data-qa_reply_seq="${replyList.qa_reply_seq}">삭제</button>
+					  	 	 </div>
+				    </c:forEach>   
+				</div>
+				<!-- 댓글작성폼 -->
+				<form name="replyForm" method="post">
+				  <input type="hidden" id="qa_seq" name="qa_seq" value="${read.qa_seq}" />
+				  <input type="hidden" id="page" name="page" value="${scri.page}"> 
+				  <input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
+				  <input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
+				  <input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
+				
+				  <div>
+				    <label for="qa_reply_user_id">댓글 작성자</label><input type="text" id="qa_reply_user_id" name="qa_reply_user_id" />
+				    <br/>
+				    <label for="qa_reply_content">댓글 내용</label><input type="text" id="qa_reply_content" name="qa_reply_content" />
+				  </div>
+				  <div>
+				 	 <button type="button" class="replyWriteBtn">작성</button>
+				  </div>
+				</form>
+			
 </body>
 </html>

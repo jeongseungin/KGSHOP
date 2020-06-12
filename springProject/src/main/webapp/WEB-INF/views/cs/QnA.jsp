@@ -47,36 +47,43 @@
 					</tr>
 				</c:forEach>
 			</table>
-		<div class="search">
-		    <select name="searchType">
-		      <option value="n"<c:out value="${scri.searchType == null ? 'selected' : ''}"/>>-----</option>
-		      <option value="t"<c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>제목</option>
-		      <option value="c"<c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
-		      <option value="w"<c:out value="${scri.searchType eq 'w' ? 'selected' : ''}"/>>작성자</option>
-		      <option value="tc"<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
-		    </select>
+			<div class="search row">
+				<div class="col-xs-2 col-sm-2">
+				    <select name="searchType" class="form-control">
+				      <option value="n"<c:out value="${scri.searchType == null ? 'selected' : ''}"/>>-----</option>
+				      <option value="t"<c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>제목</option>
+				      <option value="c"<c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
+				      <option value="w"<c:out value="${scri.searchType eq 'w' ? 'selected' : ''}"/>>작성자</option>
+				      <option value="tc"<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
+				    </select>
+				</div>
+				<div class="col-xs-3 col-sm-3">
+					<div class="input-group">
+				    	<input class="form-control" type="text" name="keyword" id="keywordInput" value="${scri.keyword}"/>
+				    	<span class="input-group-btn">
+				    		<button class="btn btn-default" id="searchBtn" type="button">검색</button>
+				    	</span>
+					</div>
+				</div>
+				    	
+			    <script>
+			      $(function(){
+			        $('#searchBtn').click(function() {
+			          self.location = "QnA" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
+			        });
+			      });   
+			    </script>
+			 </div>
 		
-		    <input type="text" name="keyword" id="keywordInput" value="${scri.keyword}"/>
-		
-		    <button id="searchBtn" type="button">검색</button>
-		    <script>
-		      $(function(){
-		        $('#searchBtn').click(function() {
-		          self.location = "QnA" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
-		        });
-		      });   
-		    </script>
-		  </div>
-		
-		
-		  <ul>
+		<div class="col-md-offset-3"></div>
+		  <ul class="pagination">
 		    <c:if test="${pageMaker.prev}">
 		    	<li><a href="QnA${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
-		    	
 		    </c:if> 
-		
+			
 		    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-		    	<li><a href="QnA${pageMaker.makeSearch(idx)}">${idx}</a></li>
+		    	<li <c:out value="${pageMaker.cri.page == idx ? 'class=info' : ''}"/>>
+		    	<a href="QnA${pageMaker.makeSearch(idx)}">${idx}</a></li>
 		    </c:forEach>
 		
 		    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
