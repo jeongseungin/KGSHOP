@@ -93,31 +93,29 @@
 		<section class="section">
 			수량 : <input type=hidden name="sell_price"
 				value="${productlist.product_name_price}"> 
-				<input type="button" value=" - " onclick="del();" class="minus" name="minus" style="border:none; background:none;"> 
+				<input type="button" value=" - " onclick="del();" class="minus"  style="border:none; background:none;"> 
 				<input type="text" name="product_count" value="1" size="3" onchange="change();" style="text-align: center; border:none; background:none;;"
 				class="numBox" min="1" max="${productlist.product_stock}" readonly="readonly"> 
-				<input type="button" value=" + " onclick="add();" class="plus" name="plus" style="border:none; background:none;"><br>
+				<input type="button" value=" + " onclick="add();" class="plus"  style="border:none; background:none;"><br>
 		</section>
 		<p>
-		<div class="section">
-			총금액 : <input type="text" name="sum" id="money" size="11" readonly 
-			style="border: none; border-right: 0px; border-top: 0px; boder-left: 0px; boder-bottom: 0px;"
-				onkeyup="numberWithCommas(this.vale)">
-		</div>
+		
 		<p>
 			<input type="hidden" name="product_name_image" value="${productlist.product_name_image }">
 			<input type="hidden" name="product_name_title" value="${productlist.product_name_title}">
 			<input type="hidden" name="product_name_price" value="${productlist.product_name_price}">
-			<script>
- 
-  </script>
+			
 		<div class="section">
 			<input type="submit" value="장바구니담기">
 			<button onclick="location.href='#'">결제하기</button>
 		</div>
 		<p>
 	</form>
-
+	<div class="section">
+			총금액 : <input type="text" name="sum" id="money" size="11" readonly 
+			style="border: none; border-right: 0px; border-top: 0px; boder-left: 0px; boder-bottom: 0px;"
+				onkeyup="numberWithCommas(this.vale)">
+		</div>
 	<section>상품 설명 : ${productlist.product_name_detail}</section>
 	<p>
 		<!-- 관리자만 볼수있게 설정해야됩니다 -->

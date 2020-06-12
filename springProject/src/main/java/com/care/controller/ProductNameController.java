@@ -174,7 +174,7 @@ public class ProductNameController {
 		dto.setId(id); //여기에 로그인한 세션값 넣어주면됩니다
 		
 		service.saveshoppingcart(dto);
-		return "home";
+		return "shopping/shoppingCart";
 		 
 	}
 	@RequestMapping("shoppingcart")

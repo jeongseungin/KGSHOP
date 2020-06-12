@@ -2,6 +2,7 @@ package com.care.controller;
 
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
@@ -52,7 +53,12 @@ public String Logout(HttpSession session) {
     return "home";
 }   
 
+@RequestMapping("order")
+public String order() {
 
-
+	
+	
+	return "pay/order";
+}
 
 }
