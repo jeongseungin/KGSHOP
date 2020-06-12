@@ -17,13 +17,10 @@
 
   <!-- Custom styles for this template -->
   <link href="./resources/css/shop-homepage.css" rel="stylesheet">
- 
+
 </head>
 <body>
-<script type="text/javascript">
-	var naverid = localStorage.getItem('naverId');
-	console.log(naverid);
-</script>
+
 
  <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -42,9 +39,10 @@
               <c:when test="${empty id }"> <a class="nav-link" href="home">홈
               <span class="sr-only">(current)</span>
               </a></c:when>
-              <c:otherwise> <a class="nav-link" href="#" >${id }님 환영합니다 
+          	  <c:when test="${id eq id}"><a class="nav-link" href="#" >${id }님 환영합니다 
               <span class="sr-only">(current)</span>
-            </a></c:otherwise>
+              </a>
+              </c:when>       
           </c:choose>
            
             
@@ -60,7 +58,7 @@
          <c:choose>
           	  <c:when test="${id eq 'system'}"></c:when>
           	  <c:when test="${empty id }"></c:when>
-            <c:otherwise> <a class="nav-link" href="shoppingcart?user_id=test">장바구니</a></c:otherwise>
+            <c:otherwise> <a class="nav-link" href="shoppingcart?user_id=${id}">장바구니</a></c:otherwise>
              </c:choose>
           </li>
             
@@ -74,11 +72,6 @@
          		 </c:when>
           	  <c:otherwise><a class="nav-link" href="myPage">마이페이지</a></c:otherwise>    
             </c:choose>
-        
-
-            <a class="nav-link" href="shoppingcart?user_id=${id}">장바구니</a>
-
-          </li>
           
           <li class="nav-item">
           	<c:choose>
@@ -254,7 +247,13 @@
 
   </div>
   <!-- /.container -->
-
+ <script type="text/javascript">
+ function init() {
+		 var val = localStorage.getItem('naverId');
+		document.querySelector("#naverresult").innerHTML = val;
+	}
+	
+</script>
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">

@@ -1,5 +1,6 @@
 package com.care.controller;
 import java.io.IOException;
+import java.io.StringReader;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Locale;
@@ -73,7 +74,7 @@ public class MemberController {
 		
  		MemberDTO dto1 = null;
 		dto1 = member.logincheck(dto);
-
+		
 		boolean passMatch = pwdEncoder.matches(dto.getPw(), dto1.getPw());
 		
 		try {
@@ -194,7 +195,8 @@ public class MemberController {
 		return "member/chklogin";
 	}
 	@RequestMapping("chkcallback" )
-	public String callback()throws IOException, ParseException {
+	public String callback() throws IOException, ParseException {
+	
 		return "member/chkcallback";
 	}
 }

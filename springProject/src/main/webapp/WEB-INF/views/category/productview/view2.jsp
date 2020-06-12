@@ -108,9 +108,7 @@
 			<input type="hidden" name="product_name_image" value="${productlist.product_name_image }">
 			<input type="hidden" name="product_name_title" value="${productlist.product_name_title}">
 			<input type="hidden" name="product_name_price" value="${productlist.product_name_price}">
-			<script>
- 
-  </script>
+
 		<div class="section">
 			<input type="submit" value="장바구니담기">
 			<button onclick="location.href='#'">결제하기</button>

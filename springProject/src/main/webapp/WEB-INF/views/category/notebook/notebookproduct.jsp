@@ -24,7 +24,7 @@
 <c:forEach items="${notebooklists}" var="dto">
 상품 고유번호 : ${dto.product_name_no}<br>
 상품 카테고리 : ${dto.product_category_no}	<br>
-상품 명 :  <a href ="productview/view2?product_name_no=${dto.product_name_no}">${dto.product_name_title}</a>	<br>
+상품 명 :  <a href ="productview?product_name_no=${dto.product_name_no}">${dto.product_name_title}</a>	<br>
 상품 가격 :<fmt:formatNumber value="${dto.product_name_price}"  /> 원  	<br>	
 상품 설명 :  ${dto.product_name_detail}	<br>
 상품 썸네일 : <img src="<spring:url value='/imgUpload/'/>${dto.product_thumbnail }" ><br>
