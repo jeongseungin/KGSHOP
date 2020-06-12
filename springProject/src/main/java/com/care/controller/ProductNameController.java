@@ -2,7 +2,13 @@ package com.care.controller;
 
 import org.springframework.stereotype.Controller;
 import java.io.File;
+import java.util.List;
+
 import javax.annotation.Resource;
+import javax.mail.Session;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +25,7 @@ public class ProductNameController {
 	@Autowired
 	SaveProductService service;
 
-	@RequestMapping("kakaologin")
-	public String kakaologin() {
-		return "kakaologin";
-	}
+	
 	
 	@RequestMapping("productName")
 	public String productName() {
@@ -164,8 +167,11 @@ public class ProductNameController {
 	}
 	
 	@RequestMapping(value = "SaveshoppingCart" ,method = RequestMethod.POST)
-	public String SaveshoppingCart(ShoppingCartDTO dto) {
-		dto.setId("test"); //여기에 로그인한 세션값 넣어주면됩니다
+	public String SaveshoppingCart(ShoppingCartDTO dto,HttpServletRequest request) {
+		HttpSession session ;
+		session = request.getSession();;
+		String id = (String) session.getAttribute("id");
+		dto.setId(id); //여기에 로그인한 세션값 넣어주면됩니다
 		
 		service.saveshoppingcart(dto);
 		return "home";
@@ -175,7 +181,7 @@ public class ProductNameController {
 	public String shoppingcart(@RequestParam("user_id") String user_id,Model model) {
 		//장바구니 누르면 로그인 세션값 같이 넘겨서 사용
 		
-		ShoppingCartDTO view =	service.viewshoppingcart(user_id);
+		List<ShoppingCartDTO> view =service.viewshoppingcart(user_id);
 		model.addAttribute("shoppingcart",view);
 		
 		return "shopping/shoppingCart";

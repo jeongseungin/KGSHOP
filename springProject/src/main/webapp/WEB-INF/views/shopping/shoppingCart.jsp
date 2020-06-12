@@ -12,15 +12,13 @@
 <body>
 <h1>장바구니 페이지</h1>
 
-
+<c:forEach items="${shoppingcart}" var="shoppingcart">
 유저아이디 :${shoppingcart.id }<br>
 이미지 :<img src="<spring:url value='/imgUpload/'/>${shoppingcart.product_name_image }"/>
 상품명 : ${shoppingcart.product_name_title}<br>
 가격 : ${shoppingcart.product_name_price}<br>
 수량 :${shoppingcart.product_count}<br>
- : 
 총 가격 :<fmt:formatNumber value="${shoppingcart.product_name_price * shoppingcart.product_count}" pattern="###,###,###"  />원	<br>	
-
-
+</c:forEach>
 </body>
 </html>
