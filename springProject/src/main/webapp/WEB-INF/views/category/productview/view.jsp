@@ -96,7 +96,7 @@
   
  </div>
  </form>
- <form name="order" id="order" method="post" action="order">
+ <form name="order" id="order" method="post" action="Saveorder">
   <input type="hidden" name="product_name_title" value="${productlist.product_name_title}">
   <input type="hidden" name="product_name_price" value="${productlist.product_name_price}">
   <input type="hidden" name="product_count" class="count"  id="product_count">
