@@ -1,9 +1,6 @@
 package com.care.service;
 
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,9 +17,7 @@ public class SaveProductService {
 	
 	
 	public void saveproduct(ProductnameDTO dto) {
-
 		dao.saveproduct(dto);
-		
 	}
 	
 	public void topproductview(Model model) {
@@ -85,8 +80,7 @@ public class SaveProductService {
 	}
 
 	public ProductnameDTO productview(String product_name_no) {
-		System.out.println("서비스");
-		System.out.println(product_name_no);
+		
 		return dao.productview(product_name_no);
 		
 	}
@@ -95,7 +89,10 @@ public class SaveProductService {
 		
 		return dao.modifyproduct(product_name_no);
 	}
-
+	public void upHit(String product_name_no) {
+		dao.uphit(product_name_no);
+		return ;
+	}
 	public void modifysaveproduct(ProductnameDTO dto) {
 		dao.modifysaveproduct(dto);
 		
@@ -112,10 +109,16 @@ public void saveshoppingcart(ShoppingCartDTO dto) {
 		
 	}
 
-	public ShoppingCartDTO viewshoppingcart(String user_id) {
+	public List<ShoppingCartDTO> viewshoppingcart(String user_id) {
 		
 		return dao.viewshoppingcart(user_id);
 	}
+
+
+
+	
+
+	
 	
 	
 }

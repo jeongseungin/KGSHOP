@@ -1,16 +1,9 @@
 package com.care.DAO;
 
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
-
 import com.care.DTO.ProductnameDTO;
 import com.care.DTO.ShoppingCartDTO;
 
@@ -24,7 +17,8 @@ public class ProductnameDAO {
 
 
 	public void saveproduct(ProductnameDTO dto) {
-		int result = sqlSession.insert(namespace+".saveproduct",dto);
+		 sqlSession.insert(namespace+".saveproduct",dto);
+		
 	}
 
 
@@ -90,12 +84,23 @@ public class ProductnameDAO {
 
 
 	public ProductnameDTO productview(String product_name_no) {
-		System.out.println("DAO");
-		System.out.println(product_name_no);
+		try {
 		return sqlSession.selectOne(namespace+ ".Productlist",product_name_no);
+		}catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		return null;
 	}
 
-
+	public void uphit(String product_name_no) {
+		try {
+		 sqlSession.update(namespace+".uphit",product_name_no);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public ProductnameDTO modifyproduct(String product_name_no) {
 		
 		return sqlSession.selectOne(namespace+ ".Modifylist",product_name_no);
@@ -104,7 +109,7 @@ public class ProductnameDAO {
 
 	public void modifysaveproduct(ProductnameDTO dto) {
 	
-		int result = sqlSession.update(namespace+".modifysaveproduct",dto);
+		 sqlSession.update(namespace+".modifysaveproduct",dto);
 	}
 
 
@@ -114,14 +119,20 @@ public class ProductnameDAO {
 	}
 	
 	public void saveshoppingcart(ShoppingCartDTO dto) {
-		int result = sqlSession.insert(namespace+".saveshoppingcart",dto);
+		 sqlSession.insert(namespace+".saveshoppingcart",dto);
 		
 	}
 
 
-	public ShoppingCartDTO viewshoppingcart(String user_id) {
+	public List<ShoppingCartDTO> viewshoppingcart(String user_id) {
 		
-		return sqlSession.selectOne(namespace+ ".viewshoppingcart",user_id);
+		return sqlSession.selectList(namespace+ ".viewshoppingcart",user_id);
 	}
+
+
+	
+
+
+	
 
 }

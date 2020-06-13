@@ -126,7 +126,8 @@ function sample6_execDaumPostcode() {
                 <div class="form-group" id="divId">
                     <label for="inputId" class="col-lg-2 control-label">아이디</label>
                     <div class="col-lg-10">
-                        <input type="text" class="id" id="id" name="id" data-rule-required="true" placeholder="30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30">  &nbsp;&nbsp;<input type="button" class="conform" value="중복확인" onclick="idcheck()"  >
+                        <input type="text" class="id" id="id" name="id" data-rule-required="true" placeholder="30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30">  &nbsp;&nbsp;
+                        <button class="conform" id="idChk" value="N" onclick="idcheck()">중복확인</button>
                     </div>
                 </div>
                 <div class="form-group" id="divPassword">
@@ -220,13 +221,20 @@ function sample6_execDaumPostcode() {
         
         <script>
         function idcheck() {
-    		var id = document.getElementById("id").value;
-    		if (id.length < 1 || id == null) {
-    			alert("중복체크할 아이디를 입력하십시오");
-    			return false;
-    		}
-    		var url = "idcheck?id=" + id;
-    		window.open(url, "get", "height = 100, width = 230,top=100,left=500");
+    		$.ajax({
+    			url: "idChk",
+    			type: "post",
+    			dataType : "json",
+    			data : {"id" : $(id).val()},
+    			success: function(data) {
+					if(data==1){
+						alert("중복된 아이디입니다")
+					}else if(data==0){
+						$("#idChk").attr("value","Y");
+						alert("사용가능한 아이디입니다")
+					}
+				}
+    		})
     	}
         
             $(function(){

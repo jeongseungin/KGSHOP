@@ -1,6 +1,9 @@
 package com.care.service;
 
 import java.sql.SQLException;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,19 @@ public class MemberService {
 	
 	public void execute(MemberDTO dto) throws SQLException {
 		dao.updatedata(dto);
+	}
+
+	public void savedata(MemberDTO dto) {
+		dao.savedata(dto);
+	}
+
+	public MemberDTO logincheck(MemberDTO dto) throws Exception{		
+		return dao.logincheck(dto);
+	}
+
+	public int idChk(MemberDTO dto) throws Exception{
+		int result = dao.idChk(dto);
+		return result;
 	}
 
 
