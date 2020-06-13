@@ -1,0 +1,17 @@
+create table qa_reply (
+    qa_seq number not null,
+    qa_reply_seq number not null,
+    qa_reply_content varchar2(1000) not null,
+    qa_reply_user_id varchar2(50) not null,
+    qa_reply_logtime date,
+    primary key(qa_seq, qa_reply_seq)
+);
+
+alter table qa_reply add constraint qa_reply_seq foreign key(qa_seq)
+references board_qa(qa_seq);
+
+create sequence qa_reply_seq START WITH 1 MINVALUE 0;
+
+ALTER TABLE board_qa ADD PRIMARY KEY (qa_seq);
+
+commit;

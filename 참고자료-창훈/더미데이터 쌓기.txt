@@ -1,0 +1,16 @@
+insert into board_qa(QA_SEQ, QA_CATEGORY, QA_SUBJECT, USER_ID, QA_LOGTIME)
+select QA_SEQ.nextval, QA_CATEGORY, QA_SUBJECT, USER_ID, QA_LOGTIME from board_qa;
+commit;
+
+
+
+
+//더미값 추가 인설트()
+예를들어 1개의 데이터가 있다고 하면
+더미데이터쌓기 쿼리에
+셀렉트절을 실행하면 1개의 값이 나오겟지요
+그 값들을 인서트하는겁니다
+그래서 1개가 2개되고 2개가 4개 4개가 8개
+이렇게 증가됩니다
+
+수정/삭제
