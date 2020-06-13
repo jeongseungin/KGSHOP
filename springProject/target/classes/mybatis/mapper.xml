@@ -216,8 +216,9 @@
 			  , QA_LOGTIME
 			  , QA_STATE
 		 FROM BOARD_QA
-		 WHERE qa_seq = #{qa_seq}
+		 WHERE qa_seq = #{qa_seq} 
 	</select>
+	
 	<!-- 수정 -->
 	<update id="update" parameterType="com.care.DTO.Board_qaDTO">
 		UPDATE BOARD_QA
