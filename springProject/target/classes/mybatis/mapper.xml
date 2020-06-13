@@ -282,6 +282,21 @@
 		  FROM QA_REPLY
 		 WHERE qa_reply_seq = #{qa_reply_seq}
 	</select>
+	
+	<!--  주문 테이블 저장 -->
+	<insert id="saveorders">
+	insert into pay values(
+		#{id},
+		#{prdocut_name_title},
+		#{product_name_price},
+		#{product_count}
+	)
+	</insert>
+	
+	<select id="vieworders">
+	select * from pay where id=#{id}
+	
+	</select>
 </mapper>
 
 

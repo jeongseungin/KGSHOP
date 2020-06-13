@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.care.DAO.ProductnameDAO;
+import com.care.DTO.OrdersDTO;
 import com.care.DTO.ProductnameDTO;
 import com.care.DTO.ShoppingCartDTO;
 
@@ -112,6 +113,17 @@ public void saveshoppingcart(ShoppingCartDTO dto) {
 	public List<ShoppingCartDTO> viewshoppingcart(String user_id) {
 		
 		return dao.viewshoppingcart(user_id);
+	}
+
+	public void saveorders(OrdersDTO dto) {
+		
+		dao.saveorders(dto);
+		
+	}
+
+	public OrdersDTO vieworders(String id) {
+		
+		return dao.vieworders(id);
 	}
 
 

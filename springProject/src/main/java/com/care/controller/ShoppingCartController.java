@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.care.DTO.OrdersDTO;
 import com.care.DTO.ShoppingCartDTO;
 import com.care.service.SaveProductService;
 
@@ -43,9 +44,22 @@ public class ShoppingCartController {
 		return "shopping/shoppingCart";
 	}
 	
-	@RequestMapping("Saveorder")
-	public String order(Model model) {
-		
+	@RequestMapping("Saveorders")
+	public String order(OrdersDTO dto,HttpServletRequest request) {
+		HttpSession session ;
+		session = request.getSession();;
+		String id = (String) session.getAttribute("id");
+		dto.setId(id);
+		service.saveorders(dto);
+		return "vieworder";
+	}
+	@RequestMapping("vieworder")
+	public String vieworder(Model model,HttpServletRequest request) {
+		HttpSession session ;
+		session = request.getSession();;
+		String id = (String) session.getAttribute("id");
+		OrdersDTO view = service.vieworders(id);
+		model.addAttribute("orders",view);
 		return "pay/order";
 	}
 

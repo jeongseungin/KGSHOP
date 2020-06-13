@@ -4,6 +4,8 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.care.DTO.OrdersDTO;
 import com.care.DTO.ProductnameDTO;
 import com.care.DTO.ShoppingCartDTO;
 
@@ -127,6 +129,18 @@ public class ProductnameDAO {
 	public List<ShoppingCartDTO> viewshoppingcart(String user_id) {
 		
 		return sqlSession.selectList(namespace+ ".viewshoppingcart",user_id);
+	}
+
+
+	public void saveorders(OrdersDTO dto) {
+		sqlSession.insert(namespace+".saveorders",dto);
+		
+	}
+
+
+	public OrdersDTO vieworders(String id) {
+		
+		return sqlSession.selectOne(namespace+"vieworders",id);
 	}
 
 
