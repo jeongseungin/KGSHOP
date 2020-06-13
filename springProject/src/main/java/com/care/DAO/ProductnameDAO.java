@@ -124,9 +124,9 @@ public class ProductnameDAO {
 	}
 
 
-	public ShoppingCartDTO viewshoppingcart(String user_id) {
+	public List<ShoppingCartDTO> viewshoppingcart(String user_id) {
 		
-		return sqlSession.selectOne(namespace+ ".viewshoppingcart",user_id);
+		return sqlSession.selectList(namespace+ ".viewshoppingcart",user_id);
 	}
 
 

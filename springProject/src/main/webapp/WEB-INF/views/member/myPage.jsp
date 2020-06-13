@@ -23,7 +23,7 @@
  <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">KG SHOP</a>
+      <a class="navbar-brand" href="home">KG SHOP</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -39,9 +39,6 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="">리뷰게시판</a>
-          </li>
-         <li class="nav-item">
-            <a class="nav-link" href="shoppingcart?user_id=test">장바구니</a>
           </li>
           
              <c:choose>
@@ -68,7 +65,7 @@
 		 <h1 class="my-4">관리자페이지</h1>
 		  <div class="list-group">
          <a href="bootMemberModify" class="list-group-item">배너수정</a>
-         <a href="#" class="list-group-item">상품등록</a>
+         <a href="productName" class="list-group-item">상품등록</a>
          <a href="#" class="list-group-item">비밀번호수정</a>
          <a href="#" class="list-group-item">상품전체</a>
          <a href="#" class="list-group-item">댓글달기</a>
