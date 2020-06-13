@@ -29,7 +29,7 @@
 	</select>
 <!-- 회원가입 -->
 	<insert id="input" parameterType="com.care.DTO.MemberDTO">
-		insert into member values(#{id},#{pw},#{name},#{email},#{tel},#{addr},#{pw_answer})
+		insert into member values(#{id},#{pw},#{name},#{email},#{tel},#{addr},#{addr1},#{addr2},#{pw_answer})
 	</insert>
 <!-- 상품등록  -->
 <insert id="saveproduct" parameterType="com.care.DTO.ProductnameDTO">

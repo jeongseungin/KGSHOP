@@ -19,19 +19,6 @@
 </head>
 <body>
 
-<h1>노트북 카테고리</h1>
-
-<c:forEach items="${notebooklists}" var="dto">
-상품 고유번호 : ${dto.product_name_no}<br>
-상품 카테고리 : ${dto.product_category_no}	<br>
-상품 명 :  <a href ="productview?product_name_no=${dto.product_name_no}">${dto.product_name_title}</a>	<br>
-상품 가격 :<fmt:formatNumber value="${dto.product_name_price}"  /> 원  	<br>	
-상품 설명 :  ${dto.product_name_detail}	<br>
-상품 썸네일 : <img src="<spring:url value='/imgUpload/'/>${dto.product_thumbnail }" ><br>
-상품 이미지 : <img src="<spring:url value='/imgUpload/'/>${dto.product_name_image }" ><br>
-재고량 :  ${dto.product_stock} 개<br>
-<hr>
-</c:forEach>
 
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -43,7 +30,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/">홈
+            <a class="nav-link" href="/">${id }
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -72,7 +59,7 @@
       <div class="col-lg-3">
 
       
-        <div class="list-group" style=position:fixed;>
+        <div class="list-group" >
           <h1 class="my-4">Category</h1>
           <a href="notebookproduct" class="list-group-item">노트북</a>
           <a href="computerproduct" class="list-group-item">컴퓨터</a>

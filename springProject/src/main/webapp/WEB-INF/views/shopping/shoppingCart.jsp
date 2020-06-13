@@ -22,31 +22,36 @@ $(function(){
 	})
 </script>
 <style>
- table.type09 {
+table.type08 {
     border-collapse: collapse;
     text-align: center;
     line-height: 1.5;
-
+    border-left: 1px solid #ccc;
+    margin: 20px 10px;
 }
-table.type09 thead th {
+
+table.type08 thead th {
+    padding: 10px;
+    font-weight: bold;
+    border-top: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 2px solid #c00;
+    background: #dcdcd1;
+}
+table.type08 tbody th {
+ 
     padding: 10px;
     font-weight: bold;
     vertical-align: top;
-    color: #369;
-    border-bottom: 3px solid #036;
-}
-table.type09 tbody th {
-    width: 150px;
-    padding: 10px;
-    font-weight: bold;
-    vertical-align: center;
+    border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
-    background: #f3f6f7;
+    background: #ececec;
 }
-table.type09 td {
-    
+table.type08 td {
+   
     padding: 10px;
     vertical-align: center;
+    border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
 }
 </style>
@@ -54,19 +59,19 @@ table.type09 td {
 <body>
 <h1>장바구니 페이지</h1>
 
-<table border="1" class="type09">
+<table class="type08">
 	<tr>
 		<th scope="cols">전체선택 : <input type="checkbox" id="allCheck"/></th>
             <th scope="cols">이미지</th><th scope="cols">상품명</th><th scope="cols">가격</th><th scope="cols">수량</th><th scope="cols">합계</th>
 	</tr>
 	<c:forEach items="${shoppingcart}" var="shoppingcart">
 	<tr>
-		<td><input type="checkbox" name="checkBox" scope="row"></td>
-		<td><img src="<spring:url value='/imgUpload/'/>${shoppingcart.product_name_image }"/></td>
-		<td>${shoppingcart.product_name_title}</td>
-		<td><fmt:formatNumber value="${shoppingcart.product_name_price}" pattern="###,###,###"  />원</td>
-		<td>${shoppingcart.product_count}</td>
-		<td><fmt:formatNumber value="${shoppingcart.product_name_price * shoppingcart.product_count}" pattern="###,###,###"  />원</td>
+		<td scope="row"><input type="checkbox" name="checkBox" ></td>
+		<td scope="row"><img src="<spring:url value='/imgUpload/'/>${shoppingcart.product_name_image }"/></td>
+		<td scope="row">${shoppingcart.product_name_title}</td>
+		<td scope="row"><fmt:formatNumber value="${shoppingcart.product_name_price}" pattern="###,###,###"  />원</td>
+		<td scope="row">${shoppingcart.product_count}</td>
+		<td scope="row"><fmt:formatNumber value="${shoppingcart.product_name_price * shoppingcart.product_count}" pattern="###,###,###"  />원</td>
 	</tr>
 	</c:forEach>
 	<tr>

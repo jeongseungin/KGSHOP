@@ -36,15 +36,14 @@ public class MemberDAO {
 	
 	
 	public void updatedata(MemberDTO dto) throws SQLException {
-		System.out.println(dto.getId());
-		int result =-1;    
+		int result = 0; 
 		result = sqlSession.update(namespace+".updatedata",dto);
-		System.out.println("수정된 값 : "+result);
 	}
 
 
 	public void savedata(MemberDTO dto) {
-		int result = sqlSession.insert(namespace+".input",dto);
+		int result = 0;
+		result = sqlSession.insert(namespace+".input",dto);
 	}
 
 	public MemberDTO logincheck(MemberDTO dto) throws Exception{
