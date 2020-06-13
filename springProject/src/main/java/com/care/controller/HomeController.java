@@ -1,18 +1,13 @@
 package com.care.controller;
 
-
-
-import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import javax.servlet.http.HttpSession;
-
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RequestParam;
+import com.care.service.KakaoAPI;
 
-import com.fasterxml.jackson.databind.JsonNode;
 
 /**
  * Handles requests for the application home page.
@@ -20,45 +15,49 @@ import com.fasterxml.jackson.databind.JsonNode;
 @Controller
 public class HomeController {
 	
-	
+@Autowired
+private KakaoAPI kakao;
 
-@RequestMapping(value = "/oauth", produces = "application/json")
-public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSession session) {
-    System.out.println("로그인 할때 임시 코드값");
-    //카카오 홈페이지에서 받은 결과 코드
-    System.out.println(code);
-    System.out.println("로그인 후 결과값");
-    
-    //카카오 rest api 객체 선언
-    kakao_restapi kr = new kakao_restapi();
-    //결과값을 node에 담아줌
-    JsonNode node = kr.getAccessToken(code);
-    //결과값 출력
-    System.out.println(node);
-    //노드 안에 있는 access_token값을 꺼내 문자열로 변환
-    String token = node.get("access_token").toString();
-    //세션에 담아준다.
-    session.setAttribute("token", token);
-    
-    return "member/successlogin";
+@RequestMapping("kakaopay")
+public String kakaopay() {
+	return "kakaopay";
 }
-@RequestMapping(value = "/kakaologout", produces = "application/json")
+
+@RequestMapping("kakaologin")
+public String kakaologin() {
+	
+	return "kakaologin";
+}
+
+
+@RequestMapping(value = "/oauth")
+public String kakaoLogin(@RequestParam("code") String code, HttpSession session) {
+	  String access_Token = kakao.getAccessToken(code);
+	  HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
+	    //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
+	    if (userInfo.get("email") != null) {
+	        session.setAttribute("useremail", userInfo.get("email"));
+	        session.setAttribute("usernickname", userInfo.get("nickname"));
+	        session.setAttribute("access_Token", access_Token);
+	       
+	        
+	    }
+    return "logininfo";
+}
+@RequestMapping(value = "/kakaologout")
 public String Logout(HttpSession session) {
-    //kakao restapi 객체 선언
-    kakao_restapi kr = new kakao_restapi();
-    //노드에 로그아웃한 결과값음 담아줌 매개변수는 세션에 잇는 token을 가져와 문자열로 변환
-    JsonNode node = kr.Logout(session.getAttribute("token").toString());
-    //결과 값 출력
-    System.out.println("로그인 후 반환되는 아이디 : " + node.get("id"));
+	kakao.kakaoLogout((String)session.getAttribute("access_Token"));
+    session.removeAttribute("access_Token");
+    session.removeAttribute("usernickname");
+    session.removeAttribute("useremail");
+
     return "home";
 }   
 
 @RequestMapping("order")
 public String order() {
-
-	
-	
-	return "pay/order";
+	return "home";
 }
+
 
 }

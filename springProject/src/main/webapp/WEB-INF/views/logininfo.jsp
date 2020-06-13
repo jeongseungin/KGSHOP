@@ -19,8 +19,5 @@
   %>
 	 <a href = "kakaologout">로그아웃</a><br>
 
-  
-
-
 </body>
 </html>
