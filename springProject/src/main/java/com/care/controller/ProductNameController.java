@@ -166,25 +166,6 @@ public class ProductNameController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "SaveshoppingCart" ,method = RequestMethod.POST)
-	public String SaveshoppingCart(ShoppingCartDTO dto,HttpServletRequest request) {
-		HttpSession session ;
-		session = request.getSession();;
-		String id = (String) session.getAttribute("id");
-		dto.setId(id); //여기에 로그인한 세션값 넣어주면됩니다
-		
-		service.saveshoppingcart(dto);
-		return "shopping/shoppingCart";
-		 
-	}
-	@RequestMapping("shoppingcart")
-	public String shoppingcart(@RequestParam("user_id") String user_id,Model model) {
-		//장바구니 누르면 로그인 세션값 같이 넘겨서 사용
-		
-		List<ShoppingCartDTO> view =service.viewshoppingcart(user_id);
-		model.addAttribute("shoppingcart",view);
-		
-		return "shopping/shoppingCart";
-	}
+	
 }
 

@@ -54,10 +54,6 @@ public String Logout(HttpSession session) {
     return "home";
 }   
 
-@RequestMapping("Saveorder")
-public String order() {
-	return "pay/order";
-}
 
 
 }
