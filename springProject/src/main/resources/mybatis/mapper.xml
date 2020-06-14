@@ -283,20 +283,35 @@
 		 WHERE qa_reply_seq = #{qa_reply_seq}
 	</select>
 	
+	
+	
+	<!-- 주문할 상품 불러오기 -->
+	 <select id="orderview" resultType="com.care.DTO.ProductnameDTO" parameterType="String">
+      select * from productname where product_name_title=#{product_name_title}
+   </select>
+	
+	
 	<!--  주문 테이블 저장 -->
 	<insert id="saveorders">
 	insert into pay values(
 		#{id},
-		#{prdocut_name_title},
+		#{email},
+		#{tel},
+		#{addr},
+		#{product_name_title},
 		#{product_name_price},
-		#{product_count}
+		#{product_count},
+		#{product_sumprice}
 	)
 	</insert>
 	
-	<select id="vieworders">
+	<select id="pay" resultType="com.care.DTO.OrdersDTO" parameterType="String">
 	select * from pay where id=#{id}
 	
 	</select>
+	
+	
+	
 </mapper>
 
 

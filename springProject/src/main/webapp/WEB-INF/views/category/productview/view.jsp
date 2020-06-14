@@ -27,26 +27,7 @@
 
 
 </head>
-<script type="text/javascript">
-$(document).ready(function(){
-    var formObj = $("form[name='view']");
-    
-    // 수정 
-    $(".cart").on("click", function(){
-       formObj.attr("action", "SaveshoppingCart");
-       formObj.attr("method", "post");
-       formObj.submit();            
-    });
-    
-    // 삭제
-    $(".order").on("click", function(){
-       formObj.attr("action", "Saveorders");
-       formObj.attr("method", "post");
-       formObj.submit();
-    });
 
-});
-</script>
 <body>
 <h1>상품 상세보기</h1>
 
@@ -65,14 +46,14 @@ $(document).ready(function(){
 	</div>
 <p>
 
-  <form name="view" id="view" method="post"  role="form">
+  <form name="view" id="view" method="post"  role="form" action="SaveshoppingCart">
   <input type="hidden" name="product_name_image" value="${productlist.product_name_image }">
   <input type="hidden" name="product_name_title" value="${productlist.product_name_title}">
   <input type="hidden" name="product_name_price" value="${productlist.product_name_price}">
   
     <section class="section">		
     		<button type="button" class="minus"  style="border:none; background:none;">-</button>
-수량 : <input type="number" class="numBox" name="product_count" min="1" max="${productlist.product_stock}" value="1" readonly="readonly"/>
+수량 : <input type="number" class="numBox" name="product_count" min="1"  value="1" readonly="readonly"/>
   		<button type="button" class="plus"  style=" border:none; background:none;">+</button> 
  </section>
  <script>
@@ -84,7 +65,6 @@ $(document).ready(function(){
    if(plusNum >= "${productlist.product_stock}") {
     $(".numBox").val(num);
     alert('최대수량 입니다');
-    
    } else {
     $(".numBox").val(plusNum);
    
@@ -100,7 +80,7 @@ $(document).ready(function(){
    if(minusNum <= 0) {
     $(".numBox").val(num);
     alert('최소수량은 1개 입니다');
-    
+    $(".sumprice").val("${productlist.product_name_price}");
    } else {
     $(".numBox").val(minusNum);   
   
@@ -113,13 +93,14 @@ $(document).ready(function(){
  
 
   <div class="section">
-	총 금액 : <input type="number" class="sumprice"  readonly="readonly" min="${productlist.product_name_price}" value="${productlist.product_name_price}"/> 원
+	총 금액 : <input type="number" class="sumprice"  readonly="readonly"  value="${productlist.product_name_price}"/> 원
 	</div>
  	<div class="section">
- <p>
+ 
 
- <input type="submit" value="장바구니담기" name="cart">
- <input type="submit" value="결제하기" name="order">
+ <input type="submit" value="장바구니담기" >
+ <a href="orderview?product_name_title=${productlist.product_name_title}"><input type="button" value="결제하기"></a>
+
  </div>
  </form>
  

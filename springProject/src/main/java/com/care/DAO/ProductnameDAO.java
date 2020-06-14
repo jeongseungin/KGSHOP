@@ -132,16 +132,25 @@ public class ProductnameDAO {
 	}
 
 
+	public ProductnameDTO orderview(String product_name_title) {
+		return sqlSession.selectOne(namespace+ ".orderview",product_name_title);
+	}
+
+
 	public void saveorders(OrdersDTO dto) {
-		sqlSession.insert(namespace+".saveorders",dto);
+		 sqlSession.insert(namespace+".saveorders",dto);
 		
 	}
 
 
-	public OrdersDTO vieworders(String id) {
+	public List<OrdersDTO> pay(String id) {
 		
-		return sqlSession.selectOne(namespace+"vieworders",id);
+		return sqlSession.selectList(namespace+".pay",id);
 	}
+
+
+	
+
 
 
 	

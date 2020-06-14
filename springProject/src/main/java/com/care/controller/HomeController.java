@@ -18,11 +18,6 @@ public class HomeController {
 @Autowired
 private KakaoAPI kakao;
 
-@RequestMapping("kakaopay")
-public String kakaopay() {
-	return "kakaopay";
-}
-
 @RequestMapping("kakaologin")
 public String kakaologin() {
 	

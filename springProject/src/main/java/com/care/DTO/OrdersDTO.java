@@ -5,15 +5,37 @@ package com.care.DTO;
 public class OrdersDTO {//주문내역에 대한 클래스
 	
 	private String id;
+	private String email;
+	private String addr;
+	private String tel;
 	private String product_name_title;
 	private int product_name_price;
 	private int product_count;
+	private int product_sumprice;
 	
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 	public String getProduct_name_title() {
 		return product_name_title;
@@ -33,6 +55,13 @@ public class OrdersDTO {//주문내역에 대한 클래스
 	public void setProduct_count(int product_count) {
 		this.product_count = product_count;
 	}
+	public int getProduct_sumprice() {
+		return product_sumprice;
+	}
+	public void setProduct_sumprice(int product_sumprice) {
+		this.product_sumprice = product_sumprice;
+	}
+	
 	
 	
 	

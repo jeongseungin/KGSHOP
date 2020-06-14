@@ -2,12 +2,10 @@ package com.care.controller;
 
 import org.springframework.stereotype.Controller;
 import java.io.File;
-import java.util.List;
+
 
 import javax.annotation.Resource;
-import javax.mail.Session;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -16,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.care.DTO.ProductnameDTO;
-import com.care.DTO.ShoppingCartDTO;
+
 import com.care.service.SaveProductService;
 import com.care.uitls.UploadFileUtils;
 @Controller

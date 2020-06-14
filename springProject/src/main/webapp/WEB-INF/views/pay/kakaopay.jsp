@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-    String name = "홍길동";  
-    String email = "aaa@naver.com";
-    String phone = "01050502840";
-    String address = "서울 종로구 단성사";
-    int totalPrice = (int)35000;   
-%>
+
 
 <!DOCTYPE html>
 <html>
@@ -17,6 +11,8 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <body>
+			
+
     <script>
     $(function(){
         var IMP = window.IMP; // 생략가능
@@ -26,14 +22,14 @@
         IMP.request_pay({
             pg : 'kakaopay',
             pay_method : 'card',
-            merchant_uid : 'merchant_' + new Date().getTime(),
-            name : 'KGSHOP 결제',
-            amount : <%=totalPrice%>,
-            buyer_email : '<%=email%>',
-            buyer_name : '<%=name%>',
-            buyer_tel : '<%=phone%>',
-            buyer_addr : '<%=address%>',
-            buyer_postcode : '123-456',
+            merchant_uid : 'merchant_' + new Date().getTime(),        
+            name :'${pay[0].product_name_title}',
+            amount :'${pay[0].product_sumprice}',
+            buyer_email :'${pay[0].email}',
+            buyer_name :'${pay[0].id}',
+            buyer_tel :'${pay[0].tel}',
+            buyer_addr :'${pay[0].addr}',          
+            buyer_postcode :'123-456',
             //m_redirect_url : 'http://www.naver.com'
         }, function(rsp) {
             if ( rsp.success ) {
@@ -75,6 +71,6 @@
         
     });
     </script>
- 
+
 </body>
 </html>

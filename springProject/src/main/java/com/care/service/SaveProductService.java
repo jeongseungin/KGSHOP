@@ -115,16 +115,26 @@ public void saveshoppingcart(ShoppingCartDTO dto) {
 		return dao.viewshoppingcart(user_id);
 	}
 
+	
+
+	public ProductnameDTO orderview(String product_name_title) {
+		
+		return dao.orderview(product_name_title);
+	}
+
 	public void saveorders(OrdersDTO dto) {
 		
 		dao.saveorders(dto);
 		
 	}
 
-	public OrdersDTO vieworders(String id) {
+	public List<OrdersDTO> pay(String id) {
 		
-		return dao.vieworders(id);
+		return dao.pay(id);
 	}
+
+	
+
 
 
 
