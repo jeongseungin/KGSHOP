@@ -64,7 +64,7 @@
 		 <c:when test="${id eq 'system'}"> 
 		 <h1 class="my-4">관리자페이지</h1>
 		  <div class="list-group">
-         <a href="bootMemberModify" class="list-group-item">배너수정</a>
+         <a href="banner" class="list-group-item">배너관리</a>
          <a href="productName" class="list-group-item">상품등록</a>
          <a href="#" class="list-group-item">비밀번호수정</a>
          <a href="#" class="list-group-item">상품전체</a>

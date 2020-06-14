@@ -219,7 +219,12 @@
 		  FROM BOARD_QA
 		 WHERE qa_seq = #{qa_seq}
 	</delete>	
-	
+		<insert id="saveImage" parameterType="java.util.Map">
+    		insert into banner values(#{banner_category},#{imgFile},#{banner_event})   
+		</insert>
+
+
+
 	
 	
 	

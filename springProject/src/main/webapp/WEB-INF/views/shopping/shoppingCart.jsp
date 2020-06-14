@@ -72,6 +72,7 @@ table.type08 td {
 		<td scope="row"><fmt:formatNumber value="${shoppingcart.product_name_price}" pattern="###,###,###"  />원</td>
 		<td scope="row">${shoppingcart.product_count}</td>
 		<td scope="row"><fmt:formatNumber value="${shoppingcart.product_name_price * shoppingcart.product_count}" pattern="###,###,###"  />원</td>
+
 	</tr>
 	</c:forEach>
 	<tr>

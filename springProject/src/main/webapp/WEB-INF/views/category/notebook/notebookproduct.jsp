@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -23,28 +23,59 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="/">KG SHOP</a>
+      <a class="navbar-brand" href="home">KG SHOP</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/">${id }
+           <li class="nav-item active">
+          <c:choose>
+          	  <c:when test="${id eq 'system'}"><a class="nav-link" href="#" >${id }님 환영합니다 
+              <span class="sr-only">(current)</span></a>
+              </c:when>
+              <c:when test="${empty id }"> <a class="nav-link" href="home">홈
               <span class="sr-only">(current)</span>
-            </a>
+              </a></c:when>
+          	  <c:when test="${id eq id}"><a class="nav-link" href="#" >${id }님 환영합니다 
+              <span class="sr-only">(current)</span>
+              </a>
+              </c:when>       
+          </c:choose>
+           
+            
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="QnA">Q&A게시판</a>
-          </li>
-           <li class="nav-item">
-            <a class="nav-link" href="bootMember">회원가입</a>
-          </li>
-           <li class="nav-item">
-            <a class="nav-link" href="shoppingcart?user_id=test">장바구니</a>
+            <a class="nav-link" href="#">Q&A게시판</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="bootlogin">로그인</a>
+            <a class="nav-link" href="">리뷰게시판</a>
+          </li>
+          
+         <li class="nav-item">
+         <c:choose>
+          	  <c:when test="${id eq 'system'}"></c:when>
+          	  <c:when test="${empty id }"></c:when>
+            <c:otherwise> <a class="nav-link" href="shoppingcart?user_id=${id}">장바구니</a></c:otherwise>
+             </c:choose>
+          </li>
+            
+           <li class="nav-item">
+
+   
+      	    <c:choose>
+          	  <c:when test="${id eq 'system'}"><a class="nav-link" href="myPage">관리자페이지</a></c:when>
+          	   <c:when test="${empty id }"> 
+            	<a class="nav-link" href="bootMember">회원가입</a>
+         		 </c:when>
+          	  <c:otherwise><a class="nav-link" href="myPage">마이페이지</a></c:otherwise>    
+            </c:choose>
+          
+          <li class="nav-item">
+          	<c:choose>
+          		  <c:when test="${empty id }"> <a class="nav-link" href="bootlogin">로그인</a> </c:when>
+          		  <c:otherwise>  <a class="nav-link" href="logout">로그아웃</a></c:otherwise>       
+            </c:choose>
           </li>
         </ul>
       </div>
@@ -68,6 +99,7 @@
           <a href="speakerproduct" class="list-group-item">스피커</a>
           <a href="graphiccardproduct"class="list-group-item">그래픽카드</a>
           <a href="cpuproduct" class="list-group-item">CPU</a>
+            <a href="ramproduct" class="list-group-item">램</a>
           <a href="mainboardproduct" class="list-group-item">메인보드</a>
           <a href="hddproduct" class="list-group-item">하드디스크</a>
           <a href="sddproduct" class="list-group-item">SDD</a>
@@ -85,16 +117,16 @@
 		<c:forEach items="${notebooklists}" var="dto">
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="productview?product_name_no=${dto.product_name_no}"><img class="card-img-top" src="<spring:url value='/imgUpload/'/>${dto.product_thumbnail }" ></a>
+              <a href="productview?product_name_no=${dto.product_name_no}"><img style="width: 253px; height: 200px;" src="<spring:url value='/imgUpload/'/>${dto.product_thumbnail }" ></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a href="productview?product_name_no=${dto.product_name_no}">${dto.product_name_title}</a>
                 </h4>
-                <h5><fmt:formatNumber value="${dto.product_name_price}"  /> 원 </h5>
-                <p class="card-text"> ${dto.product_name_detail}</p>
+        	
+               
               </div>
               <div class="card-footer">
-            			  재고량 :  ${dto.product_stock} 개
+            			  <fmt:formatNumber value="${dto.product_name_price}"  /> 원
               </div>
             </div>
           </div>
