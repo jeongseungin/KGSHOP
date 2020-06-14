@@ -38,7 +38,7 @@ public class Board_qaController {
 	Board_qaServiceimpl service;
 	
 	
-	
+	//게시판목록(페이징처리)
 	@RequestMapping("QnA")
 	public String QnA(Model model, @ModelAttribute("scri") Board_qaSearchCriteria scri, HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
@@ -187,7 +187,6 @@ public class Board_qaController {
 			
 			model.addAttribute("replyDelete", service.selectReply(dto.getQa_reply_seq()));
 			model.addAttribute("scri", scri);
-			
 
 			return "cs/QnAreplyDeleteView";
 		}
@@ -206,20 +205,4 @@ public class Board_qaController {
 			
 			return "redirect:QnAreadView";
 		}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

@@ -11,10 +11,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.care.DTO.Board_qaPageMaker;
+import com.care.DTO.Board_qaSearchCriteria;
 import com.care.DTO.ProductnameDTO;
 import com.care.DTO.ShoppingCartDTO;
 import com.care.service.SaveProductService;
@@ -38,9 +42,17 @@ public class ProductNameController {
 		return "category/top/topproduct";
 	}
 	
+	//노트북 카테고리(카테고리 통합예정) if문으로 
 	@RequestMapping("notebookproduct")
-	public String notebookproduct(Model model) {
+	public String notebookproduct(Model model, @ModelAttribute("scri")Board_qaSearchCriteria scri) {
+		
 		service.notebookproductview(model);
+		
+		Board_qaPageMaker pageMaker = new Board_qaPageMaker();
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(service.listCount(scri));
+		model.addAttribute("pageMaker", pageMaker);
+		
 		return "category/notebook/notebookproduct";
 	}
 	

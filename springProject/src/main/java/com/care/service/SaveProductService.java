@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.care.DAO.ProductnameDAO;
+import com.care.DTO.Board_qaSearchCriteria;
 import com.care.DTO.ProductnameDTO;
 import com.care.DTO.ShoppingCartDTO;
 
@@ -112,6 +113,10 @@ public void saveshoppingcart(ShoppingCartDTO dto) {
 	public List<ShoppingCartDTO> viewshoppingcart(String user_id) {
 		
 		return dao.viewshoppingcart(user_id);
+	}
+
+	public int listCount(Board_qaSearchCriteria scri) {
+		return dao.listCount(scri);
 	}
 
 

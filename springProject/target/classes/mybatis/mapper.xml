@@ -48,10 +48,57 @@
       )
    
 </insert>
+
+	<!-- 창훈 상품검색 및 상품목록 페이징처리 -->
+	<!-- 상품 총 개수 -->
+	<select id="productListCount" resultType="int">
+		SELECT COUNT(QA_SEQ)
+		  FROM BOARD_QA
+		  WHERE 1=1
+		  <include refid="productSearch"></include>
+		 AND QA_SEQ > 0
+	</select>
+	<!-- 상품 검색 -->
+	<sql id="productSearch">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">AND QA_SUBJECT LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'c'.toString()">AND QA_CONTENT LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'w'.toString()">AND USER_ID LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'tc'.toString()">AND (QA_SUBJECT LIKE '%' || #{keyword} || '%') or (QA_CONTENT LIKE '%' || #{keyword} || '%')</if>
+		</if>
+	</sql>
+	<!-- 상품 목록 페이징 -->
+	<select id="productListPage" resultType="com.care.DTO.ProductnameDTO" parameterType="com.care.DTO.Board_qaCriteria">
+		SELECT  QA_SEQ, 
+            QA_CATEGORY,
+		        QA_SUBJECT, 
+		        USER_ID, 
+		        QA_LOGTIME
+		 FROM ( 
+		        SELECT QA_SEQ,
+		               QA_CATEGORY, 
+		               QA_SUBJECT, 
+		               USER_ID, 
+		               QA_LOGTIME, 
+		               ROW_NU
+		               
+		               MBER() OVER(ORDER BY QA_SEQ DESC) AS RNUM
+		         FROM BOARD_QA
+		         WHERE 1=1
+		         	<include refid="search"></include>
+		                       ) MP
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY QA_SEQ DESC
+	</select>
+	
+	
+	
    <!-- 노트북상품목록 전체 검색 -->
    <select id="NotebooklistAll" resultType="com.care.DTO.ProductnameDTO" >
       select * from productname where product_category_no = 'notebook'
    </select>
+   
+   
    
    <!-- 컴퓨터상품목록 전체 검색 -->
    <select id="ComputerlistAll" resultType="com.care.DTO.ProductnameDTO">

@@ -1,0 +1,11 @@
+
+Spring 컨트롤러에서 Map으로 파라미터 받는방법
+@RequestParam Map<String,Object> map
+
+ex)
+private ModelAndView request_TEST(@RequestParam HashMap<String, String> paramMap)){
+	String data = paramMap.get("testParam")
+}
+
+Spring 데이터 커맨드 객체.
+키값, 변수명 동일 시 데이터 손쉽게 사용 가능 
