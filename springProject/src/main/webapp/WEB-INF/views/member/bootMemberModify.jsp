@@ -184,19 +184,19 @@ function sample6_execDaumPostcode() {
                     <label for="inputPhoneNumber" class="col-lg-2 control-label" style="padding-top: 10px;">우편번호</label> 	
     
                     <div class="col-lg-10">
-                        <input type="text" class="post"  data-rule-required="true" placeholder="우편번호" style="width: 100px;" name="addr" id="sample6_postcode"> - <input type="button" class="post1" value="조회" onclick="sample6_execDaumPostcode()"  >
+                        <input type="text" class="post"  data-rule-required="true" placeholder="우편번호" style="width: 100px;" name="addr" id="sample6_postcode" value="${list.addr }"> - <input type="button" class="post1" value="조회" onclick="sample6_execDaumPostcode()"  >
                     </div>
                 </div>
 				<div class="form-group" id="divPhoneNumber">
                     <label for="inputPhoneNumber" class="col-lg-2 control-label">주소</label>		
                     <div class="col-lg-10">
-                        <input type="tel" class="form-control onlyNumber" data-rule-required="true" placeholder="주소" maxlength="11" name="addr1" id="sample6_address">
+                        <input type="tel" class="form-control onlyNumber" data-rule-required="true" placeholder="주소" maxlength="11" name="addr1" id="sample6_address" value="${list.addr1 }">
                     </div>
                 </div>
 				<div class="form-group" id="divPhoneNumber">
                     <label for="inputPhoneNumber" class="col-lg-2 control-label" >상세주소</label>	
                     <div class="col-lg-10">
-                        <input type="text" placeholder="상세주소"  class="post2" name="addr2" id="sample6_detailAddress">
+                        <input type="text" placeholder="상세주소"  class="post2" name="addr2" id="sample6_detailAddress" value="${list.addr2 }">
                     </div>
                 </div>
 				<div class="form-group" id="divPhoneNumber">
@@ -210,7 +210,7 @@ function sample6_execDaumPostcode() {
                 
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
-                       <button type="submit" class="conform">수정</button>&nbsp;&nbsp;<button type="button" class="conform" onclick="location.href='successlogin'">취소</button>
+                       <button type="submit" class="conform">수정</button>&nbsp;&nbsp;<button type="button" class="conform" onclick="location.href='home'">취소</button>
                     </div>
                 </div>
             </form>

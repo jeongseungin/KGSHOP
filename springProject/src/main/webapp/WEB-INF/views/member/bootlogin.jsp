@@ -61,6 +61,10 @@
  	  }
  	  
  </style>
+ <script type="text/javascript">
+ 	var naverId = sesisonStorage.getItem("naverId");
+ 	
+ </script>
 </head>
 <body cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
 

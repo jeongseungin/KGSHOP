@@ -114,7 +114,7 @@
         <br>
 
         <div class="row">
-		<c:forEach items="${computerlists}" var="dto">
+		<c:forEach items="${graphiccardlists}" var="dto">
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
               <a href="productview?product_name_no=${dto.product_name_no}"><img style="width: 253px; height: 200px;" src="<spring:url value='/imgUpload/'/>${dto.product_thumbnail }" ></a>
