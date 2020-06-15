@@ -117,16 +117,16 @@
 		<c:forEach items="${notebooklists}" var="dto">
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="productview?product_name_no=${dto.product_name_no}"><img class="card-img-top" src="<spring:url value='/imgUpload/'/>${dto.product_thumbnail }" ></a>
+              <a href="productview?product_name_no=${dto.product_name_no}"><img style="width: 253px; height: 200px;" src="<spring:url value='/imgUpload/'/>${dto.product_thumbnail }" ></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a href="productview?product_name_no=${dto.product_name_no}">${dto.product_name_title}</a>
                 </h4>
-                <h5><fmt:formatNumber value="${dto.product_name_price}"  /> 원 </h5>
-                <p class="card-text"> ${dto.product_name_detail}</p>
+        	
+               
               </div>
               <div class="card-footer">
-            			  재고량 :  ${dto.product_stock} 개
+            			  <fmt:formatNumber value="${dto.product_name_price}"  /> 원
               </div>
             </div>
           </div>
