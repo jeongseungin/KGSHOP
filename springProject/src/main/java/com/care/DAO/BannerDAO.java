@@ -13,12 +13,5 @@ public class BannerDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public BannerDAO() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	public void saveImage(Map<String, Object> hmap) {
-		sqlSession.insert(namespace+".saveImage",hmap);
-	}
 	
 }

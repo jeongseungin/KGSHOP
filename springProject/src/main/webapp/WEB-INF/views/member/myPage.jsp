@@ -35,7 +35,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Q&A게시판</a>
+            <a class="nav-link" href="QnA">Q&A게시판</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="">리뷰게시판</a>
@@ -79,7 +79,7 @@
          <a href="bootMemberModify" class="list-group-item">회원정보수정</a>
      
          <a href="#" class="list-group-item">내가 쓴글</a>
-         <a href="#" class="list-group-item">장바구니</a>
+         <a href="shoppingcart" class="list-group-item">장바구니</a>
          <a href="#" class="list-group-item">주문내역</a>
 
         </div>

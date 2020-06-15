@@ -48,7 +48,7 @@
             
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Q&A게시판</a>
+            <a class="nav-link" href="QnA">Q&A게시판</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="">리뷰게시판</a>
@@ -58,7 +58,7 @@
          <c:choose>
           	  <c:when test="${id eq 'system'}"></c:when>
           	  <c:when test="${empty id }"></c:when>
-            <c:otherwise> <a class="nav-link" href="shoppingcart?user_id=${id}">장바구니</a></c:otherwise>
+            <c:otherwise> <a class="nav-link" href="shoppingcart">장바구니</a></c:otherwise>
              </c:choose>
           </li>
             

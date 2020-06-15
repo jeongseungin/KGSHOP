@@ -42,6 +42,7 @@ import com.care.service.CommonService;
 import com.care.service.MemberService;
 import com.care.template.Constants;
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.github.scribejava.core.model.Response;
 
 import jdk.nashorn.internal.parser.JSONParser;
 
@@ -98,13 +99,13 @@ public class MemberController {
 	//회원 가입 (비밀번호 암호화)
 	@RequestMapping(value="chkRegister", method=RequestMethod.POST)
 	public String chkRegister(MemberDTO dto, HttpServletRequest request,Model model) throws Exception {
-		
+		Response response;
 		int result = member.idChk(dto);
 		try {
 			if(result==1) {
-				String error = "에러입니다";
-				model.addAttribute("error",error);
-				return "member/error";
+				String regierror = "가입 실패입니다";
+				model.addAttribute("regierror",regierror);
+				return "error/regierror";		
 			}else if(result==0) {
 				String encoder = pwdEncoder.encode(dto.getPw());
 				System.out.println(encoder);
@@ -144,9 +145,9 @@ public class MemberController {
 				dto.setPw(encoder);
 				member.execute(dto);		
 			}else if(result==1){
-				String error = "에러입니다";
-				model.addAttribute("error",error);
-				return "member/error";
+				String modifyerror = "에러입니다";
+				model.addAttribute("modifyerror",modifyerror);
+				return "error/modifyerror";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -200,7 +201,24 @@ public class MemberController {
 	}
 	@RequestMapping("error")
 	public String error() {
-		return "member/error";
+		return "error/error";
 	}
+	@RequestMapping("regierror")
+	public String regierror() {
+		return "error/regierror";
+	}
+	@RequestMapping("modifyerror")
+	public String modifyerror() {
+		return "error/modifyerror";
+	}
+	@RequestMapping("qaerror")
+	public String qaerror() {
+		return "error/qaerror";
+	}
+	@RequestMapping("qaerror2")
+	public String qaerror2() {
+		return "error/qaerror2";
+	}
+	
 	
 }

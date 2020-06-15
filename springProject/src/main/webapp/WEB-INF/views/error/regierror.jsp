@@ -6,16 +6,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
-	alert(${error});
-	location.href="history.back()";
+	var regierror = '${regierror}';
+	alert(regierror);
+	history.back();
 </script>
-
-
 </head>
 <body>
-
-	
-	
 
 </body>
 </html>

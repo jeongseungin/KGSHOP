@@ -46,7 +46,7 @@
             
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Q&A게시판</a>
+            <a class="nav-link" href="QnA">Q&A게시판</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="">리뷰게시판</a>
@@ -113,20 +113,20 @@
 
         <br>
 
-        <div class="row">
+          <div class="row">
 		<c:forEach items="${notebooklists}" var="dto">
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="productview?product_name_no=${dto.product_name_no}"><img style="width: 253px; height: 200px;" src="<spring:url value='/imgUpload/'/>${dto.product_thumbnail }" ></a>
+              <a href="productview?product_name_no=${dto.product_name_no}"><img class="card-img-top" src="<spring:url value='/imgUpload/'/>${dto.product_thumbnail }" ></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a href="productview?product_name_no=${dto.product_name_no}">${dto.product_name_title}</a>
                 </h4>
-        	
-               
+                <h5><fmt:formatNumber value="${dto.product_name_price}"  /> 원 </h5>
+                <p class="card-text"> ${dto.product_name_detail}</p>
               </div>
               <div class="card-footer">
-            			  <fmt:formatNumber value="${dto.product_name_price}"  /> 원
+            			  재고량 :  ${dto.product_stock} 개
               </div>
             </div>
           </div>
@@ -142,6 +142,47 @@
 
   </div>
   <!-- /.container -->
+  		  <ul class="pagination">
+		    <c:if test="${pageMaker.prev}">
+		    	<li><a href="notebookproduct${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
+		    </c:if> 
+			
+		    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+		    	<li <c:out value="${pageMaker.cri.page == idx ? 'class=info' : ''}"/>>
+		    	<a href="notebookproduct${pageMaker.makeSearch(idx)}">${idx}</a></li>
+		    </c:forEach>
+		
+		    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+		    	<li><a href="notebookproduct${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
+		    </c:if> 
+		  </ul>
+		  
+		  <div class="search row">
+				<div class="col-xs-2 col-sm-2">
+				    <select name="searchType" class="form-control">
+				      <option value="n"<c:out value="${scri.searchType == null ? 'selected' : ''}"/>>-----</option>
+				      <option value="t"<c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>상품명</option>
+				      <option value="c"<c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>해시태그</option>
+				      <option value="tc"<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>상품명+해시태그</option>
+				    </select>
+				</div>
+				<div class="col-xs-3 col-sm-3">
+					<div class="input-group">
+				    	<input class="form-control" type="text" name="keyword" id="keywordInput" value="${scri.keyword}"/>
+				    	<span class="input-group-btn">
+				    		<button class="btn btn-default" id="searchBtn" type="button">검색</button>
+				    	</span>
+					</div>
+				</div>
+				    	
+			    <script>
+			      $(function(){
+			        $('#searchBtn').click(function() {
+			          self.location = "notebookproduct" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
+			        });
+			      });   
+			    </script>
+			 </div>
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">

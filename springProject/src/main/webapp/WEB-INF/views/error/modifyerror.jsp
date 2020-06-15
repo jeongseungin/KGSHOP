@@ -6,6 +6,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script>
+	var modifyrror = '${modifyerror}';
+	alert(modifyerror);
+	history.back();
+</script>
 <body>
 
 </body>
