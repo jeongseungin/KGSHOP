@@ -60,7 +60,7 @@
          <c:choose>
           	  <c:when test="${id eq 'system'}"></c:when>
           	  <c:when test="${empty id }"></c:when>
-            <c:otherwise> <a class="nav-link" href="shoppingcart?user_id=${id}">장바구니</a></c:otherwise>
+            <c:otherwise> <a class="nav-link" href="shoppingcart">장바구니</a></c:otherwise>
              </c:choose>
           </li>
             
@@ -74,9 +74,6 @@
          		 </c:when>
           	  <c:otherwise><a class="nav-link" href="myPage">마이페이지</a></c:otherwise>    
             </c:choose>
-        
-
-            <a class="nav-link" href="shoppingcart?user_id=${id}">장바구니</a>
 
           </li>
           

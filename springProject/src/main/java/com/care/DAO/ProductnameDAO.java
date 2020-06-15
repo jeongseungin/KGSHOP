@@ -5,6 +5,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.care.DTO.DeletecartDTO;
+import com.care.DTO.DownStockDTO;
+import com.care.DTO.OrderlistDTO;
 import com.care.DTO.OrdersDTO;
 import com.care.DTO.ProductnameDTO;
 import com.care.DTO.ShoppingCartDTO;
@@ -126,9 +129,9 @@ public class ProductnameDAO {
 	}
 
 
-	public List<ShoppingCartDTO> viewshoppingcart(String user_id) {
+	public List<ShoppingCartDTO> viewshoppingcart(String id) {
 		
-		return sqlSession.selectList(namespace+ ".viewshoppingcart",user_id);
+		return sqlSession.selectList(namespace+ ".viewshoppingcart",id);
 	}
 
 
@@ -147,6 +150,49 @@ public class ProductnameDAO {
 		
 		return sqlSession.selectList(namespace+".pay",id);
 	}
+
+
+	public void deletecart(DeletecartDTO dto) {
+	 sqlSession.delete(namespace+".deletecart",dto);
+	 
+		
+	}
+
+
+	public void saveorderlist(DeletecartDTO dto) {
+		sqlSession.insert(namespace+".saveorderlist",dto);
+		
+	}
+
+
+	public void deletepay(String product_name_title) {
+		sqlSession.delete(namespace+".deletepay",product_name_title);
+		
+	}
+
+
+	public void downstock(DownStockDTO downdto) {
+		sqlSession.update(namespace+".downstock",downdto);
+		
+	}
+
+
+	public List<OrderlistDTO> vieworderlist(String id) {
+	
+		return sqlSession.selectList(namespace+".vieworderlist",id);
+	}
+
+
+	
+
+
+	
+
+	
+
+
+	
+
 
 
 	

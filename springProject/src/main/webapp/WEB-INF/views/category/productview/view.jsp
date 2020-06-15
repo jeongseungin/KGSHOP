@@ -7,6 +7,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript">
+
+function pay(){
+	var form = document.form;
+	var count = document.getElementById("count").value;
+	
+	
+	document.getElementById("product_count").value=count;
+	
+	form.submit();
+}
+
+</script>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
@@ -53,21 +67,21 @@
   
     <section class="section">		
     		<button type="button" class="minus"  style="border:none; background:none;">-</button>
-수량 : <input type="number" class="numBox" name="product_count" min="1"  value="1" readonly="readonly"/>
+수량 : <input id="count" type="number" class="numBox" name="product_count" min="1"  value="1" readonly="readonly"/>
   		<button type="button" class="plus"  style=" border:none; background:none;">+</button> 
  </section>
  <script>
   $(".plus").click(function(){
    var num = $(".numBox").val();
    var plusNum = Number(num) + 1;
-   $(".sumprice").val(plusNum*"${productlist.product_name_price}");
-
-   if(plusNum >= "${productlist.product_stock}") {
+   
+   if(plusNum > "${productlist.product_stock}") {
     $(".numBox").val(num);
     alert('최대수량 입니다');
+    $(".sumprice").val("${productlist.product_stock}"*"${productlist.product_name_price}");
    } else {
     $(".numBox").val(plusNum);
-   
+    $(".sumprice").val(plusNum*"${productlist.product_name_price}");
    }
 	
   });
@@ -75,15 +89,16 @@
   $(".minus").click(function(){
    var num = $(".numBox").val();
    var minusNum = Number(num) - 1;
-
    $(".sumprice").val(minusNum*"${productlist.product_name_price}");
+
    if(minusNum <= 0) {
     $(".numBox").val(num);
     alert('최소수량은 1개 입니다');
     $(".sumprice").val("${productlist.product_name_price}");
+ 
    } else {
     $(".numBox").val(minusNum);   
-  
+   
    }
 
   });
@@ -99,12 +114,21 @@
  
 
  <input type="submit" value="장바구니담기" >
- <a href="orderview?product_name_title=${productlist.product_name_title}"><input type="button" value="결제하기"></a>
-
  </div>
  </form>
  
+ <form name="form" action="orderview">
+ 	<input type="hidden" name="product_name_title" value="${productlist.product_name_title}">
+ 	<input type="hidden" name="product_count" value="" id="product_count">
+ 	<input type="button" value="결제하기" onclick="pay()">
+ </form>
+ 
+
  <section>상품 설명 : ${productlist.product_name_detail}</section>
+
+<!-- 결제 -->
+
+<!-- 장바구니 -->
 
 
 <!-- 관리자만 볼수있게 설정해야됩니다 -->

@@ -155,7 +155,7 @@
       
 <!-- 장바구니 상세보기 -->
    <select id="viewshoppingcart" resultType="com.care.DTO.ShoppingCartDTO" parameterType="String">
-      select * from shoppingcart where id=#{user_id}
+      select * from shoppingcart where id=#{id}
    </select>
 
 <!-- 창훈 게시판 -->
@@ -310,8 +310,32 @@
 	
 	</select>
 	
+	<delete id="deletecart" parameterType="com.care.DTO.DeletecartDTO">
+	
+	delete from shoppingcart 
+	where id=#{id} and 
+	product_name_title=#{product_name_title}
+	</delete>
 	
 	
+	<insert id="saveorderlist">
+		insert into paylist select * from pay where product_name_title=#{product_name_title} 
+	</insert>
+	
+	<delete id="deletepay">
+		delete from pay where product_name_title = #{product_name_title}
+	</delete>
+	
+	<update id="downstock" parameterType="com.care.DTO.DownStockDTO">
+		update productname
+         set 
+      product_stock = product_stock - #{product_count}
+      where product_name_title = #{product_name_title}
+	</update>
+	
+	<select id="vieworderlist" resultType="com.care.DTO.OrderlistDTO" parameterType="String">
+		select * from paylist where id = #{id}
+	</select>
 </mapper>
 
 
