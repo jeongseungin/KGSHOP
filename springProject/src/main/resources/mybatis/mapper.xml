@@ -56,7 +56,7 @@
 		  FROM productname
 		  WHERE 1=1
 		  <include refid="productSearch"></include>
-		  AND product_name_no > 0
+		  
 	</select>
 	
 	<!-- 상품 목록 페이징 -->
