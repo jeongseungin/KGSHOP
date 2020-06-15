@@ -24,10 +24,13 @@ public class SaveProductService {
 	public void topproductview(Model model) {
 		model.addAttribute("toplists",dao.topviewproduct());
 	}
-
-	public void notebookproductview(Model model) {
-		model.addAttribute("notebooklists",dao.notebookproductview());
-		
+	//카테고리 목록
+	public List<ProductnameDTO> notebookproductview(Board_qaSearchCriteria scri) {
+		return dao.notebookproductview(scri);
+	}
+	//카테고리 총 개수
+	public int productListCount(Board_qaSearchCriteria scri) {
+		return dao.productListCount(scri);
 	}
 
 	public void computerproductview(Model model) {
@@ -113,10 +116,6 @@ public void saveshoppingcart(ShoppingCartDTO dto) {
 	public List<ShoppingCartDTO> viewshoppingcart(String user_id) {
 		
 		return dao.viewshoppingcart(user_id);
-	}
-
-	public int listCount(Board_qaSearchCriteria scri) {
-		return dao.listCount(scri);
 	}
 
 

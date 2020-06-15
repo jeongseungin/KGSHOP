@@ -42,15 +42,16 @@ public class ProductNameController {
 		return "category/top/topproduct";
 	}
 	
-	//노트북 카테고리(카테고리 통합예정) if문으로 
+	//노트북 카테고리 조회(카테고리 통합예정) if문으로 
 	@RequestMapping("notebookproduct")
-	public String notebookproduct(Model model, @ModelAttribute("scri")Board_qaSearchCriteria scri) {
+	public String notebookproduct(Model model, Board_qaSearchCriteria scri) {
 		
-		service.notebookproductview(model);
+		model.addAttribute("notebooklists",service.notebookproductview(scri));
 		
 		Board_qaPageMaker pageMaker = new Board_qaPageMaker();
 		pageMaker.setCri(scri);
-		pageMaker.setTotalCount(service.listCount(scri));
+		pageMaker.setTotalCount(service.productListCount(scri));
+		
 		model.addAttribute("pageMaker", pageMaker);
 		
 		return "category/notebook/notebookproduct";

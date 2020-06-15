@@ -28,9 +28,14 @@ public class ProductnameDAO {
 	 return sqlSession.selectList(namespace+ ".ToplistAll");
 	}
 
-
-	public List<ProductnameDTO> notebookproductview() {
-		return sqlSession.selectList(namespace+ ".NotebooklistAll");
+	//카테고리 목록 조회
+	public List<ProductnameDTO> notebookproductview(Board_qaSearchCriteria scri) {
+		return sqlSession.selectList(namespace+ ".productListPage", scri);
+		//return sqlSession.selectList(namespace+ ".NotebooklistAll");
+	}
+	//카테고리 총 개수
+	public int productListCount(Board_qaSearchCriteria scri) {
+		return sqlSession.selectOne(namespace+".productListCount", scri);
 	}
 
 
@@ -130,17 +135,5 @@ public class ProductnameDAO {
 		
 		return sqlSession.selectList(namespace+ ".viewshoppingcart",user_id);
 	}
-
-
-	public int listCount(Board_qaSearchCriteria scri) {
-		
-		return sqlSession.selectOne(namespace+".listCount", scri);
-	}
-
-
-	
-
-
-	
 
 }

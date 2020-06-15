@@ -52,12 +52,45 @@
 	<!-- 창훈 상품검색 및 상품목록 페이징처리 -->
 	<!-- 상품 총 개수 -->
 	<select id="productListCount" resultType="int">
-		SELECT COUNT(QA_SEQ)
-		  FROM BOARD_QA
-		  WHERE 1=1
-		  <include refid="productSearch"></include>
-		 AND QA_SEQ > 0
+	<![CDATA[SELECT COUNT(product_name_no)
+		  FROM productname
+		 WHERE product_name_no > 0
+	]]>
 	</select>
+	
+	<!-- 상품 목록 페이징 -->
+	<select id="productListPage" resultType="com.care.DTO.ProductnameDTO" parameterType="com.care.DTO.Board_qaSearchCriteria">
+		SELECT  PRODUCT_NAME_NO, 
+            PRODUCT_CATEGORY_NO,
+		    PRODUCT_NAME_TITLE,
+	        PRODUCT_NAME_DETAIL, 
+	        PRODUCT_NAME_PRICE,
+            PRODUCT_NAME_IMAGE,
+            PRODUCT_THUMBNAIL,
+            PRODUCT_STOCK,
+            PRODUCT_HIT,
+            PRODUCT_HASHTAG
+		 FROM ( 
+		        SELECT 
+                    PRODUCT_NAME_NO, 
+                    PRODUCT_CATEGORY_NO,
+                    PRODUCT_NAME_TITLE, 
+                    PRODUCT_NAME_DETAIL, 
+                    PRODUCT_NAME_PRICE,
+                    PRODUCT_NAME_IMAGE,
+                    PRODUCT_THUMBNAIL,
+                    PRODUCT_STOCK,
+                    PRODUCT_HIT,
+                    PRODUCT_HASHTAG,
+	                ROW_NUMBER() OVER(ORDER BY PRODUCT_NAME_NO DESC) AS RNUM
+		         	FROM PRODUCTNAME
+		         	WHERE 1=1
+		         	<include refid="productSearch"></include>
+		                       ) MP
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY PRODUCT_NAME_NO DESC
+	</select>
+	
 	<!-- 상품 검색 -->
 	<sql id="productSearch">
 		<if test="searchType != null">
@@ -67,29 +100,6 @@
 			<if test="searchType == 'tc'.toString()">AND (QA_SUBJECT LIKE '%' || #{keyword} || '%') or (QA_CONTENT LIKE '%' || #{keyword} || '%')</if>
 		</if>
 	</sql>
-	<!-- 상품 목록 페이징 -->
-	<select id="productListPage" resultType="com.care.DTO.ProductnameDTO" parameterType="com.care.DTO.Board_qaCriteria">
-		SELECT  QA_SEQ, 
-            QA_CATEGORY,
-		        QA_SUBJECT, 
-		        USER_ID, 
-		        QA_LOGTIME
-		 FROM ( 
-		        SELECT QA_SEQ,
-		               QA_CATEGORY, 
-		               QA_SUBJECT, 
-		               USER_ID, 
-		               QA_LOGTIME, 
-		               ROW_NU
-		               
-		               MBER() OVER(ORDER BY QA_SEQ DESC) AS RNUM
-		         FROM BOARD_QA
-		         WHERE 1=1
-		         	<include refid="search"></include>
-		                       ) MP
-		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
-		ORDER BY QA_SEQ DESC
-	</select>
 	
 	
 	
