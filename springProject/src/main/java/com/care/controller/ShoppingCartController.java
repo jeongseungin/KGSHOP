@@ -96,7 +96,8 @@ public class ShoppingCartController {
 
 	@RequestMapping("Saveorderlist")
 	public String Saveorderlist (DeletecartDTO dto,@RequestParam("product_name_title") String product_name_title,
-			@RequestParam("product_count") int product_count,DownStockDTO downdto) {
+			@RequestParam("product_count") int product_count,DownStockDTO downdto,
+			DeletecartDTO deletecart,HttpServletRequest request) {
 		
 		dto.setProduct_name_title(product_name_title);
 		service.Saveorderlist(dto);
@@ -105,6 +106,13 @@ public class ShoppingCartController {
 		downdto.setProduct_count(product_count);
 		deletepay(product_name_title);
 		downstock(downdto);
+		
+		HttpSession session ;
+		session = request.getSession();
+		String id = (String) session.getAttribute("id");
+		deletecart.setId(id);
+		deletecart.setProduct_name_title(product_name_title);
+		deletecart(deletecart);
 		return "redirect:vieworderlist";
 	}
 	
@@ -114,6 +122,10 @@ public class ShoppingCartController {
 	
 	private void downstock(DownStockDTO downdto) {
 		service.downstock(downdto);
+	}
+	
+	private void deletecart(DeletecartDTO deletecart) {
+		service.deletecart(deletecart);
 	}
 	
 	@RequestMapping("vieworderlist")

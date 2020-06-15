@@ -16,8 +16,6 @@
 		alert('재고량이 없어 결제 하실수 없습니다');
 		location.href="home";
 	} 
-
-
 </script>
 
 <body >
