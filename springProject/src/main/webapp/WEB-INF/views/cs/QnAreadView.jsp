@@ -5,10 +5,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+  <!-- Bootstrap core CSS -->
+  <link href="./resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="./resources/css/shop-homepage.css" rel="stylesheet">
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -132,9 +134,17 @@
 				
 				<div class="form-group">
 					<div class="col-sm-offset-4 col-sm-8">
-						<button type="submit" class="update_btn btn btn-default">수정</button>
-						<button type="submit" class="list_btn btn btn-default">목록</button>	
+					<c:choose>
+					<c:when test="${id eq 'system' }">
+					<button type="submit" class="update_btn btn btn-default">수정</button>
+					<button type="submit" class="list_btn btn btn-default">목록</button>	
 						<button type="submit" class="delete_btn btn btn-warning">삭제</button>
+					</c:when>
+					<c:otherwise><button type="submit" class="update_btn btn btn-default">수정</button>
+					<button type="submit" class="list_btn btn btn-default">목록</button>	
+					<button type="submit" class="delete_btn btn btn-warning">삭제</button>
+					</c:otherwise>
+					</c:choose>
 					</div>
 				</div>
 			</div>
@@ -179,12 +189,16 @@
 				  <input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
 				
 				  <div>
+				  	<c:choose>
+				  	<c:when test="${id ne read.user_id}"></c:when>
+				  	<c:otherwise>
 				    <label for="qa_reply_user_id">댓글 작성자</label><input type="text" id="qa_reply_user_id" name="qa_reply_user_id" />
 				    <br/>
-				    <label for="qa_reply_content">댓글 내용</label><input type="text" id="qa_reply_content" name="qa_reply_content" />
-				  </div>
-				  <div>
+				    <label for="qa_reply_content">댓글 내용</label><input type="text" id="qa_reply_content" name="qa_reply_content" /><br>
+				  
 				 	 <button type="button" class="replyWriteBtn">작성</button>
+				 	 </c:otherwise>
+				 	 </c:choose>
 				  </div>
 				</form>
 			

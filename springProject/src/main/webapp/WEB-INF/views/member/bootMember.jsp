@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +18,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <title>Insert title here</title>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 function sample6_execDaumPostcode() {
     new daum.Postcode({
@@ -106,19 +109,90 @@ function sample6_execDaumPostcode() {
  	  background: #EAEAEA;
  	  color: black;
  	  }
+ 	  .pwconform{
+ 	  	width: 895px;
+ 	  height: 35px;
+ 	  border: 1px solid #C3C3C3;
+ 	  border-radius: 4px;
+ 	  padding-left: 10px;
+ 	  }
 </style>
 </head>
 <body>
+<!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="home">KG SHOP</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+          <c:choose>
+               <c:when test="${id eq 'system'}"><a class="nav-link" href="#" >${id }님 환영합니다 
+              <span class="sr-only">(current)</span></a>
+              </c:when>
+              <c:when test="${empty id }"> <a class="nav-link" href="home">홈
+              <span class="sr-only">(current)</span>
+              </a></c:when>
+               <c:when test="${id eq id}"><a class="nav-link" href="#" >${id }님 환영합니다 
+              <span class="sr-only">(current)</span>
+              </a>
+              </c:when>       
+          </c:choose>
+           
+            
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="QnA">Q&A게시판</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">리뷰게시판</a>
+          </li>
+          
+         <li class="nav-item">
+         <c:choose>
+               <c:when test="${id eq 'system'}"></c:when>
+               <c:when test="${empty id }"></c:when>
+            <c:otherwise> <a class="nav-link" href="shoppingcart">장바구니</a></c:otherwise>
+             </c:choose>
+          </li>
+            
+           <li class="nav-item">
 
+   
+             <c:choose>
+               <c:when test="${id eq 'system'}"><a class="nav-link" href="myPage">관리자페이지</a></c:when>
+                <c:when test="${empty id }"> 
+               <a class="nav-link" href="bootMember">회원가입</a>
+                </c:when>
+               <c:otherwise><a class="nav-link" href="myPage">마이페이지</a></c:otherwise>    
+            </c:choose>
+          
+          <li class="nav-item">
+             <c:choose>
+                  <c:when test="${empty id }"> <a class="nav-link" href="bootlogin">로그인</a> </c:when>
+                  <c:otherwise>  <a class="nav-link" href="logout">로그아웃</a></c:otherwise>       
+            </c:choose>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+	<p>
+	<p>
+	<br>
 	 <div class="container"><!-- 좌우측의 공간 확보 -->
             <!-- 헤더 들어가는 부분 -->
             
             <div class="row" >
                 <p></p>
                 <div class="col-md-12">
-                    <small>
-                   <a href="#">회원가입</a>
-                    </small>
+                    <h1 >
+              			   회원가입
+                    </h1>
                 </div>
             </div>
             <!--// 헤더 들어가는 부분 -->
@@ -127,19 +201,21 @@ function sample6_execDaumPostcode() {
                     <label for="inputId" class="col-lg-2 control-label">아이디</label>
                     <div class="col-lg-10">
                         <input type="text" class="id" id="id" name="id" data-rule-required="true" placeholder="30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30">  &nbsp;&nbsp;
-                        <button class="conform" id="idChk" value="N" onclick="idcheck()">중복확인</button>
+                        <input type="button" class="conform" id="idChk" value="중복확인" onclick="idcheck()">
                     </div>
                 </div>
                 <div class="form-group" id="divPassword">
                     <label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="password" name="pw" data-rule-required="true" placeholder="패스워드" maxlength="30">
+                        <input type="password" class="pwconform" id="password" name="pw" data-rule-required="true" placeholder="패스워드" maxlength="30">
                     </div>
                 </div>
                 <div class="form-group" id="divPasswordCheck">
                     <label for="inputPasswordCheck" class="col-lg-2 control-label">패스워드 확인</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="passwordCheck" data-rule-required="true" placeholder="패스워드 확인" maxlength="30">
+                        <input type="password" class="pwconform" id="passwordCheck" data-rule-required="true" placeholder="패스워드 확인" maxlength="30">
+                         <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
+   						 <span id="alert-danger" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
                     </div>
                 </div>
                 <div class="form-group" id="divName">
@@ -202,7 +278,7 @@ function sample6_execDaumPostcode() {
 				<div class="form-group" id="divPhoneNumber">
                     <label for="inputPhoneNumber" class="col-lg-2 control-label">참고항목</label>	
                     <div class="col-lg-10">
-                        <input type="tel" class="form-control onlyNumber" data-rule-required="true" placeholder="참고항목" maxlength="11"  id="sample6_extraAddress">
+                        <input type="text"  class="post2" data-rule-required="true" placeholder="참고항목" maxlength="11"  id="sample6_extraAddress">
                     </div>
                 </div>
 				
@@ -217,7 +293,25 @@ function sample6_execDaumPostcode() {
                  
                 </div>
             </form>
-        
+          <script>
+   	 $('.pwconform').focusout(function () {
+        var pwd1 = $("#password").val();
+        var pwd2 = $("#passwordCheck").val();
+ 
+        if ( pwd1 != '' && pwd2 == '' ) {
+            null;
+        } else if (pwd1 != "" || pwd2 != "") {
+            if (pwd1 == pwd2) {
+                $("#alert-success").css('display', 'inline-block');
+                $("#alert-danger").css('display', 'none');
+            } else {
+                alert("비밀번호가 일치하지 않습니다. 비밀번호를 재확인해주세요.");
+                $("#alert-success").css('display', 'none');
+                $("#alert-danger").css('display', 'inline-block');
+            }
+        }
+    });
+</script>
         
         <script>
         function idcheck() {
@@ -230,7 +324,7 @@ function sample6_execDaumPostcode() {
 					if(data==1){
 						alert("중복된 아이디입니다")
 					}else if(data==0){
-						$("#idChk").attr("value","Y");
+						$("#idChk").attr("value","중복확인");
 						alert("사용가능한 아이디입니다")
 					}
 				}

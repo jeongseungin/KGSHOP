@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
    <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,8 +62,73 @@
  	  }
  	  
  </style>
+ <script type="text/javascript">
+ 	var naverId = sesisonStorage.getItem("naverId");
+ 	
+ </script>
 </head>
 <body cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="home">KG SHOP</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+          <c:choose>
+          	  <c:when test="${id eq 'system'}"><a class="nav-link" href="#" >${id }님 환영합니다 
+              <span class="sr-only">(current)</span></a>
+              </c:when>
+              <c:when test="${empty id }"> <a class="nav-link" href="home">홈
+              <span class="sr-only">(current)</span>
+              </a></c:when>
+          	  <c:when test="${id eq id}"><a class="nav-link" href="#" >${id }님 환영합니다 
+              <span class="sr-only">(current)</span>
+              </a>
+              </c:when>       
+          </c:choose>
+           
+            
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="QnA">Q&A게시판</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">리뷰게시판</a>
+          </li>
+          
+         <li class="nav-item">
+         <c:choose>
+          	  <c:when test="${id eq 'system'}"></c:when>
+          	  <c:when test="${empty id }"></c:when>
+            <c:otherwise> <a class="nav-link" href="shoppingcart?user_id=${id}">장바구니</a></c:otherwise>
+             </c:choose>
+          </li>
+            
+           <li class="nav-item">
+
+   
+      	    <c:choose>
+          	  <c:when test="${id eq 'system'}"><a class="nav-link" href="myPage">관리자페이지</a></c:when>
+          	   <c:when test="${empty id }"> 
+            	<a class="nav-link" href="bootMember">회원가입</a>
+         		 </c:when>
+          	  <c:otherwise><a class="nav-link" href="myPage">마이페이지</a></c:otherwise>    
+            </c:choose>
+          
+          <li class="nav-item">
+          	<c:choose>
+          		  <c:when test="${empty id }"> <a class="nav-link" href="bootlogin">로그인</a> </c:when>
+          		  <c:otherwise>  <a class="nav-link" href="logout">로그아웃</a></c:otherwise>       
+            </c:choose>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
 
 	<div class="card align-middle" style="width:20rem; border-radius:20px;">
 		<div class="card-title" style="margin-top:30px;">
@@ -90,6 +156,7 @@
 
 	<div class="modal">
 	</div>
+	
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

@@ -5,7 +5,8 @@ import java.io.File;
 import java.util.List;
 
 import javax.annotation.Resource;
-
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.care.DTO.BannerDTO;
+import com.care.DTO.Board_qaPageMaker;
+import com.care.DTO.Board_qaSearchCriteria;
 import com.care.DTO.ProductnameDTO;
 
 import com.care.service.SaveProductService;
@@ -32,72 +35,23 @@ public class ProductNameController {
 		return "shopping/productName";
 	}
 	
-	@RequestMapping("topproduct")
-	public String topproduct(Model model) {
-		service.topproductview(model);
-		return "category/top/topproduct";
-	}
+	//노트북 카테고리 조회(카테고리 통합예정) if문으로 
+		@RequestMapping("notebookproduct")
+		public String notebookproduct(Model model, Board_qaSearchCriteria scri) {
+			System.out.println(scri.getProduct_category_no());
+			
+			model.addAttribute("notebooklists",service.notebookproductview(scri));
+			
+			Board_qaPageMaker pageMaker = new Board_qaPageMaker();
+			pageMaker.setCri(scri);
+			pageMaker.setTotalCount(service.productListCount(scri));
+			
+			model.addAttribute("pageMaker", pageMaker);
+			
+			model.addAttribute("product_category_no",scri.getProduct_category_no());
+			return "category/notebook/notebookproduct";
+		}
 	
-	@RequestMapping("notebookproduct")
-	public String notebookproduct(Model model) {
-		service.notebookproductview(model);
-		return "category/notebook/notebookproduct";
-	}
-	
-	@RequestMapping("computerproduct")
-	public String computerproduct(Model model) {
-		service.computerproductview(model);
-		return "category/computer/computerproduct";
-	}
-	@RequestMapping("moniterproduct")
-	public String moniterproduct(Model model) {
-		service.moniterproductview(model);
-		return "category/moniter/moniterproduct";
-	}
-	
-	@RequestMapping("mouseproduct")
-	public String mouseproduct(Model model) {
-		service.mouseproductview(model);
-		return "category/mouse/mouseproduct";
-	}
-	@RequestMapping("speakerproduct")
-	public String speakerproduct(Model model) {
-		service.speakerproductview(model);
-		return "category/speaker/speakerproduct";
-	}
-	
-	@RequestMapping("graphiccardproduct")
-	public String graphiccardproduct(Model model) {
-		service.graphiccardproductview(model);
-		return "category/graphiccard/graphiccardproduct";
-	}
-	@RequestMapping("cpuproduct")
-	public String cpuproduct(Model model) {
-		service.cpuproductview(model);
-		return "category/cpu/cpuproduct";
-	}
-	
-	@RequestMapping("mainboardproduct")
-	public String mainboardproduct(Model model) {
-		service.mainboardproductview(model);
-		return "category/mainboard/mainboardproduct";
-	}
-	@RequestMapping("hddproduct")
-	public String hddproduct(Model model) {
-		service.hddproductview(model);
-		return "category/hdd/hddproduct";
-	}
-	
-	@RequestMapping("sddproduct")
-	public String sddproduct(Model model) {
-		service.sddproductview(model);
-		return "category/sdd/sddproduct";
-	}
-	@RequestMapping("ramproduct")
-	public String ramproduct(Model model) {
-		service.ramproductview(model);
-		return "category/ram/ramproduct";
-	}
 	
 	@Resource(name="uploadPath")
 	private String uploadPath;
@@ -120,15 +74,22 @@ public class ProductNameController {
 		dto.setProduct_hit(0);
 		service.saveproduct(dto);
 		
-		return "home";
-		 
+		return "rediret:home";
 	}
 
 	@RequestMapping("productview")
-	public String productview(@RequestParam("product_name_no") String product_name_no, Model model) {
+	public String productview(@RequestParam("product_name_no") String product_name_no, Model model,HttpServletRequest request) {
 		upHit(product_name_no);
 		ProductnameDTO view = service.productview(product_name_no);
-		
+		HttpSession session = request.getSession();	
+		String id = (String) session.getAttribute("id");
+		if(id==null) {
+			String msg = "회원가입 후 이용 가능 합니다.";
+			model.addAttribute("msg",msg);
+			String location = "notebookproduct";
+			model.addAttribute("location",location);
+			return "error/error";
+		}
 		model.addAttribute("productlist",view);
 		return "category/productview/view";
 	}

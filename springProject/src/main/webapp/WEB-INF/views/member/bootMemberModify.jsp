@@ -16,6 +16,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <title>Insert title here</title>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 function sample6_execDaumPostcode() {
     new daum.Postcode({
@@ -106,6 +107,13 @@ function sample6_execDaumPostcode() {
  	  background: #EAEAEA;
  	  color: black;
  	  }
+ 	  .pwconform{
+ 	  	width: 895px;
+ 	  height: 35px;
+ 	  border: 1px solid #C3C3C3;
+ 	  border-radius: 4px;
+ 	  padding-left: 10px;
+ 	  }
 </style>
 </head>
 <body>
@@ -133,13 +141,15 @@ function sample6_execDaumPostcode() {
                 <div class="form-group" id="divPassword">
                     <label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="password" name="pw" data-rule-required="true" maxlength="30" placeholder="패스워드" >
+                        <input type="password" class="pwconform" id="password" name="pw" data-rule-required="true" maxlength="30" placeholder="패스워드" >
                     </div>
                 </div>
                 <div class="form-group" id="divPasswordCheck">
                     <label for="inputPasswordCheck" class="col-lg-2 control-label">패스워드 확인</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="passwordCheck" data-rule-required="true" placeholder="패스워드 확인" maxlength="30">
+                        <input type="password" class="pwconform" id="passwordCheck" data-rule-required="true" placeholder="패스워드 확인" maxlength="30" ">
+                         <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
+   						 <span id="alert-danger" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
                     </div>
                 </div>
                 <div class="form-group" id="divName">
@@ -165,7 +175,7 @@ function sample6_execDaumPostcode() {
                     <label for="conformPw_answer" class="col-lg-2 control-label" style="margin-top: 4px;">비밀번호 확인대답</label>
 				<div class="col-lg-10" >
 					<input type="text" class="form-control" name="pw_answer"
-						data-rule-required="true" placeholder="답변" maxlength="40">
+						data-rule-required="true" placeholder="답변" maxlength="40" value="${list.pw_answer}">
 				</div>
 			</div>
                 <div class="form-group" id="divEmail">
@@ -184,25 +194,25 @@ function sample6_execDaumPostcode() {
                     <label for="inputPhoneNumber" class="col-lg-2 control-label" style="padding-top: 10px;">우편번호</label> 	
     
                     <div class="col-lg-10">
-                        <input type="text" class="post"  data-rule-required="true" placeholder="우편번호" style="width: 100px;" name="addr" id="sample6_postcode"> - <input type="button" class="post1" value="조회" onclick="sample6_execDaumPostcode()"  >
+                        <input type="text" class="post"  data-rule-required="true" placeholder="우편번호" style="width: 100px;" name="addr" id="sample6_postcode" value="${list.addr }"> - <input type="button" class="post1" value="조회" onclick="sample6_execDaumPostcode()"  >
                     </div>
                 </div>
 				<div class="form-group" id="divPhoneNumber">
                     <label for="inputPhoneNumber" class="col-lg-2 control-label">주소</label>		
                     <div class="col-lg-10">
-                        <input type="tel" class="form-control onlyNumber" data-rule-required="true" placeholder="주소" maxlength="11" name="addr1" id="sample6_address">
+                        <input type="tel" class="form-control onlyNumber" data-rule-required="true" placeholder="주소" maxlength="11" name="addr1" id="sample6_address" value="${list.addr1 }">
                     </div>
                 </div>
 				<div class="form-group" id="divPhoneNumber">
                     <label for="inputPhoneNumber" class="col-lg-2 control-label" >상세주소</label>	
                     <div class="col-lg-10">
-                        <input type="text" placeholder="상세주소"  class="post2" name="addr2" id="sample6_detailAddress">
+                        <input type="text" placeholder="상세주소"  class="post2" name="addr2" id="sample6_detailAddress" value="${list.addr2 }">
                     </div>
                 </div>
 				<div class="form-group" id="divPhoneNumber">
                     <label for="inputPhoneNumber" class="col-lg-2 control-label">참고항목</label>	
                     <div class="col-lg-10">
-                        <input type="tel" class="form-control onlyNumber" data-rule-required="true" placeholder="참고항목" maxlength="11"  id="sample6_extraAddress">
+                        <input type="tel" class="post2" data-rule-required="true" placeholder="참고항목" maxlength="11"  id="sample6_extraAddress">
                     </div>
                 </div>
 				
@@ -210,14 +220,33 @@ function sample6_execDaumPostcode() {
                 
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
-                       <button type="submit" class="conform">수정</button>&nbsp;&nbsp;<button type="button" class="conform" onclick="location.href='successlogin'">취소</button>
+                       <button type="submit" class="conform">수정</button>&nbsp;&nbsp;<button type="button" class="conform" onclick="location.href='home'">취소</button>
                     </div>
                 </div>
             </form>
-        
+        <script>
+   	 $('.pwconform').focusout(function () {
+        var pwd1 = $("#password").val();
+        var pwd2 = $("#passwordCheck").val();
+ 
+        if ( pwd1 != '' && pwd2 == '' ) {
+            null;
+        } else if (pwd1 != "" || pwd2 != "") {
+            if (pwd1 == pwd2) {
+                $("#alert-success").css('display', 'inline-block');
+                $("#alert-danger").css('display', 'none');
+            } else {
+                alert("비밀번호가 일치하지 않습니다. 비밀번호를 재확인해주세요.");
+                $("#alert-success").css('display', 'none');
+                $("#alert-danger").css('display', 'inline-block');
+                
+            }
+        }
+    });
+</script>
         
         <script>
-       
+       		
         
             $(function(){
                 //모달을 전역변수로 선언
@@ -286,6 +315,7 @@ function sample6_execDaumPostcode() {
                         divPasswordCheck.addClass("has-success");
                     }
                 });
+                
                 
                 $('#name').keyup(function(event){
                     
@@ -425,16 +455,10 @@ function sample6_execDaumPostcode() {
                     
                     //패스워드 비교
                     if($('#password').val()!=$('#passwordCheck').val() || $('#passwordCheck').val()==""){
-                        modalContents.text("패스워드가 일치하지 않습니다.");
-                        modal.modal('show');
-                        
-                        divPasswordCheck.removeClass("has-success");
-                        divPasswordCheck.addClass("has-error");
+                    	 alert("비밀번호가 일치하지 않습니다. 비밀번호를 재확인해주세요.");
                         $('#passwordCheck').focus();
-                        return false;
                     }else{
-                        divPasswordCheck.removeClass("has-error");
-                        divPasswordCheck.addClass("has-success");
+                    	 
                     }
                     
                     //이름

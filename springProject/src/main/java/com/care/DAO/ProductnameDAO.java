@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.care.DTO.BannerDTO;
+import com.care.DTO.Board_qaSearchCriteria;
 import com.care.DTO.DeletecartDTO;
 import com.care.DTO.DownStockDTO;
 import com.care.DTO.OrderlistDTO;
@@ -28,65 +29,21 @@ public class ProductnameDAO {
 	}
 
 
-	public List<ProductnameDTO> topviewproduct()  {
-	 return sqlSession.selectList(namespace+ ".ToplistAll");
-	}
+	
 
 
-	public List<ProductnameDTO> notebookproductview() {
-		return sqlSession.selectList(namespace+ ".NotebooklistAll");
-	}
+	//카테고리 목록 조회
+		public List<ProductnameDTO> notebookproductview(Board_qaSearchCriteria scri) {
+			return sqlSession.selectList(namespace+ ".productListPage", scri);
+			//return sqlSession.selectList(namespace+ ".NotebooklistAll");
+		}
+		//카테고리 총 개수
+		public int productListCount(Board_qaSearchCriteria scri) {
+			return sqlSession.selectOne(namespace+".productListCount", scri);
+		}
 
 
-	public List<ProductnameDTO> computerproductview() {
-		return sqlSession.selectList(namespace+ ".ComputerlistAll");
-	}
-
-
-	public List<ProductnameDTO> moniterproductview() {
-		return sqlSession.selectList(namespace+ ".MoniterlistAll");
-	}
-
-
-	public List<ProductnameDTO> mouseproductview() {
-		return sqlSession.selectList(namespace+ ".MouselistAll");
-
-	}
-
-
-	public List<ProductnameDTO> speakerproductview() {
-		return sqlSession.selectList(namespace+ ".SpeakerlistAll");
-	}
-
-
-	public List<ProductnameDTO> graphiccardproductview() {
-		return sqlSession.selectList(namespace+ ".GraphiccardlistAll");
-
-	}
-
-
-	public List<ProductnameDTO> cpuproductview() {
-		return sqlSession.selectList(namespace+ ".CpulistAll");
-	}
-
-
-	public List<ProductnameDTO> mainboardproductview() {
-		return sqlSession.selectList(namespace+ ".MainboardlistAll");
-	}
-
-
-	public List<ProductnameDTO> hddproductview() {
-		return sqlSession.selectList(namespace+ ".HddlistAll");
-	}
-
-
-	public List<ProductnameDTO> sddproductview() {
-		return sqlSession.selectList(namespace+ ".SddlistAll");
-	}
-
-	public List<ProductnameDTO> ramproductview() {
-		return sqlSession.selectList(namespace+ ".RamlistAll");
-	}
+	
 
 
 	public ProductnameDTO productview(String product_name_no) {

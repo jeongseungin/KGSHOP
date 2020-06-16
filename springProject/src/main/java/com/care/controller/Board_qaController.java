@@ -41,9 +41,6 @@ public class Board_qaController {
 	
 	@RequestMapping("QnA")
 	public String QnA(Model model, @ModelAttribute("scri") Board_qaSearchCriteria scri, HttpServletRequest request) throws Exception {
-		HttpSession session = request.getSession();
-		String name = "abc";
-		session.setAttribute("id", name);//세션생성, 추 후 삭제바람
 		
 		model.addAttribute("list",service.list(scri));
 		
@@ -56,9 +53,16 @@ public class Board_qaController {
 		
 	}
 	@RequestMapping("QnAwrite")
-	public String QnAwrite(HttpServletRequest request) {
+	public String QnAwrite(HttpServletRequest request,Model model) {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
+		if(id == null) {
+			String msg="회원가입 후 이용 가능 합니다.";
+			model.addAttribute("msg",msg);
+			String location = "QnA";
+			model.addAttribute("location",location);
+			return "error/error";
+		}
 		System.out.println(id);
 		return "cs/QnAwrite";
 	}

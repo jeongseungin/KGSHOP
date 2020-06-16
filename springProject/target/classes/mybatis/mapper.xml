@@ -9,14 +9,16 @@
 </select>
 <!-- 회원가입 수정 -->
 <update id="updatedata" parameterType="com.care.DTO.MemberDTO">
-   update member set
-    pw=#{pw},
-    name=#{name},
-    email=#{email},
-    tel=#{tel},
-    addr=#{addr},
-    pw_answer=#{pw_answer}
-    where id=#{id}
+	update member set
+	 pw=#{pw},
+	 name=#{name},
+	 email=#{email},
+	 tel=#{tel},
+	 addr=#{addr},
+	 addr1=#{addr1},
+	 addr2=#{addr2},
+	 pw_answer=#{pw_answer}
+	 where id=#{id}
 </update>
 <!-- 아이디 중복체크 -->
 <select id="idChk" resultType="int">
@@ -28,14 +30,13 @@
       select id, pw from member where id=#{id} 
    </select>
 <!-- 회원가입 -->
-   <insert id="input" parameterType="com.care.DTO.MemberDTO">
-      insert into member values(#{id},#{pw},#{name},#{email},#{tel},#{addr},#{pw_answer})
-   </insert>
+	<insert id="input" parameterType="com.care.DTO.MemberDTO">
+		insert into member values(#{id},#{pw},#{name},#{email},#{tel},#{addr},#{addr1},#{addr2},#{pw_answer})
+	</insert>
 <!-- 상품등록  -->
 <insert id="saveproduct" parameterType="com.care.DTO.ProductnameDTO">
-      
       insert into productname values(
-      #{product_name_no},
+      product_name_no.nextval,
       #{product_category_no},
       #{product_name_title},
       #{product_name_detail},
@@ -46,62 +47,98 @@
       #{product_hit},
       #{product_hashtag}
       )
-   
 </insert>
-   <!-- 노트북상품목록 전체 검색 -->
-   <select id="NotebooklistAll" resultType="com.care.DTO.ProductnameDTO" >
-      select * from productname where product_category_no = 'notebook'
-   </select>
-   
-   <!-- 컴퓨터상품목록 전체 검색 -->
-   <select id="ComputerlistAll" resultType="com.care.DTO.ProductnameDTO">
-      select * from productname where product_category_no = 'computer'
-   </select>
-   
-   <!-- 모니터상품목록 전체 검색 -->
-   <select id="MoniterlistAll" resultType="com.care.DTO.ProductnameDTO">
-      select * from productname where product_category_no = 'moniter'
-   </select>
-   
-   <!-- 마우스상품목록 전체 검색 -->
-   <select id="MouselistAll" resultType="com.care.DTO.ProductnameDTO">
-      select * from productname where product_category_no = 'mouse'
-   </select>
-   
-   <!-- 스피커상품목록 전체 검색 -->
-   <select id="SpeakerlistAll" resultType="com.care.DTO.ProductnameDTO">
-      select * from productname where product_category_no = 'speaker'
-   </select>
-   
-   <!-- 그래픽카드상품목록 전체 검색 -->
-   <select id="GraphiccardlistAll" resultType="com.care.DTO.ProductnameDTO">
-      select * from productname where product_category_no = 'graphiccard'
-   </select>
-   
-   <!-- cpu상품목록 전체 검색 -->
-   <select id="CpulistAll" resultType="com.care.DTO.ProductnameDTO">
-      select * from productname where product_category_no = 'cpu'
-   </select>
-   
-   <!-- 메인보드상품목록 전체 검색 -->
-   <select id="MainboardlistAll" resultType="com.care.DTO.ProductnameDTO">
-      select * from productname where product_category_no = 'mainboard'
-   </select>
-   
-   <!-- 하드디스크상품목록 전체 검색 -->
-   <select id="HddlistAll" resultType="com.care.DTO.ProductnameDTO">
-      select * from productname where product_category_no = 'hdd'
-   </select>
-   
-   <!-- SDD상품목록 전체 검색 -->
-   <select id="SddlistAll" resultType="com.care.DTO.ProductnameDTO">
-      select * from productname where product_category_no = 'sdd'
-   </select>
-   
-   <!-- RAM상품목록 전체 검색 -->
-   <select id="RamlistAll" resultType="com.care.DTO.ProductnameDTO">
-      select * from productname where product_category_no = 'ram'
-   </select>
+
+<!-- 창훈 상품검색 및 상품목록 페이징처리 -->
+	
+	<!-- 카테고리 상품 총 개수 -->
+	<select id="productListCount" resultType="int">
+	SELECT COUNT(product_category_no)
+		  FROM productname
+		  where product_category_no = #{product_category_no}
+	</select>
+	
+	<!-- 전체상품 총개수 -->
+	<select id="productListCountAll" resultType="int">
+	SELECT COUNT(product_category_no)
+		  FROM productname
+		  WHERE 1=1
+		  <include refid="productSearch"></include>
+	</select>
+	
+	<!-- 카테고리 목록 페이징 -->
+	<select id="productListPage" resultType="com.care.DTO.ProductnameDTO">
+		SELECT  PRODUCT_NAME_NO, 
+            PRODUCT_CATEGORY_NO,
+		    PRODUCT_NAME_TITLE,
+	        PRODUCT_NAME_DETAIL, 
+	        PRODUCT_NAME_PRICE,
+            PRODUCT_NAME_IMAGE,
+            PRODUCT_THUMBNAIL,
+            PRODUCT_STOCK,
+            PRODUCT_HIT,
+            PRODUCT_HASHTAG
+		 FROM ( 
+		        SELECT 
+                    PRODUCT_NAME_NO, 
+                    PRODUCT_CATEGORY_NO,
+                    PRODUCT_NAME_TITLE, 
+                    PRODUCT_NAME_DETAIL, 
+                    PRODUCT_NAME_PRICE,
+                    PRODUCT_NAME_IMAGE,
+                    PRODUCT_THUMBNAIL,
+                    PRODUCT_STOCK,
+                    PRODUCT_HIT,
+                    PRODUCT_HASHTAG,
+	                ROW_NUMBER() OVER(ORDER BY PRODUCT_NAME_NO DESC) AS RNUM
+		         	FROM PRODUCTNAME where product_category_no = #{product_category_no}
+		                       ) MP
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY PRODUCT_NAME_NO DESC
+	</select>
+		<!-- 상품 전체 목록 페이징 -->
+	<select id="productListPageAll" resultType="com.care.DTO.ProductnameDTO">
+		SELECT  PRODUCT_NAME_NO, 
+            PRODUCT_CATEGORY_NO,
+		    PRODUCT_NAME_TITLE,
+	        PRODUCT_NAME_DETAIL, 
+	        PRODUCT_NAME_PRICE,
+            PRODUCT_NAME_IMAGE,
+            PRODUCT_THUMBNAIL,
+            PRODUCT_STOCK,
+            PRODUCT_HIT,
+            PRODUCT_HASHTAG
+		 FROM ( 
+		        SELECT 
+                    PRODUCT_NAME_NO, 
+                    PRODUCT_CATEGORY_NO,
+                    PRODUCT_NAME_TITLE, 
+                    PRODUCT_NAME_DETAIL, 
+                    PRODUCT_NAME_PRICE,
+                    PRODUCT_NAME_IMAGE,
+                    PRODUCT_THUMBNAIL,
+                    PRODUCT_STOCK,
+                    PRODUCT_HIT,
+                    PRODUCT_HASHTAG,
+	                ROW_NUMBER() OVER(ORDER BY PRODUCT_NAME_NO DESC) AS RNUM
+		         	FROM PRODUCTNAME
+		         	WHERE 1=1
+		         	<include refid="productSearch"></include>
+		                       ) MP
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY PRODUCT_NAME_NO DESC
+	</select>
+	
+	<!-- 상품 검색 기능-->
+	<sql id="productSearch">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">AND PRODUCT_NAME_TITLE LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'c'.toString()">AND PRODUCT_HASHTAG LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'w'.toString()">AND PRODUCT_HASHTAG LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'tc'.toString()">AND (PRODUCT_NAME_TITLE LIKE '%' || #{keyword} || '%') or (PRODUCT_HASHTAG LIKE '%' || #{keyword} || '%')</if>
+		</if>
+	</sql>
+  
    
    <!-- 상품 상세보기 -->
    <select id="Productlist" resultType="com.care.DTO.ProductnameDTO" parameterType="String">

@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
@@ -18,8 +18,9 @@
 </head>
 <body>
 
-<!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="home">KG SHOP</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +28,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
+           <li class="nav-item active">
           <c:choose>
           	  <c:when test="${id eq 'system'}"><a class="nav-link" href="#" >${id }님 환영합니다 
               <span class="sr-only">(current)</span></a>
@@ -35,9 +36,10 @@
               <c:when test="${empty id }"> <a class="nav-link" href="home">홈
               <span class="sr-only">(current)</span>
               </a></c:when>
-              <c:otherwise> <a class="nav-link" href="#" >${id }님 환영합니다 
+          	  <c:when test="${id eq id}"><a class="nav-link" href="#" >${id }님 환영합니다 
               <span class="sr-only">(current)</span>
-            </a></c:otherwise>
+              </a>
+              </c:when>       
           </c:choose>
            
             
@@ -53,7 +55,7 @@
          <c:choose>
           	  <c:when test="${id eq 'system'}"></c:when>
           	  <c:when test="${empty id }"></c:when>
-            <c:otherwise> <a class="nav-link" href="shoppingcart">장바구니</a></c:otherwise>
+            <c:otherwise> <a class="nav-link" href="shoppingcart?user_id=${id}">장바구니</a></c:otherwise>
              </c:choose>
           </li>
             
@@ -67,8 +69,6 @@
          		 </c:when>
           	  <c:otherwise><a class="nav-link" href="myPage">마이페이지</a></c:otherwise>    
             </c:choose>
-
-          </li>
           
           <li class="nav-item">
           	<c:choose>
@@ -76,12 +76,10 @@
           		  <c:otherwise>  <a class="nav-link" href="logout">로그아웃</a></c:otherwise>       
             </c:choose>
           </li>
-          
         </ul>
       </div>
     </div>
   </nav>
-
 
   <!-- Page Content -->
   <div class="container">
@@ -91,42 +89,41 @@
       <div class="col-lg-3">
 
       
-        <div class="list-group" style=position:fixed;>
+        <div class="list-group">
           <h1 class="my-4">Category</h1>
-          <a href="notebookproduct" class="list-group-item">노트북</a>
-          <a href="computerproduct" class="list-group-item">컴퓨터</a>
-          <a href="moniterproduct" class="list-group-item">모니터</a>
-          <a href="mouseproduct" class="list-group-item">마우스</a>
-          <a href="speakerproduct" class="list-group-item">스피커</a>
-          <a href="graphiccardproduct"class="list-group-item">그래픽카드</a>
-          <a href="cpuproduct" class="list-group-item">CPU</a>
-          <a href="mainboardproduct" class="list-group-item">메인보드</a>
-          <a href="hddproduct" class="list-group-item">하드디스크</a>
-          <a href="sddproduct" class="list-group-item">SDD</a>
-       
+          <a href="notebookproduct?product_category_no=notebook" class="list-group-item">노트북</a>
+          <a href="notebookproduct?product_category_no=computer" class="list-group-item">컴퓨터</a>
+          <a href="notebookproduct?product_category_no=moniter" class="list-group-item">모니터</a>
+          <a href="notebookproduct?product_category_no=mouse" class="list-group-item">마우스</a>
+          <a href="notebookproduct?product_category_no=speaker" class="list-group-item">스피커</a>
+          <a href="notebookproduct?product_category_no=graphiccard" class="list-group-item">그래픽카드</a>
+          <a href="notebookproduct?product_category_no=cpu" class="list-group-item">CPU</a>
+          <a href="notebookproduct?product_category_no=ram" class="list-group-item">램</a>
+          <a href="notebookproduct?product_category_no=mainboard" class="list-group-item">메인보드</a>
+          <a href="notebookproduct?product_category_no=hdd" class="list-group-item">하드디스크</a>
+          <a href="notebookproduct?product_category_no=sdd" class="list-group-item">SDD</a>
         </div>
-
       </div>
       <!-- /.col-lg-3 -->
 
-      <div class="col-lg-9">
+    <div class="col-lg-9">
 
         <br>
 
-        <div class="row">
+          <div class="row">
 		<c:forEach items="${notebooklists}" var="dto">
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="productview?product_name_no=${dto.product_name_no}"><img class="card-img-top" src="<spring:url value='/imgUpload/'/>${dto.product_thumbnail }" ></a>
+              <a href="productview?product_name_no=${dto.product_name_no}"><img style="width: 253px; height: 200px;" src="<spring:url value='/imgUpload/'/>${dto.product_thumbnail }" ></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a href="productview?product_name_no=${dto.product_name_no}">${dto.product_name_title}</a>
                 </h4>
-                <h5><fmt:formatNumber value="${dto.product_name_price}"  /> 원 </h5>
-                <p class="card-text"> ${dto.product_name_detail}</p>
+        	
+               
               </div>
               <div class="card-footer">
-            			  재고량 :  ${dto.product_stock} 개
+            			  <fmt:formatNumber value="${dto.product_name_price}"  /> 원
               </div>
             </div>
           </div>
@@ -142,6 +139,46 @@
 
   </div>
   <!-- /.container -->
+  		  <ul class="pagination">
+		    <c:if test="${pageMaker.prev}">
+		    	<li><a href="notebookproduct${pageMaker.makeSearch(pageMaker.startPage - 1)}&product_category_no=${product_category_no}">이전</a></li>
+		    </c:if> 
+			
+		    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+		    	<li <c:out value="${pageMaker.cri.page == idx ? 'class=info' : ''}"/>>
+		    	<a href="notebookproduct${pageMaker.makeSearch(idx)}&product_category_no=${product_category_no}">${idx}</a></li>
+		    </c:forEach>
+		
+		    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+		    	<li><a href="notebookproduct${pageMaker.makeSearch(pageMaker.endPage + 1)}&product_category_no=${product_category_no}">다음</a></li>
+		    </c:if> 
+		  </ul>
+	  <div class="search row">
+				<div class="col-xs-2 col-sm-2">
+				    <select name="searchType" class="form-control">
+				      <option value="n"<c:out value="${scri.searchType == null ? 'selected' : ''}"/>>-----</option>
+				      <option value="t"<c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>상품명</option>
+				      <option value="c"<c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>해시태그</option>
+				      <option value="tc"<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>상품명+해시태그</option>
+				    </select>
+				</div>
+				<div class="col-xs-3 col-sm-3">
+					<div class="input-group">
+				    	<input class="form-control" type="text" name="keyword" id="keywordInput" value="${scri.keyword}"/>
+				    	<span class="input-group-btn">
+				    		<button class="btn btn-default" id="searchBtn" type="button">검색</button>
+				    	</span>
+					</div>
+				</div>
+				    	
+			    <script>
+			      $(function(){
+			        $('#searchBtn').click(function() {
+			          self.location = "notebookproduct" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
+			        });
+			      });   
+			    </script>
+			 </div>
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">
