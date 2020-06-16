@@ -2,7 +2,7 @@ package com.care.controller;
 
 import org.springframework.stereotype.Controller;
 import java.io.File;
-
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.care.DTO.BannerDTO;
 import com.care.DTO.ProductnameDTO;
 
 import com.care.service.SaveProductService;
@@ -164,7 +166,44 @@ public class ProductNameController {
 		return "home";
 	}
 	
+	
+	@RequestMapping("viewbanner")
+	public String banner(Model model ) {
+		List<BannerDTO> view = service.viewbanner();
+		model.addAttribute("banner",view);	
+		return "shopping/viewbanner";
+	}
+	
 
+	@RequestMapping("Modifybanner")
+	public String Modifybanner(@RequestParam("banner_no") String banner_no,Model model) throws Exception {
+		
+		model.addAttribute("banner_no",banner_no);
+		return "shopping/modifybanner";
+	}
+	
+	
+	@RequestMapping(value = "Savebanner" ,method = RequestMethod.POST)
+public String Savebanner(BannerDTO dto, MultipartFile file,@RequestParam("banner_no") String banner_no) throws Exception {
+
+		String imgUploadPath = uploadPath + File.separator + "imgUpload";
+		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+		String fileName = null;
+
+		if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
+		 fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+		} else {
+		 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+		}
+		dto.setChange_no(banner_no);
+		dto.setBanner_image(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		service.savebanner(dto);
+	
+		
+		
+		
+		return "rediredt:home";
+	}
 	
 
 }

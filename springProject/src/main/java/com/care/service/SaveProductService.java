@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.care.DAO.ProductnameDAO;
+import com.care.DTO.BannerDTO;
 import com.care.DTO.DeletecartDTO;
 import com.care.DTO.DownStockDTO;
 import com.care.DTO.OrderlistDTO;
@@ -163,6 +164,18 @@ public void saveshoppingcart(ShoppingCartDTO dto) {
 		
 	}
 
+	public void savebanner(BannerDTO dto) {
+		dao.savebanner(dto);
+		
+	}
+
+	public List<BannerDTO> viewbanner() {
+		
+		return dao.viewbanner();
+	}
+
+
+	
 	
 
 	

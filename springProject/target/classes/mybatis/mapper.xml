@@ -336,6 +336,21 @@
 	<select id="vieworderlist" resultType="com.care.DTO.OrderlistDTO" parameterType="String">
 		select * from paylist where id = #{id}
 	</select>
+	
+	<!-- 배너 저장 -->
+	<update id="savebanner" parameterType="com.care.DTO.BannerDTO">
+		update  banner
+         set
+      banner_category =#{banner_category},
+      banner_image =#{banner_image}
+      where banner_no = #{change_no}
+
+	</update>
+	
+	<!--배너 불러오기 -->
+	<select id="viewbanner" resultType="com.care.DTO.BannerDTO" parameterType="String">
+		select * from banner 
+	</select>
 </mapper>
 
 

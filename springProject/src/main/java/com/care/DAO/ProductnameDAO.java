@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.care.DTO.BannerDTO;
 import com.care.DTO.DeletecartDTO;
 import com.care.DTO.DownStockDTO;
 import com.care.DTO.OrderlistDTO;
@@ -181,6 +182,21 @@ public class ProductnameDAO {
 	
 		return sqlSession.selectList(namespace+".vieworderlist",id);
 	}
+
+
+	public void savebanner(BannerDTO dto) {
+		sqlSession.update(namespace+".savebanner",dto);
+		
+	}
+
+
+	public List<BannerDTO> viewbanner() {
+		
+		return sqlSession.selectList(namespace+".viewbanner");
+	}
+
+
+
 
 
 	
