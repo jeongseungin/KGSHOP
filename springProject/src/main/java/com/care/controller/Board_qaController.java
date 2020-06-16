@@ -61,6 +61,8 @@ public class Board_qaController {
 		if(id == null) {
 			String msg="회원가입 후 이용 가능 합니다.";
 			model.addAttribute("msg",msg);
+			String location = "QnA";
+			model.addAttribute("location",location);
 			return "error/error";
 		}
 		System.out.println(id);

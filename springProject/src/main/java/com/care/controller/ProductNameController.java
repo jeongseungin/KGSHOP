@@ -146,8 +146,10 @@ public class ProductNameController {
 		HttpSession session = request.getSession();	
 		String id = (String) session.getAttribute("id");
 		if(id==null) {
-			String error = "회원가입 후 이용";
-			model.addAttribute("error",error);
+			String msg = "회원가입 후 이용 가능 합니다.";
+			model.addAttribute("msg",msg);
+			String location = "notebookproduct";
+			model.addAttribute("location",location);
 			return "error/error";
 		}
 		model.addAttribute("productlist",view);

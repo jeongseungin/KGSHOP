@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 <script>
 	var msg = '${msg}';
+	var error = '${error}';
 	alert(msg);
-	history.back();
+	location.href="${location}";
 </script>
 
 

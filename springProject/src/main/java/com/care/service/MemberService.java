@@ -23,10 +23,15 @@ public class MemberService {
 	}
 
 	public void savedata(MemberDTO dto) {
-		dao.savedata(dto);
+		int result = 0;
+		if(result==0) {
+			dao.savedata(dto);
+		}
+		
 	}
 
-	public MemberDTO logincheck(MemberDTO dto) throws Exception{		
+	public MemberDTO logincheck(MemberDTO dto) throws Exception{
+	
 		return dao.logincheck(dto);
 	}
 

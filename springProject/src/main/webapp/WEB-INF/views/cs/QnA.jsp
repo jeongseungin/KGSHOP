@@ -121,7 +121,7 @@ li {
 						
 						<td>
 						<c:choose>
-						<c:when test="${empty id}"><a href="qaerror"><c:out value="${list.qa_subject}" /></a></c:when>
+						<c:when test="${empty id}"><a href="QnAwrite"><c:out value="${list.qa_subject}" /></a></c:when>
 						<c:otherwise>
 							<a href="QnAreadView?qa_seq=${list.qa_seq}
 							&page=${scri.page}
