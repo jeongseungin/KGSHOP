@@ -31,11 +31,12 @@
    <insert id="input" parameterType="com.care.DTO.MemberDTO">
       insert into member values(#{id},#{pw},#{name},#{email},#{tel},#{addr},#{pw_answer})
    </insert>
+
+
 <!-- 상품등록  -->
 <insert id="saveproduct" parameterType="com.care.DTO.ProductnameDTO">
-      
       insert into productname values(
-      #{product_name_no},
+      product_name_no.nextval,
       #{product_category_no},
       #{product_name_title},
       #{product_name_detail},
@@ -46,22 +47,57 @@
       #{product_hit},
       #{product_hashtag}
       )
-   
 </insert>
 
 	<!-- 창훈 상품검색 및 상품목록 페이징처리 -->
 	
-	<!-- 상품 총 개수 -->
+	<!-- 카테고리 상품 총 개수 -->
 	<select id="productListCount" resultType="int">
-	SELECT COUNT(product_name_no)
+	SELECT COUNT(product_category_no)
+		  FROM productname
+		  where product_category_no = #{product_category_no}
+	</select>
+	
+	<!-- 전체상품 총개수 -->
+	<select id="productListCountAll" resultType="int">
+	SELECT COUNT(product_category_no)
 		  FROM productname
 		  WHERE 1=1
 		  <include refid="productSearch"></include>
-		  AND product_name_no > 0
 	</select>
 	
-	<!-- 상품 목록 페이징 -->
-	<select id="productListPage" resultType="com.care.DTO.ProductnameDTO" parameterType="com.care.DTO.Board_qaSearchCriteria">
+	<!-- 카테고리 목록 페이징 -->
+	<select id="productListPage" resultType="com.care.DTO.ProductnameDTO">
+		SELECT  PRODUCT_NAME_NO, 
+            PRODUCT_CATEGORY_NO,
+		    PRODUCT_NAME_TITLE,
+	        PRODUCT_NAME_DETAIL, 
+	        PRODUCT_NAME_PRICE,
+            PRODUCT_NAME_IMAGE,
+            PRODUCT_THUMBNAIL,
+            PRODUCT_STOCK,
+            PRODUCT_HIT,
+            PRODUCT_HASHTAG
+		 FROM ( 
+		        SELECT 
+                    PRODUCT_NAME_NO, 
+                    PRODUCT_CATEGORY_NO,
+                    PRODUCT_NAME_TITLE, 
+                    PRODUCT_NAME_DETAIL, 
+                    PRODUCT_NAME_PRICE,
+                    PRODUCT_NAME_IMAGE,
+                    PRODUCT_THUMBNAIL,
+                    PRODUCT_STOCK,
+                    PRODUCT_HIT,
+                    PRODUCT_HASHTAG,
+	                ROW_NUMBER() OVER(ORDER BY PRODUCT_NAME_NO DESC) AS RNUM
+		         	FROM PRODUCTNAME where product_category_no = #{product_category_no}
+		                       ) MP
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY PRODUCT_NAME_NO DESC
+	</select>
+		<!-- 상품 전체 목록 페이징 -->
+	<select id="productListPageAll" resultType="com.care.DTO.ProductnameDTO">
 		SELECT  PRODUCT_NAME_NO, 
             PRODUCT_CATEGORY_NO,
 		    PRODUCT_NAME_TITLE,
@@ -89,13 +125,12 @@
 		         	WHERE 1=1
 		         	<include refid="productSearch"></include>
 		                       ) MP
-		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd} and PRODUCT_CATEGORY_NO = 'notebook'
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
 		ORDER BY PRODUCT_NAME_NO DESC
 	</select>
 	
-	<!-- 상품 검색 -->
+	<!-- 상품 검색 기능-->
 	<sql id="productSearch">
-	
 		<if test="searchType != null">
 			<if test="searchType == 't'.toString()">AND PRODUCT_NAME_TITLE LIKE '%' || #{keyword} || '%'</if>
 			<if test="searchType == 'c'.toString()">AND PRODUCT_HASHTAG LIKE '%' || #{keyword} || '%'</if>

@@ -4,7 +4,14 @@ public class Board_qaSearchCriteria extends Board_qaCriteria{
 	
 	private String searchType = "";
 	private String keyword = "";
+	private String product_category_no;
 	 
+	public String getProduct_category_no() {
+		return product_category_no;
+	}
+	public void setProduct_category_no(String product_category_no) {
+		this.product_category_no = product_category_no;
+	}
 	public String getSearchType() {
 		return searchType;
 	}

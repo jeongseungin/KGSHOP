@@ -3,6 +3,7 @@ package com.care.controller;
 import org.springframework.stereotype.Controller;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.mail.Session;
@@ -45,6 +46,7 @@ public class ProductNameController {
 	//노트북 카테고리 조회(카테고리 통합예정) if문으로 
 	@RequestMapping("notebookproduct")
 	public String notebookproduct(Model model, Board_qaSearchCriteria scri) {
+		System.out.println(scri.getProduct_category_no());
 		
 		model.addAttribute("notebooklists",service.notebookproductview(scri));
 		
@@ -53,7 +55,7 @@ public class ProductNameController {
 		pageMaker.setTotalCount(service.productListCount(scri));
 		
 		model.addAttribute("pageMaker", pageMaker);
-		
+		model.addAttribute("product_category_no",scri.getProduct_category_no());
 		return "category/notebook/notebookproduct";
 	}
 	

@@ -17,13 +17,10 @@
 
   <!-- Custom styles for this template -->
   <link href="./resources/css/shop-homepage.css" rel="stylesheet">
- 
+
 </head>
 <body>
-<script type="text/javascript">
-	var naverid = localStorage.getItem('naverId');
-	console.log(naverid);
-</script>
+
 
  <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -36,15 +33,16 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
           <c:choose>
-          	  <c:when test="${id eq 'system'}"><a class="nav-link" href="#" >${id }님 환영합니다 
+               <c:when test="${id eq 'system'}"><a class="nav-link" href="#" >${id }님 환영합니다 
               <span class="sr-only">(current)</span></a>
               </c:when>
               <c:when test="${empty id }"> <a class="nav-link" href="home">홈
               <span class="sr-only">(current)</span>
               </a></c:when>
-              <c:otherwise> <a class="nav-link" href="#" >${id }님 환영합니다 
+               <c:when test="${id eq id}"><a class="nav-link" href="#" >${id }님 환영합니다 
               <span class="sr-only">(current)</span>
-            </a></c:otherwise>
+              </a>
+              </c:when>       
           </c:choose>
            
             
@@ -58,32 +56,27 @@
           
          <li class="nav-item">
          <c:choose>
-          	  <c:when test="${id eq 'system'}"></c:when>
-          	  <c:when test="${empty id }"></c:when>
-            <c:otherwise> <a class="nav-link" href="shoppingcart?user_id=${id}">장바구니</a></c:otherwise>
+               <c:when test="${id eq 'system'}"></c:when>
+               <c:when test="${empty id }"></c:when>
+            <c:otherwise> <a class="nav-link" href="shoppingcart">장바구니</a></c:otherwise>
              </c:choose>
           </li>
             
            <li class="nav-item">
 
    
-      	    <c:choose>
-          	  <c:when test="${id eq 'system'}"><a class="nav-link" href="myPage">관리자페이지</a></c:when>
-          	   <c:when test="${empty id }"> 
-            	<a class="nav-link" href="bootMember">회원가입</a>
-         		 </c:when>
-          	  <c:otherwise><a class="nav-link" href="myPage">마이페이지</a></c:otherwise>    
+             <c:choose>
+               <c:when test="${id eq 'system'}"><a class="nav-link" href="myPage">관리자페이지</a></c:when>
+                <c:when test="${empty id }"> 
+               <a class="nav-link" href="bootMember">회원가입</a>
+                </c:when>
+               <c:otherwise><a class="nav-link" href="myPage">마이페이지</a></c:otherwise>    
             </c:choose>
-        
-
-            <a class="nav-link" href="shoppingcart?user_id=${id}">장바구니</a>
-
-          </li>
           
           <li class="nav-item">
-          	<c:choose>
-          		  <c:when test="${empty id }"> <a class="nav-link" href="bootlogin">로그인</a> </c:when>
-          		  <c:otherwise>  <a class="nav-link" href="logout">로그아웃</a></c:otherwise>       
+             <c:choose>
+                  <c:when test="${empty id }"> <a class="nav-link" href="bootlogin">로그인</a> </c:when>
+                  <c:otherwise>  <a class="nav-link" href="logout">로그아웃</a></c:otherwise>       
             </c:choose>
           </li>
           
@@ -101,16 +94,17 @@
 
         <h1 class="my-4">Category</h1>
         <div class="list-group">
-         <a href="notebookproduct" class="list-group-item">노트북</a>
-          <a href="#" class="list-group-item">컴퓨터</a>
-          <a href="#" class="list-group-item">모니터</a>
-          <a href="#" class="list-group-item">마우스</a>
-          <a href="#" class="list-group-item">스피커</a>
-          <a href="#" class="list-group-item">그래픽카드</a>
-          <a href="#" class="list-group-item">CPU</a>
-          <a href="#" class="list-group-item">메인보드</a>
-          <a href="#" class="list-group-item">하드디스크</a>
-          <a href="#" class="list-group-item">SDD</a>
+         <a href="notebookproduct?product_category_no=notebook" class="list-group-item">노트북</a>
+          <a href="notebookproduct?product_category_no=computer" class="list-group-item">컴퓨터</a>
+          <a href="notebookproduct?product_category_no=moniter" class="list-group-item">모니터</a>
+          <a href="notebookproduct?product_category_no=mouse" class="list-group-item">마우스</a>
+          <a href="notebookproduct?product_category_no=speaker" class="list-group-item">스피커</a>
+          <a href="notebookproduct?product_category_no=graphiccard" class="list-group-item">그래픽카드</a>
+          <a href="notebookproduct?product_category_no=cpu" class="list-group-item">CPU</a>
+          <a href="notebookproductt?product_category_no=ram" class="list-group-item">램</a>
+          <a href="notebookproduct?product_category_no=mainboard" class="list-group-item">메인보드</a>
+          <a href="notebookproduct?product_category_no=hdd" class="list-group-item">하드디스크</a>
+          <a href="notebookproduct?product_category_no=sdd" class="list-group-item">SDD</a>
         </div>
 
       </div>
@@ -254,7 +248,13 @@
 
   </div>
   <!-- /.container -->
-
+ <script type="text/javascript">
+ function init() {
+       var val = localStorage.getItem('naverId');
+      document.querySelector("#naverresult").innerHTML = val;
+   }
+   
+</script>
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">

@@ -23,14 +23,14 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="/">KG SHOP</a>
+      <a class="navbar-brand" href="home">KG SHOP</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/">홈
+            <a class="nav-link" href="home">홈
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -59,26 +59,24 @@
       <div class="col-lg-3">
 
       
-        <div class="list-group" style=position:fixed;>
+        <div class="list-group">
           <h1 class="my-4">Category</h1>
-          <a href="notebookproduct" class="list-group-item">노트북</a>
-          <a href="computerproduct" class="list-group-item">컴퓨터</a>
-          <a href="moniterproduct" class="list-group-item">모니터</a>
-          <a href="mouseproduct" class="list-group-item">마우스</a>
-          <a href="speakerproduct" class="list-group-item">스피커</a>
-          <a href="graphiccardproduct"class="list-group-item">그래픽카드</a>
-          <a href="cpuproduct" class="list-group-item">CPU</a>
-          <a href="mainboardproduct" class="list-group-item">메인보드</a>
-          <a href="hddproduct" class="list-group-item">하드디스크</a>
-          <a href="sddproduct" class="list-group-item">SDD</a>
-       
+          <a href="notebookproduct?product_category_no=notebook" class="list-group-item">노트북</a>
+          <a href="notebookproduct?product_category_no=computer" class="list-group-item">컴퓨터</a>
+          <a href="notebookproduct?product_category_no=moniter" class="list-group-item">모니터</a>
+          <a href="notebookproduct?product_category_no=mouse" class="list-group-item">마우스</a>
+          <a href="notebookproduct?product_category_no=speaker" class="list-group-item">스피커</a>
+          <a href="notebookproduct?product_category_no=graphiccard" class="list-group-item">그래픽카드</a>
+          <a href="notebookproduct?product_category_no=cpu" class="list-group-item">CPU</a>
+          <a href="notebookproduct?product_category_no=ram" class="list-group-item">램</a>
+          <a href="notebookproduct?product_category_no=mainboard" class="list-group-item">메인보드</a>
+          <a href="notebookproduct?product_category_no=hdd" class="list-group-item">하드디스크</a>
+          <a href="notebookproduct?product_category_no=sdd" class="list-group-item">SDD</a>
         </div>
-
       </div>
       <!-- /.col-lg-3 -->
 
       <div class="col-lg-9">
-
         <br>
 
         <div class="row">
@@ -112,16 +110,16 @@
   <!-- /.container -->
   		  <ul class="pagination">
 		    <c:if test="${pageMaker.prev}">
-		    	<li><a href="notebookproduct${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
+		    	<li><a href="notebookproduct${pageMaker.makeSearch(pageMaker.startPage - 1)}&product_category_no=${product_category_no}">이전</a></li>
 		    </c:if> 
 			
 		    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
 		    	<li <c:out value="${pageMaker.cri.page == idx ? 'class=info' : ''}"/>>
-		    	<a href="notebookproduct${pageMaker.makeSearch(idx)}">${idx}</a></li>
+		    	<a href="notebookproduct${pageMaker.makeSearch(idx)}&product_category_no=${product_category_no}">${idx}</a></li>
 		    </c:forEach>
 		
 		    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-		    	<li><a href="notebookproduct${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
+		    	<li><a href="notebookproduct${pageMaker.makeSearch(pageMaker.endPage + 1)}&product_category_no=${product_category_no}">다음</a></li>
 		    </c:if> 
 		  </ul>
 		  

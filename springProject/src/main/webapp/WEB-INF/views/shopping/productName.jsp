@@ -8,19 +8,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script >
 function product_write() {
-	var product_name_no = document.getElementById("product_name_no");
 	var	product_name_title =  document.getElementById("product_name_title");
 	var	product_stock =  document.getElementById("product_stock");
 	var	product_name_price =  document.getElementById("product_name_price");
 	var product_name_detail =  document.getElementById("product_name_detail");
 	var product_images =  document.getElementById("product_images");
     	
-		if(product_name_no.value == ""){
-			alert("상품고유번호 을 입력하세요")
-			productName.product_name_no.focus();
-			return false;
-		}
-		else if(product_name_title.value == "") {
+		
+		if(product_name_title.value == "") {
 			alert("상품명을 입력하세요")
 			productName.product_name_title.focus();
 			return false;
@@ -55,10 +50,6 @@ function product_write() {
 			<tr>
 				<th colspan="2">상품 등록 </th>
 			</tr>
-			  <tr>
-				<td>상품 고유번호</td>
-				<td><input type="text" name="product_name_no" id="product_name_no" ></td>
-			 </tr>
 			<tr>
 				<td>상품 카테고리</td>
 				<td>
