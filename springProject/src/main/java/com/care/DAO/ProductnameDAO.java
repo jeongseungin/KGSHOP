@@ -25,6 +25,7 @@ public class ProductnameDAO {
 	}
 
 
+	
 	public List<ProductnameDTO> topviewproduct()  {
 	 return sqlSession.selectList(namespace+ ".ToplistAll");
 	}
