@@ -42,6 +42,7 @@ import com.care.service.CommonService;
 import com.care.service.MemberService;
 import com.care.template.Constants;
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.github.scribejava.core.model.Response;
 
 import jdk.nashorn.internal.parser.JSONParser;
 
@@ -68,9 +69,15 @@ public class MemberController {
 	}
 	//로그인
 	@RequestMapping(value="chkUser", method=RequestMethod.POST)
-	public String chkUser(MemberDTO dto,HttpServletRequest request, HttpSession session,Model model) throws Exception {
+	public String chkUser(MemberDTO dto,HttpServletRequest request ,Model model) throws Exception {
+		HttpSession session;
+		session = request.getSession();
+		
 		String id = request.getParameter("id");		
 		String pw = request.getParameter("pw");
+		
+//		String naverId = (String) session.getAttribute("naverId");
+//		System.out.println(naverId);
 		
  		MemberDTO dto1 = null;
 		dto1 = member.logincheck(dto);
@@ -79,8 +86,7 @@ public class MemberController {
 		
 		try {
 			if(dto1.getId().equals(id) && pwdEncoder.matches(pw, dto1.getPw())) {	
-				session.setAttribute("id", request.getParameter("id"));
-				session.setAttribute("pw", request.getParameter("pw"));
+				session.setAttribute("id",id);
 				return "redirect:home";
 			}
 		} catch (Exception e) {
@@ -92,15 +98,14 @@ public class MemberController {
 
 	//회원 가입 (비밀번호 암호화)
 	@RequestMapping(value="chkRegister", method=RequestMethod.POST)
-	public String chkRegister(MemberDTO dto, HttpServletRequest request) throws Exception {
-		String addr = request.getParameter("addr");
-		String addr1 = request.getParameter("addr1");
-		String addr2 = request.getParameter("addr2");
-		dto.setAddr(addr+addr1+addr2);
+	public String chkRegister(MemberDTO dto, HttpServletRequest request,Model model) throws Exception {
+		Response response;
 		int result = member.idChk(dto);
 		try {
 			if(result==1) {
-				return "member/bootMember";
+				String regierror = "가입 실패입니다";
+				model.addAttribute("regierror",regierror);
+				return "error/regierror";		
 			}else if(result==0) {
 				String encoder = pwdEncoder.encode(dto.getPw());
 				System.out.println(encoder);
@@ -122,31 +127,34 @@ public class MemberController {
 		return result;
 	}
 
-	@RequestMapping("successloginManager")
-	public String successloginManager() {
-		return "member/successloginManager";
-	}
-
 	//회원수정
 	@RequestMapping("updatedata")
-	public String updatedata(MemberDTO dto,HttpServletRequest request) throws SQLException {
+	public String updatedata(MemberDTO dto,HttpServletRequest request,Model model) throws SQLException {
 		
 		HttpSession session = request.getSession();
 		
 		String id = (String) session.getAttribute("id");
-		System.out.println("세션 스트링값" + id);
-		
-		String addr = request.getParameter("addr");
-		String addr1 = request.getParameter("addr1");
-		String addr2 = request.getParameter("addr2");
+	
 		dto.setId(id);
-		System.out.println("세션 주소 값 : "+addr+addr1+addr2);
-		dto.setAddr(addr+addr1+addr2);
-
-		member.execute(dto);
 		
-		return "redirect:successlogin";
+		int result = 0;
+		try {
+			if(result==0) {
+				String encoder = pwdEncoder.encode(dto.getPw());
+				System.out.println(encoder);
+				dto.setPw(encoder);
+				member.execute(dto);		
+			}else if(result==1){
+				String modifyerror = "에러입니다";
+				model.addAttribute("modifyerror",modifyerror);
+				return "error/modifyerror";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		return "redirect:home";
 	}
+	
 	@RequestMapping("logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
@@ -162,12 +170,7 @@ public class MemberController {
 	public String bootMember() {
 		return "member/bootMember";
 	}
-	
-	@RequestMapping("successlogin")
-	public String successlogin(HttpServletRequest request) {
-		
-		return "member/successlogin";
-	}
+
 	@RequestMapping("home")
 	public String logout() {
 		return "home";
@@ -175,9 +178,9 @@ public class MemberController {
 
 	@RequestMapping("bootMemberModify")
 	public String bootMemberModify(MemberDTO dto,HttpServletRequest request,Model model) throws Exception {		
-		HttpSession session = request.getSession();		
+		HttpSession session = request.getSession();	
 		String id = (String) session.getAttribute("id");
-	
+		
 		model.addAttribute("list",member.list(id));
 		
 		return "member/bootMemberModify";
@@ -186,10 +189,7 @@ public class MemberController {
 	public String myPage(HttpServletRequest request) {
 		return "member/myPage";
 	}
-	@RequestMapping("index")
-	public String idex() {
-		return "member/index";
-	}
+	
 	@RequestMapping("chklogin")
 	public String login() {
 		return "member/chklogin";
@@ -199,4 +199,26 @@ public class MemberController {
 	
 		return "member/chkcallback";
 	}
+	@RequestMapping("error")
+	public String error() {
+		return "error/error";
+	}
+	@RequestMapping("regierror")
+	public String regierror() {
+		return "error/regierror";
+	}
+	@RequestMapping("modifyerror")
+	public String modifyerror() {
+		return "error/modifyerror";
+	}
+	@RequestMapping("qaerror")
+	public String qaerror() {
+		return "error/qaerror";
+	}
+	@RequestMapping("qaerror2")
+	public String qaerror2() {
+		return "error/qaerror2";
+	}
+	
+	
 }

@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.care.DTO.Board_qaPageMaker;
+import com.care.DTO.Board_qaSearchCriteria;
 import com.care.DTO.ProductnameDTO;
 import com.care.DTO.ShoppingCartDTO;
 import com.care.service.SaveProductService;
@@ -38,11 +41,23 @@ public class ProductNameController {
 		return "category/top/topproduct";
 	}
 	
+	
+	//노트북 카테고리 조회(카테고리 통합예정) if문으로 
 	@RequestMapping("notebookproduct")
-	public String notebookproduct(Model model) {
-		service.notebookproductview(model);
+	public String notebookproduct(Model model, Board_qaSearchCriteria scri) {
+		
+		model.addAttribute("notebooklists",service.notebookproductview(scri));
+		
+		Board_qaPageMaker pageMaker = new Board_qaPageMaker();
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(service.productListCount(scri));
+		
+		model.addAttribute("pageMaker", pageMaker);
+		
 		return "category/notebook/notebookproduct";
 	}
+	
+	
 	
 	@RequestMapping("computerproduct")
 	public String computerproduct(Model model) {
@@ -125,10 +140,16 @@ public class ProductNameController {
 	}
 
 	@RequestMapping("productview")
-	public String productview(@RequestParam("product_name_no") String product_name_no, Model model) {
+	public String productview(@RequestParam("product_name_no") String product_name_no, Model model,HttpServletRequest request) {
 		upHit(product_name_no);
 		ProductnameDTO view = service.productview(product_name_no);
-		
+		HttpSession session = request.getSession();	
+		String id = (String) session.getAttribute("id");
+		if(id==null) {
+			String error = "회원가입 후 이용";
+			model.addAttribute("error",error);
+			return "error/error";
+		}
 		model.addAttribute("productlist",view);
 		return "category/productview/view";
 	}
@@ -166,32 +187,8 @@ public class ProductNameController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "SaveshoppingCart" ,method = RequestMethod.POST)
-	public String SaveshoppingCart(ShoppingCartDTO dto,HttpServletRequest request) {
-		HttpSession session ;
-		session = request.getSession();;
-		String id = (String) session.getAttribute("id");
-		dto.setId(id); //여기에 로그인한 세션값 넣어주면됩니다
-		
-		service.saveshoppingcart(dto);
-		return "home";
-		 
-	}
-	@RequestMapping("shoppingcart")
-	public String shoppingcart(@RequestParam("user_id") String user_id,Model model) {
-		//장바구니 누르면 로그인 세션값 같이 넘겨서 사용
-		
-		List<ShoppingCartDTO> view =service.viewshoppingcart(user_id);
-		model.addAttribute("shoppingcart",view);
-		
-		return "shopping/shoppingCart";
-	}
-	@RequestMapping("productview/view2")
-	public String view2(@RequestParam("product_name_no") String product_name_no, Model model) {
-		upHit(product_name_no);
-		ProductnameDTO view = service.productview(product_name_no);
-		
-		model.addAttribute("productlist",view);
-		return "category/productview/view2";
-	}
+
+	
+
 }
+

@@ -6,6 +6,7 @@ public class ShoppingCartDTO {//장바구니에 대한 클래스
 	private String product_name_title; // 상품명
 	private int product_name_price; // 가격
 	private int product_count;  //수량
+
 	
 	public String getId() {
 		return id;

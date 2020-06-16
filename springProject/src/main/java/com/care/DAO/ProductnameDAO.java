@@ -4,6 +4,12 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.care.DTO.Board_qaSearchCriteria;
+import com.care.DTO.DeletecartDTO;
+import com.care.DTO.DownStockDTO;
+import com.care.DTO.OrderlistDTO;
+import com.care.DTO.OrdersDTO;
 import com.care.DTO.ProductnameDTO;
 import com.care.DTO.ShoppingCartDTO;
 
@@ -26,9 +32,14 @@ public class ProductnameDAO {
 	 return sqlSession.selectList(namespace+ ".ToplistAll");
 	}
 
-
-	public List<ProductnameDTO> notebookproductview() {
-		return sqlSession.selectList(namespace+ ".NotebooklistAll");
+	//카테고리 목록 조회
+	public List<ProductnameDTO> notebookproductview(Board_qaSearchCriteria scri) {
+		return sqlSession.selectList(namespace+ ".productListPage", scri);
+		//return sqlSession.selectList(namespace+ ".NotebooklistAll");
+	}
+	//카테고리 총 개수
+	public int productListCount(Board_qaSearchCriteria scri) {
+		return sqlSession.selectOne(namespace+".productListCount", scri);
 	}
 
 
@@ -124,10 +135,74 @@ public class ProductnameDAO {
 	}
 
 
-	public List<ShoppingCartDTO> viewshoppingcart(String user_id) {
+	public List<ShoppingCartDTO> viewshoppingcart(String id) {
 		
-		return sqlSession.selectList(namespace+ ".viewshoppingcart",user_id);
+		return sqlSession.selectList(namespace+ ".viewshoppingcart",id);
 	}
+
+
+	public ProductnameDTO orderview(String product_name_title) {
+		return sqlSession.selectOne(namespace+ ".orderview",product_name_title);
+	}
+
+
+	public void saveorders(OrdersDTO dto) {
+		 sqlSession.insert(namespace+".saveorders",dto);
+		
+	}
+
+
+	public List<OrdersDTO> pay(String id) {
+		
+		return sqlSession.selectList(namespace+".pay",id);
+	}
+
+
+	public void deletecart(DeletecartDTO dto) {
+	 sqlSession.delete(namespace+".deletecart",dto);
+	 
+		
+	}
+
+
+	public void saveorderlist(DeletecartDTO dto) {
+		sqlSession.insert(namespace+".saveorderlist",dto);
+		
+	}
+
+
+	public void deletepay(String product_name_title) {
+		sqlSession.delete(namespace+".deletepay",product_name_title);
+		
+	}
+
+
+	public void downstock(DownStockDTO downdto) {
+		sqlSession.update(namespace+".downstock",downdto);
+		
+	}
+
+
+	public List<OrderlistDTO> vieworderlist(String id) {
+	
+		return sqlSession.selectList(namespace+".vieworderlist",id);
+	}
+
+
+	
+
+
+	
+
+	
+
+
+	
+
+
+
+	
+
 
 
 	

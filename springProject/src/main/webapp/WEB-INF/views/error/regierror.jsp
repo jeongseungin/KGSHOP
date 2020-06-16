@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	var regierror = '${regierror}';
+	alert(regierror);
+	history.back();
+</script>
 </head>
 <body>
 

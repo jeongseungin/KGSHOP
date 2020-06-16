@@ -202,7 +202,7 @@ function sample6_execDaumPostcode() {
 				<div class="form-group" id="divPhoneNumber">
                     <label for="inputPhoneNumber" class="col-lg-2 control-label">참고항목</label>	
                     <div class="col-lg-10">
-                        <input type="tel" class="form-control onlyNumber" data-rule-required="true" placeholder="참고항목" maxlength="11"  id="sample6_extraAddress">
+                        <input type="text"  class="post2" data-rule-required="true" placeholder="참고항목" maxlength="11"  id="sample6_extraAddress">
                     </div>
                 </div>
 				

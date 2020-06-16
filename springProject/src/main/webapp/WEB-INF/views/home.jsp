@@ -48,7 +48,7 @@
             
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Q&A게시판</a>
+            <a class="nav-link" href="QnA">Q&A게시판</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="">리뷰게시판</a>
@@ -58,7 +58,7 @@
          <c:choose>
           	  <c:when test="${id eq 'system'}"></c:when>
           	  <c:when test="${empty id }"></c:when>
-            <c:otherwise> <a class="nav-link" href="shoppingcart?user_id=${id}">장바구니</a></c:otherwise>
+            <c:otherwise> <a class="nav-link" href="shoppingcart">장바구니</a></c:otherwise>
              </c:choose>
           </li>
             
@@ -95,15 +95,16 @@
         <h1 class="my-4">Category</h1>
         <div class="list-group">
          <a href="notebookproduct" class="list-group-item">노트북</a>
-          <a href="#" class="list-group-item">컴퓨터</a>
-          <a href="#" class="list-group-item">모니터</a>
-          <a href="#" class="list-group-item">마우스</a>
-          <a href="#" class="list-group-item">스피커</a>
-          <a href="#" class="list-group-item">그래픽카드</a>
-          <a href="#" class="list-group-item">CPU</a>
-          <a href="#" class="list-group-item">메인보드</a>
-          <a href="#" class="list-group-item">하드디스크</a>
-          <a href="#" class="list-group-item">SDD</a>
+          <a href="computerproduct" class="list-group-item">컴퓨터</a>
+          <a href="moniterproduct" class="list-group-item">모니터</a>
+          <a href="mouseproduct" class="list-group-item">마우스</a>
+          <a href="speakerproduct" class="list-group-item">스피커</a>
+          <a href="graphiccardproduct" class="list-group-item">그래픽카드</a>
+          <a href="cpuproduct" class="list-group-item">CPU</a>
+          <a href="ramproduct" class="list-group-item">램</a>
+          <a href="mainboardproduct" class="list-group-item">메인보드</a>
+          <a href="hddproduct" class="list-group-item">하드디스크</a>
+          <a href="sddproduct" class="list-group-item">SDD</a>
         </div>
 
       </div>

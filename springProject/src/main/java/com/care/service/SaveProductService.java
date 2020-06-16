@@ -7,6 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.care.DAO.ProductnameDAO;
+import com.care.DTO.Board_qaSearchCriteria;
+import com.care.DTO.DeletecartDTO;
+import com.care.DTO.DownStockDTO;
+import com.care.DTO.OrderlistDTO;
+import com.care.DTO.OrdersDTO;
 import com.care.DTO.ProductnameDTO;
 import com.care.DTO.ShoppingCartDTO;
 
@@ -24,9 +29,13 @@ public class SaveProductService {
 		model.addAttribute("toplists",dao.topviewproduct());
 	}
 
-	public void notebookproductview(Model model) {
-		model.addAttribute("notebooklists",dao.notebookproductview());
-		
+	//카테고리 목록
+	public List<ProductnameDTO> notebookproductview(Board_qaSearchCriteria scri) {
+		return dao.notebookproductview(scri);
+	}
+	//카테고리 총 개수
+	public int productListCount(Board_qaSearchCriteria scri) {
+		return dao.productListCount(scri);
 	}
 
 	public void computerproductview(Model model) {
@@ -109,10 +118,65 @@ public void saveshoppingcart(ShoppingCartDTO dto) {
 		
 	}
 
-	public List<ShoppingCartDTO> viewshoppingcart(String user_id) {
+	public List<ShoppingCartDTO> viewshoppingcart(String id) {
 		
-		return dao.viewshoppingcart(user_id);
+		return dao.viewshoppingcart(id);
 	}
+
+	
+
+	public ProductnameDTO orderview(String product_name_title) {
+		
+		return dao.orderview(product_name_title);
+	}
+
+	public void saveorders(OrdersDTO dto) {
+		
+		dao.saveorders(dto);
+		
+	}
+
+	public List<OrdersDTO> pay(String id) {
+		
+		return dao.pay(id);
+	}
+
+	public void deletecart(DeletecartDTO dto) {
+		
+		dao.deletecart(dto);
+		
+	}
+
+	public void Saveorderlist(DeletecartDTO dto) {
+		dao.saveorderlist(dto);
+		
+	}
+
+	public void deletepay(String product_name_title) {
+		dao.deletepay(product_name_title);
+		
+	}
+
+	public void downstock(DownStockDTO downdto) {
+		dao.downstock(downdto);
+		
+	}
+
+	public List<OrderlistDTO> vieworderlist(String id) {
+		
+		return dao.vieworderlist(id);
+		
+	}
+
+	
+
+	
+	
+
+
+
+	
+
 
 
 
