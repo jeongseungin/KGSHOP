@@ -111,7 +111,7 @@
         <br>
 
           <div class="row">
-		<c:forEach items="${notebooklists}" var="dto">
+		<c:forEach items="${searchView}" var="dto">
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
               <a href="productview?product_name_no=${dto.product_name_no}"><img style="width: 253px; height: 200px;" src="<spring:url value='/imgUpload/'/>${dto.product_thumbnail }" ></a>
@@ -141,16 +141,16 @@
   <!-- /.container -->
   		  <ul class="pagination">
 		    <c:if test="${pageMaker.prev}">
-		    	<li><a href="notebookproduct${pageMaker.makeSearch(pageMaker.startPage - 1)}&product_category_no=${product_category_no}">이전</a></li>
+		    	<li><a href="searchView${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
 		    </c:if> 
 			
 		    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
 		    	<li <c:out value="${pageMaker.cri.page == idx ? 'class=info' : ''}"/>>
-		    	<a href="notebookproduct${pageMaker.makeSearch(idx)}&product_category_no=${product_category_no}">${idx}</a></li>
+		    	<a href="searchView${pageMaker.makeSearch(idx)}&product_category_no=${product_category_no}">${idx}</a></li>
 		    </c:forEach>
 		
 		    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-		    	<li><a href="notebookproduct${pageMaker.makeSearch(pageMaker.endPage + 1)}&product_category_no=${product_category_no}">다음</a></li>
+		    	<li><a href="searchView${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
 		    </c:if> 
 		  </ul>
 	  

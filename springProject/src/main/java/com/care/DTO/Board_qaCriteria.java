@@ -9,7 +9,7 @@ public class Board_qaCriteria {
 	
 	public Board_qaCriteria() {
 		this.page = 1;
-		this.perPageNum = 10;
+		this.perPageNum = 12;
 	}
 	
 	public void setPage(int page) {
@@ -22,8 +22,8 @@ public class Board_qaCriteria {
 	}
 	
 	public void setPerPageNum(int perPageNum) {
-		if (perPageNum <= 0 || perPageNum > 100) {
-			this.perPageNum = 10;
+		if (perPageNum <= 0 || perPageNum > 120) {
+			this.perPageNum = 12;
 			return;
 		}
 		this.perPageNum = perPageNum;

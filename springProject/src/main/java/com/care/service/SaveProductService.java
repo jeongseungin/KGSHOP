@@ -125,6 +125,15 @@ public void saveshoppingcart(ShoppingCartDTO dto) {
 		return dao.viewbanner();
 	}
 
+	public List<ProductnameDTO> searchView(Board_qaSearchCriteria scri) {
+		return dao.searchView(scri);
+	}
+
+	public int searchListCount(Board_qaSearchCriteria scri) {
+		
+		return dao.searchListCount(scri);
+	}
+
 
 	
 	

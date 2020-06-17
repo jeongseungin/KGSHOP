@@ -58,8 +58,8 @@
 		  where product_category_no = #{product_category_no}
 	</select>
 	
-	<!-- 전체상품 총개수 -->
-	<select id="productListCountAll" resultType="int">
+	<!-- 검색상품 총개수 -->
+	<select id="searchListCount" resultType="int">
 	SELECT COUNT(product_category_no)
 		  FROM productname
 		  WHERE 1=1
@@ -97,7 +97,7 @@
 		ORDER BY PRODUCT_NAME_NO DESC
 	</select>
 		<!-- 상품 전체 목록 페이징 -->
-	<select id="productListPageAll" resultType="com.care.DTO.ProductnameDTO">
+	<select id="searchView" resultType="com.care.DTO.ProductnameDTO">
 		SELECT  PRODUCT_NAME_NO, 
             PRODUCT_CATEGORY_NO,
 		    PRODUCT_NAME_TITLE,

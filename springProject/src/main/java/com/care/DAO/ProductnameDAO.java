@@ -28,10 +28,6 @@ public class ProductnameDAO {
 		
 	}
 
-
-	
-
-
 	//카테고리 목록 조회
 		public List<ProductnameDTO> notebookproductview(Board_qaSearchCriteria scri) {
 			return sqlSession.selectList(namespace+ ".productListPage", scri);
@@ -153,28 +149,13 @@ public class ProductnameDAO {
 	}
 
 
+	public List<ProductnameDTO> searchView(Board_qaSearchCriteria scri) {
+		return sqlSession.selectList(namespace+".searchView",scri);
+	}
 
 
-
-	
-
-
-	
-
-	
-
-
-	
-
-
-
-	
-
-
-
-	
-
-
-	
+	public int searchListCount(Board_qaSearchCriteria scri) {
+		return sqlSession.selectOne(namespace+".searchListCount", scri);
+	}
 
 }
