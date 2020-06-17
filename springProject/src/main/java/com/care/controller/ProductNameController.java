@@ -74,7 +74,7 @@ public class ProductNameController {
 		dto.setProduct_hit(0);
 		service.saveproduct(dto);
 		
-		return "rediret:home";
+		return "redirect:home";
 	}
 
 	@RequestMapping("productview")
@@ -163,7 +163,7 @@ public String Savebanner(BannerDTO dto, MultipartFile file,@RequestParam("banner
 		
 		
 		
-		return "rediredt:home";
+		return "redirect:home";
 	}
 	
 

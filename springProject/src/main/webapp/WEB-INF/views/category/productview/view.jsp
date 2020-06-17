@@ -36,52 +36,11 @@ function pay(){
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style type="text/css">
-.nav {
-   float: left;
-  padding-left: 400px;
-  padding-top: 140px;
-}
-
-.section1 {
-   padding-left: 900px;
-   padding-top: 150px;
-}
-.section {
-   padding-left: 900px;
- 	
-}
-.section2 {
-
-   padding-left: 900px; 
+.table {
  
 }
-.button {
 
-    width:250px;
 
-    background-color: #f8585b;
-
-    border: none;
-
-    color:#fff;
-
-    padding: 8px 0;
-
-    text-align: center;
-
-    text-decoration: none;
-
-    display: inline-block;
-
-    font-size: 15px;
-
-    margin: 4px;
-
-    cursor: pointer;
-    
-    border-radius:10px;
-
-}
 .button1 {
 
     width:250px;
@@ -141,6 +100,60 @@ function pay(){
     width:100px;
 
     background-color: #5CD1E5;
+
+    border: none;
+
+    color:#fff;
+
+    padding: 8px 0;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    display: inline-block;
+
+    font-size: 15px;
+
+    margin: 4px;
+
+    cursor: pointer;
+    
+    border-radius:10px;
+
+}
+.button4 {
+
+    width:100px;
+
+    background-color: #FFBB00;
+
+    border: none;
+
+    color:#fff;
+
+    padding: 8px 0;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    display: inline-block;
+
+    font-size: 15px;
+
+    margin: 4px;
+
+    cursor: pointer;
+    
+    border-radius:10px;
+
+}
+.button5 {
+
+    width:250px;
+
+    background-color:  #f8585b;
 
     border: none;
 
@@ -229,36 +242,58 @@ function pay(){
       </div>
     </div>
   </nav>
-
-
-
-
-<div class="nav">
+  
+ <form name="view" id="view" method="post"  role="form" action="SaveshoppingCart">
+<table class="table">
+	<tr>
+		<td style="text-align: center;">
 		<img
-			src="<spring:url value='/imgUpload/'/>${productlist.product_name_image }"><br>
-</div>
-<div class="section1">
-		<font>상품명 &nbsp;&nbsp;&nbsp;${productlist.product_name_title}</font>
-</div>
-<p>
-<div class="section">
-		<font>상품가격 &nbsp;&nbsp;&nbsp;<fmt:formatNumber
+			src="<spring:url value='/imgUpload/'/>${productlist.product_name_image }">
+	
+		</td>
+		<td style="padding-top: 50px;"><font size="6px">상품명 &nbsp;&nbsp;&nbsp;${productlist.product_name_title}</font></td>
+		
+	</tr>
+	<tr>
+	<td style="text-align: center;"> <c:choose>
+         <c:when test="${id eq 'system'}">
+            <a href="modifyproduct?product_name_no=${productlist.product_name_no}"><button class="button2">상품수정</button></a>
+            <a href="deleteproduct?product_name_no=${productlist.product_name_no}"><button class="button3" style="margin-left: 20px;">상품삭제</button></a>
+         </c:when>
+         <c:when test="${empty id}"> </c:when>
+         <c:otherwise>         
+         </c:otherwise>
+      </c:choose></td>
+	<td  style="padding: 20px;"><font >상품가격 &nbsp;&nbsp;&nbsp;<fmt:formatNumber
 				value="${productlist.product_name_price}" pattern="###,###,###" />원
-		</font>
-	</div>
-<p>
+		</font></td>
+	</tr>
+	<tr>
+		<td style="text-align: center;"></td>
+		<td><button type="button" class="minus"  style="border:none; background:none;">-</button>
+수량 : <input id="count" type="number" class="numBox" name="product_count" min="1"  value="1" readonly="readonly"
+			style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px; text-align: center;"/>
+  		<button type="button" class="plus"  style=" border:none; background:none;">+</button> </td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>총 금액 : <input type="number" class="sumprice"  readonly="readonly"  value="${productlist.product_name_price}"
+		style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px; text-align: center;"/> 원</td>
+	</tr>
+	<tr>
+		<td style="text-align: center;"><input type="button" onclick="history.back()" value="목록으로" class="button4"></td>
+		<td><div class="section2">
+ 		<input type="submit" value="장바구니담기" class="button5" >
+ 		</div></td>
+	</tr>
+</table>
 
-  <form name="view" id="view" method="post"  role="form" action="SaveshoppingCart">
+ 
   <input type="hidden" name="product_name_image" value="${productlist.product_name_image }">
   <input type="hidden" name="product_name_title" value="${productlist.product_name_title}">
   <input type="hidden" name="product_name_price" value="${productlist.product_name_price}">
   
-    <section class="section">		
-    		<button type="button" class="minus"  style="border:none; background:none;">-</button>
-수량 : <input id="count" type="number" class="numBox" name="product_count" min="1"  value="1" readonly="readonly"
-			style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px; text-align: center;"/>
-  		<button type="button" class="plus"  style=" border:none; background:none;">+</button> 
- </section>
+  
  <script>
   $(".plus").click(function(){
    var num = $(".numBox").val();
@@ -292,41 +327,39 @@ function pay(){
 
   });
  
- </script> 
- <p>
- 
-
-  <div class="section">
-	총 금액 : <input type="number" class="sumprice"  readonly="readonly"  value="${productlist.product_name_price}"
-				style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px; text-align: center;"/> 원
-	</div>
- 	 <div class="section">
- <p>
- </div>
- <div class="section2">
- <input type="submit" value="장바구니담기" class="button" >
- </div>
-  <div style="padding-left: 400px;">
- </div>
+ </script>  
  </form>
- 
  <form name="form" action="orderview">
- 	<input type="hidden" name="product_name_title" value="${productlist.product_name_title}">
- 	<input type="hidden" name="product_count" value="" id="product_count">
- 	<input type="button" value="결제하기"  class="button1" onclick="pay()">
+ <table  class="table">
+ 	<tr>
+ 	
+ 		<td></td>
+ 		<td style="text-align: center;">	<input type="hidden" name="product_name_title" value="${productlist.product_name_title}">
+ 				<input type="hidden" name="product_count" value="" id="product_count">
+ 				<input type="button" value="결제하기"  class="button1" onclick="pay()"></td>
+ 	</tr>
+ 	<tr>
+ 	</tr>
+ </table>
  </form>
+ <table class="table">
+ 	<tr>
+ 		<td style="text-align: center;"> 제품 설명 : ${productlist.product_name_detail}</td>
+ 	</tr>
+ 	<tr>
+ 		<td style="text-align: center;"></td>
+ 	</tr>
+ </table>
+<footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+<script src="./resources/vendor/jquery/jquery.min.js"></script>
+  <script src="./resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
  
 
-  <c:choose>
-         <c:when test="${id eq 'system'}">
-            <a href="modifyproduct?product_name_no=${productlist.product_name_no}"><button class="button2">상품수정</button></a>
-            <a href="deleteproduct?product_name_no=${productlist.product_name_no}"><button class="button3" style="margin-left: 20px;">상품삭제</button></a>
-         </c:when>
-         <c:when test="${empty id}"> </c:when>
-         <c:otherwise>         
-         </c:otherwise>
-      </c:choose>
- <div style="padding-left: 400px; padding-top: 50px;">제품 설명 : ${productlist.product_name_detail}</div>
       
        
 </body>

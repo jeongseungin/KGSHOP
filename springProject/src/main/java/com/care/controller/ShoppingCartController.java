@@ -65,7 +65,12 @@ public class ShoppingCartController {
 	}
 
 	@RequestMapping("Saveorders")
-	public String Sabeorder(OrdersDTO dto,Model model) {
+	public String Sabeorder(OrdersDTO dto,Model model,HttpServletRequest request) {
+		String addr = request.getParameter("addr");
+		String addr1 = request.getParameter("addr1");
+		String addr2 = request.getParameter("addr2");
+		String Addr = (addr+" "+addr1+" "+addr2);
+		dto.setAddr(Addr);
 		service.saveorders(dto);
 		
 		return "redirect:paypay";

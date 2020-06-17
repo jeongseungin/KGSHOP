@@ -107,7 +107,7 @@ li {
       </div>
     </div>
   </div>
-
+      
 	<div class="container" style="margin-top: 40px;">
 		<h4 style="padding-left:20px;">Q&A</h4>
 		<section class="container">
@@ -187,6 +187,17 @@ li {
 		<input type="button" value="글쓰기" onclick="location.href='QnAwrite'" >
  </section>
 </div>
+<p>
+<p>
+<p>
+<p>
+
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
  <script src="./resources/vendor/jquery/jquery.min.js"></script>
   <script src="./resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -122,15 +122,15 @@
           </ol>
           <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
-            <img class="d-block img-fluid" width=900px,height=300px src="<spring:url value='/imgUpload/'/>${banner[0].banner_image}" alt="First slide">
+            <img class="d-block img-fluid"  src="<spring:url value='/imgUpload/'/>${banner[0].banner_image}" alt="First slide" style="width:900px;height:300px;">
              
             </div>
             <div class="carousel-item">
-               <img class="d-block img-fluid" width=900px,height=300px src="<spring:url value='/imgUpload/'/>${banner[1].banner_image}" alt="Second slide">
+               <img class="d-block img-fluid"  src="<spring:url value='/imgUpload/'/>${banner[1].banner_image}" alt="Second slide" style="width:900px;height:300px;">
              
             </div>
             <div class="carousel-item">
-               <img class="d-block img-fluid" width=900px,height=300px src="<spring:url value='/imgUpload/'/>${banner[2].banner_image}" alt="Third slide">
+               <img class="d-block img-fluid" src="<spring:url value='/imgUpload/'/>${banner[2].banner_image}" alt="Third slide" style="width:900px;height:300px;">
       
             </div>
           </div>
