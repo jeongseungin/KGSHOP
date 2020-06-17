@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 
 import com.care.DAO.MemberDAO;
 import com.care.DTO.MemberDTO;
+import com.care.DTO.ProductnameDTO;
 
 @Service
 public class MemberService {
@@ -37,6 +38,10 @@ public class MemberService {
 
 	public MemberDTO list(String id) throws Exception{
 		return dao.list(id);		
+	}
+	
+	public List<ProductnameDTO> bestView(){
+		return dao.bestView();
 	}
 
 

@@ -66,6 +66,37 @@
 		  <include refid="productSearch"></include>
 	</select>
 	
+	<!-- 상품 Best30 -->
+	<select id="bestView" resultType="com.care.DTO.ProductnameDTO">
+		SELECT  PRODUCT_NAME_NO, 
+            PRODUCT_CATEGORY_NO,
+		    PRODUCT_NAME_TITLE,
+	        PRODUCT_NAME_DETAIL, 
+	        PRODUCT_NAME_PRICE,
+            PRODUCT_NAME_IMAGE,
+            PRODUCT_THUMBNAIL,
+            PRODUCT_STOCK,
+            PRODUCT_HIT,
+            PRODUCT_HASHTAG
+		 FROM ( 
+		        SELECT 
+                    PRODUCT_NAME_NO, 
+                    PRODUCT_CATEGORY_NO,
+                    PRODUCT_NAME_TITLE, 
+                    PRODUCT_NAME_DETAIL, 
+                    PRODUCT_NAME_PRICE,
+                    PRODUCT_NAME_IMAGE,
+                    PRODUCT_THUMBNAIL,
+                    PRODUCT_STOCK,
+                    PRODUCT_HIT,
+                    PRODUCT_HASHTAG,
+	                ROW_NUMBER() OVER(ORDER BY PRODUCT_HIT DESC) AS RNUM
+		         	FROM PRODUCTNAME
+		                       ) MP
+		WHERE RNUM BETWEEN 1 AND 30
+	</select>
+	
+	
 	<!-- 카테고리 목록 페이징 -->
 	<select id="productListPage" resultType="com.care.DTO.ProductnameDTO">
 		SELECT  PRODUCT_NAME_NO, 
@@ -96,7 +127,7 @@
 		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
 		ORDER BY PRODUCT_NAME_NO DESC
 	</select>
-		<!-- 상품 전체 목록 페이징 -->
+		<!-- 상품 검색 목록 페이징 -->
 	<select id="searchView" resultType="com.care.DTO.ProductnameDTO">
 		SELECT  PRODUCT_NAME_NO, 
             PRODUCT_CATEGORY_NO,

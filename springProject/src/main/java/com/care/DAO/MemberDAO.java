@@ -19,6 +19,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 
 import com.care.DTO.MemberDTO;
+import com.care.DTO.ProductnameDTO;
 import com.care.template.Constants;
 
 @Repository
@@ -27,6 +28,7 @@ public class MemberDAO {
 	private static final String namespace = "com.care.mybatis.Mapper";
 	@Autowired
 	private SqlSession sqlSession;
+	
 	@Autowired
 	BCryptPasswordEncoder pwdEncoder;
 
@@ -58,6 +60,11 @@ public class MemberDAO {
 
 	public MemberDTO list(String id) throws Exception{
 		return sqlSession.selectOne(namespace+".memberlist",id);
+	}
+	
+	public List<ProductnameDTO> bestView(){
+		return sqlSession.selectList(namespace+".bestView");
+		
 	}
 
 

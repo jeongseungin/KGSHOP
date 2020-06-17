@@ -40,14 +40,26 @@ public class MemberController {
 	BCryptPasswordEncoder pwdEncoder;
 	
 	
-	@RequestMapping(value = "home", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
 		
 		List<BannerDTO> view = productservice.viewbanner();
 		model.addAttribute("banner",view);
 		
+		model.addAttribute("bestView",member.bestView());
+		
+		
 		return "home";
 	}
+	
+	@RequestMapping(value = "home", method = RequestMethod.GET)
+	public String goHome(Model model) {
+		return "redirect:/";
+	}
+	
+	
+	
+	
 	//로그인
 		@RequestMapping(value="chkUser", method=RequestMethod.POST)
 		public String chkUser(MemberDTO dto,HttpServletRequest request, Model model) throws Exception {

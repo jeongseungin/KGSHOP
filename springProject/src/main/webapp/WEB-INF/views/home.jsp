@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
     <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <%@page import="com.care.DTO.MemberDTO" %>
 <!DOCTYPE html>
@@ -170,14 +171,28 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
           </a>
+          
+          
+          
         </div>
-        
-        <div class="row">
-
-          
-
-          
-
+         <div class="row">
+		<c:forEach items="${bestView}" var="dto">
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <a href="productview?product_name_no=${dto.product_name_no}"><img style="width: 253px; height: 200px;" src="<spring:url value='/imgUpload/'/>${dto.product_thumbnail }" ></a>
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="productview?product_name_no=${dto.product_name_no}">${dto.product_name_title}</a>
+                </h4>
+        	
+               
+              </div>
+              <div class="card-footer">
+            	<fmt:formatNumber value="${dto.product_name_price}"  /> 원
+              </div>
+            </div>
+          </div>
+		</c:forEach>
         </div>
         <!-- /.row -->
 
@@ -189,6 +204,7 @@
 
   </div>
   <!-- /.container -->
+     
  <script type="text/javascript">
  function init() {
        var val = localStorage.getItem('naverId');
