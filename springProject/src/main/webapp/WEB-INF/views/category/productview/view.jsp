@@ -293,6 +293,27 @@ function pay(){
   });
  
  </script> 
+ 
+ <script>
+        function cartChk() {
+        	
+    		$.ajax({
+    			url: "cartChk",
+    			type: "post",
+    			dataType : "json",
+    			data : {"product_name_title" :"${productlist.product_name_title}"},
+    			success: function(data) {
+					if(data==1){
+						alert("이미 담겨진 상품 입니다")					
+					}else if(data==0){
+						alert("장바구니에 상품이 정상적으로 등록되었습니다")
+						document.view.submit();
+					}
+				}
+    		});
+        }
+   </script>
+ 
  <p>
  
 
@@ -304,7 +325,7 @@ function pay(){
  <p>
  </div>
  <div class="section2">
- <input type="submit" value="장바구니담기" class="button" >
+ <input type="button" value="장바구니담기" class="button" onclick="cartChk()" >
  </div>
   <div style="padding-left: 400px;">
  </div>

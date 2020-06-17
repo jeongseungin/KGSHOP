@@ -57,21 +57,24 @@ public class Board_qaController {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		if(id == null) {
-			String msg="회원가입 후 이용 가능 합니다.";
-			model.addAttribute("msg",msg);
-			String location = "QnA";
-			model.addAttribute("location",location);
+			model.addAttribute("msg","로그인후 이용 가능 합니다.");
+			model.addAttribute("url","bootlogin");
 			return "error/error";
 		}
-		System.out.println(id);
 		return "cs/QnAwrite";
 	}
 	@RequestMapping("savedata")
-	public String savedata(Board_qaDTO dto) {
-		int i;
-		i = service.Board_qaInsert(dto);
-		System.out.println("결과값"+i);
-		return "redirect:QnA";
+	public String savedata(Board_qaDTO dto,Model model)throws Exception {
+		try {
+		 service.Board_qaInsert(dto);
+		 model.addAttribute("msg","게시글이 작성되었습니다");
+	     model.addAttribute("url","QnA");
+		 
+		}catch (Exception e) {
+			 model.addAttribute("msg","게시글 작성 실패");
+		     model.addAttribute("url","QnA");
+		}
+		return "error/error";
 	}
 	//게시물 조회 & 게시물 댓글 조회
 	@RequestMapping("QnAreadView")
@@ -116,39 +119,51 @@ public class Board_qaController {
 	
 	// 게시판 수정
 	@RequestMapping("update")
-	public String update(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri, RedirectAttributes rttr) throws Exception{
+	public String update(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri, RedirectAttributes rttr,Model model) throws Exception{
+		try {
 		service.update(dto);
-		
 		rttr.addAttribute("page", scri.getPage());
 		rttr.addAttribute("perPageNum", scri.getPerPageNum());
 		rttr.addAttribute("searchType", scri.getSearchType());
 		rttr.addAttribute("keyword", scri.getKeyword());
 		
-		return "redirect:QnA";
+		model.addAttribute("msg","게시글이 수정 되었습니다");
+	    model.addAttribute("url","QnA");
+		}
+		catch (Exception e) {
+			model.addAttribute("msg","게시글 수정 실패");
+		    model.addAttribute("url","QnA");
+		}
+		return "error/error";
 	}
 	
 	// 게시판 삭제
 	@RequestMapping("delete")
-	public String delete(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri, RedirectAttributes rttr) throws Exception{
+	public String delete(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri, RedirectAttributes rttr,Model model) throws Exception{
+		try {
 		service.delete(dto.getQa_seq());
 		
 		rttr.addAttribute("page", scri.getPage());
 		rttr.addAttribute("perPageNum", scri.getPerPageNum());
 		rttr.addAttribute("searchType", scri.getSearchType());
 		rttr.addAttribute("keyword", scri.getKeyword());
+	
+		model.addAttribute("msg","게시글이 삭제 되었습니다");
+	    model.addAttribute("url","QnA");
+		}catch (Exception e) {
 		
-		return "redirect:QnA";
+		model.addAttribute("msg","게시글 삭제 실패");
+		model.addAttribute("url","QnA");
+		}
+		return "error/error";
 	}
 	
 	// 댓글 작성
 	@RequestMapping("replyWrite")
-	public String replyWrite(board_qaReplyDTO dto, Board_qaSearchCriteria scri, RedirectAttributes rttr)throws Exception{
-		service.writeReply(dto);
+	public String replyWrite(board_qaReplyDTO dto, Board_qaSearchCriteria scri, RedirectAttributes rttr,Model model)throws Exception{
 		
-//		System.out.println("댓글작성 게시판번호"+dto.getQa_seq());
-//		System.out.println("댓글작성 페이지값 : "+scri.getPage());
-//		System.out.println("댓글작성 서치타입: "+scri.getSearchType());
-//		System.out.println("댓글작성 키워드 : "+scri.getKeyword());
+		try {
+		service.writeReply(dto);
 		
 		rttr.addAttribute("qa_seq", dto.getQa_seq());
 		rttr.addAttribute("page", scri.getPage());
@@ -156,7 +171,13 @@ public class Board_qaController {
 		rttr.addAttribute("searchType", scri.getSearchType());
 		rttr.addAttribute("keyword", scri.getKeyword());
 		
-		return "redirect:QnAreadView";
+		model.addAttribute("msg","댓글이 작성 되었습니다 ");
+	    model.addAttribute("url","QnAreadView");
+		}catch (Exception e) {
+			model.addAttribute("msg","댓글 작성 실패 ");
+		    model.addAttribute("url","QnA");
+		}
+		return "error/error";
 	}
 	
 	//댓글 수정 페이지에 접근하기 위한 컨트롤러와 수정한 값을 전송할 수 있는 컨트롤러를 작성
@@ -171,8 +192,8 @@ public class Board_qaController {
 	}
 	//댓글 수정 POST
 	@RequestMapping(value = "/replyUpdate", method = RequestMethod.POST)
-	public String replyUpdate(board_qaReplyDTO dto, Board_qaSearchCriteria scri, RedirectAttributes rttr) throws Exception {
-		
+	public String replyUpdate(board_qaReplyDTO dto, Board_qaSearchCriteria scri, RedirectAttributes rttr,Model model) throws Exception {
+		try {
 		service.updateReply(dto);
 		
 		rttr.addAttribute("qa_seq", dto.getQa_seq());
@@ -180,8 +201,14 @@ public class Board_qaController {
 		rttr.addAttribute("perPageNum", scri.getPerPageNum());
 		rttr.addAttribute("searchType", scri.getSearchType());
 		rttr.addAttribute("keyword", scri.getKeyword());
+		model.addAttribute("msg","댓글이 수정  되었습니다");
+	    model.addAttribute("url","QnAreadView");
 		
-		return "redirect:QnAreadView";
+		}catch (Exception e) {
+			model.addAttribute("msg","댓글 수정 실패 ");
+		    model.addAttribute("url","QnA");
+		}
+		return "error/error";
 	}
 	
 	//댓글 삭제 페이지에 들어가기 위한 컨트롤러와 삭제 컨트롤러를 작성
@@ -198,8 +225,8 @@ public class Board_qaController {
 		
 		//댓글 삭제
 		@RequestMapping(value="/replyDelete", method = RequestMethod.POST)
-		public String replyDelete(board_qaReplyDTO dto, Board_qaSearchCriteria scri, RedirectAttributes rttr) throws Exception {
-			
+		public String replyDelete(board_qaReplyDTO dto, Board_qaSearchCriteria scri, RedirectAttributes rttr,Model model) throws Exception {
+			try {
 			service.deleteReply(dto);
 			
 			rttr.addAttribute("qa_seq", dto.getQa_seq());
@@ -207,8 +234,14 @@ public class Board_qaController {
 			rttr.addAttribute("perPageNum", scri.getPerPageNum());
 			rttr.addAttribute("searchType", scri.getSearchType());
 			rttr.addAttribute("keyword", scri.getKeyword());
-			
-			return "redirect:QnAreadView";
+			model.addAttribute("msg","댓글이 삭제 되었습니다");
+		    model.addAttribute("url","QnAreadView");
+			}catch (Exception e) {
+				model.addAttribute("msg","댓글 삭제 실패 ");
+			    model.addAttribute("url","QnA");
+			}
+
+			return "error/error";
 		}
 	
 	

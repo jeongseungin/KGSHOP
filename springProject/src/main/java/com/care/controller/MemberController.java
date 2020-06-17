@@ -2,12 +2,11 @@ package com.care.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.json.simple.parser.ParseException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -18,18 +17,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.care.DTO.BannerDTO;
 import com.care.DTO.MemberDTO;
-import com.care.service.CommonService;
+
 import com.care.service.MemberService;
 import com.care.service.SaveProductService;
-
-
 
 @Controller
 public class MemberController {
 	
 
-	private CommonService service;
-	
 	@Autowired
 	SaveProductService productservice;
 	
@@ -52,24 +47,24 @@ public class MemberController {
 		@RequestMapping(value="chkUser", method=RequestMethod.POST)
 		public String chkUser(MemberDTO dto,HttpServletRequest request, Model model) throws Exception {
 			
-			String id =  request.getParameter("id");
-			String pw = request.getParameter("pw");
-			
-			HttpSession session = request.getSession();
-			
-	 		MemberDTO dto1 = null;
-			dto1 = member.logincheck(dto);
-			String msg = "로그인 실패입니다.";
-			model.addAttribute("msg",msg);
-			String location = "bootlogin";
-			model.addAttribute("location",location);
 			try {
+				String id =  request.getParameter("id");
+				String pw = request.getParameter("pw");
+				
+				HttpSession session = request.getSession();
+			
+		 		MemberDTO dto1 = null;
+				dto1 = member.logincheck(dto);
 					if(dto1.getId().equals(id) && pwdEncoder.matches(pw, dto1.getPw())) {	
 						session.setAttribute("id", request.getParameter("id"));
-						return "redirect:home";
+						model.addAttribute("msg","로그인 성공");
+				        model.addAttribute("url","home");
+						
 					}
 			} catch (Exception e) {
-				e.printStackTrace();
+				
+				model.addAttribute("msg","로그인 실패");
+			    model.addAttribute("url","bootlogin");
 			}
 			return "error/error";
 		}
@@ -77,32 +72,26 @@ public class MemberController {
 		//회원 가입 (비밀번호 암호화)
 		@RequestMapping(value="chkRegister", method=RequestMethod.POST)
 		public String chkRegister(MemberDTO dto, HttpServletRequest request,Model model) throws Exception {
-		
-			int result = member.idChk(dto);
 			try {
-				if(result==1) {
-					String msg = "회원가입 실패입니다.";
-					model.addAttribute("msg",msg);
-					String location = "bootMember";
-					model.addAttribute("location",location);				
-					return "error/error";
-				}else if(result==0) {
+				
 					String encoder = pwdEncoder.encode(dto.getPw());
-					System.out.println(encoder);
 					dto.setPw(encoder);
 					member.savedata(dto);
-				}
+					model.addAttribute("msg","회원가입 성공하셨습니다");
+					model.addAttribute("url","bootlogin");	
+				
 			} catch (Exception e) {
-				e.printStackTrace();
+				model.addAttribute("msg","회원가입 실패입니다");
+				model.addAttribute("url","bootMember");	
 			}	
-			return "redirect:home";	
+			return "error/error";	
 			
 		}
 		
 		//아이디 중복체크 페이지
 		@ResponseBody
 		@RequestMapping(value = "idChk", method =RequestMethod.POST)
-		public int idChk(Model model,  HttpServletRequest request,MemberDTO dto) throws Exception {
+		public int idChk(MemberDTO dto) throws Exception {
 			int result = member.idChk(dto);
 			return result;
 		}
@@ -110,41 +99,35 @@ public class MemberController {
 
 		//회원수정
 		@RequestMapping("updatedata")
-		public String updatedata(MemberDTO dto,HttpServletRequest request,Model model) throws SQLException {
-			
-			HttpSession session = request.getSession();
-			
-			String id = (String) session.getAttribute("id");
-			System.out.println("세션 스트링값" + id);
-			
-			dto.setId(id);
-
-			int result = 0;
+		public String updatedata(MemberDTO dto,HttpServletRequest request,Model model) throws SQLException {		
 			try {
-				if(result==0) {
+					HttpSession session = request.getSession();		
+					String id = (String) session.getAttribute("id");
+					dto.setId(id);
 					String encoder = pwdEncoder.encode(dto.getPw());
-					System.out.println(encoder);
 					dto.setPw(encoder);
 					member.execute(dto);
-					String msg = "회원수정 성공";
-					model.addAttribute("msg",msg);
-					String location = "home";
-					model.addAttribute("location",location);
-				}else if(result==1){
-					String msg = "에러입니다";
-					model.addAttribute("msg",msg);
-					return "error/error";
-				}
+					model.addAttribute("msg","회원수정 성공");
+					model.addAttribute("url","home");
+	
 			} catch (Exception e) {
-				e.printStackTrace();
+				model.addAttribute("msg","회원수정 실패");
+				model.addAttribute("url","bootMemberModify");
 			}		
 			return "error/error";
 		
 		}
 		@RequestMapping("logout")
-		public String logout(HttpSession session) {
+		public String logout(HttpSession session,Model model)throws SQLException {
+			try {
 			session.invalidate();
-			return "home";
+			model.addAttribute("msg","로그아웃 되셨습니다");
+			model.addAttribute("url","home");
+			}catch (Exception e) {
+				model.addAttribute("msg","로그아웃 실패");
+				model.addAttribute("url","home");
+			}
+			return "error/error";
 		}
 
 		
@@ -181,11 +164,5 @@ public class MemberController {
 		
 			return "member/chkcallback";
 		}
-		@RequestMapping("error")
-		public String error() {
-			return "error/error";
-		}
-		
-		
-		
+				
 	}

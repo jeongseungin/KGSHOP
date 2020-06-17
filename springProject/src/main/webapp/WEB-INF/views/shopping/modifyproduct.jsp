@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script >
 function product_write() {
 	var product_name_no = document.getElementById("product_name_no");
@@ -99,7 +100,21 @@ function product_write() {
 				<td><label for="product_name_image">상품 이미지</label></td>
 				<td><input type="file" name="file" id="product_name_image"></td>
 			</tr>
-			
+			<tr>
+			<td>이미지 미리보기</td>
+			<td><div class="select_img"><img src="" /></div></td>
+			 </tr>
+			<script>
+			  $("#product_name_image").change(function(){
+			   if(this.files && this.files[0]) {
+			    var reader = new FileReader;
+			    reader.onload = function(data) {
+			     $(".select_img img").attr("src", data.target.result).width(500);        
+			    }
+			    reader.readAsDataURL(this.files[0]);
+			   }
+			  });
+ 				</script>
 			<tr>
 				<td colspan="2">
 					<input type="submit" value="상품 등록" >

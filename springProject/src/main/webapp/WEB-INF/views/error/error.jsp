@@ -6,10 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
-	var msg = '${msg}';
-	var error = '${error}';
-	alert(msg);
-	location.href="${location}";
+	
+	alert('${msg}');
+	location.href="${url}";
 </script>
 
 

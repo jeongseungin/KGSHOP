@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.care.DTO.BannerDTO;
@@ -38,8 +39,7 @@ public class ProductNameController {
 	//노트북 카테고리 조회(카테고리 통합예정) if문으로 
 		@RequestMapping("notebookproduct")
 		public String notebookproduct(Model model, Board_qaSearchCriteria scri) {
-			System.out.println(scri.getProduct_category_no());
-			
+
 			model.addAttribute("notebooklists",service.notebookproductview(scri));
 			
 			Board_qaPageMaker pageMaker = new Board_qaPageMaker();
@@ -57,8 +57,8 @@ public class ProductNameController {
 	private String uploadPath;
 	
 	@RequestMapping(value = "SaveProduct" ,method = RequestMethod.POST)
-	public String saveproduct(ProductnameDTO dto, MultipartFile file)throws Exception {	
-		
+	public String saveproduct(ProductnameDTO dto, MultipartFile file,Model model)throws Exception {	
+		try {
 		String imgUploadPath = uploadPath + File.separator + "imgUpload";
 		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
 		String fileName = null;
@@ -74,8 +74,27 @@ public class ProductNameController {
 		dto.setProduct_hit(0);
 		service.saveproduct(dto);
 		
-		return "rediret:home";
+		model.addAttribute("msg","상품이 등록 되었습니다");
+        model.addAttribute("url","home");
+
+		}catch (Exception e) {
+			
+			model.addAttribute("msg","상품이 등록 실패 되었습니다");
+	        model.addAttribute("url","productName");
+			
+		}
+		return "error/error";
 	}
+	
+	//상품명 중복체크
+	@ResponseBody
+	@RequestMapping(value = "titleChk", method =RequestMethod.POST)
+	public int idChk(ProductnameDTO dto) throws Exception {
+		
+		int result = service.titleChk(dto);
+		return result;
+		
+		}
 
 	@RequestMapping("productview")
 	public String productview(@RequestParam("product_name_no") String product_name_no, Model model,HttpServletRequest request) {
@@ -84,10 +103,8 @@ public class ProductNameController {
 		HttpSession session = request.getSession();	
 		String id = (String) session.getAttribute("id");
 		if(id==null) {
-			String msg = "회원가입 후 이용 가능 합니다.";
-			model.addAttribute("msg",msg);
-			String location = "notebookproduct";
-			model.addAttribute("location",location);
+			model.addAttribute("msg","회원가입 후 이용 가능 합니다.");
+			model.addAttribute("url","bootlogin");
 			return "error/error";
 		}
 		model.addAttribute("productlist",view);
@@ -105,7 +122,8 @@ public class ProductNameController {
 		return "shopping/modifyproduct";
 	}
 	@RequestMapping("ModifySaveProduct")
-	public String ModifySaveProduct(ProductnameDTO dto, MultipartFile file)throws Exception {
+	public String ModifySaveProduct(ProductnameDTO dto, MultipartFile file,Model model)throws Exception {
+		try {
 		String imgUploadPath = uploadPath + File.separator + "imgUpload";
 		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
 		String fileName = null;
@@ -119,17 +137,35 @@ public class ProductNameController {
 		dto.setProduct_name_image(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 		dto.setProduct_thumbnail(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 		service.modifysaveproduct(dto);
-		return "home";
+		
+		model.addAttribute("msg","상품이 수정 되었습니다");
+        model.addAttribute("url","home");
+        
+		}catch (Exception e) {
+			
+		model.addAttribute("msg","상품 수정 실패");
+	    model.addAttribute("url","modifyproduct");
+		}
+		return "error/error";
 	}
 	@RequestMapping("deleteproduct")
-	public String deleteproduct(@RequestParam("product_name_no") String product_name_no) {
+	public String deleteproduct(@RequestParam("product_name_no") String product_name_no,Model model)throws Exception {
+		try {
 		service.deleteproduct(product_name_no);
-		return "home";
+		model.addAttribute("msg","상품이 삭제 되었습니다");
+        model.addAttribute("url","home");
+		
+		}catch (Exception e) {
+			
+		model.addAttribute("msg","상품삭제 실패");
+		model.addAttribute("url","home");
+		}
+		return "error/error";
 	}
 	
 	
 	@RequestMapping("viewbanner")
-	public String banner(Model model ) {
+	public String banner(Model model) {
 		List<BannerDTO> view = service.viewbanner();
 		model.addAttribute("banner",view);	
 		return "shopping/viewbanner";
@@ -145,8 +181,9 @@ public class ProductNameController {
 	
 	
 	@RequestMapping(value = "Savebanner" ,method = RequestMethod.POST)
-public String Savebanner(BannerDTO dto, MultipartFile file,@RequestParam("banner_no") String banner_no) throws Exception {
+public String Savebanner(BannerDTO dto, MultipartFile file,@RequestParam("banner_no") String banner_no,Model model) throws Exception {
 
+		try {
 		String imgUploadPath = uploadPath + File.separator + "imgUpload";
 		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
 		String fileName = null;
@@ -159,11 +196,17 @@ public String Savebanner(BannerDTO dto, MultipartFile file,@RequestParam("banner
 		dto.setChange_no(banner_no);
 		dto.setBanner_image(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 		service.savebanner(dto);
-	
 		
+		model.addAttribute("msg","배너가 수정 되었습니다");
+        model.addAttribute("url","home");
 		
-		
-		return "rediredt:home";
+		}catch (Exception e) {
+			
+		model.addAttribute("msg","배너 수정 실패");
+	    model.addAttribute("url","home");
+		}
+
+		return "error/error";
 	}
 	
 

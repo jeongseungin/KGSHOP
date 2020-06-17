@@ -14,6 +14,7 @@
   <!-- Custom styles for this template -->
   <link href="./resources/css/shop-homepage.css" rel="stylesheet">
 <title>Insert title here</title>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style type="text/css">
 	.table {
@@ -199,7 +200,10 @@ function product_write() {
 			</tr>
 			<tr>
 				<th>상품 명</th>
-				<td><input type="text" name="product_name_title" id="product_name_title"></td>
+				<td>
+				<input type="text" name="product_name_title" id="product_name_title">
+				 <input type="button" class="conform" id="titleChk" value="중복확인" onclick="titlecheck()">
+				</td>
 			</tr>
 			
 			<tr>
@@ -248,7 +252,24 @@ function product_write() {
 			</tr>
 	</table>
 	
- 
+  <script>
+        function titlecheck() {
+    		$.ajax({
+    			url: "titleChk",
+    			type: "post",
+    			dataType : "json",
+    			data : {"product_name_title" : $(product_name_title).val()},
+    			success: function(data) {
+					if(data==1){
+						alert("중복된 상품명 입니다")
+						$(product_name_title).val("");						
+					}else if(data==0){
+						alert("사용가능한 상품명 입니다")
+					}
+				}
+    		});
+        }
+   </script>
  
 	</form>
 </body>

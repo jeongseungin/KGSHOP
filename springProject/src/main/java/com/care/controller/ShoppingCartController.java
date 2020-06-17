@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.care.DTO.DeletecartDTO;
 import com.care.DTO.DownStockDTO;
@@ -40,6 +41,18 @@ public class ShoppingCartController {
 		return "redirect:shoppingcart";
 		 
 	}
+	
+	//장바구니 중복체크
+	@ResponseBody
+	@RequestMapping(value = "cartChk", method =RequestMethod.POST)
+	public int cartChk(ShoppingCartDTO dto) throws Exception {
+			
+		int result = service.cartChk(dto);
+		return result;
+			
+		}
+
+	
 	@RequestMapping("shoppingcart")
 	public String shoppingcart(HttpServletRequest request,Model model) {
 		HttpSession session ;
@@ -83,15 +96,24 @@ public class ShoppingCartController {
 	}
 	
 	@RequestMapping("deletecart")
-	public String deletecart(HttpServletRequest request,DeletecartDTO dto,@RequestParam("product_name_title") String product_name_title) {
+	public String deletecart(HttpServletRequest request,DeletecartDTO dto,@RequestParam("product_name_title") String product_name_title,Model model) {
 		HttpSession session ;
 		session = request.getSession();
 		String id = (String) session.getAttribute("id");
+		try {
 		dto.setId(id);
 		dto.setProduct_name_title(product_name_title);
-		
 		service.deletecart(dto);
-		return "redirect:shoppingcart";
+		
+		model.addAttribute("msg","해당 상품이 삭제 되었습니다");
+        model.addAttribute("url","shoppingcart");
+		
+		}catch (Exception e) {
+			
+		model.addAttribute("msg","삭제 실패 ");
+	    model.addAttribute("url","shoppingcart");
+		}
+		return "error/error";
 	}
 
 	@RequestMapping("Saveorderlist")

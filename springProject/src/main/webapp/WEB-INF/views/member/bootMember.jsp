@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>회원가입</title>
+ <title>Insert title here</title>     
         <!-- Bootstrap -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요한) -->
@@ -16,7 +16,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <!-- Respond.js 으로 IE8 에서 반응형 기능을 활성화하세요 (https://github.com/scottjehl/Respond) -->
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<title>Insert title here</title>
+
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
@@ -323,6 +323,7 @@ function sample6_execDaumPostcode() {
     			success: function(data) {
 					if(data==1){
 						alert("중복된 아이디입니다")
+						 $(id).val("");
 					}else if(data==0){
 						$("#idChk").attr("value","중복확인");
 						alert("사용가능한 아이디입니다")

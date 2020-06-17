@@ -49,6 +49,12 @@
       )
 </insert>
 
+<!-- 상품명 중복체크 -->
+<select id="titleChk" resultType="int">
+   select count(*) from productname
+   where product_name_title=#{product_name_title}
+</select>
+
 <!-- 창훈 상품검색 및 상품목록 페이징처리 -->
 	
 	<!-- 카테고리 상품 총 개수 -->
@@ -189,6 +195,12 @@
          #{product_count}
       )
       </insert>
+      
+<!-- 장바구니 중복체크 -->
+<select id="cartChk" resultType="int">
+   select count(*) from shoppingcart
+   where product_name_title=#{product_name_title}
+</select>      
       
 <!-- 장바구니 상세보기 -->
    <select id="viewshoppingcart" resultType="com.care.DTO.ShoppingCartDTO" parameterType="String">

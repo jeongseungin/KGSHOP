@@ -1,11 +1,8 @@
 package com.care.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-
 import com.care.DAO.ProductnameDAO;
 import com.care.DTO.BannerDTO;
 import com.care.DTO.Board_qaSearchCriteria;
@@ -125,21 +122,15 @@ public void saveshoppingcart(ShoppingCartDTO dto) {
 		return dao.viewbanner();
 	}
 
+	public int titleChk(ProductnameDTO dto) throws Exception{
+		int result = dao.titleChk(dto);
+		return result;
+	}
 
-	
-	
-
-	
-	
-
-
-
-	
-
-
-
-
-	
+	public int cartChk(ShoppingCartDTO dto) {
+		int result = dao.cartChk(dto);
+		return result;
+	}
 
 	
 	
