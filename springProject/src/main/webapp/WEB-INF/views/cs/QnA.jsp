@@ -46,7 +46,8 @@ li {
 </head>
 <body>
 
-<div class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+ <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="home">KG SHOP</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,16 +57,13 @@ li {
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
           <c:choose>
-          	  <c:when test="${id eq 'system'}"><a class="nav-link" href="#" >${id }님 환영합니다 
-              <span class="sr-only">(current)</span></a>
-              </c:when>
               <c:when test="${empty id }"> <a class="nav-link" href="home">홈
               <span class="sr-only">(current)</span>
               </a></c:when>
-          	  <c:when test="${id eq id}"><a class="nav-link" href="#" >${id }님 환영합니다 
+               <c:when test="${id eq id}"><a class="nav-link" >${id }님 환영합니다 
               <span class="sr-only">(current)</span>
               </a>
-              </c:when>       
+              </c:when>             
           </c:choose>
            
             
@@ -79,34 +77,35 @@ li {
           
          <li class="nav-item">
          <c:choose>
-          	  <c:when test="${id eq 'system'}"></c:when>
-          	  <c:when test="${empty id }"></c:when>
-            <c:otherwise> <a class="nav-link" href="shoppingcart?user_id=${id}">장바구니</a></c:otherwise>
+               <c:when test="${id eq 'system'}"></c:when>
+               <c:when test="${empty id }"></c:when>
+            <c:otherwise> <a class="nav-link" href="shoppingcart">장바구니</a></c:otherwise>
              </c:choose>
           </li>
             
            <li class="nav-item">
 
    
-      	    <c:choose>
-          	  <c:when test="${id eq 'system'}"><a class="nav-link" href="myPage">관리자페이지</a></c:when>
-          	   <c:when test="${empty id }"> 
-            	<a class="nav-link" href="bootMember">회원가입</a>
-         		 </c:when>
-          	  <c:otherwise><a class="nav-link" href="myPage">마이페이지</a></c:otherwise>    
+             <c:choose>
+               <c:when test="${id eq 'system'}"><a class="nav-link" href="myPage">관리자페이지</a></c:when>
+                <c:when test="${empty id }"> 
+               <a class="nav-link" href="bootMember">회원가입</a>
+                </c:when>
+               <c:otherwise><a class="nav-link" href="myPage">마이페이지</a></c:otherwise>    
             </c:choose>
           
           <li class="nav-item">
-          	<c:choose>
-          		  <c:when test="${empty id }"> <a class="nav-link" href="bootlogin">로그인</a> </c:when>
-          		  <c:otherwise>  <a class="nav-link" href="logout">로그아웃</a></c:otherwise>       
+             <c:choose>
+                  <c:when test="${empty id }"> <a class="nav-link" href="bootlogin">로그인</a> </c:when>
+                  <c:otherwise>  <a class="nav-link" href="logout">로그아웃</a></c:otherwise>       
             </c:choose>
+       
           </li>
           
         </ul>
       </div>
     </div>
-  </div>
+  </nav>
 
 	<div class="container" style="margin-top: 40px;">
 		<h4 style="padding-left:20px;">Q&A</h4>

@@ -75,9 +75,69 @@
 	})
 </script>
 <body>
-		<div class="form-horizontal">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="home">KG SHOP</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+          <c:choose>
+               <c:when test="${id eq 'system'}"><a class="nav-link" href="#" >${id }님 환영합니다 
+              <span class="sr-only">(current)</span></a>
+              </c:when>
+              <c:when test="${empty id }"> <a class="nav-link" href="home">홈
+              <span class="sr-only">(current)</span>
+              </a></c:when>
+               <c:when test="${id eq id}"><a class="nav-link" href="#" >${id }님 환영합니다 
+              <span class="sr-only">(current)</span>
+              </a>
+              </c:when>       
+          </c:choose>
+           
+            
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="QnA">Q&A게시판</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">리뷰게시판</a>
+          </li>
+          
+         <li class="nav-item">
+         <c:choose>
+               <c:when test="${id eq 'system'}"></c:when>
+               <c:when test="${empty id }"></c:when>
+            <c:otherwise> <a class="nav-link" href="shoppingcart">장바구니</a></c:otherwise>
+             </c:choose>
+          </li>
+            
+           <li class="nav-item">
+
+   
+             <c:choose>
+               <c:when test="${id eq 'system'}"><a class="nav-link" href="myPage">관리자페이지</a></c:when>
+                <c:when test="${empty id }"> 
+               <a class="nav-link" href="bootMember">회원가입</a>
+                </c:when>
+               <c:otherwise><a class="nav-link" href="myPage">마이페이지</a></c:otherwise>    
+            </c:choose>
+          
+          <li class="nav-item">
+             <c:choose>
+                  <c:when test="${empty id }"> <a class="nav-link" href="bootlogin">로그인</a> </c:when>
+                  <c:otherwise>  <a class="nav-link" href="logout">로그아웃</a></c:otherwise>       
+            </c:choose>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>	
 		
-		<h1>게시글 조회</h1>
+		<h1 style="text-align: center; padding-top: 30px;">게시글 조회</h1>
 		<form name="readForm" role="form" method="post">
 			<input type="hidden" id="qa_seq" name="qa_seq" value="${read.qa_seq}" />
 			<input type="hidden" id="page" name="page" value="${scri.page}"> 
@@ -85,101 +145,82 @@
 			<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
 			<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
 		</form>
-			
-				<div class="form-group">
-					<label for="qa_seq" class="col-sm-4 control-label">글 번호</label>
-					<div class="col-sm-8">
-						<input type="text" id="qa_seq" name="qa_seq" value="${read.qa_seq}" readonly="readonly"/>
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<label for="qa_category" class="col-sm-4 control-label">카테고리</label>
-					<div class="col-sm-8">
-						<input type="text" id="qa_category" name="qa_category" value="${read.qa_category}" readonly="readonly"/>
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<label for="qa_subject" class="col-sm-4 control-label">제목</label>
-					<div class="col-sm-8">
-						<input type="text" id="qa_subject" name="qa_subject" value="${read.qa_subject}" readonly="readonly"/>
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<label for="qa_content" class="col-sm-4 control-label">내용</label>
-					<div class="col-sm-8">
+		<table class="table" style="margin-top: 30px;">
+			<tr>
+				<th style=" text-align: center; width: 200px;">글 번호</th>
+				<td><input type="text" id="qa_seq" name="qa_seq" value="${read.qa_seq}" readonly="readonly" style="margin-left: 15px;"/></td>
+			</tr>
+			<tr>
+				<th style="text-align: center;">카테고리</th>
+				<td><input type="text" id="qa_category" name="qa_category" value="${read.qa_category}" readonly="readonly" style="margin-left: 15px;"/></td>
+			</tr>
+			<tr>
+				<th style="text-align: center;">제목</th>
+				<td><input type="text" id="qa_subject" name="qa_subject" value="${read.qa_subject}" readonly="readonly" style="margin-left: 15px;"/></td>
+			</tr>
+			<tr>
+				<th style="text-align: center;">내용</th>
+				<td><div class="col-sm-8">
 						<textarea id="qa_content" name="qa_content" readonly="readonly" 
 						rows="10" cols="100" style="resize: none">
 						<c:out value="${read.qa_content}" /></textarea>
 					</div>
-				</div>
+				</td>
+			</tr>
+			<tr>
+				<th style="text-align: center;">작성자</th>
+				<td><input type="text" id="user_id" name="user_id" value="${read.user_id}" readonly="readonly" style="margin-left: 15px;"/></td>
+			</tr>
+			<tr>
+				<th style="text-align: center;">작성날짜</th>
+				<td><fmt:formatDate value="${read.qa_logtime}" pattern="yyyy-MM-dd" /></td>
+			</tr>
+		</table>	
 				
-				
-				<div class="form-group">
-					<label for="user_id" class="col-sm-4 control-label">작성자</label>
-					<div class="col-sm-8">
-						<input type="text" id="user_id" name="user_id" value="${read.user_id}" readonly="readonly"/>
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<label for="qa_logtime" class="col-sm-4 control-label">작성날짜</label>
-					<div class="col-sm-8">
-						<fmt:formatDate value="${read.qa_logtime}" pattern="yyyy-MM-dd" />
-					</div>
-				</div>
-				
-				
-				<div class="form-group">
-					<div class="col-sm-offset-4 col-sm-8">
+					<div style="text-align: center;">
 					<c:choose>
 					<c:when test="${id eq 'system' }">
 					<button type="submit" class="update_btn btn btn-default">수정</button>
 					<button type="submit" class="list_btn btn btn-default">목록</button>	
 						<button type="submit" class="delete_btn btn btn-warning">삭제</button>
 					</c:when>
-					<c:otherwise><button type="submit" class="update_btn btn btn-default">수정</button>
+					<c:otherwise>
 					<button type="submit" class="list_btn btn btn-default">목록</button>	
-					<button type="submit" class="delete_btn btn btn-warning">삭제</button>
+					
 					</c:otherwise>
 					</c:choose>
 					</div>
-				</div>
-			</div>
-				
-				
-				<!-- 댓글 -->
-				<div class="form-horizontal">
+	
+	
+		<h4 class="col-sm-offset-4 col-sm-8">댓글</h4>
+				<table class="table" ><!-- 댓글 -->			
 				    <c:forEach items="${replyList}" var="replyList">
-				    	<div id="reply" class="form-group">
-					    	<h4 class="col-sm-offset-4 col-sm-8">댓글</h4>
-					    </div>
-					    
-					    <div id="reply" class="form-group">
-				    		<label class="col-sm-4 control-label">작성자</label>
-				    		<div class="col-sm-8">
-				    		<input type="text" value="${replyList.qa_reply_user_id}" readonly="readonly">
-						        작성 날짜 :  <fmt:formatDate value="${replyList.qa_reply_logtime}" pattern="yyyy-MM-dd" />
-						   	</div>
-					   	</div>
-					   	<div id="reply" class="form-group">
-					        <label class="col-sm-4 control-label">내용</label>
-					        <div class="col-sm-8">
-						        <textarea readonly="readonly" 
-								rows="10" cols="100" style="resize: none">
+				    <tr>
+				    <th style="width: 200px;text-align: center;">작성자</th>
+				    <td><input type="text" value="${replyList.qa_reply_user_id}" readonly="readonly"></td>	
+					</tr>   	
+				    <tr>
+				    <th style="text-align: center;">작성 날짜</th>
+				    <td><fmt:formatDate value="${replyList.qa_reply_logtime}" pattern="yyyy-MM-dd" /></td>	
+					</tr> 
+					<tr>  	
+				    <th style="text-align: center;">내용</th>
+				    <td>  <textarea readonly="readonly" 
+								rows="5" cols="50" style="resize: none">
 								${replyList.qa_reply_content}
 							</textarea>
-							</div>
-						</div>
-					        
-					         <div>
-								<button type="button" class="replyUpdateBtn btn btn-default" data-qa_reply_seq="${replyList.qa_reply_seq}">수정</button>
-							    <button type="button" class="replyDeleteBtn btn btn-warning" data-qa_reply_seq="${replyList.qa_reply_seq}">삭제</button>
-					  	 	 </div>
+					</td>	
+					</tr>   	
+					<tr>
+					<td></td>
+						<td>
+						<button type="button" class="replyUpdateBtn btn btn-default" data-qa_reply_seq="${replyList.qa_reply_seq}">수정</button>
+						<button type="button" class="replyDeleteBtn btn btn-warning" data-qa_reply_seq="${replyList.qa_reply_seq}">삭제</button>				  	 
+						</td>
+					</tr>   			       
+								
 				    </c:forEach>   
-				</div>
+				</table>
 				<!-- 댓글작성폼 -->
 				<form name="replyForm" method="post">
 				  <input type="hidden" id="qa_seq" name="qa_seq" value="${read.qa_seq}" />
@@ -187,20 +228,38 @@
 				  <input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
 				  <input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
 				  <input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
-				
-				  <div>
+				  <table style="padding-top: 30px;" class="table">
 				  	<c:choose>
-				  	<c:when test="${id ne read.user_id}"></c:when>
+				  	<c:when test="${id eq read.user_id}"></c:when>
 				  	<c:otherwise>
-				    <label for="qa_reply_user_id">댓글 작성자</label><input type="text" id="qa_reply_user_id" name="qa_reply_user_id" />
-				    <br/>
-				    <label for="qa_reply_content">댓글 내용</label><input type="text" id="qa_reply_content" name="qa_reply_content" /><br>
-				  
-				 	 <button type="button" class="replyWriteBtn">작성</button>
+				  	<tr>
+				  		<th style="width: 200px;text-align: center;">댓글 작성자</th>
+				  		<td><input type="text" id="qa_reply_user_id" name="qa_reply_user_id"/></td>
+				  	</tr>
+				  	<tr>
+				  		<th style="text-align: center;">댓글 내용</th>
+				  		<td><textarea readonly="readonly" id="qa_reply_content" name="qa_reply_content" rows="5" cols="50" style="resize: none"></textarea></td>
+				  	</tr>
+					<tr>
+						<td></td>
+						<td><button type="button" class="replyWriteBtn">작성</button></td>
+					</tr>							 	 
 				 	 </c:otherwise>
 				 	 </c:choose>
-				  </div>
+				  </table>
+		  
 				</form>
-			
+				
+				
+			<footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="./resources/vendor/jquery/jquery.min.js"></script>
+  <script src="./resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

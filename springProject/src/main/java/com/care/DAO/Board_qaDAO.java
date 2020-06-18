@@ -2,12 +2,9 @@
 package com.care.DAO;
 
 import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import com.care.DTO.Board_qaCriteria;
 import com.care.DTO.Board_qaDTO;
 import com.care.DTO.board_qaReplyDTO;
 import com.care.DTO.Board_qaSearchCriteria;
@@ -63,7 +60,7 @@ public class Board_qaDAO {
 	}
 	//댓글 삭제
 	public void deleteReply(board_qaReplyDTO dto) throws Exception	{
-		int i = sqlSession.delete(namespace+".deleteReply",dto);
+		 sqlSession.delete(namespace+".deleteReply",dto);
 	}
 	//선택된 댓글 조회
 	public board_qaReplyDTO selectReply(int qa_reply_seq) throws Exception	{

@@ -1,35 +1,22 @@
 package com.care.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Logger;
 
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.text.StyleConstants.ColorConstants;
-import javax.xml.transform.Templates;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.GenericXmlApplicationContext;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.care.DTO.Board_qaCriteria;
 import com.care.DTO.Board_qaDTO;
 import com.care.DTO.Board_qaPageMaker;
 import com.care.DTO.Board_qaSearchCriteria;
 import com.care.DTO.board_qaReplyDTO;
 import com.care.service.Board_qaServiceimpl;
-import com.care.service.CommonService;
-import com.care.template.Constants;
+
 
 @Controller
 public class Board_qaController {
@@ -43,7 +30,6 @@ public class Board_qaController {
 	public String QnA(Model model, @ModelAttribute("scri") Board_qaSearchCriteria scri, HttpServletRequest request) throws Exception {
 		
 		model.addAttribute("list",service.list(scri));
-		
 		Board_qaPageMaker pageMaker = new Board_qaPageMaker();
 		pageMaker.setCri(scri);
 		pageMaker.setTotalCount(service.listCount(scri));
@@ -64,7 +50,14 @@ public class Board_qaController {
 		return "cs/QnAwrite";
 	}
 	@RequestMapping("savedata")
-	public String savedata(Board_qaDTO dto,Model model)throws Exception {
+	public String savedata(Board_qaDTO dto,Model model,HttpServletRequest request)throws Exception {
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id");
+		if(id == null) {
+			model.addAttribute("msg","로그인후 이용 가능 합니다.");
+			model.addAttribute("url","bootlogin");
+			return "error/error";
+		}
 		try {
 		 service.Board_qaInsert(dto);
 		 model.addAttribute("msg","게시글이 작성되었습니다");
@@ -81,7 +74,7 @@ public class Board_qaController {
 	public String read(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri, Model model) throws Exception {
 			
 			int Qa_state = service.read(dto.getQa_seq()).getQa_state();
-			System.out.println("비밀글 여부 1=비공개 0=공개 : "+Qa_state);
+		
 			
 			//게시물 조회
 			model.addAttribute("read", service.read(dto.getQa_seq()));
@@ -111,7 +104,15 @@ public class Board_qaController {
 	
 	// 게시판 수정뷰
 	@RequestMapping("updateView")
-	public String updateView(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri,Model model) throws Exception{
+	public String updateView(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri,Model model,HttpServletRequest request) throws Exception{
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id");
+		if(id == null) {
+			model.addAttribute("msg","로그인후 이용 가능 합니다.");
+			model.addAttribute("url","bootlogin");
+			return "error/error";
+		}
+		
 		model.addAttribute("update", service.read(dto.getQa_seq()));
 		model.addAttribute("scri", scri);
 		return "cs/QnAupdateView";
@@ -139,7 +140,15 @@ public class Board_qaController {
 	
 	// 게시판 삭제
 	@RequestMapping("delete")
-	public String delete(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri, RedirectAttributes rttr,Model model) throws Exception{
+	public String delete(Board_qaDTO dto, @ModelAttribute("scri") Board_qaSearchCriteria scri, RedirectAttributes rttr,Model model,HttpServletRequest request) throws Exception{
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id");
+		if(id == null) {
+			model.addAttribute("msg","로그인후 이용 가능 합니다.");
+			model.addAttribute("url","bootlogin");
+			return "error/error";
+		}
+		
 		try {
 		service.delete(dto.getQa_seq());
 		
@@ -160,7 +169,15 @@ public class Board_qaController {
 	
 	// 댓글 작성
 	@RequestMapping("replyWrite")
-	public String replyWrite(board_qaReplyDTO dto, Board_qaSearchCriteria scri, RedirectAttributes rttr,Model model)throws Exception{
+	public String replyWrite(board_qaReplyDTO dto, Board_qaSearchCriteria scri, RedirectAttributes rttr,Model model,HttpServletRequest request)throws Exception{
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id");
+		String system = "system";
+		if(!id.equals(system)) {
+			model.addAttribute("msg","관리자만 이용 가능 합니다.");
+			model.addAttribute("url","home");
+			return "error/error";
+		}
 		
 		try {
 		service.writeReply(dto);
@@ -183,8 +200,14 @@ public class Board_qaController {
 	//댓글 수정 페이지에 접근하기 위한 컨트롤러와 수정한 값을 전송할 수 있는 컨트롤러를 작성
 	//댓글 수정 GET
 	@RequestMapping(value = "/replyUpdateView", method = RequestMethod.GET)
-	public String replyUpdateView(board_qaReplyDTO dto, Board_qaSearchCriteria scri, Model model) throws Exception{
-		
+	public String replyUpdateView(board_qaReplyDTO dto, Board_qaSearchCriteria scri, Model model,HttpServletRequest request) throws Exception{
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id");
+		if(id == null) {
+			model.addAttribute("msg","로그인후 이용 가능 합니다.");
+			model.addAttribute("url","bootlogin");
+			return "error/error";
+		}
 		model.addAttribute("replyUpdate", service.selectReply(dto.getQa_reply_seq()));
 		model.addAttribute("scri", scri);
 		
@@ -214,8 +237,14 @@ public class Board_qaController {
 	//댓글 삭제 페이지에 들어가기 위한 컨트롤러와 삭제 컨트롤러를 작성
 	//댓글 삭제 GET
 		@RequestMapping(value="/replyDeleteView", method = RequestMethod.GET)
-		public String replyDeleteView(board_qaReplyDTO dto, Board_qaSearchCriteria scri, Model model) throws Exception {
-			
+		public String replyDeleteView(board_qaReplyDTO dto, Board_qaSearchCriteria scri, Model model,HttpServletRequest request) throws Exception {
+			HttpSession session = request.getSession();
+			String id = (String) session.getAttribute("id");
+			if(id == null) {
+				model.addAttribute("msg","로그인후 이용 가능 합니다.");
+				model.addAttribute("url","bootlogin");
+				return "error/error";
+			}
 			model.addAttribute("replyDelete", service.selectReply(dto.getQa_reply_seq()));
 			model.addAttribute("scri", scri);
 			

@@ -32,7 +32,15 @@ public class ProductNameController {
 	
 	
 	@RequestMapping("productName")
-	public String productName() {
+	public String productName(HttpServletRequest request,Model model) {
+		HttpSession session = request.getSession();	
+		String id = (String) session.getAttribute("id");
+		String system= "system";
+		if(!id.equals(system)) {
+			model.addAttribute("msg","관리자만 사용가능합니다");
+	        model.addAttribute("url","home");
+	        return "error/error";
+		}
 		return "shopping/productName";
 	}
 	
@@ -116,7 +124,15 @@ public class ProductNameController {
 	}
 	
 	@RequestMapping("modifyproduct")
-	public String modifyproduct(@RequestParam("product_name_no") String product_name_no, Model model) {
+	public String modifyproduct(@RequestParam("product_name_no") String product_name_no, Model model,HttpServletRequest request) {
+		HttpSession session = request.getSession();	
+		String id = (String) session.getAttribute("id");
+		String system= "system";
+		if(!id.equals(system)) {
+			model.addAttribute("msg","관리자만 사용가능합니다");
+	        model.addAttribute("url","home");
+	        return "error/error";
+		}
 		ProductnameDTO modify = service.modifyproduct(product_name_no);
 		model.addAttribute("modifylist",modify);
 		return "shopping/modifyproduct";
@@ -149,7 +165,16 @@ public class ProductNameController {
 		return "error/error";
 	}
 	@RequestMapping("deleteproduct")
-	public String deleteproduct(@RequestParam("product_name_no") String product_name_no,Model model)throws Exception {
+	public String deleteproduct(@RequestParam("product_name_no") String product_name_no,Model model,HttpServletRequest request)throws Exception {
+		HttpSession session = request.getSession();	
+		String id = (String) session.getAttribute("id");
+		String system= "system";
+		if(!id.equals(system)) {
+			model.addAttribute("msg","관리자만 사용가능합니다");
+	        model.addAttribute("url","home");
+	        return "error/error";
+		}
+		
 		try {
 		service.deleteproduct(product_name_no);
 		model.addAttribute("msg","상품이 삭제 되었습니다");
@@ -165,7 +190,15 @@ public class ProductNameController {
 	
 	
 	@RequestMapping("viewbanner")
-	public String banner(Model model) {
+	public String banner(Model model,HttpServletRequest request) {
+		HttpSession session = request.getSession();	
+		String id = (String) session.getAttribute("id");
+		String system = "system";
+		if(!id.equals(system)) {
+			model.addAttribute("msg","관리자만 사용가능합니다");
+	        model.addAttribute("url","home");
+	        return "error/error";
+		}
 		List<BannerDTO> view = service.viewbanner();
 		model.addAttribute("banner",view);	
 		return "shopping/viewbanner";
@@ -173,8 +206,15 @@ public class ProductNameController {
 	
 
 	@RequestMapping("Modifybanner")
-	public String Modifybanner(@RequestParam("banner_no") String banner_no,Model model) throws Exception {
-		
+	public String Modifybanner(@RequestParam("banner_no") String banner_no,Model model,HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();	
+		String id = (String) session.getAttribute("id");
+		String system = "system";
+		if(!id.equals(system)) {
+			model.addAttribute("msg","관리자만 사용가능합니다");
+	        model.addAttribute("url","home");
+	        return "error/error";
+		}
 		model.addAttribute("banner_no",banner_no);
 		return "shopping/modifybanner";
 	}

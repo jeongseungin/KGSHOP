@@ -24,13 +24,10 @@ import com.care.service.SaveProductService;
 @Controller
 public class MemberController {
 	
-
 	@Autowired
 	SaveProductService productservice;
-	
 	@Autowired
 	private MemberService member;
-	
 	@Autowired
 	BCryptPasswordEncoder pwdEncoder;
 	
@@ -46,23 +43,20 @@ public class MemberController {
 	//로그인
 		@RequestMapping(value="chkUser", method=RequestMethod.POST)
 		public String chkUser(MemberDTO dto,HttpServletRequest request, Model model) throws Exception {
-			
+			HttpSession session = request.getSession();
+			String id =  request.getParameter("id");
+			System.out.println(id);
+			String pw = request.getParameter("pw");
+	 		MemberDTO dto1 = null;
+			dto1 = member.logincheck(dto);
+			System.out.println(dto.getPw());
 			try {
-				String id =  request.getParameter("id");
-				String pw = request.getParameter("pw");
-				
-				HttpSession session = request.getSession();
-			
-		 		MemberDTO dto1 = null;
-				dto1 = member.logincheck(dto);
-					if(dto1.getId().equals(id) && pwdEncoder.matches(pw, dto1.getPw())) {	
-						session.setAttribute("id", request.getParameter("id"));
-						model.addAttribute("msg","로그인 성공");
-				        model.addAttribute("url","home");
-						
-					}
+				if(dto1.getId().equals(id) && pwdEncoder.matches(pw, dto1.getPw())) {	
+					session.setAttribute("id", request.getParameter("id"));
+					model.addAttribute("msg","로그인 성공");
+			        model.addAttribute("url","home");
+				}
 			} catch (Exception e) {
-				
 				model.addAttribute("msg","로그인 실패");
 			    model.addAttribute("url","bootlogin");
 			}
@@ -151,7 +145,14 @@ public class MemberController {
 			return "member/bootMemberModify";
 		}
 		@RequestMapping("myPage")
-		public String myPage(HttpServletRequest request) {
+		public String myPage(HttpServletRequest request,Model model) {
+			HttpSession session = request.getSession();
+			String id = (String) session.getAttribute("id");
+			if(id == null) {
+				model.addAttribute("msg","로그인후 이용 가능 합니다.");
+				model.addAttribute("url","bootlogin");
+				return "error/error";
+			}
 			return "member/myPage";
 		}
 

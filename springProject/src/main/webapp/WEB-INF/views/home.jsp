@@ -34,16 +34,13 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
           <c:choose>
-               <c:when test="${id eq 'system'}"><a class="nav-link" href="#" >${id }님 환영합니다 
-              <span class="sr-only">(current)</span></a>
-              </c:when>
               <c:when test="${empty id }"> <a class="nav-link" href="home">홈
               <span class="sr-only">(current)</span>
               </a></c:when>
-               <c:when test="${id eq id}"><a class="nav-link" href="#" >${id }님 환영합니다 
+               <c:when test="${id eq id}"><a class="nav-link" >${id }님 환영합니다 
               <span class="sr-only">(current)</span>
               </a>
-              </c:when>       
+              </c:when>             
           </c:choose>
            
             
@@ -79,6 +76,7 @@
                   <c:when test="${empty id }"> <a class="nav-link" href="bootlogin">로그인</a> </c:when>
                   <c:otherwise>  <a class="nav-link" href="logout">로그아웃</a></c:otherwise>       
             </c:choose>
+       
           </li>
           
         </ul>

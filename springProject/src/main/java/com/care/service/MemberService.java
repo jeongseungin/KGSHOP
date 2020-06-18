@@ -1,14 +1,8 @@
 package com.care.service;
 
 import java.sql.SQLException;
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-
 import com.care.DAO.MemberDAO;
 import com.care.DTO.MemberDTO;
 

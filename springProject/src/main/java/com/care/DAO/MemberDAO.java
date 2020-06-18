@@ -1,25 +1,12 @@
 package com.care.DAO;
-import java.sql.PreparedStatement;
+
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
-
 import com.care.DTO.MemberDTO;
-import com.care.template.Constants;
+
 
 @Repository
 public class MemberDAO {
@@ -36,15 +23,13 @@ public class MemberDAO {
 	
 	
 	public void updatedata(MemberDTO dto) throws SQLException {
-		System.out.println(dto.getId());
-		int result =-1;    
-		result = sqlSession.update(namespace+".updatedata",dto);
-		System.out.println("수정된 값 : "+result);
+		 sqlSession.update(namespace+".updatedata",dto);
+	
 	}
 
 
 	public void savedata(MemberDTO dto) {
-		int result = sqlSession.insert(namespace+".input",dto);
+		sqlSession.insert(namespace+".input",dto);
 	}
 
 	public MemberDTO logincheck(MemberDTO dto) throws Exception{

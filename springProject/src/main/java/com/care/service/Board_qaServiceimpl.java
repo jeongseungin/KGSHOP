@@ -1,12 +1,10 @@
 package com.care.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import com.care.DAO.Board_qaDAO;
-import com.care.DTO.Board_qaCriteria;
 import com.care.DTO.Board_qaDTO;
 import com.care.DTO.Board_qaSearchCriteria;
 import com.care.DTO.board_qaReplyDTO;

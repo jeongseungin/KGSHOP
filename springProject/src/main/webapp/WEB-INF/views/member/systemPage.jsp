@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>     
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +23,7 @@
  <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="home">KG SHOP</a>
+      <a class="navbar-brand" href="#">KG SHOP</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -36,7 +35,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="QnA">Q&A게시판</a>
+            <a class="nav-link" href="#">Q&A게시판</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="">리뷰게시판</a>
@@ -69,7 +68,7 @@
 		 <h1 class="my-4">관리자페이지</h1>
 		  <div class="list-group">
          <a href="viewbanner" class="list-group-item">배너수정</a>
-         <a href="productName" class="list-group-item">상품등록</a>
+         <a href="#" class="list-group-item">상품등록</a>
          <a href="#" class="list-group-item">비밀번호수정</a>
          <a href="#" class="list-group-item">상품전체</a>
          <a href="#" class="list-group-item">댓글달기</a>
@@ -83,34 +82,22 @@
          <a href="bootMemberModify" class="list-group-item">회원정보수정</a>
      
          <a href="#" class="list-group-item">내가 쓴글</a>
-         <a href="shoppingcart?user_id=test" class="list-group-item">장바구니</a>
+         <a href="#" class="list-group-item">장바구니</a>
          <a href="#" class="list-group-item">주문내역</a>
 
         </div>
 		</c:otherwise>
 		</c:choose>
       </div>
-      
-		
+ 
       <!-- /.col-lg-3 -->
       <div class="col-lg-9">
-      <p>
-     
-			<table border="2" style="margin-left: auto; margin-right:auto;" >
-				<tr>
-				<td><img src="<spring:url value='/imgUpload/'/>\imgUpload\mod.JPG"> </td> 
-				<td><img src="<spring:url value='/imgUpload/'/>\imgUpload\vie.JPG"> </td>
-				</tr>
-				<tr>
-				<td><img src="<spring:url value='/imgUpload/'/>\imgUpload\cart.JPG"> </td>
-				<td><img src="<spring:url value='/imgUpload/'/>\imgUpload\order.JPG"> </td>
-				</tr>
-				
-			
-			</table>
-			
-       <p>
-       
+
+
+
+
+
+
       </div>
       <!-- /.col-lg-9 -->
 
