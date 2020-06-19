@@ -118,22 +118,42 @@ li {
 					<tr>
 						<td><c:out value="${list.qa_category}" /></td>
 						<td><c:out value="${list.qa_seq}" /></td>
-						
 						<td>
 						<c:choose>
-						<c:when test="${empty id}"><a href="QnAwrite"><c:out value="${list.qa_subject}" /></a></c:when>
-						<c:otherwise>
-							<a href="QnAreadView?qa_seq=${list.qa_seq}
-							&page=${scri.page}
-							&perPageNum=${scri.perPageNum}
-							&searchType=${scri.searchType}
-							&keyword=${scri.keyword}">
-							<c:out value="${list.qa_subject}" /></a>
-						</c:otherwise>
+							<c:when test="${empty id}"><a href="QnAwrite">
+								<c:out value="${list.qa_subject}" /></a>
+							</c:when>
+							<c:when test="${not empty id}">
+								<a href="QnAreadView?qa_seq=${list.qa_seq}
+								&page=${scri.page}
+								&perPageNum=${scri.perPageNum}
+								&searchType=${scri.searchType}
+								&keyword=${scri.keyword}"></a>
+									<c:choose>
+										<c:when test="${list.qa_state eq 1 }">
+											<a href="QnAreadView?qa_seq=${list.qa_seq}
+											&page=${scri.page}
+											&perPageNum=${scri.perPageNum}
+											&searchType=${scri.searchType}
+											&keyword=${scri.keyword}">
+											<c:out value="${list.qa_subject}"/>
+											</a>
+											<font color="gray">(비밀번호가 설정된 글입니다.)</font>
+										</c:when>
+										<c:otherwise>
+											<a href="QnAreadView?qa_seq=${list.qa_seq}
+											&page=${scri.page}
+											&perPageNum=${scri.perPageNum}
+											&searchType=${scri.searchType}
+											&keyword=${scri.keyword}">
+											<c:out value="${list.qa_subject}"/>
+											<c:out value="${list.qa_state}"/>
+											</a>
+										</c:otherwise>
+									</c:choose>
+							</c:when>
 						</c:choose>
 						</td>
-						
-						
 						<td><c:out value="${list.user_id}" /></td>
 						<td><fmt:formatDate value="${list.qa_logtime}" pattern="yyyy-MM-dd"/></td>
 					</tr>

@@ -239,13 +239,15 @@
             QA_CATEGORY,
 		        QA_SUBJECT, 
 		        USER_ID, 
-		        QA_LOGTIME
+		        QA_LOGTIME,
+		        QA_STATE
 		 FROM ( 
 		        SELECT QA_SEQ,
 		               QA_CATEGORY, 
 		               QA_SUBJECT, 
 		               USER_ID, 
 		               QA_LOGTIME, 
+		               QA_STATE,
 		               ROW_NUMBER() OVER(ORDER BY QA_SEQ DESC) AS RNUM
 		         FROM BOARD_QA
 		         WHERE 1=1
@@ -326,6 +328,7 @@
 			, #{qa_reply_user_id}	
 			,sysdate)
 	</insert>
+	
 	
 	<!-- 댓글 수정 -->
 	<update id="updateReply" parameterType="com.care.DTO.board_qaReplyDTO">

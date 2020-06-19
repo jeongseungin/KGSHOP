@@ -69,4 +69,6 @@ public class Board_qaDAO {
 	public board_qaReplyDTO selectReply(int qa_reply_seq) throws Exception	{
 		return sqlSession.selectOne(namespace+".selectReply", qa_reply_seq);
 	}
+	
+	
 }
