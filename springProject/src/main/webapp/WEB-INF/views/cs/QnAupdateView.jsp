@@ -39,12 +39,13 @@
 						<tbody>
 							<tr>
 								<td>
-									<label for="qa_category">카테고리</label><input type="text" id="qa_category" name="qa_category" value="${update.qa_category}"/>
+									<label for="qa_category">카테고리</label>
+									<input type="text" id="qa_category" name="qa_category" value="${update.qa_category}"/>
 								</td>
 							</tr>	
 							<tr>
 								<td>
-									<label for="qa_subject">제목</label><input type="text" id="qa_subject" name="qa_subject" value="${update.qa_subject}">
+							                                    <label for="qa_subject">제목</label><input type="text" id="qa_subject" name="qa_subject" value="${update.qa_subject}" readonly="readonly">
 								</td>
 							</tr>	
 							<tr>
