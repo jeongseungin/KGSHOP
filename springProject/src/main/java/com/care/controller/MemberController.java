@@ -55,21 +55,18 @@ public class MemberController {
 		public String chkUser(MemberDTO dto,HttpServletRequest request, Model model) throws Exception {
 			HttpSession session = request.getSession();
 			String id =  request.getParameter("id");
-			System.out.println(id);
 			String pw = request.getParameter("pw");
 	 		MemberDTO dto1 = null;
 			dto1 = member.logincheck(dto);
-			System.out.println(dto.getPw());
-			try {
 				if(dto1.getId().equals(id) && pwdEncoder.matches(pw, dto1.getPw())) {	
 					session.setAttribute("id", request.getParameter("id"));
 					model.addAttribute("msg","로그인 성공");
 			        model.addAttribute("url","home");
-				}
-			} catch (Exception e) {
+				
+			}else
 				model.addAttribute("msg","로그인 실패");
 			    model.addAttribute("url","bootlogin");
-			}
+			
 			return "error/error";
 		}
 

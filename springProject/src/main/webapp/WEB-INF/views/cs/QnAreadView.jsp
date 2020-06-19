@@ -184,9 +184,13 @@
 					<button type="submit" class="list_btn btn btn-default">목록</button>	
 						<button type="submit" class="delete_btn btn btn-warning">삭제</button>
 					</c:when>
-					<c:otherwise>
+					<c:when test="${id ne read.user_id}">
 					<button type="submit" class="list_btn btn btn-default">목록</button>	
-					
+					</c:when>
+					<c:otherwise>
+					<button type="submit" class="update_btn btn btn-default">수정</button>
+					<button type="submit" class="list_btn btn btn-default">목록</button>	
+						<button type="submit" class="delete_btn btn btn-warning">삭제</button>
 					</c:otherwise>
 					</c:choose>
 					</div>
