@@ -64,12 +64,41 @@
 		  where product_category_no = #{product_category_no}
 	</select>
 	
-	<!-- 전체상품 총개수 -->
-	<select id="productListCountAll" resultType="int">
+	<!-- 검색상품 총개수 -->
+	<select id="searchListCount" resultType="int">
 	SELECT COUNT(product_category_no)
 		  FROM productname
 		  WHERE 1=1
 		  <include refid="productSearch"></include>
+	</select>
+	<!-- 상품 Best30 -->
+	<select id="bestView" resultType="com.care.DTO.ProductnameDTO">
+		SELECT  PRODUCT_NAME_NO, 
+            PRODUCT_CATEGORY_NO,
+		    PRODUCT_NAME_TITLE,
+	        PRODUCT_NAME_DETAIL, 
+	        PRODUCT_NAME_PRICE,
+            PRODUCT_NAME_IMAGE,
+            PRODUCT_THUMBNAIL,
+            PRODUCT_STOCK,
+            PRODUCT_HIT,
+            PRODUCT_HASHTAG
+		 FROM ( 
+		        SELECT 
+                    PRODUCT_NAME_NO, 
+                    PRODUCT_CATEGORY_NO,
+                    PRODUCT_NAME_TITLE, 
+                    PRODUCT_NAME_DETAIL, 
+                    PRODUCT_NAME_PRICE,
+                    PRODUCT_NAME_IMAGE,
+                    PRODUCT_THUMBNAIL,
+                    PRODUCT_STOCK,
+                    PRODUCT_HIT,
+                    PRODUCT_HASHTAG,
+	                ROW_NUMBER() OVER(ORDER BY PRODUCT_HIT DESC) AS RNUM
+		         	FROM PRODUCTNAME
+		                       ) MP
+		WHERE RNUM BETWEEN 1 AND 30
 	</select>
 	
 	<!-- 카테고리 목록 페이징 -->
@@ -102,8 +131,10 @@
 		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
 		ORDER BY PRODUCT_NAME_NO DESC
 	</select>
-		<!-- 상품 전체 목록 페이징 -->
-	<select id="productListPageAll" resultType="com.care.DTO.ProductnameDTO">
+	
+	
+	<!-- 상품 검색 목록 페이징 -->
+	<select id="searchView" resultType="com.care.DTO.ProductnameDTO">
 		SELECT  PRODUCT_NAME_NO, 
             PRODUCT_CATEGORY_NO,
 		    PRODUCT_NAME_TITLE,
@@ -134,6 +165,7 @@
 		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
 		ORDER BY PRODUCT_NAME_NO DESC
 	</select>
+	
 	
 	<!-- 상품 검색 기능-->
 	<sql id="productSearch">
@@ -215,26 +247,28 @@
 		VALUES(#{qa_category},#{user_id},#{qa_content},sysdate,#{qa_pwd,jdbcType=VARCHAR},0,qa_seq.nextval,#{qa_state},#{qa_subject})
 	</insert>
 	<!-- 게시판 목록 페이징 -->
-	<select id="listPage" resultType="com.care.DTO.Board_qaDTO" parameterType="com.care.DTO.Board_qaCriteria">
-		SELECT  QA_SEQ, 
+   <select id="listPage" resultType="com.care.DTO.Board_qaDTO" parameterType="com.care.DTO.Board_qaCriteria">
+      SELECT  QA_SEQ, 
             QA_CATEGORY,
-		        QA_SUBJECT, 
-		        USER_ID, 
-		        QA_LOGTIME
-		 FROM ( 
-		        SELECT QA_SEQ,
-		               QA_CATEGORY, 
-		               QA_SUBJECT, 
-		               USER_ID, 
-		               QA_LOGTIME, 
-		               ROW_NUMBER() OVER(ORDER BY QA_SEQ DESC) AS RNUM
-		         FROM BOARD_QA
-		         WHERE 1=1
-		         	<include refid="search"></include>
-		                       ) MP
-		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
-		ORDER BY QA_SEQ DESC
-	</select>
+              QA_SUBJECT, 
+              USER_ID, 
+              QA_LOGTIME,
+              QA_STATE
+       FROM ( 
+              SELECT QA_SEQ,
+                     QA_CATEGORY, 
+                     QA_SUBJECT, 
+                     USER_ID, 
+                     QA_LOGTIME, 
+                     QA_STATE,
+                     ROW_NUMBER() OVER(ORDER BY QA_SEQ DESC) AS RNUM
+               FROM BOARD_QA
+               WHERE 1=1
+                  <include refid="search"></include>
+                             ) MP
+      WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+      ORDER BY QA_SEQ DESC
+   </select>
 	<!-- 게시판 총 개수 -->
 	<select id="listCount" resultType="int">
 		SELECT COUNT(QA_SEQ)
@@ -400,6 +434,111 @@
 	<select id="viewbanner" resultType="com.care.DTO.BannerDTO" parameterType="String">
 		select * from banner 
 	</select>
+	
+	<!-- 리뷰 목록 페이징 -->
+	<select id="reviewList" resultType="com.care.DTO.ReviewDTO" parameterType="com.care.DTO.Board_qaCriteria">
+		SELECT  review_seq, 
+           		review_score,
+		        review_product_title,
+            	review_product_image,
+		        review_user_id, 
+		        review_subject,
+            	review_content,
+           		review_image,
+           		review_logtime            
+		 FROM ( 
+		        SELECT 
+              review_seq, 
+           	  review_score,
+              review_product_title, 
+              review_product_image,
+              review_user_id, 
+              review_subject,
+              review_content,
+              review_image,
+              review_logtime, 
+		      ROW_NUMBER() OVER(ORDER BY review_seq DESC) AS RNUM
+	          FROM BOARD_REVIEW
+		                       ) MP
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY review_seq DESC
+	</select>
+	<!-- 리뷰게시판 총 개수 -->
+	<select id="reviewListCount" resultType="int">
+		SELECT COUNT(REVIEW_SEQ)
+		  FROM BOARD_REVIEW
+	</select>
+	<!-- 리뷰 글쓰기 -->
+	<insert id="reviewSavedata" >
+		INSERT INTO BOARD_REVIEW(
+              review_seq, 
+           	  review_score,
+              review_product_title, 
+              review_product_image,
+              review_user_id, 
+              review_subject,
+              review_content,
+              review_image,
+              review_logtime) 
+		VALUES(
+		      review_seq.nextval,
+		      #{review_score},
+		      #{review_product_title},
+		      #{review_product_image},
+		      #{review_user_id},
+		      #{review_subject},
+		      #{review_content},
+		      #{review_image},
+		      sysdate
+     	 )
+	</insert>
+
+	<!-- 리뷰 상품정보 가져오기 -->	
+	<select id="getproduct" resultType="com.care.DTO.ProductnameDTO">
+		select
+			product_name_title,
+			product_thumbnail
+			where 
+			product_name_title = ${product_title};
+	
+	</select>
+	
+	<!-- 게시판 조회 -->
+	<select id="reviewReadView" parameterType="int" resultType="com.care.DTO.ReviewDTO">
+		SELECT	
+			  review_seq, 
+           	  review_score,
+              review_product_title, 
+              review_product_image,
+              review_user_id, 
+              review_subject,
+              review_content,
+              review_image,
+              review_logtime
+		 FROM BOARD_REVIEW
+		 WHERE review_seq = #{review_seq} 
+	</select>
+	
+	<!-- 리뷰 게시판 수정 -->
+	<update id="reviewUpdate" parameterType="com.care.DTO.ReviewDTO">
+		UPDATE BOARD_REVIEW
+		   SET 
+           	  review_score=#{review_score},
+              review_product_title=#{review_product_title},
+              review_product_image=#{review_product_image},
+              review_subject=#{review_subject},
+              review_content=#{review_content},
+              review_image=#{review_image},
+              review_logtime=sysdate
+		 WHERE review_seq = #{review_seq}
+	</update>
+	<!-- 리뷰 게시판 삭제 -->
+	<delete id="reviewDelete" parameterType="int">
+		DELETE 
+		  FROM BOARD_REVIEW
+		 WHERE review_seq = #{review_seq}
+	</delete>
+	
 </mapper>
 
 

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -249,6 +250,19 @@ public String Savebanner(BannerDTO dto, MultipartFile file,@RequestParam("banner
 		return "error/error";
 	}
 	
+	@RequestMapping("searchView")
+	public String SearchView(Model model, @ModelAttribute("scri") Board_qaSearchCriteria scri) {
+		
+		model.addAttribute("searchView",service.searchView(scri));
+		
+		Board_qaPageMaker pageMaker = new Board_qaPageMaker();
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(service.searchListCount(scri));
+		
+		model.addAttribute("pageMaker", pageMaker);
+		
+		return "category/searchView/searchView";
+	}
 
 }
 

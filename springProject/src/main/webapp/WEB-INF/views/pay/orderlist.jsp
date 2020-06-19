@@ -17,6 +17,7 @@
 가 격 : ${orderlist.product_name_price }
 수 량 : ${orderlist.product_count }
 총 가 격 :${orderlist.product_sumprice }
+<a href="reviewWrite?product_title=${orderlist.product_name_title }">리뷰 쓰기</a>
 </c:forEach>
 </body>
 </html>

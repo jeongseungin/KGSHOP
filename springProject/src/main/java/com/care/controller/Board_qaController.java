@@ -27,7 +27,7 @@ public class Board_qaController {
 	
 	
 	@RequestMapping("QnA")
-	public String QnA(Model model, @ModelAttribute("scri") Board_qaSearchCriteria scri, HttpServletRequest request) throws Exception {
+	public String QnA(Model model, @ModelAttribute("scri") Board_qaSearchCriteria scri) throws Exception {
 		
 		model.addAttribute("list",service.list(scri));
 		Board_qaPageMaker pageMaker = new Board_qaPageMaker();

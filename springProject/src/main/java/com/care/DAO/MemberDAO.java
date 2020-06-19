@@ -1,11 +1,14 @@
 package com.care.DAO;
 
 import java.sql.SQLException;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import com.care.DTO.MemberDTO;
+import com.care.DTO.ProductnameDTO;
 
 
 @Repository
@@ -45,7 +48,13 @@ public class MemberDAO {
 		return sqlSession.selectOne(namespace+".memberlist",id);
 	}
 
+	public List<ProductnameDTO> bestView(){
+		return sqlSession.selectList(namespace+".bestView");
+		
+	}
 
+
+	
 	
 	
 }

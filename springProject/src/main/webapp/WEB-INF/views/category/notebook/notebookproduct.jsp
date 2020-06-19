@@ -153,32 +153,7 @@
 		    	<li><a href="notebookproduct${pageMaker.makeSearch(pageMaker.endPage + 1)}&product_category_no=${product_category_no}">다음</a></li>
 		    </c:if> 
 		  </ul>
-	  <div class="search row">
-				<div class="col-xs-2 col-sm-2">
-				    <select name="searchType" class="form-control">
-				      <option value="n"<c:out value="${scri.searchType == null ? 'selected' : ''}"/>>-----</option>
-				      <option value="t"<c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>상품명</option>
-				      <option value="c"<c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>해시태그</option>
-				      <option value="tc"<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>상품명+해시태그</option>
-				    </select>
-				</div>
-				<div class="col-xs-3 col-sm-3">
-					<div class="input-group">
-				    	<input class="form-control" type="text" name="keyword" id="keywordInput" value="${scri.keyword}"/>
-				    	<span class="input-group-btn">
-				    		<button class="btn btn-default" id="searchBtn" type="button">검색</button>
-				    	</span>
-					</div>
-				</div>
-				    	
-			    <script>
-			      $(function(){
-			        $('#searchBtn').click(function() {
-			          self.location = "notebookproduct" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
-			        });
-			      });   
-			    </script>
-			 </div>
+	 
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">

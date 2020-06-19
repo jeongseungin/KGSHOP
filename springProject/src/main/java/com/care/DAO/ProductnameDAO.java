@@ -153,9 +153,6 @@ public class ProductnameDAO {
 	}
 
 
-
-
-
 	public int titleChk(ProductnameDTO dto)throws Exception {
 		
 		return sqlSession.selectOne(namespace+".titleChk",dto);
@@ -163,13 +160,27 @@ public class ProductnameDAO {
 	}
 
 
-
-
-
 	public int cartChk(ShoppingCartDTO dto) {
 	
 		return sqlSession.selectOne(namespace+".cartChk",dto);
 	}
+
+
+	public List<ProductnameDTO> searchView(Board_qaSearchCriteria scri) {
+		return sqlSession.selectList(namespace+".searchView",scri);
+	}
+
+
+	public int searchListCount(Board_qaSearchCriteria scri) {
+		return sqlSession.selectOne(namespace+".searchListCount", scri);
+	}
+
+	public ProductnameDTO getproduct(String product_title) {
+		
+		return sqlSession.selectOne(namespace+".getproduct", product_title);
+	}
+
+
 
 
 

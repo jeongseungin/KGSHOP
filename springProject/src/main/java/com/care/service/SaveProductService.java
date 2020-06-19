@@ -132,7 +132,19 @@ public void saveshoppingcart(ShoppingCartDTO dto) {
 		return result;
 	}
 
-	
+	public List<ProductnameDTO> searchView(Board_qaSearchCriteria scri) {
+		return dao.searchView(scri);
+	}
+
+	public int searchListCount(Board_qaSearchCriteria scri) {
+		
+		return dao.searchListCount(scri);
+	}
+
+	public ProductnameDTO getproduct(String product_title) {
+		
+		return dao.getproduct(product_title);
+	}
 	
 	
 }

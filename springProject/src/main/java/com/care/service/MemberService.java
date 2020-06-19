@@ -1,10 +1,13 @@
 package com.care.service;
 
 import java.sql.SQLException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.care.DAO.MemberDAO;
 import com.care.DTO.MemberDTO;
+import com.care.DTO.ProductnameDTO;
 
 @Service
 public class MemberService {
@@ -33,6 +36,9 @@ public class MemberService {
 		return dao.list(id);		
 	}
 
+	public List<ProductnameDTO> bestView(){
+		return dao.bestView();
+	}
 
 
 }
