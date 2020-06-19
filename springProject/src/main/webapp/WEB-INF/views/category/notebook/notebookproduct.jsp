@@ -48,7 +48,7 @@
             <a class="nav-link" href="QnA">Q&A게시판</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">리뷰게시판</a>
+            <a class="nav-link" href="reviewPage">리뷰게시판</a>
           </li>
           
          <li class="nav-item">
@@ -114,7 +114,8 @@
 		<c:forEach items="${notebooklists}" var="dto">
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="productview?product_name_no=${dto.product_name_no}"><img style="width: 253px; height: 200px;" src="<spring:url value='/imgUpload/'/>${dto.product_thumbnail }" ></a>
+              <a href="productview?product_name_no=${dto.product_name_no}">
+              <img style="width: 253px; height: 200px;" src="<spring:url value='/imgUpload/'/>${dto.product_thumbnail }" ></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a href="productview?product_name_no=${dto.product_name_no}">${dto.product_name_title}</a>

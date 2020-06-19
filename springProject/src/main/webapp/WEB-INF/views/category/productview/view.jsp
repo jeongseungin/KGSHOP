@@ -209,7 +209,7 @@ function pay(){
             <a class="nav-link" href="QnA">Q&A게시판</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">리뷰게시판</a>
+            <a class="nav-link" href="reviewPage">리뷰게시판</a>
           </li>
           
          <li class="nav-item">
@@ -248,8 +248,7 @@ function pay(){
 	<tr>
 		<td style="text-align: center;" rowspan="4">
 		<img style="width: 295px; height: 250px;"
-			src="<spring:url value='/imgUpload/'/>${productlist.product_name_image }">
-	
+			src="<spring:url value='/imgUpload/'/>${productlist.product_name_image }" >
 		</td>
 		<td style="padding-top: 50px;"><font size="6px">상품명 &nbsp;&nbsp;&nbsp;${productlist.product_name_title}</font></td>
 		
@@ -332,7 +331,8 @@ function pay(){
  <form name="form" action="orderview">
  <table  class="table" >
  	<tr>	
- 		<td style="text-align: center; padding-left: 313px;">	<input type="hidden" name="product_name_title" value="${productlist.product_name_title}">
+ 		<td style="text-align: center; padding-left: 313px;">	
+ 		<input type="hidden" name="product_name_title" value="${productlist.product_name_title}">
  				<input type="hidden" name="product_count" value="" id="product_count">
  				<input type="button" value="결제하기"  class="button1" onclick="pay()"></td>
  	</tr>

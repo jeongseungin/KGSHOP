@@ -39,7 +39,7 @@
             <a class="nav-link" href="QnA">Q&A게시판</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">리뷰게시판</a>
+            <a class="nav-link" href="reviewPage">리뷰게시판</a>
           </li>
          <li class="nav-item">
             <a class="nav-link" href="shoppingcart?user_id=test">장바구니</a>
