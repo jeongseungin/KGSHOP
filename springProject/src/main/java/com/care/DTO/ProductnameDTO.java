@@ -14,7 +14,6 @@ public class ProductnameDTO {//등록상품에 대한 클래스
 	private int product_hit; // 조회수
 	private int product_stock; //재고량
 	
-	
 	public String getProduct_name_no() {
 		return product_name_no;
 	}

@@ -84,7 +84,7 @@
      
          <a href="#" class="list-group-item">내가 쓴글</a>
          <a href="shoppingcart?user_id=test" class="list-group-item">장바구니</a>
-         <a href="#" class="list-group-item">주문내역</a>
+         <a href="vieworderlist" class="list-group-item">주문내역</a>
 
         </div>
 		</c:otherwise>

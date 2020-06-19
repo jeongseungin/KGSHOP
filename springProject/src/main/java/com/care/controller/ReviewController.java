@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -44,18 +45,18 @@ public class ReviewController {
 		
 		//리뷰 글쓰기
 		@RequestMapping("reviewWrite")
-		public String QnAwrite(HttpServletRequest request,Model model,@RequestParam("product_title") String product_title) {
-			ProductnameDTO view = productservice.getproduct(product_title);
+		public String QnAwrite(HttpServletRequest request,Model model,@RequestParam("product_name_title") String product_name_title) {
+			ProductnameDTO view = productservice.getproduct(product_name_title);
 			model.addAttribute("product",view);
+			
 			HttpSession session = request.getSession();
 			String id = (String) session.getAttribute("id");
 			if(id == null) {
-				String msg="회원가입 후 이용 가능 합니다.";
-				model.addAttribute("msg",msg);
-				String location = "QnA";
-				model.addAttribute("location",location);
+				model.addAttribute("msg","로그인후 이용 가능 합니다.");
+				model.addAttribute("url","bootlogin");
 				return "error/error";
 			}
+			
 			return "cs/reviewWrite";
 		}
 		
@@ -63,11 +64,12 @@ public class ReviewController {
 		private String uploadPath;
 		
 		//글쓰기 저장
-		@RequestMapping("reviewSavedata")
+		@RequestMapping(value = "reviewSavedata" ,method = RequestMethod.POST)
 		public String savedata(ReviewDTO dto,MultipartFile file)throws Exception {
 			String imgUploadPath = uploadPath + File.separator + "imgUpload";
 			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
 			String fileName = null;
+			
 
 			if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
 			 fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
@@ -78,6 +80,7 @@ public class ReviewController {
 			int i;
 			i = service.insert(dto);
 			System.out.println("결과값"+i);
+			
 			return "redirect:reviewPage";
 		}
 		

@@ -243,7 +243,7 @@
 				  	</tr>
 				  	<tr>
 				  		<th style="text-align: center;">댓글 내용</th>
-				  		<td><textarea readonly="readonly" id="qa_reply_content" name="qa_reply_content" rows="5" cols="50" style="resize: none"></textarea></td>
+				  		<td><textarea id="qa_reply_content" name="qa_reply_content" rows="5" cols="50" style="resize: none"></textarea></td>
 				  	</tr>
 					<tr>
 						<td></td>

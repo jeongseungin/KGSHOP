@@ -80,6 +80,7 @@
   <!-- Custom styles for this template -->
   <link href="./resources/css/shop-homepage.css" rel="stylesheet">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -156,7 +157,8 @@
 <h1 style="text-align: center;">글쓰기</h1>
 
 <div>
-   <form action="reviewSavedata" method="get" id="reviewSavedata" enctype="multipart/form-data">
+   <form action="reviewSavedata" method="post" id="reviewSavedata" enctype="multipart/form-data" >
+   <input type="hidden" value="${product.product_thumbnail}" name="review_product_image">
 		<table class="table">
 			<tr>
 				<td>
@@ -190,7 +192,7 @@
 			<tr>
 				<th>상품 이미지</th>
 				<td>
-				<img style="width: 50px; height: 50px;" name="review_product_image" src="<spring:url value='/imgUpload/'/>${product.product_thumbnail}" >
+				<img style="width: 200px; height: 200px;"  src="<spring:url value='/imgUpload/'/>${product.product_thumbnail}" >
 				</td>				
 			</tr>
 			<tr>
@@ -202,7 +204,7 @@
 			<tr>
 			<th>리뷰 이미지</th>
 			<td>
-			<input type="file" name="file" id="review_image">
+			<input type="file" name="file" id="review_image" name="review_image">
 			</td>
 			
 			</tr>

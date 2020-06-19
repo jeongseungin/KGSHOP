@@ -27,6 +27,17 @@ public class ReviewDAO {
 	}
 
 	public int insert(ReviewDTO dto) {
+		System.out.println("dao");
+		System.out.println(dto.getReview_content());
+		System.out.println(dto.getReview_image()); 
+		System.out.println(dto.getReview_product_image());
+		System.out.println(dto.getReview_product_title());
+		System.out.println(dto.getReview_score());
+		System.out.println(dto.getReview_seq());
+		System.out.println(dto.getReview_subject());
+		System.out.println(dto.getReview_user_id());
+		System.out.println(dto.getClass());
+		System.out.println(dto.getReview_logtime());
 		return sqlSession.insert(namespace+".reviewSavedata",dto);
 	}
 

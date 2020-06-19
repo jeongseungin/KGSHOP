@@ -282,7 +282,7 @@ function pay(){
          </c:otherwise>
       </c:choose></td>
 		<td><div class="section2">
- 		<input type="submit" value="장바구니담기" class="button5" >
+ 		 <input type="button" value="장바구니담기" class="button5" onclick="cartChk()" >
  		</div></td>
 	</tr>
 </table>
@@ -293,6 +293,26 @@ function pay(){
   <input type="hidden" name="product_name_price" value="${productlist.product_name_price}">
   
   
+   <script>
+        function cartChk() {
+            
+            $.ajax({
+                url: "cartChk",
+                type: "post",
+                dataType : "json",
+                data : {"product_name_title" :"${productlist.product_name_title}"},
+                success: function(data) {
+                    if(data==1){
+                        alert("이미 담겨진 상품 입니다")                    
+                    }else if(data==0){
+                        alert("장바구니에 상품이 정상적으로 등록되었습니다")
+                        document.view.submit();
+                    }
+                }
+            });
+        }
+   </script>
+   
  <script>
   $(".plus").click(function(){
    var num = $(".numBox").val();
