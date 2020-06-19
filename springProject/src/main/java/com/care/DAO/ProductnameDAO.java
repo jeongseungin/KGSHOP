@@ -158,4 +158,9 @@ public class ProductnameDAO {
 		return sqlSession.selectOne(namespace+".searchListCount", scri);
 	}
 
+	public ProductnameDTO getproduct(String product_title) {
+		
+		return sqlSession.selectOne(namespace+".getproduct", product_title);
+	}
+
 }

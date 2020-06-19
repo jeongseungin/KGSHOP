@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -188,17 +189,21 @@
 			</tr>
 			<tr>
 				<th>상품 이미지</th>
-				<td><img name="review_product_image"></td>													</td>
+				<td>
+				<img style="width: 50px; height: 50px;" name="review_product_image" src="<spring:url value='/imgUpload/'/>${product.product_thumbnail}" >
+				</td>				
 			</tr>
 			<tr>
 				<th>상품명</th>
 				<td>
-				<input type="text" value="" name="review_product_title" readonly>
+				<input type="text" value="${product.product_name_title}" name="review_product_title" readonly>
 				</td>
 			</tr>
 			<tr>
 			<th>리뷰 이미지</th>
-			<td><input type="file" name="file" id="review_image"></td>
+			<td>
+			<input type="file" name="file" id="review_image">
+			</td>
 			
 			</tr>
 			

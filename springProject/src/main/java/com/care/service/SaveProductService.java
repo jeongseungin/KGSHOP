@@ -134,6 +134,11 @@ public void saveshoppingcart(ShoppingCartDTO dto) {
 		return dao.searchListCount(scri);
 	}
 
+	public ProductnameDTO getproduct(String product_title) {
+		
+		return dao.getproduct(product_title);
+	}
+
 
 	
 	

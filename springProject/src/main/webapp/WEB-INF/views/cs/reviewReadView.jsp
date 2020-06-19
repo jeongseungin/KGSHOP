@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -136,7 +137,9 @@
          </tr>
          <tr>
             <th style="text-align: center;">이미지</th>
-            <td><input type="text" id="review_product_image" name="review_product_image" value="${read.review_product_image}" readonly="readonly" style="margin-left: 15px;"/></td>
+           <td> <img style="width: 50px; height: 50px;" id="review_product_image" name="review_product_image" 
+            src="<spring:url value='/imgUpload/'/>${read.review_product_image}" style="margin-left: 15px;">
+            </td>
          </tr>
          <tr>
             <th style="text-align: center;">내용</th>

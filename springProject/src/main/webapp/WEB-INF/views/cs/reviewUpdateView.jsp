@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+ <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -99,7 +100,7 @@
          </header>
          
          <section id="container" style="padding-top: 30px;">
-            <form name="updateForm" role="form" method="post" action="reviewUpdate">
+            <form name="updateForm" role="form" method="post" action="reviewUpdate" enctype="multipart/form-data">
                <input type="hidden" name="review_seq" value="${update.review_seq}" readonly="readonly"/>
                <table class="table">
                   <tbody>
@@ -125,6 +126,14 @@
                            <input type="text" id="review_subject" name="review_subject" value="${update.review_subject}">
                         </td>
                      </tr>   
+                      <tr>
+                        <th style="text-align: center;">
+                           <label for="review_content">내용</label>
+                        </th>
+                        <td>
+                           <textarea id="review_content" name="review_content" rows="10" cols="100" style="resize: none"><c:out value="${update.review_content}"/></textarea>
+                        </td>
+                     </tr>
                      <tr>
 						<td> 
 							<input type="hidden" name="review_product_image" value="review_product_image">
@@ -133,20 +142,28 @@
 						</td>
 						<td>
 							파일선택
-							<input type="button" value="파일선택">
-							<input type="hidden" name="review_image" value="review_image">
+							<input type="file" name="file" id="review_image">
 						</td>
 					</tr>
+                    
                      <tr>
-                        <th style="text-align: center;">
-                           <label for="review_content">내용</label>
-                        </th>
-                        <td>
-                           <textarea id="review_content" name="review_content" rows="10" cols="100" style="resize: none"><c:out value="${update.review_content}"/></textarea>
-                        </td>
-                     </tr>
-                     
-                     
+					<th>리뷰 이미지 미리보기</th>
+					<td>
+					<div class="select_img"><img src="" /></div>
+					</td>
+					</tr>
+					<script>
+					  $("#review_image").change(function(){
+					   if(this.files && this.files[0]) {
+					    var reader = new FileReader;
+					    reader.onload = function(data) {
+					     $(".select_img img").attr("src", data.target.result).width(500);        
+					    }
+					    reader.readAsDataURL(this.files[0]);
+					   }
+					  });
+		 				</script>
+		                     
                      <tr>
                         <th style="text-align: center;">
                            <label for="user_id">작성자</label>

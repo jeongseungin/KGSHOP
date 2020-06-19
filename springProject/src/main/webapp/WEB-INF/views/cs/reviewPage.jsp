@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+ <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -120,7 +120,9 @@ li {
 						<td><c:out value="${list.review_seq}" /></td>
 						
 						<!-- 해당상품에 대한 이미지, 크기 작게 -->
-						<td><input type="image"></td>
+						<td>
+						<img style="width: 50px; height: 50px;" name="review_product_image" src="<spring:url value='/imgUpload/'/>${list.review_product_image}" >
+						</td>
 						
 						<td>
 						<c:choose>
