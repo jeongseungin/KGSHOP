@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <script src="./resources/vendor/jquery/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -147,7 +148,6 @@ li {
 											&searchType=${scri.searchType}
 											&keyword=${scri.keyword}">
 											<c:out value="${list.qa_subject}"/>
-											<c:out value="${list.qa_state}"/>
 											</a>
 										</c:otherwise>
 									</c:choose>
@@ -207,7 +207,7 @@ li {
 		<input type="button" value="글쓰기" onclick="location.href='QnAwrite'" >
  </section>
 </div>
- <script src="./resources/vendor/jquery/jquery.min.js"></script>
+
   <script src="./resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

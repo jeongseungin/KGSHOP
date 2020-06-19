@@ -64,7 +64,7 @@
 			</tr>
 			<tr>
 				<td>제목</td>
-				<td><input type="text" name="qa_subject" id="qa_subject"></td>
+				<td><input type="text" name="qa_subject" id="qa_subject" value="${id }님의 문의입니다." readonly="readonly"></td>
 			</tr>		
 			<tr>
 				<td>내용</td>

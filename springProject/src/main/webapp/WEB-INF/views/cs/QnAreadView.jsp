@@ -27,21 +27,21 @@
 			formObj.attr("action", "updateView");
 			formObj.attr("method", "get");
 			formObj.submit();				
-		})
+		});
 		
 		// 삭제
 		$(".delete_btn").on("click", function(){
 			formObj.attr("action", "delete");
 			formObj.attr("method", "post");
 			formObj.submit();
-		})
+		});
 		
 		// 취소
 		$(".list_btn").on("click", function(){
 			location.href = "QnA?page=${scri.page}"
 			+"&perPageNum=${scri.perPageNum}"
 			+"&searchType=${scri.searchType}&keyword=${scri.keyword}";
-		})
+		});
 		
 		$(".replyWriteBtn").on("click", function(){
 		   var formObj = $("form[name='replyForm']");
@@ -73,7 +73,7 @@
 				+ "&qa_reply_seq="+$(this).attr("data-qa_reply_seq");
 		});
 		
-	})
+	});
 </script>
 <body>
 		<div class="form-horizontal">
@@ -193,7 +193,7 @@
 				  	<c:choose>
 				  	<c:when test="${id ne read.user_id}"></c:when>
 				  	<c:otherwise>
-				    <label for="qa_reply_user_id">댓글 작성자</label><input type="text" id="qa_reply_user_id" name="qa_reply_user_id" />
+				    <label for="qa_reply_user_id">댓글 작성자</label><input type="text" id="qa_reply_user_id" name="qa_reply_user_id" value="${id }" readonly="readonly" />
 				    <br/>
 				    <label for="qa_reply_content">댓글 내용</label><input type="text" id="qa_reply_content" name="qa_reply_content" /><br>
 				  
